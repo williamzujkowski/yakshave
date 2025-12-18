@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gh-year-end Chart Examples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #1f2328;
+            --border-color: #d1d9e0;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0d1117;
+            --text-color: #e6edf3;
+            --border-color: #30363d;
+        }
+
+        header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        #theme-toggle {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: transparent;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #theme-toggle:hover {
+            background-color: var(--border-color);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .chart-section {
+            margin-bottom: 60px;
+        }
+
+        .chart-section h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .note {
+            background-color: var(--border-color);
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>gh-year-end Chart Examples</h1>
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </header>
+
+    <main>
+        <section class="chart-section">
+            <h2>Time Series Chart</h2>
+            <div class="chart-container">
+                <div id="chart-timeseries"></div>
+            </div>
+            <p class="note">Line/area chart showing activity over time with interactive tooltips.</p>
+        </section>
+
+        <section class="chart-section">
+            <h2>Bar Chart</h2>
+            <div class="chart-container">
+                <div id="chart-bar"></div>
+            </div>
+            <p class="note">Horizontal bar chart for leaderboards and rankings.</p>
+        </section>
+
+        <section class="chart-section">
+            <h2>Heat Map</h2>
+            <div class="chart-container">
+                <div id="chart-heatmap"></div>
+            </div>
+            <p class="note">Contribution-style calendar heat map showing activity patterns.</p>
+        </section>
+
+        <section class="chart-section">
+            <h2>Gauge Charts</h2>
+            <div class="grid">
+                <div class="chart-container">
+                    <div id="chart-gauge-1"></div>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-gauge-2"></div>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-gauge-3"></div>
+                </div>
+            </div>
+            <p class="note">Semi-circular gauges for displaying scores (0-100).</p>
+        </section>
+
+        <section class="chart-section">
+            <h2>Donut Chart</h2>
+            <div class="chart-container">
+                <div id="chart-donut"></div>
+            </div>
+            <p class="note">Donut chart for showing distribution breakdowns.</p>
+        </section>
+    </main>
+
+    <!-- D3.js v7 -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Chart library -->
+    <script src="charts.js"></script>
+
+    <!-- Example data and initialization -->
+    <script>
+        // Generate sample data
+        function generateTimeSeriesData() {
+            const data = [];
+            const startDate = new Date('2025-01-01');
+            for (let i = 0; i < 52; i++) {
+                const date = new Date(startDate);
+                date.setDate(date.getDate() + (i * 7));
+                data.push({
+                    date: date,
+                    value: Math.floor(Math.random() * 50) + 20
+                });
+            }
+            return data;
+        }
+
+        function generateBarData() {
+            return [
+                { label: 'user_alice', value: 150, rank: 1 },
+                { label: 'user_bob', value: 120, rank: 2 },
+                { label: 'user_charlie', value: 95, rank: 3 },
+                { label: 'user_diana', value: 87, rank: 4 },
+                { label: 'user_eve', value: 72, rank: 5 },
+                { label: 'user_frank', value: 65, rank: 6 },
+                { label: 'user_grace', value: 58, rank: 7 },
+                { label: 'user_henry', value: 45, rank: 8 }
+            ];
+        }
+
+        function generateHeatMapData() {
+            const data = [];
+            const startDate = new Date('2025-01-01');
+            for (let i = 0; i < 365; i++) {
+                const date = new Date(startDate);
+                date.setDate(date.getDate() + i);
+                data.push({
+                    date: date,
+                    value: Math.floor(Math.random() * 20)
+                });
+            }
+            return data;
+        }
+
+        function generateDonutData() {
+            return [
+                { label: 'PRs', value: 342 },
+                { label: 'Issues', value: 256 },
+                { label: 'Reviews', value: 489 },
+                { label: 'Comments', value: 723 },
+                { label: 'Commits', value: 1024 }
+            ];
+        }
+
+        // Chart instances
+        let charts = [];
+
+        // Initialize charts
+        function initCharts() {
+            // Clear existing charts
+            charts.forEach(chart => chart.destroy());
+            charts = [];
+
+            const theme = document.documentElement.getAttribute('data-theme');
+
+            // Time series chart
+            const tsChart = new TimeSeriesChart('chart-timeseries', {
+                theme: theme,
+                height: 300,
+                showArea: true,
+                xAxisLabel: 'Week',
+                yAxisLabel: 'Activity Count'
+            });
+            tsChart.render(generateTimeSeriesData());
+            charts.push(tsChart);
+
+            // Bar chart
+            const barChart = new BarChart('chart-bar', {
+                theme: theme,
+                xAxisLabel: 'Contributions'
+            });
+            barChart.render(generateBarData());
+            charts.push(barChart);
+
+            // Heat map
+            const heatMap = new HeatMap('chart-heatmap', {
+                theme: theme,
+                cellSize: 10,
+                cellPadding: 2
+            });
+            heatMap.render(generateHeatMapData());
+            charts.push(heatMap);
+
+            // Gauge charts
+            const gaugeScores = [
+                { value: 85, label: 'repo/excellent' },
+                { value: 62, label: 'repo/good' },
+                { value: 38, label: 'repo/needs-work' }
+            ];
+
+            gaugeScores.forEach((score, i) => {
+                const gauge = new GaugeChart(`chart-gauge-${i + 1}`, {
+                    theme: theme,
+                    height: 200
+                });
+                gauge.render(score.value, score.label);
+                charts.push(gauge);
+            });
+
+            // Donut chart
+            const donutChart = new DonutChart('chart-donut', {
+                theme: theme,
+                height: 400,
+                showLegend: true,
+                showLabels: true
+            });
+            donutChart.render(generateDonutData());
+            charts.push(donutChart);
+        }
+
+        // Theme toggle
+        function setupThemeToggle() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+            themeToggle.innerHTML = savedTheme === 'dark' ? '☀️' : '🌙';
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+                html.setAttribute('data-theme', newTheme);
+                themeToggle.innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
+                localStorage.setItem('theme', newTheme);
+
+                // Re-render charts with new theme
+                initCharts();
+            });
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setupThemeToggle();
+            initCharts();
+
+            // Handle window resize
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    initCharts();
+                }, 250);
+            });
+        });
+    </script>
+</body>
+</html>

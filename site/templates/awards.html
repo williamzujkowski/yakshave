@@ -1,0 +1,317 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.report.title }} - Awards{% endblock %}
+{% block nav_awards %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Awards & Recognition</h1>
+    <p class="lead">Celebrating achievements and highlighting opportunities</p>
+</div>
+
+<section class="awards-hero-section">
+    <div class="hero-banner">
+        <h2>{{ config.github.windows.year }} Community Champions</h2>
+        <p>Recognizing outstanding contributions and memorable moments</p>
+    </div>
+</section>
+
+<section class="awards-tabs-section">
+    <div class="tabs">
+        <button class="tab-button active" data-tab="individual">Individual Awards</button>
+        <button class="tab-button" data-tab="repository">Repository Awards</button>
+        <button class="tab-button" data-tab="risk">Risk Signals</button>
+    </div>
+
+    <!-- Individual Awards Tab -->
+    <div class="tab-content active" id="tab-individual">
+        <div class="awards-grid">
+            {% for award in awards.individual %}
+            <div class="award-card award-{{ award.award_key }}">
+                <div class="award-icon">
+                    <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702 1.509.229z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                    </svg>
+                </div>
+                <div class="award-header">
+                    <h3 class="award-title">{{ award.title }}</h3>
+                    <p class="award-description">{{ award.description }}</p>
+                </div>
+                <div class="award-winner">
+                    <div class="winner-avatar">
+                        <img src="{{ award.winner_avatar_url | default('https://github.com/identicons/' + award.winner_name + '.png') }}"
+                             alt="{{ award.winner_name }}">
+                    </div>
+                    <div class="winner-info">
+                        <a href="https://github.com/{{ award.winner_name }}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="winner-name">
+                            {{ award.winner_name }}
+                        </a>
+                        <div class="winner-stats">
+                            {% if award.supporting_stats %}
+                            {{ award.supporting_stats }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Repository Awards Tab -->
+    <div class="tab-content" id="tab-repository">
+        <div class="awards-grid">
+            {% for award in awards.repository %}
+            <div class="award-card award-{{ award.award_key }}">
+                <div class="award-icon">
+                    <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 0 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 0 1 1-1h8z"/>
+                    </svg>
+                </div>
+                <div class="award-header">
+                    <h3 class="award-title">{{ award.title }}</h3>
+                    <p class="award-description">{{ award.description }}</p>
+                </div>
+                <div class="award-winner repo-winner">
+                    <div class="winner-info">
+                        <a href="https://github.com/{{ award.winner_name }}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="winner-name">
+                            {{ award.winner_name }}
+                        </a>
+                        <div class="winner-stats">
+                            {% if award.supporting_stats %}
+                            {{ award.supporting_stats }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Risk Signals Tab -->
+    <div class="tab-content" id="tab-risk">
+        <div class="risk-signals-grid">
+            {% for signal in awards.risk %}
+            <div class="risk-signal-card">
+                <div class="risk-signal-header">
+                    <div class="risk-signal-icon">
+                        <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        </svg>
+                    </div>
+                    <div class="risk-signal-info">
+                        <h3 class="risk-signal-title">{{ signal.title }}</h3>
+                        <span class="risk-badge">{{ signal.category | upper }}</span>
+                    </div>
+                </div>
+                <p class="risk-signal-description">{{ signal.description }}</p>
+                <div class="risk-signal-stats">
+                    <div class="risk-stat">
+                        <span class="risk-stat-label">Affected:</span>
+                        <span class="risk-stat-value">{{ signal.winner_name }}</span>
+                    </div>
+                    {% if signal.supporting_stats %}
+                    <div class="risk-stat-details">
+                        {{ signal.supporting_stats }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="special-mentions-section">
+    <h2>Special Mentions</h2>
+    <div class="mentions-grid">
+        <div class="mention-card">
+            <h3>First Contribution</h3>
+            <p>Celebrating new community members</p>
+            <div class="mention-list">
+                {% for contributor in special_mentions.first_contributions[:5] %}
+                <div class="mention-item">
+                    <img src="{{ contributor.avatar_url | default('https://github.com/identicons/' + contributor.login + '.png') }}"
+                         alt="{{ contributor.login }}"
+                         class="mini-avatar">
+                    <a href="https://github.com/{{ contributor.login }}"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        {{ contributor.login }}
+                    </a>
+                    <span class="mention-date">{{ contributor.first_contribution_date }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="mention-card">
+            <h3>Consistent Contributors</h3>
+            <p>Most weeks with activity</p>
+            <div class="mention-list">
+                {% for contributor in special_mentions.consistent_contributors[:5] %}
+                <div class="mention-item">
+                    <img src="{{ contributor.avatar_url | default('https://github.com/identicons/' + contributor.login + '.png') }}"
+                         alt="{{ contributor.login }}"
+                         class="mini-avatar">
+                    <a href="https://github.com/{{ contributor.login }}"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        {{ contributor.login }}
+                    </a>
+                    <span class="mention-stat">{{ contributor.active_weeks }} weeks</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="mention-card">
+            <h3>Largest PR</h3>
+            <p>Biggest single contribution</p>
+            <div class="mention-list">
+                {% for pr in special_mentions.largest_prs[:5] %}
+                <div class="mention-item">
+                    <img src="{{ pr.author_avatar_url | default('https://github.com/identicons/' + pr.author_login + '.png') }}"
+                         alt="{{ pr.author_login }}"
+                         class="mini-avatar">
+                    <div class="mention-info">
+                        <a href="{{ pr.url }}"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            {{ pr.title | truncate(40) }}
+                        </a>
+                        <span class="mention-stat">{{ pr.lines_changed }} lines</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="mention-card">
+            <h3>Fastest Merge</h3>
+            <p>Quickest time from open to merge</p>
+            <div class="mention-list">
+                {% for pr in special_mentions.fastest_merges[:5] %}
+                <div class="mention-item">
+                    <img src="{{ pr.author_avatar_url | default('https://github.com/identicons/' + pr.author_login + '.png') }}"
+                         alt="{{ pr.author_login }}"
+                         class="mini-avatar">
+                    <div class="mention-info">
+                        <a href="{{ pr.url }}"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            {{ pr.title | truncate(40) }}
+                        </a>
+                        <span class="mention-stat">{{ pr.merge_time }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="fun-facts-section">
+    <h2>Fun Facts</h2>
+    <div class="fun-facts-grid">
+        <div class="fun-fact-card">
+            <div class="fun-fact-icon">
+                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                </svg>
+            </div>
+            <div class="fun-fact-content">
+                <div class="fun-fact-value">{{ fun_facts.total_lines_changed | default(0) | format_number }}</div>
+                <div class="fun-fact-label">Lines of code changed</div>
+            </div>
+        </div>
+
+        <div class="fun-fact-card">
+            <div class="fun-fact-icon">
+                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>
+                </svg>
+            </div>
+            <div class="fun-fact-content">
+                <div class="fun-fact-value">{{ fun_facts.busiest_day | default('N/A') }}</div>
+                <div class="fun-fact-label">Busiest day of the year</div>
+            </div>
+        </div>
+
+        <div class="fun-fact-card">
+            <div class="fun-fact-icon">
+                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                </svg>
+            </div>
+            <div class="fun-fact-content">
+                <div class="fun-fact-value">{{ fun_facts.most_active_hour | default('N/A') }}</div>
+                <div class="fun-fact-label">Most active hour</div>
+            </div>
+        </div>
+
+        <div class="fun-fact-card">
+            <div class="fun-fact-icon">
+                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3z"/>
+                    <path d="M9 2.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3z"/>
+                </svg>
+            </div>
+            <div class="fun-fact-content">
+                <div class="fun-fact-value">{{ fun_facts.total_comments | default(0) | format_number }}</div>
+                <div class="fun-fact-label">Comments posted</div>
+            </div>
+        </div>
+
+        <div class="fun-fact-card">
+            <div class="fun-fact-icon">
+                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                </svg>
+            </div>
+            <div class="fun-fact-content">
+                <div class="fun-fact-value">{{ fun_facts.avg_pr_size | default(0) | round(0) }}</div>
+                <div class="fun-fact-label">Average PR size (lines)</div>
+            </div>
+        </div>
+
+        <div class="fun-fact-card">
+            <div class="fun-fact-icon">
+                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                </svg>
+            </div>
+            <div class="fun-fact-content">
+                <div class="fun-fact-value">{{ fun_facts.most_used_emoji | default('N/A') }}</div>
+                <div class="fun-fact-label">Most used emoji in comments</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="awards-cta-section">
+    <div class="cta-banner">
+        <h2>Keep Up the Great Work!</h2>
+        <p>These awards celebrate the amazing contributions made in {{ config.github.windows.year }}. Here's to an even better year ahead!</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="assets/js/awards.js"></script>
+<script>
+    // Initialize awards tabs
+    if (typeof initAwardsTabs === 'function') {
+        initAwardsTabs();
+    }
+</script>
+{% endblock %}
