@@ -112,7 +112,8 @@ class ParquetWriter:
         Raises:
             FileNotFoundError: If file doesn't exist.
         """
-        return pq.read_table(path)
+        # Use ParquetFile to read a single file, avoiding dataset schema inference
+        return pq.ParquetFile(path).read()
 
     @staticmethod
     def count_rows(path: Path) -> int:

@@ -255,10 +255,64 @@ def metrics(ctx: click.Context, config: Path) -> None:
     Calculates leaderboards, time series, repository health scores,
     hygiene scores, and awards from the normalized Parquet tables.
     """
+    from gh_year_end.metrics.orchestrator import run_metrics
+    from gh_year_end.storage.paths import PathManager
+
     cfg = load_config(config)
+    paths = PathManager(cfg)
+
     console.print(f"[bold]Computing metrics for year {cfg.github.windows.year}[/bold]")
-    # TODO: Implement metrics logic
-    console.print("[dim]Metrics computation not yet implemented[/dim]")
+    console.print(f"  Source: {paths.curated_root}")
+    console.print(f"  Target: {paths.metrics_root}")
+    console.print()
+
+    # Check if curated data exists
+    if not paths.curated_root.exists():
+        console.print(
+            "[bold red]Error:[/bold red] No curated data found. Run 'normalize' command first."
+        )
+        raise click.Abort()
+
+    console.print("[bold cyan]Starting metrics calculation...[/bold cyan]")
+    console.print()
+
+    try:
+        # Run metrics calculation
+        stats = run_metrics(cfg)
+
+        # Display summary
+        console.print()
+        console.print("[bold green]Metrics calculation complete![/bold green]")
+        console.print()
+        console.print("[bold]Summary:[/bold]")
+        console.print(f"  Duration: {stats.get('duration_seconds', 0):.2f} seconds")
+        console.print(f"  Metrics calculated: {len(stats.get('metrics_written', []))}")
+        console.print(f"  Total rows: {stats.get('total_rows', 0)}")
+
+        if stats.get("metrics_written"):
+            console.print()
+            console.print("[bold]Metrics tables:[/bold]")
+            for table in stats["metrics_written"]:
+                console.print(f"  - {table}")
+
+        errors = stats.get("errors", [])
+        if errors:
+            console.print()
+            console.print(f"[yellow]Warnings:[/yellow] {len(errors)} metric(s) skipped")
+            for error in errors:
+                console.print(f"  - {error}")
+
+    except ValueError as e:
+        console.print(f"\n[bold red]Error:[/bold red] {e}")
+        raise click.Abort() from e
+    except Exception as e:
+        console.print(f"\n[bold red]Metrics calculation failed:[/bold red] {e}")
+        if ctx.obj.get("verbose"):
+            import traceback
+
+            console.print("\n[dim]Traceback:[/dim]")
+            console.print(traceback.format_exc())
+        raise click.Abort() from e
 
 
 @main.command()
