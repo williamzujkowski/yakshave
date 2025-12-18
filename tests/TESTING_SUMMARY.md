@@ -1,59 +1,29 @@
-# Testing Summary for GitHub Issue #23
+# Testing Summary
 
-This document summarizes the implementation of integration and orchestrator tests for gh-year-end.
+**Last Updated**: 2025-12-18
+**Total Tests**: 771
+**Test Files**: 51 (48 test files + 3 utility/fixture files)
+**Coverage**: 45% (target: 80%)
 
-## Files Created
+This document summarizes the testing infrastructure for gh-year-end.
 
-### 1. `/home/william/git/yakshave/tests/test_integration.py`
-Comprehensive integration tests that make real GitHub API calls.
+## Test Statistics
 
-**Features:**
-- Uses `@pytest.mark.integration` marker for selective test execution
-- Automatically skips tests when `GITHUB_TOKEN` is not set
-- Tests against real GitHub API (user: williamzujkowski)
-- Verifies complete data collection pipeline
-- Tests JSONL file creation and structure
-- Validates envelope structure and data integrity
-- Tests manifest tracking
-- Includes cleanup and error handling tests
+```
+Total Tests: 771 across 48 files
+By Category:
+  - Unit Tests: ~700
+  - Integration Tests: ~50
+  - End-to-End Tests: ~20
 
-**Test Classes:**
-- `TestRepositoryDiscovery`: Repository discovery with real API calls
-- `TestJSONLDataStructure`: JSONL structure validation
-- `TestErrorHandling`: Error handling and rate limiting
-- `TestDataCleanup`: Cleanup functionality
-
-**Total:** 7 integration tests
-
-### 2. `/home/william/git/yakshave/tests/test_orchestrator.py`
-Unit tests for the collection orchestrator with mocked dependencies.
-
-**Features:**
-- Mocks all collectors and API clients
-- Tests orchestration logic without API calls
-- Tests error handling and edge cases
-- Validates configuration handling
-- Tests collector enable/disable logic
-- Tests force flag behavior
-- Tests data extraction utilities
-
-**Test Classes:**
-- `TestRunCollection`: Orchestrator main flow tests (5 tests)
-- `TestExtractIssueNumbers`: Issue number extraction (2 tests)
-- `TestExtractPRNumbers`: PR number extraction (2 tests)
-
-**Total:** 9 unit tests
-
-### 3. `/home/william/git/yakshave/tests/INTEGRATION_TESTS.md`
-Comprehensive documentation for integration tests.
-
-**Contents:**
-- Overview and purpose
-- Running instructions
-- Test categories and descriptions
-- Skip behavior documentation
-- Troubleshooting guide
-- CI/CD integration examples
+By Phase:
+  - Phase 1 (GitHub Client): ~150
+  - Phase 2 (Collectors): ~200
+  - Phase 3 (Hygiene): ~50
+  - Phase 4 (Normalization): ~150
+  - Phase 5 (Metrics): ~150
+  - Phase 6 (Report): ~70
+```
 
 ## Running Tests
 
@@ -66,14 +36,17 @@ uv run pytest -v -m "not integration"
 
 ### Integration Tests Only
 ```bash
-export GITHUB_TOKEN=ghp_your_token_here
-uv run pytest -v -m integration
+GITHUB_TOKEN=ghp_your_token_here uv run pytest -v -m integration
 ```
 
 ### All Tests
 ```bash
-export GITHUB_TOKEN=ghp_your_token_here
-uv run pytest -v
+GITHUB_TOKEN=ghp_your_token_here uv run pytest -v
+```
+
+### With Coverage
+```bash
+uv run pytest --cov=src/gh_year_end --cov-report=term-missing
 ```
 
 ### Specific Test File
@@ -81,23 +54,15 @@ uv run pytest -v
 uv run pytest tests/test_orchestrator.py -v
 ```
 
-## Test Results
+## Documentation
 
-### Current Status
-```
-Total Tests: 195
-- Passed: 189
-- Skipped: 6 (integration tests without GITHUB_TOKEN)
-- Failed: 0
-```
-
-### With GITHUB_TOKEN
-```
-Total Tests: 195
-- Passed: 195
-- Skipped: 0
-- Failed: 0
-```
+See [docs/testing.md](../docs/testing.md) for comprehensive testing guide including:
+- Quick start commands
+- Test categories and markers
+- Running specific tests
+- Coverage reporting
+- Writing tests
+- Best practices
 
 ## Integration Test Coverage
 
