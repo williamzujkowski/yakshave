@@ -1,11 +1,12 @@
 """Configuration loading and validation."""
 
+import re
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 
 import yaml
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 class TargetConfig(BaseModel):
@@ -21,12 +22,77 @@ class AuthConfig(BaseModel):
     token_env: str = "GITHUB_TOKEN"
 
 
+class ActivityFilterConfig(BaseModel):
+    """Filter by activity recency."""
+
+    enabled: bool = False
+    min_pushed_within_days: int | None = None
+    min_pushed_after: str | None = Field(default=None, description="ISO date (YYYY-MM-DD)")
+
+
+class SizeFilterConfig(BaseModel):
+    """Filter by repo size."""
+
+    enabled: bool = False
+    min_kb: int = 0
+    max_kb: int | None = None
+
+
+class LanguageFilterConfig(BaseModel):
+    """Filter by primary language."""
+
+    enabled: bool = False
+    include: list[str] = Field(default_factory=list)
+    exclude: list[str] = Field(default_factory=list)
+
+
+class TopicsFilterConfig(BaseModel):
+    """Filter by topics."""
+
+    enabled: bool = False
+    require_any: list[str] = Field(default_factory=list)
+    require_all: list[str] = Field(default_factory=list)
+    exclude: list[str] = Field(default_factory=list)
+
+
+class NamePatternFilterConfig(BaseModel):
+    """Filter by name regex."""
+
+    enabled: bool = False
+    include_regex: list[str] = Field(default_factory=list)
+    exclude_regex: list[str] = Field(default_factory=list)
+
+    @field_validator("include_regex", "exclude_regex")
+    @classmethod
+    def validate_regex_patterns(cls, v: list[str]) -> list[str]:
+        """Validate that regex patterns are valid."""
+        for pattern in v:
+            try:
+                re.compile(pattern)
+            except re.error as e:
+                msg = f"Invalid regex pattern '{pattern}': {e}"
+                raise ValueError(msg) from e
+        return v
+
+
+class QuickScanConfig(BaseModel):
+    """Use Search API for discovery."""
+
+    enabled: bool = False
+
+
 class DiscoveryConfig(BaseModel):
     """Repository discovery configuration."""
 
     include_forks: bool = False
     include_archived: bool = False
     visibility: str = Field(default="all", pattern=r"^(all|public|private)$")
+    activity_filter: ActivityFilterConfig = Field(default_factory=ActivityFilterConfig)
+    size_filter: SizeFilterConfig = Field(default_factory=SizeFilterConfig)
+    language_filter: LanguageFilterConfig = Field(default_factory=LanguageFilterConfig)
+    topics_filter: TopicsFilterConfig = Field(default_factory=TopicsFilterConfig)
+    name_pattern_filter: NamePatternFilterConfig = Field(default_factory=NamePatternFilterConfig)
+    quick_scan: QuickScanConfig = Field(default_factory=QuickScanConfig)
 
 
 class WindowsConfig(BaseModel):
@@ -62,6 +128,28 @@ class GitHubConfig(BaseModel):
     windows: WindowsConfig
 
 
+class BurstConfig(BaseModel):
+    """Burst control configuration."""
+
+    capacity: int = Field(default=30, ge=1, description="Maximum burst capacity")
+    sustained_rate: float = Field(default=10.0, ge=0.1, description="Sustained tokens per second")
+    recovery_rate: float = Field(default=2.0, ge=0.1, description="Token recovery rate per second")
+
+
+class SecondaryLimitConfig(BaseModel):
+    """Secondary rate limit configuration."""
+
+    max_requests_per_minute: int = Field(
+        default=90, ge=1, description="Maximum requests per minute"
+    )
+    detection_window_seconds: int = Field(
+        default=60, ge=1, description="Detection window in seconds"
+    )
+    backoff_multiplier: float = Field(
+        default=1.5, ge=1.0, description="Backoff multiplier on violations"
+    )
+
+
 class RateLimitConfig(BaseModel):
     """Rate limiting configuration."""
 
@@ -70,6 +158,8 @@ class RateLimitConfig(BaseModel):
     min_sleep_seconds: float = Field(default=1.0, ge=0)
     max_sleep_seconds: float = Field(default=60.0, ge=1)
     sample_rate_limit_endpoint_every_n_requests: int = Field(default=50, ge=1)
+    burst: BurstConfig = Field(default_factory=BurstConfig)
+    secondary: SecondaryLimitConfig = Field(default_factory=SecondaryLimitConfig)
 
 
 class BotConfig(BaseModel):

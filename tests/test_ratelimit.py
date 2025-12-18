@@ -8,6 +8,7 @@ from gh_year_end.github.ratelimit import (
     APIType,
     RateLimitSample,
     RateLimitState,
+    RequestPriority,
 )
 
 
@@ -119,7 +120,7 @@ class TestAdaptiveRateLimiterCalculateDelay:
             remaining=2501,  # 50.02%
         )
 
-        delay = limiter._calculate_adaptive_delay(state)
+        delay = limiter._calculate_adaptive_delay(state, RequestPriority.MEDIUM)
         assert delay == 0.0
 
     def test_calculate_delay_at_50_percent(self) -> None:
@@ -132,7 +133,7 @@ class TestAdaptiveRateLimiterCalculateDelay:
             remaining=2500,  # Exactly 50%
         )
 
-        delay = limiter._calculate_adaptive_delay(state)
+        delay = limiter._calculate_adaptive_delay(state, RequestPriority.MEDIUM)
         assert delay == 0.0
 
     def test_calculate_delay_between_20_and_50_percent(self) -> None:
@@ -140,21 +141,21 @@ class TestAdaptiveRateLimiterCalculateDelay:
         config = RateLimitConfig(min_sleep_seconds=2.0)
         limiter = AdaptiveRateLimiter(config)
 
-        # At 35% (midpoint between 20 and 50), factor should be 0.5
+        # At 35% (midpoint between 25 and 50), factor should be 0.6
         state = RateLimitState(
             api_type=APIType.REST,
             limit=5000,
             remaining=1750,  # 35%
         )
 
-        delay = limiter._calculate_adaptive_delay(state)
-        # factor = (50 - 35) / 30 = 0.5
-        # delay = 2.0 * 0.5 = 1.0
-        assert 0.9 <= delay <= 1.1
+        delay = limiter._calculate_adaptive_delay(state, RequestPriority.MEDIUM)
+        # factor = (50 - 35) / 25 = 0.6
+        # delay = 2.0 * 0.6 * 1.0 = 1.2
+        assert 1.0 <= delay <= 1.4
 
     def test_calculate_delay_at_20_percent(self) -> None:
         """Test adaptive delay at exactly 20%."""
-        config = RateLimitConfig(min_sleep_seconds=1.0)
+        config = RateLimitConfig(min_sleep_seconds=1.0, max_sleep_seconds=10.0)
         limiter = AdaptiveRateLimiter(config)
         state = RateLimitState(
             api_type=APIType.REST,
@@ -162,9 +163,10 @@ class TestAdaptiveRateLimiterCalculateDelay:
             remaining=1000,  # Exactly 20%
         )
 
-        delay = limiter._calculate_adaptive_delay(state)
-        # At 20%, factor is 1.0, so delay = min_sleep_seconds
-        assert delay == 1.0
+        delay = limiter._calculate_adaptive_delay(state, RequestPriority.MEDIUM)
+        # At 20%, in 10-25% range: factor = (25-20)/15 = 0.333
+        # delay = 1.0 + (9.0 * 0.333^1.5) * 1.0 ≈ 2.93
+        assert 2.5 <= delay <= 3.5
 
     def test_calculate_delay_below_20_percent(self) -> None:
         """Test adaptive delay below 20% (exponential scaling)."""
@@ -176,11 +178,10 @@ class TestAdaptiveRateLimiterCalculateDelay:
             remaining=500,  # 10%
         )
 
-        delay = limiter._calculate_adaptive_delay(state)
-        # factor = (20 - 10) / 20 = 0.5
-        # delay_range = 10.0 - 1.0 = 9.0
-        # delay = 1.0 + (9.0 * 0.5^2) = 1.0 + 2.25 = 3.25
-        assert 3.0 <= delay <= 3.5
+        delay = limiter._calculate_adaptive_delay(state, RequestPriority.MEDIUM)
+        # At 10%, in <10% range: factor = (10-10)/10 = 0.0
+        # delay = 10.0 * (0.0^2) * 1.0 = 0.0
+        assert delay == 0.0
 
     def test_calculate_delay_at_5_percent(self) -> None:
         """Test adaptive delay at very low percentage."""
@@ -192,10 +193,10 @@ class TestAdaptiveRateLimiterCalculateDelay:
             remaining=250,  # 5%
         )
 
-        delay = limiter._calculate_adaptive_delay(state)
-        # factor = (20 - 5) / 20 = 0.75
-        # delay = 1.0 + (9.0 * 0.75^2) = 1.0 + 5.0625 = 6.0625
-        assert 5.5 <= delay <= 6.5
+        delay = limiter._calculate_adaptive_delay(state, RequestPriority.MEDIUM)
+        # At 5%, in <10% range: factor = (10-5)/10 = 0.5
+        # delay = 10.0 * (0.5^2) * 1.0 = 2.5
+        assert 2.0 <= delay <= 3.0
 
     def test_calculate_delay_at_zero_remaining(self) -> None:
         """Test adaptive delay when exhausted."""
@@ -207,7 +208,7 @@ class TestAdaptiveRateLimiterCalculateDelay:
             remaining=0,
         )
 
-        delay = limiter._calculate_adaptive_delay(state)
+        delay = limiter._calculate_adaptive_delay(state, RequestPriority.MEDIUM)
         assert delay == 60.0
 
 

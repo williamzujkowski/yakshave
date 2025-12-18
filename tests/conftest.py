@@ -1,0 +1,263 @@
+"""Live integration test fixtures for real GitHub API calls.
+
+Provides session-scoped fixtures for:
+- GitHub token validation
+- Config targeting stable public repo (github/hotkey)
+- PathManager for test isolation
+- Cached raw data collection (runs once per session)
+
+Tests using these fixtures should be marked with @pytest.mark.live_api.
+"""
+
+import asyncio
+import os
+from pathlib import Path
+
+import pytest
+
+from gh_year_end.collect.orchestrator import run_collection
+from gh_year_end.config import Config
+from gh_year_end.storage.paths import PathManager
+
+
+@pytest.fixture(scope="session")
+def github_token() -> str:
+    """Get GitHub token from environment.
+
+    Skips test if GITHUB_TOKEN is not set.
+
+    Returns:
+        GitHub API token.
+    """
+    token = os.getenv("GITHUB_TOKEN")
+    if not token:
+        pytest.skip("GITHUB_TOKEN not set - skipping live API test")
+    return token
+
+
+@pytest.fixture(scope="session")
+def live_config(tmp_path_factory: pytest.TempPathFactory) -> Config:
+    """Create config targeting stable public repo (github/hotkey).
+
+    Uses year 2024 for stable, historical data.
+    Conservative rate limiting to avoid secondary limits.
+
+    Args:
+        tmp_path_factory: Pytest temp path factory for session scope.
+
+    Returns:
+        Config instance for live testing.
+    """
+    # Create session-scoped temp directory
+    temp_dir = tmp_path_factory.mktemp("live_test_data")
+
+    return Config.model_validate(
+        {
+            "github": {
+                "target": {"mode": "org", "name": "github"},
+                "auth": {"token_env": "GITHUB_TOKEN"},
+                "discovery": {
+                    "include_forks": False,
+                    "include_archived": False,
+                    "visibility": "public",
+                },
+                "windows": {
+                    "year": 2024,
+                    "since": "2024-01-01T00:00:00Z",
+                    "until": "2025-01-01T00:00:00Z",
+                },
+            },
+            "rate_limit": {
+                "strategy": "adaptive",
+                "max_concurrency": 1,
+                "min_sleep_seconds": 2.0,
+                "max_sleep_seconds": 60.0,
+                "sample_rate_limit_endpoint_every_n_requests": 50,
+            },
+            "identity": {
+                "bots": {
+                    "exclude_patterns": [r".*\[bot\]$", r"^dependabot$", r"^renovate\[bot\]$"],
+                    "include_overrides": [],
+                },
+                "humans_only": True,
+            },
+            "collection": {
+                "enable": {
+                    "pulls": True,
+                    "issues": True,
+                    "reviews": True,
+                    "comments": True,
+                    "commits": True,
+                    "hygiene": True,
+                },
+                "commits": {"include_files": True, "classify_files": True},
+                "hygiene": {
+                    "paths": [
+                        "SECURITY.md",
+                        "README.md",
+                        "LICENSE",
+                        "CONTRIBUTING.md",
+                        "CODE_OF_CONDUCT.md",
+                        "CODEOWNERS",
+                        ".github/CODEOWNERS",
+                    ],
+                    "workflow_prefixes": [".github/workflows/"],
+                    "branch_protection": {
+                        "mode": "sample",
+                        "sample_top_repos_by": "prs_merged",
+                        "sample_count": 5,
+                    },
+                    "security_features": {"best_effort": True},
+                },
+            },
+            "storage": {
+                "root": str(temp_dir / "data"),
+                "raw_format": "jsonl",
+                "curated_format": "parquet",
+                "dataset_version": "v1",
+            },
+            "report": {
+                "title": "GitHub Organization 2024 Year in Review",
+                "output_dir": str(temp_dir / "site"),
+                "theme": "engineer_exec_toggle",
+            },
+        }
+    )
+
+
+@pytest.fixture(scope="session")
+def live_paths(live_config: Config) -> PathManager:
+    """Create PathManager for live tests.
+
+    Uses session-scoped temp directory for test isolation.
+
+    Args:
+        live_config: Live test configuration.
+
+    Returns:
+        PathManager instance.
+    """
+    return PathManager(live_config)
+
+
+@pytest.fixture(scope="session")
+def cached_raw_data(github_token: str, live_config: Config, live_paths: PathManager) -> dict:
+    """Run collection ONCE per session and cache data.
+
+    This fixture:
+    1. Runs data collection against github/hotkey repo (2024 data)
+    2. Caches the result for reuse across all tests in session
+    3. Skips if GITHUB_TOKEN is missing
+
+    Note: This makes real GitHub API calls. Use sparingly.
+
+    Args:
+        github_token: GitHub API token (triggers skip if missing).
+        live_config: Live test configuration.
+        live_paths: Path manager for live tests.
+
+    Returns:
+        Collection statistics dictionary.
+    """
+    # Ensure directories exist
+    live_paths.ensure_directories()
+
+    # Run collection (async)
+    stats = asyncio.run(run_collection(live_config, force=False))
+
+    # Verify collection succeeded
+    assert "discovery" in stats, "Collection should include discovery stats"
+    assert "duration_seconds" in stats, "Collection should track duration"
+
+    return stats
+
+
+@pytest.fixture(scope="session")
+def live_test_config_path(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """Create live test config file.
+
+    Writes config.yaml to temp directory for CLI testing.
+
+    Args:
+        tmp_path_factory: Pytest temp path factory for session scope.
+
+    Returns:
+        Path to config.yaml file.
+    """
+    config_dir = tmp_path_factory.mktemp("config")
+    config_path = config_dir / "live_test_config.yaml"
+
+    config_content = """github:
+  target:
+    mode: org
+    name: github
+  auth:
+    token_env: GITHUB_TOKEN
+  discovery:
+    include_forks: false
+    include_archived: false
+    visibility: public
+  windows:
+    year: 2024
+    since: "2024-01-01T00:00:00Z"
+    until: "2025-01-01T00:00:00Z"
+
+rate_limit:
+  strategy: adaptive
+  max_concurrency: 1
+  min_sleep_seconds: 2.0
+  max_sleep_seconds: 60.0
+  sample_rate_limit_endpoint_every_n_requests: 50
+
+identity:
+  bots:
+    exclude_patterns:
+      - ".*\\\\[bot\\\\]$"
+      - "^dependabot$"
+      - "^renovate\\\\[bot\\\\]$"
+    include_overrides: []
+  humans_only: true
+
+collection:
+  enable:
+    pulls: true
+    issues: true
+    reviews: true
+    comments: true
+    commits: true
+    hygiene: true
+  commits:
+    include_files: true
+    classify_files: true
+  hygiene:
+    paths:
+      - SECURITY.md
+      - README.md
+      - LICENSE
+      - CONTRIBUTING.md
+      - CODE_OF_CONDUCT.md
+      - CODEOWNERS
+      - .github/CODEOWNERS
+    workflow_prefixes:
+      - .github/workflows/
+    branch_protection:
+      mode: sample
+      sample_top_repos_by: prs_merged
+      sample_count: 5
+    security_features:
+      best_effort: true
+
+storage:
+  root: "./data"
+  raw_format: jsonl
+  curated_format: parquet
+  dataset_version: v1
+
+report:
+  title: "GitHub Organization 2024 Year in Review"
+  output_dir: "./site"
+  theme: engineer_exec_toggle
+"""
+
+    config_path.write_text(config_content)
+    return config_path
