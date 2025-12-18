@@ -13,9 +13,9 @@ github:
     include_archived: false
     visibility: public  # Only public repos for demo
   windows:
-    year: 2024
-    since: "2024-01-01T00:00:00Z"
-    until: "2025-01-01T00:00:00Z"
+    year: 2025
+    since: "2025-01-01T00:00:00Z"
+    until: "2026-01-01T00:00:00Z"
 
 rate_limit:
   strategy: adaptive
@@ -69,7 +69,7 @@ storage:
   dataset_version: "v1"
 
 report:
-  title: "williamzujkowski Year in Review 2024"
+  title: "williamzujkowski Year in Review 2025"
   output_dir: "./site"
   theme: "engineer_exec_toggle"
   awards_config: "./config/awards.yaml"

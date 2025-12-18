@@ -9,33 +9,25 @@ import time
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
-from unittest.mock import AsyncMock, MagicMock, Mock, patch
+from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
 from gh_year_end.collect.discovery import discover_repos
 from gh_year_end.collect.filters import FilterChain
 from gh_year_end.config import (
-    ActivityFilterConfig,
     Config,
-    DiscoveryConfig,
-    LanguageFilterConfig,
-    NamePatternFilterConfig,
-    QuickScanConfig,
-    SizeFilterConfig,
-    TopicsFilterConfig,
 )
 from gh_year_end.github.http import GitHubClient, GitHubResponse
 from gh_year_end.github.ratelimit import (
-    APIType,
     AdaptiveRateLimiter,
+    APIType,
     CircuitState,
     ProgressState,
     RequestPriority,
 )
-from gh_year_end.storage.checkpoint import CheckpointManager, CheckpointStatus
+from gh_year_end.storage.checkpoint import CheckpointManager
 from gh_year_end.storage.paths import PathManager
-
 
 # ============================================================================
 # Fixtures

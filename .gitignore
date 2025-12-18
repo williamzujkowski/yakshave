@@ -78,7 +78,7 @@ dmypy.json
 data/
 site/year=*/
 site/2*/
-!site/2024/
+!site/2025/
 *.jsonl
 *.parquet
 

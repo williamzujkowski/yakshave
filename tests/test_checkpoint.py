@@ -1,8 +1,6 @@
 """Tests for checkpoint management system."""
 
 import json
-import signal
-import tempfile
 from datetime import UTC, datetime
 from pathlib import Path
 
