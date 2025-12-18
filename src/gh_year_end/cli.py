@@ -84,12 +84,55 @@ def collect(ctx: click.Context, config: Path, force: bool) -> None:
     Fetches all configured data types (PRs, issues, reviews, etc.) from
     the target org/user and stores as raw JSONL files.
     """
+    import asyncio
+
+    from gh_year_end.collect.orchestrator import run_collection
+
     cfg = load_config(config)
     console.print(f"[bold]Collecting data for {cfg.github.target.name}[/bold]")
+    console.print(f"  Year: {cfg.github.windows.year}")
+    console.print(f"  Target: {cfg.github.target.mode} / {cfg.github.target.name}")
+    console.print(f"  Storage: {cfg.storage.root}")
+
     if force:
         console.print("[yellow]Force mode: will re-fetch existing data[/yellow]")
-    # TODO: Implement collection logic
-    console.print("[dim]Collection not yet implemented[/dim]")
+
+    console.print()
+    console.print("[bold cyan]Starting collection...[/bold cyan]")
+
+    try:
+        # Run async collection
+        stats = asyncio.run(run_collection(cfg, force=force))
+
+        # Display summary
+        console.print()
+        console.print("[bold green]Collection complete![/bold green]")
+        console.print()
+        console.print("[bold]Summary:[/bold]")
+        console.print(f"  Duration: {stats.get('duration_seconds', 0):.2f} seconds")
+        console.print(
+            f"  Repos discovered: {stats.get('discovery', {}).get('repos_discovered', 0)}"
+        )
+        console.print(f"  Repos processed: {stats.get('repos', {}).get('repos_processed', 0)}")
+        console.print(f"  PRs collected: {stats.get('pulls', {}).get('pulls_collected', 0)}")
+        console.print(f"  Issues collected: {stats.get('issues', {}).get('issues_collected', 0)}")
+        console.print(
+            f"  Reviews collected: {stats.get('reviews', {}).get('reviews_collected', 0)}"
+        )
+        console.print(f"  Comments collected: {stats.get('comments', {}).get('total_comments', 0)}")
+        console.print(
+            f"  Commits collected: {stats.get('commits', {}).get('commits_collected', 0)}"
+        )
+        console.print(f"  Rate limit samples: {len(stats.get('rate_limit_samples', []))}")
+
+    except Exception as e:
+        console.print(f"\n[bold red]Error:[/bold red] {e}")
+        if ctx.obj.get("verbose"):
+            import traceback
+
+            console.print("\n[dim]Traceback:[/dim]")
+            console.print(traceback.format_exc())
+        raise click.Abort() from e
 
 
 @main.command()
