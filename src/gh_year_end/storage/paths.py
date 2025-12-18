@@ -206,6 +206,33 @@ class PathManager:
         """Path to a metrics Parquet table."""
         return self.metrics_root / f"{table}.parquet"
 
+    # Convenience properties for metrics tables
+
+    @property
+    def metrics_leaderboard_path(self) -> Path:
+        """Path to metrics_leaderboard Parquet table."""
+        return self.metrics_path("metrics_leaderboard")
+
+    @property
+    def metrics_repo_health_path(self) -> Path:
+        """Path to metrics_repo_health Parquet table."""
+        return self.metrics_path("metrics_repo_health")
+
+    @property
+    def metrics_time_series_path(self) -> Path:
+        """Path to metrics_time_series Parquet table."""
+        return self.metrics_path("metrics_time_series")
+
+    @property
+    def metrics_repo_hygiene_score_path(self) -> Path:
+        """Path to metrics_repo_hygiene_score Parquet table."""
+        return self.metrics_path("metrics_repo_hygiene_score")
+
+    @property
+    def metrics_awards_path(self) -> Path:
+        """Path to metrics_awards Parquet table."""
+        return self.metrics_path("metrics_awards")
+
     # Site paths
 
     @property
