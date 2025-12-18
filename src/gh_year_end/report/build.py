@@ -197,8 +197,12 @@ def _render_templates(
         timeseries_data = _load_json_file(data_dir / "timeseries.json")
 
         # The JSON files are already lists, not dicts with "repos" key
-        repo_health_list = repo_health_json if isinstance(repo_health_json, list) else []
-        hygiene_scores_list = hygiene_scores_json if isinstance(hygiene_scores_json, list) else []
+        repo_health_list: list[dict[str, Any]] = (
+            repo_health_json if isinstance(repo_health_json, list) else []
+        )
+        hygiene_scores_list: list[dict[str, Any]] = (
+            hygiene_scores_json if isinstance(hygiene_scores_json, list) else []
+        )
 
         # Merge repo data for repos.html template
         repos_merged = repos_view.merge_repo_data(repo_health_list, hygiene_scores_list)
@@ -219,7 +223,7 @@ def _render_templates(
         activity_timeline_data = _transform_activity_timeline(timeseries_data)
 
         # Process awards data
-        awards_by_category = {
+        awards_by_category: dict[str, list[Any]] = {
             "individual": [],
             "repository": [],
             "risk": [],
@@ -375,8 +379,8 @@ def _render_templates(
     return rendered_templates
 
 
-def _load_json_file(file_path: Path) -> dict[str, Any]:
-    """Load JSON file safely."""
+def _load_json_file(file_path: Path) -> Any:
+    """Load JSON file safely. Returns dict, list, or empty dict on error."""
     if not file_path.exists():
         return {}
     try:
@@ -533,8 +537,8 @@ def _calculate_highlights(
     # Calculate average review time from repo health data
     try:
         if repo_health_list:
-            review_times = [
-                r.get("median_time_to_first_review")
+            review_times: list[float] = [
+                float(r.get("median_time_to_first_review", 0))
                 for r in repo_health_list
                 if r.get("median_time_to_first_review") is not None
             ]

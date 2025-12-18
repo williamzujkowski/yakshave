@@ -439,7 +439,7 @@ class AdaptiveRateLimiter:
         remaining_pct = state.remaining_percent
 
         # Priority multiplier (CRITICAL gets 0.5x, LOW gets 1.5x)
-        priority_multiplier = 1.0 + (priority.value * 0.25) - 0.5
+        priority_multiplier: float = 1.0 + (float(priority.value) * 0.25) - 0.5
 
         # > 75%: full speed (no delay)
         if remaining_pct > 75:
@@ -463,7 +463,7 @@ class AdaptiveRateLimiter:
             factor = (25 - remaining_pct) / 15  # 0.0 to 1.0
             delay_range = self.config.max_sleep_seconds - self.config.min_sleep_seconds
             base_delay = self.config.min_sleep_seconds + (delay_range * (factor**1.5))
-            return base_delay * priority_multiplier
+            return float(base_delay * priority_multiplier)
 
         # < 10%: critical delay (exponential scaling)
         if remaining_pct > 0:
