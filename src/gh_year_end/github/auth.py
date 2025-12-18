@@ -1,21 +1,52 @@
 """GitHub authentication module.
 
-Handles loading and validating GitHub API tokens from environment variables.
+Handles loading and validating GitHub API tokens from environment variables
+or the GitHub CLI.
 """
 
+import logging
 import os
 import re
+import subprocess
+
+logger = logging.getLogger(__name__)
 
 
 class AuthenticationError(Exception):
     """Raised when authentication fails or token is invalid."""
 
 
+def _get_gh_cli_token() -> str | None:
+    """Try to get token from GitHub CLI.
+
+    Returns:
+        Token from `gh auth token` or None if not available.
+    """
+    try:
+        result = subprocess.run(
+            ["gh", "auth", "token"],
+            capture_output=True,
+            text=True,
+            timeout=5,
+            check=False,
+        )
+        if result.returncode == 0:
+            token = result.stdout.strip()
+            if token:
+                logger.debug("Loaded token from GitHub CLI")
+                return token
+    except (FileNotFoundError, subprocess.TimeoutExpired) as e:
+        logger.debug("Could not get token from GitHub CLI: %s", e)
+    return None
+
+
 class GitHubAuth:
     """GitHub authentication manager.
 
-    Loads and validates GitHub tokens from environment variables.
-    Supports personal access tokens (classic and fine-grained) and OAuth tokens.
+    Loads and validates GitHub tokens from:
+    1. Explicit token parameter
+    2. GITHUB_TOKEN environment variable
+    3. GitHub CLI (`gh auth token`)
 
     Token prefix formats:
     - ghp_: Personal access token (classic)
@@ -35,16 +66,19 @@ class GitHubAuth:
         """Initialize GitHub authentication.
 
         Args:
-            token: GitHub token. If None, loads from GITHUB_TOKEN env var.
+            token: GitHub token. If None, loads from GITHUB_TOKEN env var
+                   or GitHub CLI.
 
         Raises:
             AuthenticationError: If token is missing or invalid.
         """
-        loaded_token = token or os.environ.get("GITHUB_TOKEN")
+        # Try sources in order: explicit token, env var, gh CLI
+        loaded_token = token or os.environ.get("GITHUB_TOKEN") or _get_gh_cli_token()
 
         if not loaded_token:
             raise AuthenticationError(
-                "GitHub token not found. Set GITHUB_TOKEN environment variable or pass token."
+                "GitHub token not found. Set GITHUB_TOKEN environment variable, "
+                "pass token explicitly, or authenticate with `gh auth login`."
             )
 
         self._token: str = loaded_token

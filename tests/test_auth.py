@@ -1,13 +1,15 @@
 """Tests for GitHub authentication module."""
 
 import os
-from unittest.mock import patch
+import subprocess
+from unittest.mock import MagicMock, patch
 
 import pytest
 
 from gh_year_end.github.auth import (
     AuthenticationError,
     GitHubAuth,
+    _get_gh_cli_token,
     get_auth_headers,
     load_github_token,
 )
@@ -59,15 +61,28 @@ class TestGitHubAuthInvalidTokens:
 
     def test_missing_token_no_env(self) -> None:
         """Test that AuthenticationError is raised when token is missing."""
+        mock_result = MagicMock()
+        mock_result.returncode = 1
+        mock_result.stdout = ""
+
         with (
             patch.dict(os.environ, {}, clear=True),
+            patch("gh_year_end.github.auth.subprocess.run", return_value=mock_result),
             pytest.raises(AuthenticationError, match="GitHub token not found"),
         ):
             GitHubAuth(token=None)
 
     def test_empty_token(self) -> None:
         """Test that AuthenticationError is raised for empty token."""
-        with pytest.raises(AuthenticationError, match="GitHub token not found"):
+        mock_result = MagicMock()
+        mock_result.returncode = 1
+        mock_result.stdout = ""
+
+        with (
+            patch.dict(os.environ, {}, clear=True),
+            patch("gh_year_end.github.auth.subprocess.run", return_value=mock_result),
+            pytest.raises(AuthenticationError, match="GitHub token not found"),
+        ):
             GitHubAuth(token="")
 
     def test_invalid_prefix(self) -> None:
@@ -177,3 +192,101 @@ class TestGetAuthHeaders:
         with patch.dict(os.environ, {"GITHUB_TOKEN": token}):
             headers = get_auth_headers(token=None)
             assert headers["Authorization"] == f"token {token}"
+
+
+class TestGhCliTokenLoading:
+    """Tests for GitHub CLI token loading."""
+
+    def test_get_gh_cli_token_success(self) -> None:
+        """Test _get_gh_cli_token returns token when gh CLI succeeds."""
+        token = "ghp_" + "n" * 36
+        mock_result = MagicMock()
+        mock_result.returncode = 0
+        mock_result.stdout = f"{token}\n"
+
+        with patch("gh_year_end.github.auth.subprocess.run", return_value=mock_result):
+            result = _get_gh_cli_token()
+            assert result == token
+
+    def test_get_gh_cli_token_failure(self) -> None:
+        """Test _get_gh_cli_token returns None when gh CLI fails."""
+        mock_result = MagicMock()
+        mock_result.returncode = 1
+        mock_result.stdout = ""
+
+        with patch("gh_year_end.github.auth.subprocess.run", return_value=mock_result):
+            result = _get_gh_cli_token()
+            assert result is None
+
+    def test_get_gh_cli_token_not_installed(self) -> None:
+        """Test _get_gh_cli_token returns None when gh is not installed."""
+        with patch(
+            "gh_year_end.github.auth.subprocess.run",
+            side_effect=FileNotFoundError("gh not found"),
+        ):
+            result = _get_gh_cli_token()
+            assert result is None
+
+    def test_get_gh_cli_token_timeout(self) -> None:
+        """Test _get_gh_cli_token returns None on timeout."""
+        with patch(
+            "gh_year_end.github.auth.subprocess.run",
+            side_effect=subprocess.TimeoutExpired("gh", 5),
+        ):
+            result = _get_gh_cli_token()
+            assert result is None
+
+    def test_get_gh_cli_token_empty_output(self) -> None:
+        """Test _get_gh_cli_token returns None when output is empty."""
+        mock_result = MagicMock()
+        mock_result.returncode = 0
+        mock_result.stdout = ""
+
+        with patch("gh_year_end.github.auth.subprocess.run", return_value=mock_result):
+            result = _get_gh_cli_token()
+            assert result is None
+
+    def test_auth_falls_back_to_gh_cli(self) -> None:
+        """Test GitHubAuth falls back to gh CLI when no env var is set."""
+        token = "ghp_" + "o" * 36
+        mock_result = MagicMock()
+        mock_result.returncode = 0
+        mock_result.stdout = f"{token}\n"
+
+        with (
+            patch.dict(os.environ, {}, clear=True),
+            patch("gh_year_end.github.auth.subprocess.run", return_value=mock_result),
+        ):
+            auth = GitHubAuth(token=None)
+            assert auth.token == token
+
+    def test_env_var_takes_precedence_over_gh_cli(self) -> None:
+        """Test GITHUB_TOKEN env var takes precedence over gh CLI."""
+        env_token = "ghp_" + "p" * 36
+        cli_token = "ghp_" + "q" * 36
+        mock_result = MagicMock()
+        mock_result.returncode = 0
+        mock_result.stdout = f"{cli_token}\n"
+
+        with (
+            patch.dict(os.environ, {"GITHUB_TOKEN": env_token}),
+            patch("gh_year_end.github.auth.subprocess.run", return_value=mock_result),
+        ):
+            auth = GitHubAuth(token=None)
+            assert auth.token == env_token
+
+    def test_explicit_token_takes_precedence_over_all(self) -> None:
+        """Test explicit token takes precedence over env var and gh CLI."""
+        explicit_token = "ghp_" + "r" * 36
+        env_token = "ghp_" + "s" * 36
+        cli_token = "ghp_" + "t" * 36
+        mock_result = MagicMock()
+        mock_result.returncode = 0
+        mock_result.stdout = f"{cli_token}\n"
+
+        with (
+            patch.dict(os.environ, {"GITHUB_TOKEN": env_token}),
+            patch("gh_year_end.github.auth.subprocess.run", return_value=mock_result),
+        ):
+            auth = GitHubAuth(token=explicit_token)
+            assert auth.token == explicit_token

@@ -1,0 +1,445 @@
+"""Collection orchestrator for GitHub data collection.
+
+Coordinates the execution of all collectors in the correct order,
+manages clients and rate limiting, and aggregates statistics.
+"""
+
+import json
+import logging
+import os
+from datetime import datetime
+from typing import Any, cast
+
+from gh_year_end.collect.comments import collect_issue_comments, collect_review_comments
+from gh_year_end.collect.commits import collect_commits
+from gh_year_end.collect.discovery import discover_repos
+from gh_year_end.collect.issues import collect_issues
+from gh_year_end.collect.pulls import collect_pulls
+from gh_year_end.collect.repos import collect_repo_metadata
+from gh_year_end.collect.reviews import collect_reviews
+from gh_year_end.config import Config
+from gh_year_end.github.auth import GitHubAuth
+from gh_year_end.github.graphql import GraphQLClient
+from gh_year_end.github.http import GitHubClient
+from gh_year_end.github.ratelimit import AdaptiveRateLimiter
+from gh_year_end.github.rest import RestClient
+from gh_year_end.storage.paths import PathManager
+from gh_year_end.storage.writer import AsyncJSONLWriter
+
+logger = logging.getLogger(__name__)
+
+
+class CollectionError(Exception):
+    """Raised when collection orchestration fails."""
+
+
+async def run_collection(config: Config, force: bool = False) -> dict[str, Any]:
+    """Run complete data collection pipeline.
+
+    Executes all collectors in the correct order:
+    1. Discovery - find all repos
+    2. Repos - collect detailed repo metadata
+    3. Pulls - collect pull requests
+    4. Issues - collect issues
+    5. Reviews - collect PR reviews
+    6. Comments - collect issue and review comments
+    7. Commits - collect commit history
+
+    Args:
+        config: Application configuration.
+        force: If True, re-fetch data even if raw files exist.
+
+    Returns:
+        Dictionary with aggregated statistics from all collectors:
+            - discovery: Discovery stats
+            - repos: Repo metadata stats
+            - pulls: Pull request stats
+            - issues: Issue stats
+            - reviews: Review stats
+            - comments: Comment stats
+            - commits: Commit stats
+            - duration_seconds: Total execution time
+            - rate_limit_samples: List of rate limit samples
+
+    Raises:
+        CollectionError: If critical collection failure occurs.
+    """
+    start_time = datetime.now()
+
+    logger.info("Starting collection orchestration for %s", config.github.target.name)
+    logger.info(
+        "Year: %d, Date range: %s to %s",
+        config.github.windows.year,
+        config.github.windows.since.isoformat(),
+        config.github.windows.until.isoformat(),
+    )
+
+    # Initialize paths and ensure directories exist
+    paths = PathManager(config)
+    paths.ensure_directories()
+
+    # Check if data already exists and force is not set
+    if not force and paths.manifest_path.exists():
+        logger.warning(
+            "Collection manifest exists at %s. Use --force to re-collect.", paths.manifest_path
+        )
+        logger.info("Loading existing manifest...")
+        with paths.manifest_path.open() as f:
+            existing_manifest = json.load(f)
+        return cast("dict[str, Any]", existing_manifest.get("stats", {}))
+
+    # Initialize auth and clients
+    token = os.getenv(config.github.auth.token_env)
+    if not token:
+        msg = f"GitHub token not found in environment variable {config.github.auth.token_env}"
+        raise CollectionError(msg)
+
+    auth = GitHubAuth(token=token)
+    http_client = GitHubClient(auth=auth)
+    rate_limiter = AdaptiveRateLimiter(config.rate_limit)
+    rest_client = RestClient(http_client, rate_limiter)
+    graphql_client = GraphQLClient(http_client, rate_limiter)
+
+    # Initialize stats collector
+    stats: dict[str, Any] = {
+        "discovery": {},
+        "repos": {},
+        "pulls": {},
+        "issues": {},
+        "reviews": {},
+        "comments": {},
+        "commits": {},
+        "duration_seconds": 0.0,
+        "rate_limit_samples": [],
+    }
+
+    try:
+        # Step 1: Discovery
+        logger.info("=" * 80)
+        logger.info("STEP 1: Repository Discovery")
+        logger.info("=" * 80)
+
+        repos = await discover_repos(config, http_client, paths)
+        stats["discovery"] = {
+            "repos_discovered": len(repos),
+        }
+        logger.info("Discovery complete: %d repos discovered", len(repos))
+
+        if not repos:
+            logger.warning("No repositories discovered. Check target configuration.")
+            return stats
+
+        # Step 2: Repo Metadata
+        if config.collection.enable.hygiene:
+            logger.info("=" * 80)
+            logger.info("STEP 2: Repository Metadata Collection")
+            logger.info("=" * 80)
+
+            # Open writer for repo metadata
+            repo_metadata_path = paths.raw_root / "repo_metadata.jsonl"
+            async with AsyncJSONLWriter(repo_metadata_path) as writer:
+                repo_stats = await collect_repo_metadata(
+                    repos=repos,
+                    graphql_client=graphql_client,
+                    writer=writer,
+                    rate_limiter=rate_limiter,
+                    config=config,
+                )
+            stats["repos"] = repo_stats
+            logger.info(
+                "Repo metadata complete: %d repos processed", repo_stats.get("repos_processed", 0)
+            )
+        else:
+            logger.info("Skipping repo metadata collection (hygiene collection disabled)")
+            stats["repos"] = {"repos_processed": 0, "skipped": True}
+
+        # Step 3: Pull Requests
+        if config.collection.enable.pulls:
+            logger.info("=" * 80)
+            logger.info("STEP 3: Pull Request Collection")
+            logger.info("=" * 80)
+
+            pull_stats = await collect_pulls(
+                repos=repos,
+                rest_client=rest_client,
+                paths=paths,
+                config=config,
+            )
+            stats["pulls"] = pull_stats
+            logger.info(
+                "Pull request complete: %d PRs collected", pull_stats.get("pulls_collected", 0)
+            )
+        else:
+            logger.info("Skipping pull request collection (disabled in config)")
+            stats["pulls"] = {"pulls_collected": 0, "skipped": True}
+
+        # Step 4: Issues
+        if config.collection.enable.issues:
+            logger.info("=" * 80)
+            logger.info("STEP 4: Issue Collection")
+            logger.info("=" * 80)
+
+            issue_stats = await collect_issues(
+                repos=repos,
+                rest_client=rest_client,
+                paths=paths,
+                rate_limiter=rate_limiter,
+                config=config,
+            )
+            stats["issues"] = issue_stats
+            logger.info(
+                "Issue collection complete: %d issues collected",
+                issue_stats.get("issues_collected", 0),
+            )
+        else:
+            logger.info("Skipping issue collection (disabled in config)")
+            stats["issues"] = {"issues_collected": 0, "skipped": True}
+
+        # Step 5: Reviews
+        if config.collection.enable.reviews:
+            logger.info("=" * 80)
+            logger.info("STEP 5: Review Collection")
+            logger.info("=" * 80)
+
+            review_stats = await collect_reviews(
+                repos=repos,
+                rest_client=rest_client,
+                paths=paths,
+                rate_limiter=rate_limiter,
+                config=config,
+            )
+            stats["reviews"] = review_stats
+            logger.info(
+                "Review collection complete: %d reviews collected",
+                review_stats.get("reviews_collected", 0),
+            )
+        else:
+            logger.info("Skipping review collection (disabled in config)")
+            stats["reviews"] = {"reviews_collected": 0, "skipped": True}
+
+        # Step 6: Comments (both issue and review comments)
+        if config.collection.enable.comments:
+            logger.info("=" * 80)
+            logger.info("STEP 6: Comment Collection")
+            logger.info("=" * 80)
+
+            # Extract issue numbers from collected issues
+            logger.info("Extracting issue numbers from collected issues...")
+            issue_numbers_by_repo = await _extract_issue_numbers_from_raw(repos, paths)
+            logger.info("Found issues in %d repositories", len(issue_numbers_by_repo))
+
+            # Extract PR numbers from collected PRs
+            logger.info("Extracting PR numbers from collected PRs...")
+            pr_numbers_by_repo = await _extract_pr_numbers_from_raw(repos, paths)
+            logger.info("Found PRs in %d repositories", len(pr_numbers_by_repo))
+
+            # Collect issue comments
+            logger.info("Collecting issue comments...")
+            issue_comment_stats = await collect_issue_comments(
+                repos=repos,
+                rest_client=rest_client,
+                paths=paths,
+                rate_limiter=rate_limiter,
+                config=config,
+                issue_numbers_by_repo=issue_numbers_by_repo,
+            )
+
+            # Collect review comments
+            logger.info("Collecting review comments...")
+            review_comment_stats = await collect_review_comments(
+                repos=repos,
+                rest_client=rest_client,
+                paths=paths,
+                rate_limiter=rate_limiter,
+                config=config,
+                pr_numbers_by_repo=pr_numbers_by_repo,
+            )
+
+            stats["comments"] = {
+                "issue_comments": issue_comment_stats,
+                "review_comments": review_comment_stats,
+                "total_comments": (
+                    issue_comment_stats.get("comments_collected", 0)
+                    + review_comment_stats.get("comments_collected", 0)
+                ),
+            }
+            logger.info(
+                "Comment collection complete: %d total comments collected",
+                stats["comments"]["total_comments"],
+            )
+        else:
+            logger.info("Skipping comment collection (disabled in config)")
+            stats["comments"] = {"total_comments": 0, "skipped": True}
+
+        # Step 7: Commits
+        if config.collection.enable.commits:
+            logger.info("=" * 80)
+            logger.info("STEP 7: Commit Collection")
+            logger.info("=" * 80)
+
+            commit_stats = await collect_commits(
+                repos=repos,
+                rest_client=rest_client,
+                paths=paths,
+                rate_limiter=rate_limiter,
+                config=config,
+            )
+            stats["commits"] = commit_stats
+            logger.info(
+                "Commit collection complete: %d commits collected",
+                commit_stats.get("commits_collected", 0),
+            )
+        else:
+            logger.info("Skipping commit collection (disabled in config)")
+            stats["commits"] = {"commits_collected": 0, "skipped": True}
+
+        # Collect rate limit samples
+        stats["rate_limit_samples"] = rate_limiter.get_samples()
+
+        # Write rate limit samples to JSONL
+        if stats["rate_limit_samples"]:
+            logger.info(
+                "Writing %d rate limit samples to storage", len(stats["rate_limit_samples"])
+            )
+            async with AsyncJSONLWriter(paths.rate_limit_samples_path) as writer:
+                for sample in stats["rate_limit_samples"]:
+                    await writer.write(
+                        source="github_rest",
+                        endpoint="rate_limit_samples",
+                        data=sample,
+                    )
+
+    finally:
+        # Cleanup clients
+        await http_client.close()
+
+    # Calculate duration
+    end_time = datetime.now()
+    duration = (end_time - start_time).total_seconds()
+    stats["duration_seconds"] = round(duration, 2)
+
+    logger.info("=" * 80)
+    logger.info("COLLECTION COMPLETE")
+    logger.info("=" * 80)
+    logger.info("Total duration: %.2f seconds (%.2f minutes)", duration, duration / 60)
+    logger.info("Repos discovered: %d", stats["discovery"].get("repos_discovered", 0))
+    logger.info("Repos processed: %d", stats["repos"].get("repos_processed", 0))
+    logger.info("PRs collected: %d", stats["pulls"].get("pulls_collected", 0))
+    logger.info("Issues collected: %d", stats["issues"].get("issues_collected", 0))
+    logger.info("Reviews collected: %d", stats["reviews"].get("reviews_collected", 0))
+    logger.info("Comments collected: %d", stats["comments"].get("total_comments", 0))
+    logger.info("Commits collected: %d", stats["commits"].get("commits_collected", 0))
+
+    # Write manifest
+    manifest = {
+        "collection_date": datetime.now().isoformat(),
+        "config": {
+            "target": config.github.target.name,
+            "year": config.github.windows.year,
+            "since": config.github.windows.since.isoformat(),
+            "until": config.github.windows.until.isoformat(),
+        },
+        "stats": stats,
+    }
+
+    logger.info("Writing collection manifest to %s", paths.manifest_path)
+    with paths.manifest_path.open("w") as f:
+        json.dump(manifest, f, indent=2)
+
+    return stats
+
+
+async def _extract_issue_numbers_from_raw(
+    repos: list[dict[str, Any]],
+    paths: PathManager,
+) -> dict[str, list[int]]:
+    """Extract issue numbers from raw issue JSONL files.
+
+    Args:
+        repos: List of repository metadata.
+        paths: Path manager for storage.
+
+    Returns:
+        Dictionary mapping repo full_name to list of issue numbers.
+    """
+    issue_numbers_by_repo: dict[str, list[int]] = {}
+
+    for repo in repos:
+        repo_full_name = repo["full_name"]
+        issue_file_path = paths.issues_raw_path(repo_full_name)
+
+        if not issue_file_path.exists():
+            continue
+
+        issue_numbers = set()
+        try:
+            with issue_file_path.open() as f:
+                for line in f:
+                    try:
+                        record = json.loads(line)
+                        data = record.get("data", {})
+                        number = data.get("number")
+                        if number is not None:
+                            issue_numbers.add(int(number))
+                    except (json.JSONDecodeError, ValueError, KeyError) as e:
+                        logger.warning("Failed to parse issue record: %s", e)
+                        continue
+
+            if issue_numbers:
+                issue_numbers_by_repo[repo_full_name] = sorted(issue_numbers)
+                logger.debug(
+                    "Extracted %d issue numbers from %s", len(issue_numbers), repo_full_name
+                )
+
+        except Exception as e:
+            logger.error("Error reading issue file %s: %s", issue_file_path, e)
+            continue
+
+    return issue_numbers_by_repo
+
+
+async def _extract_pr_numbers_from_raw(
+    repos: list[dict[str, Any]],
+    paths: PathManager,
+) -> dict[str, list[int]]:
+    """Extract PR numbers from raw PR JSONL files.
+
+    Args:
+        repos: List of repository metadata.
+        paths: Path manager for storage.
+
+    Returns:
+        Dictionary mapping repo full_name to list of PR numbers.
+    """
+    pr_numbers_by_repo: dict[str, list[int]] = {}
+
+    for repo in repos:
+        repo_full_name = repo["full_name"]
+        pr_file_path = paths.pulls_raw_path(repo_full_name)
+
+        if not pr_file_path.exists():
+            continue
+
+        pr_numbers = set()
+        try:
+            with pr_file_path.open() as f:
+                for line in f:
+                    try:
+                        record = json.loads(line)
+                        data = record.get("data", {})
+                        number = data.get("number")
+                        if number is not None:
+                            pr_numbers.add(int(number))
+                    except (json.JSONDecodeError, ValueError, KeyError) as e:
+                        logger.warning("Failed to parse PR record: %s", e)
+                        continue
+
+            if pr_numbers:
+                pr_numbers_by_repo[repo_full_name] = sorted(pr_numbers)
+                logger.debug("Extracted %d PR numbers from %s", len(pr_numbers), repo_full_name)
+
+        except Exception as e:
+            logger.error("Error reading PR file %s: %s", pr_file_path, e)
+            continue
+
+    return pr_numbers_by_repo
