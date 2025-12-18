@@ -1,0 +1,37 @@
+github:
+  target:
+    mode: org
+    name: test-org
+  auth:
+    token_env: GITHUB_TOKEN
+  discovery:
+    include_forks: false
+    include_archived: false
+    visibility: all
+  windows:
+    year: 2025
+    since: "2025-01-01T00:00:00Z"
+    until: "2026-01-01T00:00:00Z"
+
+rate_limit:
+  strategy: adaptive
+  max_concurrency: 4
+
+identity:
+  humans_only: true
+
+collection:
+  enable:
+    pulls: true
+    issues: true
+    reviews: true
+    comments: true
+    commits: true
+    hygiene: true
+
+storage:
+  root: "./data"
+
+report:
+  title: "Test Report"
+  output_dir: "./site"

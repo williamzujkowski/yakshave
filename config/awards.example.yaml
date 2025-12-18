@@ -1,0 +1,143 @@
+# Awards Configuration
+# Define awards for the year-end report
+
+# User Awards (individual contributors)
+user_awards:
+  - key: merge_machine
+    title: "Merge Machine"
+    description: "Most PRs merged in the year"
+    metric: prs_merged
+    humans_only: true
+    tie_breaker: prs_opened
+
+  - key: review_paladin
+    title: "Review Paladin"
+    description: "Most code reviews submitted"
+    metric: reviews_submitted
+    humans_only: true
+    tie_breaker: review_comments_total
+
+  - key: docs_druid
+    title: "Docs Druid"
+    description: "Champion of documentation updates"
+    metric: docs_lines_changed
+    humans_only: true
+    tie_breaker: docs_commits
+
+  - key: bug_janitor
+    title: "Bug Janitor"
+    description: "Most issues closed"
+    metric: issues_closed
+    humans_only: true
+    tie_breaker: issues_opened
+
+  - key: comment_champion
+    title: "Comment Champion"
+    description: "Most engaged in discussions"
+    metric: comments_total
+    humans_only: true
+    tie_breaker: review_comments_total
+
+  - key: approval_ace
+    title: "Approval Ace"
+    description: "Most PRs approved"
+    metric: approvals
+    humans_only: true
+    tie_breaker: reviews_submitted
+
+  - key: nitpicker
+    title: "Thoughtful Nitpicker"
+    description: "Most changes requested on PRs"
+    metric: changes_requested
+    humans_only: true
+    tie_breaker: reviews_submitted
+
+  - key: early_bird
+    title: "Early Bird"
+    description: "Fastest average time to first review"
+    metric: avg_time_to_first_review
+    humans_only: true
+    direction: asc  # Lower is better
+
+  - key: consistency_king
+    title: "Consistency King/Queen"
+    description: "Most weeks with at least one contribution"
+    metric: active_weeks
+    humans_only: true
+    tie_breaker: prs_merged
+
+  - key: night_owl
+    title: "Night Owl"
+    description: "Most commits outside business hours"
+    metric: off_hours_commits
+    humans_only: true
+    tie_breaker: commits_total
+
+# Repo Awards
+repo_awards:
+  - key: bus_factor_alarm
+    title: "Bus Factor Alarm"
+    description: "High activity but concentrated among few contributors"
+    metric: bus_factor_risk_score
+    direction: desc  # Higher risk score = more concerning
+
+  - key: stale_queue_dragon
+    title: "Stale Queue Dragon"
+    description: "Repository with the most long-lived open PRs"
+    metric: stale_pr_count
+    direction: desc
+
+  - key: review_desert
+    title: "Review Desert"
+    description: "Lowest review coverage"
+    metric: review_coverage
+    direction: asc
+    min_prs: 10  # Only consider repos with at least 10 PRs
+
+  - key: merge_velocity_champion
+    title: "Merge Velocity Champion"
+    description: "Fastest median time to merge"
+    metric: median_time_to_merge
+    direction: asc
+    min_prs: 10
+
+  - key: most_active
+    title: "Most Active Repository"
+    description: "Highest total activity"
+    metric: total_activity_score
+    direction: desc
+
+  - key: best_hygiene
+    title: "Best Hygiene"
+    description: "Highest hygiene score"
+    metric: hygiene_score
+    direction: desc
+
+  - key: worst_hygiene
+    title: "Hygiene Needs Work"
+    description: "Lowest hygiene score (opportunity for improvement)"
+    metric: hygiene_score
+    direction: asc
+
+# Risk Signals (not really awards, but flagged items)
+risk_signals:
+  - key: no_security_policy
+    title: "Missing Security Policy"
+    description: "Repositories without SECURITY.md"
+    filter: missing_security_md
+
+  - key: no_codeowners
+    title: "Missing CODEOWNERS"
+    description: "Repositories without CODEOWNERS file"
+    filter: missing_codeowners
+
+  - key: no_ci
+    title: "No CI Workflows"
+    description: "Repositories without GitHub Actions workflows"
+    filter: missing_ci
+
+  - key: stale_issues
+    title: "Stale Issues"
+    description: "Repositories with many old open issues"
+    metric: stale_issue_count
+    threshold: 20

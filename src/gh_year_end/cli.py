@@ -1,0 +1,195 @@
+"""CLI entry point for gh-year-end."""
+
+from pathlib import Path
+
+import click
+from rich.console import Console
+
+from gh_year_end import __version__
+from gh_year_end.config import load_config
+from gh_year_end.logging import setup_logging
+
+console = Console()
+
+
+@click.group()
+@click.version_option(version=__version__, prog_name="gh-year-end")
+@click.option("--verbose", "-v", is_flag=True, default=False, help="Enable verbose output")
+@click.pass_context
+def main(ctx: click.Context, verbose: bool) -> None:
+    """GitHub Year-End Community Health Report Generator.
+
+    Generate comprehensive year-end reports for GitHub organizations or users,
+    including activity metrics, leaderboards, and repository health scores.
+    """
+    ctx.ensure_object(dict)
+    ctx.obj["verbose"] = verbose
+    setup_logging(verbose=verbose)
+
+
+@main.command()
+@click.option(
+    "--config",
+    "-c",
+    type=click.Path(exists=True, path_type=Path),
+    required=True,
+    help="Path to config.yaml file",
+)
+@click.pass_context
+def plan(ctx: click.Context, config: Path) -> None:
+    """Show what will be collected without making any changes.
+
+    Validates the config and prints the collection plan including:
+    - Target org/user
+    - Time window
+    - What data will be collected
+    - Where data will be stored
+    """
+    cfg = load_config(config)
+    console.print("[bold]Collection Plan[/bold]")
+    console.print(f"  Target: {cfg.github.target.mode} / {cfg.github.target.name}")
+    console.print(f"  Year: {cfg.github.windows.year}")
+    console.print(f"  Since: {cfg.github.windows.since}")
+    console.print(f"  Until: {cfg.github.windows.until}")
+    console.print(f"  Storage root: {cfg.storage.root}")
+    console.print("\n[bold]Enabled collectors:[/bold]")
+    collection = cfg.collection.enable
+    console.print(f"  - PRs: {collection.pulls}")
+    console.print(f"  - Issues: {collection.issues}")
+    console.print(f"  - Reviews: {collection.reviews}")
+    console.print(f"  - Comments: {collection.comments}")
+    console.print(f"  - Commits: {collection.commits}")
+    console.print(f"  - Hygiene: {collection.hygiene}")
+
+
+@main.command()
+@click.option(
+    "--config",
+    "-c",
+    type=click.Path(exists=True, path_type=Path),
+    required=True,
+    help="Path to config.yaml file",
+)
+@click.option(
+    "--force",
+    "-f",
+    is_flag=True,
+    default=False,
+    help="Re-fetch data even if raw files exist",
+)
+@click.pass_context
+def collect(ctx: click.Context, config: Path, force: bool) -> None:
+    """Collect raw data from GitHub API.
+
+    Fetches all configured data types (PRs, issues, reviews, etc.) from
+    the target org/user and stores as raw JSONL files.
+    """
+    cfg = load_config(config)
+    console.print(f"[bold]Collecting data for {cfg.github.target.name}[/bold]")
+    if force:
+        console.print("[yellow]Force mode: will re-fetch existing data[/yellow]")
+    # TODO: Implement collection logic
+    console.print("[dim]Collection not yet implemented[/dim]")
+
+
+@main.command()
+@click.option(
+    "--config",
+    "-c",
+    type=click.Path(exists=True, path_type=Path),
+    required=True,
+    help="Path to config.yaml file",
+)
+@click.pass_context
+def normalize(ctx: click.Context, config: Path) -> None:
+    """Normalize raw data to curated Parquet tables.
+
+    Converts raw JSONL files to normalized Parquet tables with
+    consistent schemas, bot detection, and identity resolution.
+    """
+    cfg = load_config(config)
+    console.print(f"[bold]Normalizing data for year {cfg.github.windows.year}[/bold]")
+    # TODO: Implement normalization logic
+    console.print("[dim]Normalization not yet implemented[/dim]")
+
+
+@main.command()
+@click.option(
+    "--config",
+    "-c",
+    type=click.Path(exists=True, path_type=Path),
+    required=True,
+    help="Path to config.yaml file",
+)
+@click.pass_context
+def metrics(ctx: click.Context, config: Path) -> None:
+    """Compute metrics from curated data.
+
+    Calculates leaderboards, time series, repository health scores,
+    hygiene scores, and awards from the normalized Parquet tables.
+    """
+    cfg = load_config(config)
+    console.print(f"[bold]Computing metrics for year {cfg.github.windows.year}[/bold]")
+    # TODO: Implement metrics logic
+    console.print("[dim]Metrics computation not yet implemented[/dim]")
+
+
+@main.command()
+@click.option(
+    "--config",
+    "-c",
+    type=click.Path(exists=True, path_type=Path),
+    required=True,
+    help="Path to config.yaml file",
+)
+@click.pass_context
+def report(ctx: click.Context, config: Path) -> None:
+    """Generate static HTML report.
+
+    Exports metrics to JSON and builds a static D3-powered site with
+    exec summary and engineer drilldown views.
+    """
+    cfg = load_config(config)
+    console.print(f"[bold]Generating report for year {cfg.github.windows.year}[/bold]")
+    console.print(f"  Output: {cfg.report.output_dir}")
+    # TODO: Implement report generation
+    console.print("[dim]Report generation not yet implemented[/dim]")
+
+
+@main.command(name="all")
+@click.option(
+    "--config",
+    "-c",
+    type=click.Path(exists=True, path_type=Path),
+    required=True,
+    help="Path to config.yaml file",
+)
+@click.option(
+    "--force",
+    "-f",
+    is_flag=True,
+    default=False,
+    help="Re-fetch data even if raw files exist",
+)
+@click.pass_context
+def run_all(ctx: click.Context, config: Path, force: bool) -> None:
+    """Run the complete pipeline: collect -> normalize -> metrics -> report.
+
+    This is the main command to generate a complete year-end report.
+    """
+    console.print("[bold]Running complete pipeline[/bold]\n")
+
+    # Invoke each command in sequence
+    ctx.invoke(collect, config=config, force=force)
+    console.print()
+    ctx.invoke(normalize, config=config)
+    console.print()
+    ctx.invoke(metrics, config=config)
+    console.print()
+    ctx.invoke(report, config=config)
+
+    console.print("\n[bold green]Pipeline complete![/bold green]")
+
+
+if __name__ == "__main__":
+    main()
