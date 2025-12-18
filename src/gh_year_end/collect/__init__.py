@@ -9,6 +9,12 @@ from gh_year_end.collect.comments import (
 )
 from gh_year_end.collect.commits import CommitCollectionError, collect_commits
 from gh_year_end.collect.discovery import DiscoveryError, discover_repos
+from gh_year_end.collect.hygiene import (
+    HygieneCollectionError,
+    collect_branch_protection,
+    collect_repo_hygiene,
+    collect_security_features,
+)
 from gh_year_end.collect.issues import collect_issues
 from gh_year_end.collect.orchestrator import CollectionError, run_collection
 from gh_year_end.collect.pulls import PullsCollectorError, collect_pulls
@@ -24,17 +30,21 @@ __all__ = [
     "CommentCollectionError",
     "CommitCollectionError",
     "DiscoveryError",
+    "HygieneCollectionError",
     "PullsCollectorError",
     "RepoMetadataError",
     "ReviewCollectionStats",
+    "collect_branch_protection",
     "collect_commits",
     "collect_issue_comments",
     "collect_issues",
     "collect_pulls",
+    "collect_repo_hygiene",
     "collect_repo_metadata",
     "collect_review_comments",
     "collect_reviews",
     "collect_reviews_from_pr_iterator",
+    "collect_security_features",
     "discover_repos",
     "read_issue_numbers",
     "read_pr_numbers",

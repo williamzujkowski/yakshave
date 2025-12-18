@@ -439,6 +439,59 @@ class RestClient:
         async for items, metadata in self._paginate(path, params):
             yield items, metadata
 
+    async def get_repository_tree(
+        self,
+        owner: str,
+        repo: str,
+        tree_sha: str,
+        recursive: bool = True,
+    ) -> dict[str, Any] | None:
+        """Get repository tree (file listing) for a specific commit/branch SHA.
+
+        Args:
+            owner: Repository owner.
+            repo: Repository name.
+            tree_sha: Git tree SHA (commit SHA, branch name, or tag).
+            recursive: Whether to fetch tree recursively (all subdirectories).
+
+        Returns:
+            Tree data dict with file/directory entries, or None if not found.
+        """
+        path = f"/repos/{owner}/{repo}/git/trees/{tree_sha}"
+        params: dict[str, Any] = {}
+
+        if recursive:
+            params["recursive"] = "1"
+
+        if self._rate_limiter:
+            await self._rate_limiter.acquire(APIType.REST)
+
+        try:
+            response = await self._http.get(path, params=params)
+
+            if self._rate_limiter:
+                self._rate_limiter.update(dict(response.headers), APIType.REST)
+
+            if response.status_code == 404:
+                logger.debug("Tree not found (404): %s/%s @ %s", owner, repo, tree_sha)
+                return None
+
+            if response.is_success:
+                return cast("dict[str, Any]", response.data)
+
+            logger.error(
+                "Failed to fetch tree for %s/%s @ %s: %d",
+                owner,
+                repo,
+                tree_sha,
+                response.status_code,
+            )
+            return None
+
+        finally:
+            if self._rate_limiter:
+                self._rate_limiter.release()
+
     async def get_rate_limit(self) -> dict[str, Any] | None:
         """Get current rate limit status.
 
@@ -460,6 +513,172 @@ class RestClient:
                 return cast("dict[str, Any]", response.data)
 
             logger.error("Failed to fetch rate limit: %d", response.status_code)
+            return None
+
+        finally:
+            if self._rate_limiter:
+                self._rate_limiter.release()
+
+    async def get_branch_protection(
+        self,
+        owner: str,
+        repo: str,
+        branch: str,
+    ) -> tuple[dict[str, Any] | None, int]:
+        """Get branch protection rules for a branch.
+
+        Args:
+            owner: Repository owner.
+            repo: Repository name.
+            branch: Branch name.
+
+        Returns:
+            Tuple of (protection data dict or None, status_code).
+            Returns (None, 404) if no protection set.
+            Returns (None, 403) if no permission to access.
+            Returns (data, 200) on success.
+        """
+        path = f"/repos/{owner}/{repo}/branches/{branch}/protection"
+
+        if self._rate_limiter:
+            await self._rate_limiter.acquire(APIType.REST)
+
+        try:
+            response = await self._http.get(path)
+
+            if self._rate_limiter:
+                self._rate_limiter.update(dict(response.headers), APIType.REST)
+
+            # 404 means no branch protection is set (not an error)
+            if response.status_code == 404:
+                logger.debug("No branch protection for %s/%s:%s", owner, repo, branch)
+                return None, 404
+
+            # 403 means no permission to access
+            if response.status_code == 403:
+                logger.debug(
+                    "No permission to access branch protection for %s/%s:%s",
+                    owner,
+                    repo,
+                    branch,
+                )
+                return None, 403
+
+            if response.is_success:
+                return cast("dict[str, Any]", response.data), response.status_code
+
+            logger.warning(
+                "Unexpected status for branch protection %s/%s:%s - %d",
+                owner,
+                repo,
+                branch,
+                response.status_code,
+            )
+            return None, response.status_code
+
+        finally:
+            if self._rate_limiter:
+                self._rate_limiter.release()
+
+    async def check_vulnerability_alerts(self, owner: str, repo: str) -> bool | None:
+        """Check if vulnerability alerts (Dependabot alerts) are enabled.
+
+        Args:
+            owner: Repository owner.
+            repo: Repository name.
+
+        Returns:
+            True if enabled, False if disabled, None if permission denied or error.
+        """
+        path = f"/repos/{owner}/{repo}/vulnerability-alerts"
+
+        if self._rate_limiter:
+            await self._rate_limiter.acquire(APIType.REST)
+
+        try:
+            response = await self._http.get(path)
+
+            if self._rate_limiter:
+                self._rate_limiter.update(dict(response.headers), APIType.REST)
+
+            if response.status_code == 204:
+                # 204 No Content means enabled
+                return True
+            if response.status_code == 404:
+                # 404 Not Found means disabled
+                return False
+            if response.status_code == 403:
+                # 403 Forbidden means no permission
+                logger.debug(
+                    "No permission to check vulnerability alerts for %s/%s",
+                    owner,
+                    repo,
+                )
+                return None
+
+            logger.debug(
+                "Unexpected status checking vulnerability alerts for %s/%s: %d",
+                owner,
+                repo,
+                response.status_code,
+            )
+            return None
+
+        except Exception as e:
+            logger.debug(
+                "Error checking vulnerability alerts for %s/%s: %s",
+                owner,
+                repo,
+                e,
+            )
+            return None
+
+        finally:
+            if self._rate_limiter:
+                self._rate_limiter.release()
+
+    async def get_repo_security_analysis(self, owner: str, repo: str) -> dict[str, Any] | None:
+        """Get repository with security_and_analysis field.
+
+        Args:
+            owner: Repository owner.
+            repo: Repository name.
+
+        Returns:
+            Repository data with security_and_analysis field, or None if not accessible.
+        """
+        path = f"/repos/{owner}/{repo}"
+
+        if self._rate_limiter:
+            await self._rate_limiter.acquire(APIType.REST)
+
+        try:
+            response = await self._http.get(path)
+
+            if self._rate_limiter:
+                self._rate_limiter.update(dict(response.headers), APIType.REST)
+
+            if response.status_code == 404:
+                logger.debug("Repository not found: %s/%s", owner, repo)
+                return None
+
+            if response.status_code == 403:
+                logger.debug("No permission to access repository: %s/%s", owner, repo)
+                return None
+
+            if response.is_success:
+                return cast("dict[str, Any]", response.data)
+
+            logger.debug(
+                "Failed to fetch repo %s/%s: %d",
+                owner,
+                repo,
+                response.status_code,
+            )
+            return None
+
+        except Exception as e:
+            logger.debug("Error fetching repo %s/%s: %s", owner, repo, e)
             return None
 
         finally:

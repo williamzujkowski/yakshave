@@ -25,7 +25,7 @@ class EnvelopedRecord:
     """
 
     timestamp: str
-    source: Literal["github_rest", "github_graphql"]
+    source: Literal["github_rest", "github_graphql", "derived"]
     endpoint: str
     request_id: str
     page: int
@@ -34,7 +34,7 @@ class EnvelopedRecord:
     @classmethod
     def create(
         cls,
-        source: Literal["github_rest", "github_graphql"],
+        source: Literal["github_rest", "github_graphql", "derived"],
         endpoint: str,
         data: dict[str, Any],
         page: int = 1,
@@ -139,7 +139,7 @@ class JSONLWriter:
 
     def write(
         self,
-        source: Literal["github_rest", "github_graphql"],
+        source: Literal["github_rest", "github_graphql", "derived"],
         endpoint: str,
         data: dict[str, Any],
         page: int = 1,
@@ -291,7 +291,7 @@ class AsyncJSONLWriter:
 
     async def write(
         self,
-        source: Literal["github_rest", "github_graphql"],
+        source: Literal["github_rest", "github_graphql", "derived"],
         endpoint: str,
         data: dict[str, Any],
         page: int = 1,

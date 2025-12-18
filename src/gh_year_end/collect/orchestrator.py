@@ -13,6 +13,7 @@ from typing import Any, cast
 from gh_year_end.collect.comments import collect_issue_comments, collect_review_comments
 from gh_year_end.collect.commits import collect_commits
 from gh_year_end.collect.discovery import discover_repos
+from gh_year_end.collect.hygiene import collect_branch_protection, collect_security_features
 from gh_year_end.collect.issues import collect_issues
 from gh_year_end.collect.pulls import collect_pulls
 from gh_year_end.collect.repos import collect_repo_metadata
@@ -109,6 +110,7 @@ async def run_collection(config: Config, force: bool = False) -> dict[str, Any]:
         "reviews": {},
         "comments": {},
         "commits": {},
+        "hygiene": {},
         "duration_seconds": 0.0,
         "rate_limit_samples": [],
     }
@@ -293,6 +295,53 @@ async def run_collection(config: Config, force: bool = False) -> dict[str, Any]:
             logger.info("Skipping commit collection (disabled in config)")
             stats["commits"] = {"commits_collected": 0, "skipped": True}
 
+        # Step 8: Hygiene - Branch Protection
+        if config.collection.enable.hygiene:
+            logger.info("=" * 80)
+            logger.info("STEP 8: Branch Protection Collection")
+            logger.info("=" * 80)
+
+            hygiene_stats = await collect_branch_protection(
+                repos=repos,
+                rest_client=rest_client,
+                path_manager=paths,
+                config=config,
+            )
+            stats["hygiene"] = hygiene_stats
+            logger.info(
+                "Branch protection collection complete: %d repos processed, %d with protection enabled",
+                hygiene_stats.get("repos_processed", 0),
+                hygiene_stats.get("protection_enabled", 0),
+            )
+        else:
+            logger.info("Skipping branch protection collection (hygiene disabled in config)")
+            stats["hygiene"] = {"repos_processed": 0, "skipped": True}
+
+        # Step 9: Security Features
+        if config.collection.enable.hygiene:
+            logger.info("=" * 80)
+            logger.info("STEP 9: Security Features Collection")
+            logger.info("=" * 80)
+
+            security_features_stats = await collect_security_features(
+                repos=repos,
+                rest_client=rest_client,
+                paths=paths,
+                config=config,
+            )
+            stats["security_features"] = security_features_stats
+            logger.info(
+                "Security features collection complete: %d repos processed, %d with all features, "
+                "%d with partial features, %d with no access",
+                security_features_stats.get("repos_processed", 0),
+                security_features_stats.get("repos_with_all_features", 0),
+                security_features_stats.get("repos_with_partial_features", 0),
+                security_features_stats.get("repos_with_no_access", 0),
+            )
+        else:
+            logger.info("Skipping security features collection (hygiene disabled in config)")
+            stats["security_features"] = {"repos_processed": 0, "skipped": True}
+
         # Collect rate limit samples
         stats["rate_limit_samples"] = rate_limiter.get_samples()
 
@@ -329,6 +378,15 @@ async def run_collection(config: Config, force: bool = False) -> dict[str, Any]:
     logger.info("Reviews collected: %d", stats["reviews"].get("reviews_collected", 0))
     logger.info("Comments collected: %d", stats["comments"].get("total_comments", 0))
     logger.info("Commits collected: %d", stats["commits"].get("commits_collected", 0))
+    logger.info(
+        "Hygiene - branch protection: %d repos processed",
+        stats["hygiene"].get("repos_processed", 0),
+    )
+    logger.info(
+        "Security features: %d repos processed, %d with all features",
+        stats["security_features"].get("repos_processed", 0),
+        stats["security_features"].get("repos_with_all_features", 0),
+    )
 
     # Write manifest
     manifest = {
