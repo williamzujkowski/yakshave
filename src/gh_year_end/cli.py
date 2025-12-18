@@ -150,10 +150,94 @@ def normalize(ctx: click.Context, config: Path) -> None:
     Converts raw JSONL files to normalized Parquet tables with
     consistent schemas, bot detection, and identity resolution.
     """
+    from datetime import UTC, datetime
+
+    from gh_year_end.storage.paths import PathManager
+
     cfg = load_config(config)
+    paths = PathManager(cfg)
+
     console.print(f"[bold]Normalizing data for year {cfg.github.windows.year}[/bold]")
-    # TODO: Implement normalization logic
-    console.print("[dim]Normalization not yet implemented[/dim]")
+    console.print(f"  Source: {paths.raw_root}")
+    console.print(f"  Target: {paths.curated_root}")
+    console.print()
+
+    # Check if raw data exists
+    if not paths.manifest_path.exists():
+        console.print("[bold red]Error:[/bold red] No raw data found. Run 'collect' command first.")
+        raise click.Abort()
+
+    console.print("[bold cyan]Checking raw data...[/bold cyan]")
+
+    # Check for repos file
+    if not paths.repos_raw_path.exists():
+        console.print(
+            "[bold red]Error:[/bold red] No repos.jsonl found. Collection may be incomplete."
+        )
+        raise click.Abort()
+
+    console.print(f"  Found repos data: {paths.repos_raw_path}")
+
+    # Ensure curated directory exists
+    paths.curated_root.mkdir(parents=True, exist_ok=True)
+
+    console.print()
+    console.print("[bold cyan]Starting normalization...[/bold cyan]")
+
+    start_time = datetime.now(UTC)
+    stats: dict[str, int | list[str]] = {
+        "tables_written": 0,
+        "total_rows": 0,
+        "errors": [],
+    }
+
+    try:
+        # TODO: Call normalizers for each table when implemented
+        # Import normalize functions and call them sequentially
+
+        console.print("[yellow]Note:[/yellow] Normalizers not yet implemented")
+        console.print("  Expected normalizers:")
+        console.print("    - dim_user (from users.py)")
+        console.print("    - dim_repo (from repos.py)")
+        console.print("    - dim_identity_rule (from users.py)")
+        console.print("    - fact_pull_request (from pulls.py)")
+        console.print("    - fact_issue (from issues.py)")
+        console.print("    - fact_review (from reviews.py)")
+        console.print("    - fact_issue_comment (from comments.py)")
+        console.print("    - fact_review_comment (from comments.py)")
+        console.print("    - fact_commit (from commits.py)")
+        console.print("    - fact_commit_file (from commits.py)")
+        console.print("    - fact_repo_files_presence (from hygiene.py)")
+        console.print("    - fact_repo_hygiene (from hygiene.py)")
+        console.print("    - fact_repo_security_features (from hygiene.py)")
+
+    except Exception as e:
+        console.print(f"\n[bold red]Normalization failed:[/bold red] {e}")
+        if ctx.obj.get("verbose"):
+            import traceback
+
+            console.print("\n[dim]Traceback:[/dim]")
+            console.print(traceback.format_exc())
+        errors = stats["errors"]
+        if isinstance(errors, list):
+            errors.append(str(e))
+        raise click.Abort() from e
+
+    end_time = datetime.now(UTC)
+    duration = (end_time - start_time).total_seconds()
+
+    console.print()
+    console.print("[bold green]Normalization complete![/bold green]")
+    console.print()
+    console.print("[bold]Summary:[/bold]")
+    console.print(f"  Duration: {duration:.2f} seconds")
+    console.print(f"  Tables written: {stats['tables_written']}")
+    console.print(f"  Total rows: {stats['total_rows']}")
+    errors = stats["errors"]
+    if errors and isinstance(errors, list):
+        console.print(f"  Errors: {len(errors)}")
+        for error in errors:
+            console.print(f"    - {error}")
 
 
 @main.command()

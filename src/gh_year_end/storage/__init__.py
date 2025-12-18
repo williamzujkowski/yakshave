@@ -1,6 +1,11 @@
 """Storage utilities for raw, curated, and metrics data."""
 
 from gh_year_end.storage.manifest import EndpointStats, Manifest
+from gh_year_end.storage.parquet_writer import (
+    ParquetWriter,
+    read_parquet,
+    write_parquet,
+)
 from gh_year_end.storage.paths import PathManager
 from gh_year_end.storage.writer import (
     AsyncJSONLWriter,
@@ -16,7 +21,10 @@ __all__ = [
     "EnvelopedRecord",
     "JSONLWriter",
     "Manifest",
+    "ParquetWriter",
     "PathManager",
     "async_jsonl_writer",
     "jsonl_writer",
+    "read_parquet",
+    "write_parquet",
 ]

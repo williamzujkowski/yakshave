@@ -124,6 +124,73 @@ class PathManager:
         """Path to a curated Parquet table."""
         return self.curated_root / f"{table}.parquet"
 
+    # Convenience properties for common curated tables
+
+    @property
+    def dim_user_path(self) -> Path:
+        """Path to dim_user Parquet table."""
+        return self.curated_path("dim_user")
+
+    @property
+    def dim_repo_path(self) -> Path:
+        """Path to dim_repo Parquet table."""
+        return self.curated_path("dim_repo")
+
+    @property
+    def dim_identity_rule_path(self) -> Path:
+        """Path to dim_identity_rule Parquet table."""
+        return self.curated_path("dim_identity_rule")
+
+    @property
+    def fact_pull_request_path(self) -> Path:
+        """Path to fact_pull_request Parquet table."""
+        return self.curated_path("fact_pull_request")
+
+    @property
+    def fact_issue_path(self) -> Path:
+        """Path to fact_issue Parquet table."""
+        return self.curated_path("fact_issue")
+
+    @property
+    def fact_review_path(self) -> Path:
+        """Path to fact_review Parquet table."""
+        return self.curated_path("fact_review")
+
+    @property
+    def fact_issue_comment_path(self) -> Path:
+        """Path to fact_issue_comment Parquet table."""
+        return self.curated_path("fact_issue_comment")
+
+    @property
+    def fact_review_comment_path(self) -> Path:
+        """Path to fact_review_comment Parquet table."""
+        return self.curated_path("fact_review_comment")
+
+    @property
+    def fact_commit_path(self) -> Path:
+        """Path to fact_commit Parquet table."""
+        return self.curated_path("fact_commit")
+
+    @property
+    def fact_commit_file_path(self) -> Path:
+        """Path to fact_commit_file Parquet table."""
+        return self.curated_path("fact_commit_file")
+
+    @property
+    def fact_repo_files_presence_path(self) -> Path:
+        """Path to fact_repo_files_presence Parquet table."""
+        return self.curated_path("fact_repo_files_presence")
+
+    @property
+    def fact_repo_hygiene_path(self) -> Path:
+        """Path to fact_repo_hygiene Parquet table."""
+        return self.curated_path("fact_repo_hygiene")
+
+    @property
+    def fact_repo_security_features_path(self) -> Path:
+        """Path to fact_repo_security_features Parquet table."""
+        return self.curated_path("fact_repo_security_features")
+
     # Metrics paths
 
     def metrics_path(
