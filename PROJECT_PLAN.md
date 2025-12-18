@@ -1,5 +1,22 @@
 # Project Plan: GitHub Year-End Community Health Report (2025)
 
+## Implementation Status
+
+**Current Phase**: Phase 6 (Static Report Site) - In Progress
+
+**Completed Phases**:
+- Phase 0: Foundation (packaging, CLI, config validation) - Complete
+- Phase 1: GitHub client and repository discovery - Complete
+- Phase 2: Data collectors and collection orchestrator - Complete
+- Phase 3: Hygiene snapshot collection - Complete
+- Phase 4: Normalization to Parquet - Complete
+- Phase 5: Metrics engine - Complete
+- Phase 6: Static report site - In Progress
+
+**Implementation Details**: See [docs/archive/](docs/archive/) for detailed implementation summaries from each phase.
+
+---
+
 ## 0) Goals, non-negotiables, and success criteria
 
 ### Goals

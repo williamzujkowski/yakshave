@@ -3,7 +3,7 @@
 ```
 STATUS: AUTHORITATIVE
 VERSION: 1.0.0
-LAST_AUDIT: 2025-12-17
+LAST_AUDIT: 2025-12-18
 NEXT_REVIEW: 2026-03-17
 SCOPE: gh-year-end development standards
 ```
@@ -205,6 +205,7 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 * **Immutable snapshots**: Raw data in JSONL with request/response envelope
 * **Layered data**: raw -> curated (Parquet) -> metrics (Parquet) -> report (JSON/HTML)
 * **Deterministic**: Stable ordering, stable IDs, repeatable outputs
+* **Report generation**: Phase 6 report module with exec/engineer views, Jinja2 template rendering, and D3.js visualizations
 
 ### Important Files
 
@@ -227,7 +228,7 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 - Always ensure deterministic ordering and stable IDs in normalized outputs
 
 ### Module Size Limits
-- Modules <= 300-400 lines
+- Modules <= 300-400 lines (some modules like checkpoint.py exceed this due to complexity, which is acceptable for cohesive functionality)
 - Functions <= 50 lines
 - DRY/KISS principles
 
@@ -245,6 +246,9 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 # Development
 uv run gh-year-end plan --config config/config.yaml
 
+# Check collection progress
+uv run gh-year-end status --config config/config.yaml
+
 # Build (collect all data and generate report)
 uv run gh-year-end all --config config/config.yaml
 
@@ -253,6 +257,16 @@ uv run gh-year-end collect --config config/config.yaml
 uv run gh-year-end normalize --config config/config.yaml
 uv run gh-year-end metrics --config config/config.yaml
 uv run gh-year-end report --config config/config.yaml
+
+# Collection with checkpoints
+# Resume interrupted collection
+uv run gh-year-end collect --config config/config.yaml --resume
+
+# Retry failed repos only
+uv run gh-year-end collect --config config/config.yaml --retry-failed
+
+# Start from specific repo
+uv run gh-year-end collect --config config/config.yaml --from-repo owner/repo
 ```
 
 ---
