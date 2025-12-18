@@ -271,7 +271,7 @@ Metrics Parquet tables from `data/metrics/year=YYYY/`
 
 **Output:**
 
-Static HTML site in `site/year=YYYY/`:
+Static HTML site in `site/YYYY/`:
 
 - `index.html` - Main landing page
 - `exec.html` - Executive summary view
@@ -291,7 +291,7 @@ gh-year-end report -c config/config.yaml --force
 **Viewing the report:**
 
 ```bash
-python -m http.server -d site/year=2025
+python -m http.server -d site/2025
 # Open http://localhost:8000 in browser
 ```
 
@@ -341,7 +341,7 @@ gh-year-end plan -c config/config.yaml
 gh-year-end all -c config/config.yaml
 
 # 4. View report
-python -m http.server -d site/year=2025
+python -m http.server -d site/2025
 ```
 
 ### Incremental Development
@@ -419,7 +419,7 @@ gh-year-end collect -c config/config.yaml --retry-failed
          │
          ▼ report
 ┌─────────────────┐
-│  Static Site    │  site/year=YYYY/
+│  Static Site    │  site/YYYY/
 │  - HTML         │  - index.html
 │  - JSON         │  - exec.html
 │  - D3 viz       │  - engineer.html
@@ -756,7 +756,7 @@ du -sh data/
 rm -rf data/raw/year=2024/
 rm -rf data/curated/year=2024/
 rm -rf data/metrics/year=2024/
-rm -rf site/year=2024/
+rm -rf site/2024/
 
 # Or change storage.root in config to different volume
 ```

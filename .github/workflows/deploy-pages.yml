@@ -1,0 +1,58 @@
+# Deploy Demo Site to GitHub Pages
+#
+# IMPORTANT: This deploys a pre-built demo site from the repository.
+#
+# To update the demo:
+#   1. Run `gh-year-end all --config config/config.yaml` locally
+#   2. Commit the generated `site/2024/` directory
+#   3. Push to main branch
+#
+# Future enhancement:
+#   - Automate builds using a GitHub PAT (Personal Access Token)
+#   - Generate site directly in CI instead of committing artifacts
+#
+# The demo is built from sample data in tests/fixtures/sample_org/
+# and does not require real GitHub API access.
+
+name: Deploy Demo to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Add .nojekyll
+        run: touch site/2024/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'site/2024'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

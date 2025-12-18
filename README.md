@@ -36,7 +36,7 @@ uv run gh-year-end all --config config/config.yaml
 View the report:
 
 ```bash
-python -m http.server -d site/year=2025
+python -m http.server -d site/2025
 # Open http://localhost:8000
 ```
 

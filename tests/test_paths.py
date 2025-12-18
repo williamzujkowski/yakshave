@@ -53,7 +53,7 @@ class TestPathManagerRoots:
 
     def test_site_root(self, path_manager: PathManager) -> None:
         """Test site root path generation."""
-        expected = Path("/tmp/test-site/year=2025")
+        expected = Path("/tmp/test-site/2025")
         assert path_manager.site_root == expected
 
 
