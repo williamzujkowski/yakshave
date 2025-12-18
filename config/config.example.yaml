@@ -1,0 +1,74 @@
+# GitHub Year-End Report Configuration
+# Copy this file to config.yaml and customize for your org/user
+
+github:
+  target:
+    mode: org          # org | user
+    name: example-org  # Organization or username to analyze
+  auth:
+    token_env: GITHUB_TOKEN  # Environment variable containing GitHub token
+  discovery:
+    include_forks: false     # Include forked repositories
+    include_archived: false  # Include archived repositories
+    visibility: all          # all | public | private
+  windows:
+    year: 2025
+    since: "2025-01-01T00:00:00Z"
+    until: "2026-01-01T00:00:00Z"
+
+rate_limit:
+  strategy: adaptive         # adaptive | fixed
+  max_concurrency: 4         # Max parallel requests
+  min_sleep_seconds: 1       # Minimum sleep between requests
+  max_sleep_seconds: 60      # Maximum sleep when rate limited
+  sample_rate_limit_endpoint_every_n_requests: 50
+
+identity:
+  bots:
+    exclude_patterns:
+      - ".*\\[bot\\]$"        # GitHub App bots
+      - "^dependabot$"        # Dependabot
+      - "^renovate\\[bot\\]$" # Renovate bot
+    include_overrides: []     # Force-include specific bot accounts as humans
+  humans_only: true           # Filter bots from leaderboards
+
+collection:
+  enable:
+    pulls: true      # Pull requests
+    issues: true     # Issues (non-PR)
+    reviews: true    # PR reviews
+    comments: true   # Issue and review comments
+    commits: true    # Commits
+    hygiene: true    # Repository hygiene checks
+  commits:
+    include_files: true    # Include file changes in commits
+    classify_files: true   # Classify files (docs, test, ci, etc.)
+  hygiene:
+    paths:
+      - "SECURITY.md"
+      - "README.md"
+      - "LICENSE"
+      - "CONTRIBUTING.md"
+      - "CODE_OF_CONDUCT.md"
+      - "CODEOWNERS"
+      - ".github/CODEOWNERS"
+    workflow_prefixes:
+      - ".github/workflows/"
+    branch_protection:
+      mode: sample           # skip | best_effort | sample
+      sample_top_repos_by: prs_merged
+      sample_count: 25
+    security_features:
+      best_effort: true
+
+storage:
+  root: "./data"
+  raw_format: jsonl
+  curated_format: parquet
+  dataset_version: "v1"
+
+report:
+  title: "Year in Review 2025"
+  output_dir: "./site"
+  theme: "engineer_exec_toggle"
+  awards_config: "./config/awards.yaml"
