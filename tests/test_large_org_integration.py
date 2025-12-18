@@ -441,7 +441,9 @@ class TestRateLimiterIntegration:
         calculated_delay = limiter._calculate_adaptive_delay(state, RequestPriority.LOW)
 
         # At 5% remaining, LOW priority should have significant delay
-        assert calculated_delay > 0.1, f"Expected delay > 0.1s at 5% remaining, got {calculated_delay}s"
+        assert calculated_delay > 0.1, (
+            f"Expected delay > 0.1s at 5% remaining, got {calculated_delay}s"
+        )
 
         # Verify rate limit state is properly tracked
         assert state.remaining_percent < 10
@@ -503,8 +505,7 @@ class TestRateLimiterIntegration:
         # Low priority should have higher delay
         # (or at least not less than high priority)
         assert low_delay >= high_delay * 0.8, (
-            f"Low priority delay ({low_delay}s) should be >= "
-            f"high priority delay ({high_delay}s)"
+            f"Low priority delay ({low_delay}s) should be >= high priority delay ({high_delay}s)"
         )
 
 

@@ -284,7 +284,9 @@ def status(ctx: click.Context, config: Path) -> None:
 
     if phases:
         completed_phases = [p for p, info in phases.items() if info.get("status") == "complete"]
-        console.print(f"  Completed phases: {', '.join(completed_phases) if completed_phases else 'none'}")
+        console.print(
+            f"  Completed phases: {', '.join(completed_phases) if completed_phases else 'none'}"
+        )
     else:
         console.print("  No phases started")
     console.print()
@@ -357,7 +359,9 @@ def status(ctx: click.Context, config: Path) -> None:
         console.print("[bold]Next Steps:[/bold]")
         console.print("  Resume collection: gh-year-end collect --config <config> --resume")
         if stats["repos_failed"] > 0:
-            console.print("  Retry failed only: gh-year-end collect --config <config> --retry-failed")
+            console.print(
+                "  Retry failed only: gh-year-end collect --config <config> --retry-failed"
+            )
 
 
 @main.command()

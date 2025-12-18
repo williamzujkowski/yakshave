@@ -518,9 +518,7 @@ class TestCheckpointIntegration:
         manager.create_new(sample_config)
 
         # Simulate repo discovery
-        repos = [
-            {"full_name": f"org/repo{i}", "name": f"repo{i}"} for i in range(1, 6)
-        ]
+        repos = [{"full_name": f"org/repo{i}", "name": f"repo{i}"} for i in range(1, 6)]
         manager.update_repos(repos)
 
         # Simulate processing

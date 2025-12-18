@@ -91,9 +91,7 @@ def calculate_hygiene_aggregate(hygiene_data: list[dict[str, Any]]) -> dict[str,
     total_repos = len(hygiene_data)
     security_md = sum(1 for r in hygiene_data if r.get("has_security_md"))
     security_features = sum(
-        1
-        for r in hygiene_data
-        if r.get("dependabot_enabled") or r.get("secret_scanning_enabled")
+        1 for r in hygiene_data if r.get("dependabot_enabled") or r.get("secret_scanning_enabled")
     )
     codeowners = sum(1 for r in hygiene_data if r.get("has_codeowners"))
     branch_protection = sum(1 for r in hygiene_data if r.get("branch_protection_enabled"))

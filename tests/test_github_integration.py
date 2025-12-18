@@ -872,9 +872,7 @@ class TestRestClientPagination:
     @respx.mock
     async def test_get_branch_protection(self) -> None:
         """Test getting branch protection rules."""
-        route = respx.get(
-            "https://api.github.com/repos/owner/repo/branches/main/protection"
-        ).mock(
+        route = respx.get("https://api.github.com/repos/owner/repo/branches/main/protection").mock(
             return_value=httpx.Response(
                 200,
                 json={
@@ -907,7 +905,9 @@ class TestRestClientPagination:
             assert status == 200
             assert protection is not None
             assert protection["required_status_checks"]["strict"] is True
-            assert protection["required_pull_request_reviews"]["required_approving_review_count"] == 2
+            assert (
+                protection["required_pull_request_reviews"]["required_approving_review_count"] == 2
+            )
 
         assert route.called
 
@@ -915,9 +915,7 @@ class TestRestClientPagination:
     @respx.mock
     async def test_get_branch_protection_not_set(self) -> None:
         """Test getting branch protection when not set (404)."""
-        route = respx.get(
-            "https://api.github.com/repos/owner/repo/branches/main/protection"
-        ).mock(
+        route = respx.get("https://api.github.com/repos/owner/repo/branches/main/protection").mock(
             return_value=httpx.Response(
                 404,
                 json={"message": "Branch not protected"},
@@ -944,9 +942,7 @@ class TestRestClientPagination:
     @respx.mock
     async def test_get_branch_protection_no_permission(self) -> None:
         """Test getting branch protection with no permission (403)."""
-        route = respx.get(
-            "https://api.github.com/repos/owner/repo/branches/main/protection"
-        ).mock(
+        route = respx.get("https://api.github.com/repos/owner/repo/branches/main/protection").mock(
             return_value=httpx.Response(
                 403,
                 json={"message": "Forbidden"},
@@ -973,9 +969,7 @@ class TestRestClientPagination:
     @respx.mock
     async def test_check_vulnerability_alerts_enabled(self) -> None:
         """Test checking vulnerability alerts when enabled (204)."""
-        route = respx.get(
-            "https://api.github.com/repos/owner/repo/vulnerability-alerts"
-        ).mock(
+        route = respx.get("https://api.github.com/repos/owner/repo/vulnerability-alerts").mock(
             return_value=httpx.Response(
                 204,
                 headers={
@@ -1000,9 +994,7 @@ class TestRestClientPagination:
     @respx.mock
     async def test_check_vulnerability_alerts_disabled(self) -> None:
         """Test checking vulnerability alerts when disabled (404)."""
-        route = respx.get(
-            "https://api.github.com/repos/owner/repo/vulnerability-alerts"
-        ).mock(
+        route = respx.get("https://api.github.com/repos/owner/repo/vulnerability-alerts").mock(
             return_value=httpx.Response(
                 404,
                 json={"message": "Not Found"},
@@ -1028,9 +1020,7 @@ class TestRestClientPagination:
     @respx.mock
     async def test_check_vulnerability_alerts_no_permission(self) -> None:
         """Test checking vulnerability alerts with no permission (403)."""
-        route = respx.get(
-            "https://api.github.com/repos/owner/repo/vulnerability-alerts"
-        ).mock(
+        route = respx.get("https://api.github.com/repos/owner/repo/vulnerability-alerts").mock(
             return_value=httpx.Response(
                 403,
                 json={"message": "Forbidden"},
@@ -1086,8 +1076,7 @@ class TestRestClientPagination:
             assert repo is not None
             assert repo["security_and_analysis"]["secret_scanning"]["status"] == "enabled"
             assert (
-                repo["security_and_analysis"]["dependabot_security_updates"]["status"]
-                == "enabled"
+                repo["security_and_analysis"]["dependabot_security_updates"]["status"] == "enabled"
             )
 
         assert route.called

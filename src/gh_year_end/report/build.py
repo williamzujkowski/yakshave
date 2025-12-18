@@ -444,10 +444,12 @@ def _transform_activity_timeline(timeseries_data: dict[str, Any]) -> list[dict[s
                 value = entry.get("value", 0)
 
                 if period_start:
-                    activity_timeline.append({
-                        "date": period_start,
-                        "value": value,
-                    })
+                    activity_timeline.append(
+                        {
+                            "date": period_start,
+                            "value": value,
+                        }
+                    )
 
             logger.info("Transformed %d activity timeline entries", len(activity_timeline))
         else:

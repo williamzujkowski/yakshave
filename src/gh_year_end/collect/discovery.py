@@ -148,7 +148,9 @@ async def _quick_scan_discovery(
 
             data = response.data
             if not isinstance(data, dict) or "items" not in data:
-                logger.warning("Unexpected search response format, falling back to thorough discovery")
+                logger.warning(
+                    "Unexpected search response format, falling back to thorough discovery"
+                )
                 return await _fetch_repos(client, mode, name)
 
             items = data["items"]
