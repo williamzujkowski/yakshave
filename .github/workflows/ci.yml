@@ -212,6 +212,7 @@ jobs:
             --timeout=300 \
             tests/test_pipeline_live*.py
         timeout-minutes: 10
+        continue-on-error: true  # Live API tests are informational, don't block PRs
 
       - name: Upload test artifacts
         if: failure()
