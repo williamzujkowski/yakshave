@@ -188,9 +188,7 @@ class ProgressTracker:
 
         # Items collected
         if self.stats.items_collected:
-            items = ", ".join(
-                f"{k}: {v}" for k, v in sorted(self.stats.items_collected.items())
-            )
+            items = ", ".join(f"{k}: {v}" for k, v in sorted(self.stats.items_collected.items()))
             table.add_row(f"[bold cyan]Collected:[/] {items}")
 
         return table

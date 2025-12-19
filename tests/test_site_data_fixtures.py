@@ -4,8 +4,6 @@ Validates that the minimal test dataset is well-formed and complete.
 """
 
 
-
-
 def test_sample_site_data_dir_exists(sample_site_data_dir):
     """Test that sample site data directory exists."""
     assert sample_site_data_dir.exists()
@@ -232,13 +230,15 @@ def test_leaderboard_data_quality(load_sample_leaderboards):
 
             # Values should be descending
             values = [entry["value"] for entry in org_leaders]
-            assert values == sorted(
-                values, reverse=True
-            ), f"Values should be descending for {metric_key}"
+            assert values == sorted(values, reverse=True), (
+                f"Values should be descending for {metric_key}"
+            )
 
             # User IDs should be unique
             user_ids = [entry["user_id"] for entry in org_leaders]
-            assert len(user_ids) == len(set(user_ids)), f"User IDs should be unique for {metric_key}"
+            assert len(user_ids) == len(set(user_ids)), (
+                f"User IDs should be unique for {metric_key}"
+            )
 
 
 def test_timeseries_data_quality(load_sample_timeseries):
@@ -251,10 +251,12 @@ def test_timeseries_data_quality(load_sample_timeseries):
             if org_series:
                 # Period starts should be chronologically ordered
                 period_starts = [point["period_start"] for point in org_series]
-                assert period_starts == sorted(
-                    period_starts
-                ), f"Periods should be chronologically ordered for {period_type}/{metric_key}"
+                assert period_starts == sorted(period_starts), (
+                    f"Periods should be chronologically ordered for {period_type}/{metric_key}"
+                )
 
                 # All values should be non-negative
                 values = [point["value"] for point in org_series]
-                assert all(v >= 0 for v in values), f"Values should be non-negative for {metric_key}"
+                assert all(v >= 0 for v in values), (
+                    f"Values should be non-negative for {metric_key}"
+                )

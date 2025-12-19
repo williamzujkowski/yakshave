@@ -452,9 +452,7 @@ def validate_collection(
     # Validate checkpoint consistency
     if checkpoint_path:
         logger.info("Validating checkpoint consistency")
-        checkpoint_result = validator.validate_checkpoint_consistency(
-            checkpoint_path, raw_root
-        )
+        checkpoint_result = validator.validate_checkpoint_consistency(checkpoint_path, raw_root)
         result.merge(checkpoint_result)
 
     return result

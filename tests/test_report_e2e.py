@@ -100,7 +100,10 @@ class TestReportGenerationE2E:
         assert written_filenames == set(expected_files)
 
     def test_template_rendering_creates_all_html_files(
-        self, sample_metrics_config: Config, sample_metrics_paths: PathManager, tmp_path: Path  # noqa: ARG002
+        self,
+        sample_metrics_config: Config,
+        sample_metrics_paths: PathManager,
+        tmp_path: Path,  # noqa: ARG002
     ) -> None:
         """Verify that all templates are rendered correctly."""
         # Copy templates and assets from site/ to the test output directory
@@ -239,7 +242,7 @@ class TestReportGenerationE2E:
                 # Skip lines that are in JSON data islands or script tags
                 if "data-" in line or "<script" in line or "// " in line:
                     continue
-                if "{{" in line and "}}" in line and 'data-' not in line:
+                if "{{" in line and "}}" in line and "data-" not in line:
                     lines_with_issues.append((line_num, line.strip()[:100]))
 
             # Allow some template syntax in data attributes but shouldn't be excessive
@@ -374,7 +377,10 @@ class TestReportGenerationE2E:
     # Helper methods for verification
 
     def _setup_test_site(
-        self, config: Config, paths: PathManager, tmp_path: Path  # noqa: ARG002
+        self,
+        config: Config,
+        paths: PathManager,
+        tmp_path: Path,  # noqa: ARG002
     ) -> PathManager:
         """Setup test site with templates and assets.
 
@@ -433,9 +439,7 @@ class TestReportGenerationE2E:
             assert file_path.exists(), f"Missing data file: {filename}"
             assert file_path.stat().st_size > 0, f"Empty data file: {filename}"
 
-    def _verify_rendered_templates(
-        self, paths: PathManager, build_stats: dict
-    ) -> None:
+    def _verify_rendered_templates(self, paths: PathManager, build_stats: dict) -> None:
         """Verify templates were rendered and reported in stats."""
         # Check that templates were rendered
         assert len(build_stats["templates_rendered"]) > 0
@@ -458,9 +462,7 @@ class TestReportGenerationE2E:
         asset_files = [f for f in asset_files if f.is_file()]
         assert len(asset_files) > 0, "No asset files copied"
 
-    def _verify_manifest(
-        self, paths: PathManager, config: Config, build_stats: dict
-    ) -> None:
+    def _verify_manifest(self, paths: PathManager, config: Config, build_stats: dict) -> None:
         """Verify manifest.json exists and contains correct data."""
         manifest_path = paths.site_root / "manifest.json"
         assert manifest_path.exists(), "manifest.json not created"
@@ -485,7 +487,10 @@ class TestReportOutputValidation:
     """Additional validation tests for report output quality."""
 
     def _setup_test_site(
-        self, config: Config, paths: PathManager, tmp_path: Path  # noqa: ARG002
+        self,
+        config: Config,
+        paths: PathManager,
+        tmp_path: Path,  # noqa: ARG002
     ) -> PathManager:
         """Setup test site with templates and assets."""
         import shutil
@@ -556,7 +561,7 @@ class TestReportOutputValidation:
                 if "data-" in line or "<script" in line:
                     continue
                 # Check for unrendered variables (but not in data attributes)
-                if "{{" in line and "}}" in line and 'data-' not in line:
+                if "{{" in line and "}}" in line and "data-" not in line:
                     lines_with_issues.append((line_num, line.strip()[:80]))
 
             # Allow some minor issues (e.g., in comments) but not too many
@@ -619,9 +624,7 @@ class TestReportOutputValidation:
         build_stats_2 = build_site(sample_metrics_config, test_paths)
 
         # Should produce same number of files
-        assert len(build_stats_1["templates_rendered"]) == len(
-            build_stats_2["templates_rendered"]
-        )
+        assert len(build_stats_1["templates_rendered"]) == len(build_stats_2["templates_rendered"])
         assert build_stats_1["data_files_written"] == build_stats_2["data_files_written"]
         assert build_stats_1["assets_copied"] == build_stats_2["assets_copied"]
         assert len(build_stats_1["errors"]) == len(build_stats_2["errors"])

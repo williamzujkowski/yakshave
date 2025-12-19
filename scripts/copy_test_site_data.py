@@ -37,8 +37,7 @@ def copy_test_data(year: int, force: bool = False) -> None:
     # Check if site data directory exists and has files
     if site_data_dir.exists() and any(site_data_dir.glob("*.json")) and not force:
         response = input(
-            f"Site data directory {site_data_dir} already contains files. "
-            "Overwrite? (y/N): "
+            f"Site data directory {site_data_dir} already contains files. Overwrite? (y/N): "
         )
         if response.lower() != "y":
             print("Aborted.")

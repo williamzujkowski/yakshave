@@ -94,9 +94,7 @@ def test_sample_metrics_time_series_structure(sample_metrics_dir: Path) -> None:
     assert "month" in period_types
 
     # Verify we have full year coverage (52 weeks)
-    weekly_org = df.filter(
-        (pl.col("period_type") == "week") & (pl.col("scope") == "org")
-    )
+    weekly_org = df.filter((pl.col("period_type") == "week") & (pl.col("scope") == "org"))
     # Each metric should have ~52 weeks
     metrics_count = len(weekly_org["metric_key"].unique())
     expected_weekly_records = metrics_count * 52
@@ -260,9 +258,7 @@ def test_sample_metrics_leaderboard_values(
     df = pl.read_parquet(leaderboard_path)
 
     # Get org-wide data for this metric
-    metric_data = df.filter(
-        (pl.col("metric_key") == metric_key) & (pl.col("scope") == "org")
-    )
+    metric_data = df.filter((pl.col("metric_key") == metric_key) & (pl.col("scope") == "org"))
 
     assert len(metric_data) > 0, f"No data for metric: {metric_key}"
 

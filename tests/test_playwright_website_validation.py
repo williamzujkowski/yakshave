@@ -26,6 +26,7 @@ import pytest
 # Check if playwright is available
 try:
     from playwright.sync_api import Page, expect
+
     HAS_PLAYWRIGHT = True
 except ImportError:
     HAS_PLAYWRIGHT = False
@@ -35,7 +36,7 @@ except ImportError:
 # Skip all tests in this module if playwright is not installed
 pytestmark = pytest.mark.skipif(
     not HAS_PLAYWRIGHT,
-    reason="Playwright not installed. Run: pip install playwright && playwright install"
+    reason="Playwright not installed. Run: pip install playwright && playwright install",
 )
 
 
@@ -391,7 +392,9 @@ class TestAccessibility:
         page.goto(f"{BASE_URL}/index.html")
 
         theme_toggle = page.locator("button.theme-toggle")
-        expect(theme_toggle).to_have_attribute("aria-label", re.compile(".*dark.*mode.*", re.IGNORECASE))
+        expect(theme_toggle).to_have_attribute(
+            "aria-label", re.compile(".*dark.*mode.*", re.IGNORECASE)
+        )
 
     def test_year_selector_has_aria_attributes(self, page: Page):
         """Verify year selector has proper aria attributes."""
@@ -401,7 +404,9 @@ class TestAccessibility:
         expect(year_toggle).to_have_attribute("aria-label", re.compile(".*year.*", re.IGNORECASE))
         # Check aria-expanded exists (value can be "true" or "false")
         aria_expanded = year_toggle.get_attribute("aria-expanded")
-        assert aria_expanded in ["true", "false"], f"aria-expanded should be 'true' or 'false', got {aria_expanded}"
+        assert aria_expanded in ["true", "false"], (
+            f"aria-expanded should be 'true' or 'false', got {aria_expanded}"
+        )
 
     def test_nav_has_aria_label(self, page: Page):
         """Verify navigation has proper aria label."""

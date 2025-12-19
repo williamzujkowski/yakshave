@@ -143,9 +143,7 @@ async def collect_issues(
 
             # Mark as failed
             if checkpoint:
-                checkpoint.mark_repo_endpoint_failed(
-                    repo_name, "issues", str(e), retryable=True
-                )
+                checkpoint.mark_repo_endpoint_failed(repo_name, "issues", str(e), retryable=True)
             continue
 
     logger.info(
@@ -228,9 +226,7 @@ async def _collect_repo_issues(
 
             # Update checkpoint with page progress
             if checkpoint:
-                checkpoint.update_progress(
-                    repo_name, "issues", metadata["page"], issue_count
-                )
+                checkpoint.update_progress(repo_name, "issues", metadata["page"], issue_count)
 
             logger.debug(
                 "Fetched page %d: %d items (%d issues, %d PRs filtered)",
