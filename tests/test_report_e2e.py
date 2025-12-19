@@ -102,8 +102,8 @@ class TestReportGenerationE2E:
     def test_template_rendering_creates_all_html_files(
         self,
         sample_metrics_config: Config,
-        sample_metrics_paths: PathManager,
-        tmp_path: Path,  # noqa: ARG002
+        sample_metrics_paths: PathManager,  # noqa: ARG002
+        tmp_path: Path,
     ) -> None:
         """Verify that all templates are rendered correctly."""
         # Copy templates and assets from site/ to the test output directory
@@ -379,8 +379,8 @@ class TestReportGenerationE2E:
     def _setup_test_site(
         self,
         config: Config,
-        paths: PathManager,
-        tmp_path: Path,  # noqa: ARG002
+        paths: PathManager,  # noqa: ARG002
+        tmp_path: Path,
     ) -> PathManager:
         """Setup test site with templates and assets.
 
@@ -489,8 +489,8 @@ class TestReportOutputValidation:
     def _setup_test_site(
         self,
         config: Config,
-        paths: PathManager,
-        tmp_path: Path,  # noqa: ARG002
+        paths: PathManager,  # noqa: ARG002
+        tmp_path: Path,
     ) -> PathManager:
         """Setup test site with templates and assets."""
         import shutil
