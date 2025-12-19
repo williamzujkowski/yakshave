@@ -16,6 +16,7 @@ from gh_year_end.collect.commits import collect_commits
 from gh_year_end.collect.discovery import discover_repos
 from gh_year_end.collect.hygiene import collect_branch_protection, collect_security_features
 from gh_year_end.collect.issues import collect_issues
+from gh_year_end.collect.progress import ProgressTracker
 from gh_year_end.collect.pulls import collect_pulls
 from gh_year_end.collect.repos import collect_repo_metadata
 from gh_year_end.collect.reviews import collect_reviews
@@ -42,6 +43,8 @@ async def run_collection(
     resume: bool = False,
     from_repo: str | None = None,
     retry_failed: bool = False,
+    verbose: bool = False,
+    quiet: bool = False,
 ) -> dict[str, Any]:
     """Run complete data collection pipeline.
 
@@ -60,6 +63,8 @@ async def run_collection(
         resume: If True, require existing checkpoint (fail if none exists).
         from_repo: Resume starting from specific repo (e.g., 'owner/repo').
         retry_failed: If True, only retry repos marked as failed.
+        verbose: Enable detailed logging output.
+        quiet: Minimal output mode (no progress display).
 
     Returns:
         Dictionary with aggregated statistics from all collectors:
@@ -164,6 +169,13 @@ async def run_collection(
     rest_client = RestClient(http_client, rate_limiter)
     graphql_client = GraphQLClient(http_client, rate_limiter)
 
+    # Initialize progress tracker
+    progress = ProgressTracker(
+        verbose=verbose,
+        quiet=quiet,
+        rate_limiter=rate_limiter,
+    )
+
     # Initialize stats collector
     stats: dict[str, Any] = {
         "discovery": {},
@@ -179,17 +191,17 @@ async def run_collection(
     }
 
     try:
+        # Start progress display
+        progress.start()
+
         # Step 1: Discovery
         logger.info("=" * 80)
         logger.info("STEP 1: Repository Discovery")
         logger.info("=" * 80)
+        progress.set_phase("discovery")
 
         if checkpoint.is_phase_complete("discovery"):
             logger.info("Discovery phase already complete, loading repos from checkpoint")
-            # Get repos from checkpoint
-            repos_to_process = checkpoint.get_repos_to_process(
-                retry_failed=retry_failed, from_repo=from_repo
-            )
             # Load repo metadata from existing discovery file
             repos = []
             if paths.repos_raw_path.exists():
@@ -199,6 +211,8 @@ async def run_collection(
                         repos.append(record.get("data", {}))
             stats["discovery"] = {"repos_discovered": len(repos), "skipped": True}
             logger.info("Loaded %d repos from checkpoint", len(repos))
+            progress.set_total_repos(len(repos))
+            progress.mark_phase_complete("discovery")
         else:
             checkpoint.set_current_phase("discovery")
             repos = await discover_repos(config, http_client, paths)
@@ -208,6 +222,8 @@ async def run_collection(
             # Register all repos with checkpoint
             checkpoint.update_repos(repos)
             checkpoint.mark_phase_complete("discovery")
+            progress.set_total_repos(len(repos))
+            progress.mark_phase_complete("discovery")
             logger.info("Discovery complete: %d repos discovered", len(repos))
 
         if not repos:
@@ -227,9 +243,11 @@ async def run_collection(
 
         # Step 2: Repo Metadata
         if config.collection.enable.hygiene:
+            progress.set_phase("repo_metadata")
             if checkpoint.is_phase_complete("repo_metadata"):
                 logger.info("Repo metadata phase already complete, skipping")
                 stats["repos"] = {"repos_processed": len(repos), "skipped": True}
+                progress.mark_phase_complete("repo_metadata")
             else:
                 logger.info("=" * 80)
                 logger.info("STEP 2: Repository Metadata Collection")
@@ -248,6 +266,7 @@ async def run_collection(
                     )
                 stats["repos"] = repo_stats
                 checkpoint.mark_phase_complete("repo_metadata")
+                progress.mark_phase_complete("repo_metadata")
                 logger.info(
                     "Repo metadata complete: %d repos processed",
                     repo_stats.get("repos_processed", 0),
@@ -255,12 +274,15 @@ async def run_collection(
         else:
             logger.info("Skipping repo metadata collection (hygiene collection disabled)")
             stats["repos"] = {"repos_processed": 0, "skipped": True}
+            progress.mark_phase_complete("repo_metadata")
 
         # Step 3: Pull Requests
         if config.collection.enable.pulls:
+            progress.set_phase("pulls")
             if checkpoint.is_phase_complete("pulls"):
                 logger.info("Pull requests phase already complete, skipping")
                 stats["pulls"] = {"pulls_collected": 0, "skipped": True}
+                progress.mark_phase_complete("pulls")
             else:
                 logger.info("=" * 80)
                 logger.info("STEP 3: Pull Request Collection")
@@ -276,18 +298,23 @@ async def run_collection(
                 )
                 stats["pulls"] = pull_stats
                 checkpoint.mark_phase_complete("pulls")
+                progress.update_items_collected("pulls", pull_stats.get("pulls_collected", 0))
+                progress.mark_phase_complete("pulls")
                 logger.info(
                     "Pull request complete: %d PRs collected", pull_stats.get("pulls_collected", 0)
                 )
         else:
             logger.info("Skipping pull request collection (disabled in config)")
             stats["pulls"] = {"pulls_collected": 0, "skipped": True}
+            progress.mark_phase_complete("pulls")
 
         # Step 4: Issues
         if config.collection.enable.issues:
+            progress.set_phase("issues")
             if checkpoint.is_phase_complete("issues"):
                 logger.info("Issues phase already complete, skipping")
                 stats["issues"] = {"issues_collected": 0, "skipped": True}
+                progress.mark_phase_complete("issues")
             else:
                 logger.info("=" * 80)
                 logger.info("STEP 4: Issue Collection")
@@ -304,6 +331,8 @@ async def run_collection(
                 )
                 stats["issues"] = issue_stats
                 checkpoint.mark_phase_complete("issues")
+                progress.update_items_collected("issues", issue_stats.get("issues_collected", 0))
+                progress.mark_phase_complete("issues")
                 logger.info(
                     "Issue collection complete: %d issues collected",
                     issue_stats.get("issues_collected", 0),
@@ -311,12 +340,15 @@ async def run_collection(
         else:
             logger.info("Skipping issue collection (disabled in config)")
             stats["issues"] = {"issues_collected": 0, "skipped": True}
+            progress.mark_phase_complete("issues")
 
         # Step 5: Reviews
         if config.collection.enable.reviews:
+            progress.set_phase("reviews")
             if checkpoint.is_phase_complete("reviews"):
                 logger.info("Reviews phase already complete, skipping")
                 stats["reviews"] = {"reviews_collected": 0, "skipped": True}
+                progress.mark_phase_complete("reviews")
             else:
                 logger.info("=" * 80)
                 logger.info("STEP 5: Review Collection")
@@ -333,6 +365,8 @@ async def run_collection(
                 )
                 stats["reviews"] = review_stats
                 checkpoint.mark_phase_complete("reviews")
+                progress.update_items_collected("reviews", review_stats.get("reviews_collected", 0))
+                progress.mark_phase_complete("reviews")
                 logger.info(
                     "Review collection complete: %d reviews collected",
                     review_stats.get("reviews_collected", 0),
@@ -340,12 +374,15 @@ async def run_collection(
         else:
             logger.info("Skipping review collection (disabled in config)")
             stats["reviews"] = {"reviews_collected": 0, "skipped": True}
+            progress.mark_phase_complete("reviews")
 
         # Step 6: Comments (both issue and review comments)
         if config.collection.enable.comments:
+            progress.set_phase("comments")
             if checkpoint.is_phase_complete("comments"):
                 logger.info("Comments phase already complete, skipping")
                 stats["comments"] = {"total_comments": 0, "skipped": True}
+                progress.mark_phase_complete("comments")
             else:
                 logger.info("=" * 80)
                 logger.info("STEP 6: Comment Collection")
@@ -395,6 +432,8 @@ async def run_collection(
                     ),
                 }
                 checkpoint.mark_phase_complete("comments")
+                progress.update_items_collected("comments", stats["comments"]["total_comments"])
+                progress.mark_phase_complete("comments")
                 logger.info(
                     "Comment collection complete: %d total comments collected",
                     stats["comments"]["total_comments"],
@@ -402,12 +441,15 @@ async def run_collection(
         else:
             logger.info("Skipping comment collection (disabled in config)")
             stats["comments"] = {"total_comments": 0, "skipped": True}
+            progress.mark_phase_complete("comments")
 
         # Step 7: Commits
         if config.collection.enable.commits:
+            progress.set_phase("commits")
             if checkpoint.is_phase_complete("commits"):
                 logger.info("Commits phase already complete, skipping")
                 stats["commits"] = {"commits_collected": 0, "skipped": True}
+                progress.mark_phase_complete("commits")
             else:
                 logger.info("=" * 80)
                 logger.info("STEP 7: Commit Collection")
@@ -424,6 +466,8 @@ async def run_collection(
                 )
                 stats["commits"] = commit_stats
                 checkpoint.mark_phase_complete("commits")
+                progress.update_items_collected("commits", commit_stats.get("commits_collected", 0))
+                progress.mark_phase_complete("commits")
                 logger.info(
                     "Commit collection complete: %d commits collected",
                     commit_stats.get("commits_collected", 0),
@@ -431,12 +475,15 @@ async def run_collection(
         else:
             logger.info("Skipping commit collection (disabled in config)")
             stats["commits"] = {"commits_collected": 0, "skipped": True}
+            progress.mark_phase_complete("commits")
 
         # Step 8: Hygiene - Branch Protection
         if config.collection.enable.hygiene:
+            progress.set_phase("branch_protection")
             if checkpoint.is_phase_complete("branch_protection"):
                 logger.info("Branch protection phase already complete, skipping")
                 stats["hygiene"] = {"repos_processed": 0, "skipped": True}
+                progress.mark_phase_complete("branch_protection")
             else:
                 logger.info("=" * 80)
                 logger.info("STEP 8: Branch Protection Collection")
@@ -452,6 +499,7 @@ async def run_collection(
                 )
                 stats["hygiene"] = hygiene_stats
                 checkpoint.mark_phase_complete("branch_protection")
+                progress.mark_phase_complete("branch_protection")
                 logger.info(
                     "Branch protection collection complete: %d repos processed, "
                     "%d with protection enabled",
@@ -461,12 +509,15 @@ async def run_collection(
         else:
             logger.info("Skipping branch protection collection (hygiene disabled in config)")
             stats["hygiene"] = {"repos_processed": 0, "skipped": True}
+            progress.mark_phase_complete("branch_protection")
 
         # Step 9: Security Features
         if config.collection.enable.hygiene:
+            progress.set_phase("security_features")
             if checkpoint.is_phase_complete("security_features"):
                 logger.info("Security features phase already complete, skipping")
                 stats["security_features"] = {"repos_processed": 0, "skipped": True}
+                progress.mark_phase_complete("security_features")
             else:
                 logger.info("=" * 80)
                 logger.info("STEP 9: Security Features Collection")
@@ -482,6 +533,7 @@ async def run_collection(
                 )
                 stats["security_features"] = security_features_stats
                 checkpoint.mark_phase_complete("security_features")
+                progress.mark_phase_complete("security_features")
                 logger.info(
                     "Security features collection complete: %d repos processed, "
                     "%d with all features, %d with partial features, %d with no access",
@@ -493,6 +545,7 @@ async def run_collection(
         else:
             logger.info("Skipping security features collection (hygiene disabled in config)")
             stats["security_features"] = {"repos_processed": 0, "skipped": True}
+            progress.mark_phase_complete("security_features")
 
         # Collect rate limit samples
         stats["rate_limit_samples"] = rate_limiter.get_samples()
@@ -511,6 +564,8 @@ async def run_collection(
                     )
 
     finally:
+        # Stop progress display
+        progress.stop()
         # Cleanup clients
         await http_client.close()
 

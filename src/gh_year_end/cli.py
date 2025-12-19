@@ -96,6 +96,13 @@ def plan(ctx: click.Context, config: Path) -> None:
     default=False,
     help="Only retry repos marked as failed",
 )
+@click.option(
+    "--quiet",
+    "-q",
+    is_flag=True,
+    default=False,
+    help="Minimal output (no progress display)",
+)
 @click.pass_context
 def collect(
     ctx: click.Context,
@@ -104,6 +111,7 @@ def collect(
     resume: bool,
     from_repo: str | None,
     retry_failed: bool,
+    quiet: bool,
 ) -> None:
     """Collect raw data from GitHub API.
 
@@ -174,6 +182,7 @@ def collect(
 
     try:
         # Run async collection with checkpoint support
+        verbose = ctx.obj.get("verbose", False)
         stats = asyncio.run(
             run_collection(
                 cfg,
@@ -181,6 +190,8 @@ def collect(
                 resume=resume,
                 from_repo=from_repo,
                 retry_failed=retry_failed,
+                verbose=verbose,
+                quiet=quiet,
             )
         )
 
