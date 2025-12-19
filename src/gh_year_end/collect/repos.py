@@ -148,7 +148,7 @@ query($owner: String!, $name: String!) {
 
 # Separate query for branch protection (may fail due to permissions)
 BRANCH_PROTECTION_QUERY = """
-query($owner: String!, $name: String!, $branch: String!) {
+query($owner: String!, $name: String!) {
   repository(owner: $owner, name: $name) {
     branchProtectionRule: branchProtectionRules(first: 1) {
       nodes {
@@ -421,7 +421,7 @@ async def _fetch_branch_protection(
     try:
         data = await graphql_client.execute(
             BRANCH_PROTECTION_QUERY,
-            {"owner": owner, "name": name, "branch": branch},
+            {"owner": owner, "name": name},
         )
 
         repo_data = data.get("repository", {})

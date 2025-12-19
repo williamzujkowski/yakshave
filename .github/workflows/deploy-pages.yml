@@ -1,20 +1,20 @@
-# Deploy Demo Site to GitHub Pages
+# Deploy Year-End Report Site to GitHub Pages
 #
-# IMPORTANT: This deploys a pre-built demo site from the repository.
+# This workflow deploys the complete year-end report site, including:
+#   - Root index.html with year redirection
+#   - Year-specific directories (2024/, 2025/, etc.)
+#   - Shared assets
 #
-# To update the demo:
+# To update the site:
 #   1. Run `gh-year-end all --config config/config.yaml` locally
-#   2. Commit the generated `site/2024/` directory
+#   2. Commit the generated `site/` directory
 #   3. Push to main branch
 #
-# Future enhancement:
-#   - Automate builds using a GitHub PAT (Personal Access Token)
-#   - Generate site directly in CI instead of committing artifacts
-#
-# The demo is built from sample data in tests/fixtures/sample_org/
-# and does not require real GitHub API access.
+# The workflow triggers on:
+#   - Push to main when site/ changes
+#   - Manual workflow dispatch
 
-name: Deploy Demo to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -45,13 +45,21 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Add .nojekyll
-        run: touch site/2024/.nojekyll
+      - name: Prepare site directory
+        run: |
+          # Ensure .nojekyll exists in root to disable Jekyll processing
+          touch site/.nojekyll
+
+          # Remove any old year=YYYY directories (should be YYYY format)
+          rm -rf site/year=* || true
+
+          # Remove templates directory (not needed in production)
+          rm -rf site/templates || true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'site/2024'
+          path: 'site'
 
       - name: Deploy to GitHub Pages
         id: deployment
