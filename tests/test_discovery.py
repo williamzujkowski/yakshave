@@ -6,6 +6,7 @@ from gh_year_end.collect.discovery import (
     _apply_filters,
     _extract_metadata,
 )
+from gh_year_end.collect.filters import FilterChain
 from gh_year_end.config import DiscoveryConfig
 
 
@@ -26,8 +27,11 @@ class TestApplyFilters:
             visibility="all",
         )
 
-        filtered = _apply_filters(repos, config)
+        filter_chain = FilterChain(config)
+        filtered, stats = _apply_filters(repos, filter_chain)
         assert len(filtered) == 3
+        assert stats["total_discovered"] == 3
+        assert stats["passed_filters"] == 3
 
     def test_apply_filters_exclude_forks(self) -> None:
         """Test _apply_filters excludes forks."""
@@ -43,9 +47,12 @@ class TestApplyFilters:
             visibility="all",
         )
 
-        filtered = _apply_filters(repos, config)
+        filter_chain = FilterChain(config)
+        filtered, stats = _apply_filters(repos, filter_chain)
         assert len(filtered) == 1
         assert filtered[0]["name"] == "repo1"
+        assert stats["total_rejected"] == 2
+        assert stats["rejected_by_filter"]["fork"] == 2
 
     def test_apply_filters_exclude_archived(self) -> None:
         """Test _apply_filters excludes archived repositories."""
@@ -61,9 +68,11 @@ class TestApplyFilters:
             visibility="all",
         )
 
-        filtered = _apply_filters(repos, config)
+        filter_chain = FilterChain(config)
+        filtered, stats = _apply_filters(repos, filter_chain)
         assert len(filtered) == 1
         assert filtered[0]["name"] == "repo1"
+        assert stats["rejected_by_filter"]["archive"] == 2
 
     def test_apply_filters_public_only(self) -> None:
         """Test _apply_filters with visibility=public."""
@@ -79,9 +88,11 @@ class TestApplyFilters:
             visibility="public",
         )
 
-        filtered = _apply_filters(repos, config)
+        filter_chain = FilterChain(config)
+        filtered, stats = _apply_filters(repos, filter_chain)
         assert len(filtered) == 2
         assert all(r["name"] in ["repo1", "repo3"] for r in filtered)
+        assert stats["rejected_by_filter"]["visibility"] == 1
 
     def test_apply_filters_private_only(self) -> None:
         """Test _apply_filters with visibility=private."""
@@ -97,9 +108,11 @@ class TestApplyFilters:
             visibility="private",
         )
 
-        filtered = _apply_filters(repos, config)
+        filter_chain = FilterChain(config)
+        filtered, stats = _apply_filters(repos, filter_chain)
         assert len(filtered) == 2
         assert all(r["name"] in ["repo2", "repo3"] for r in filtered)
+        assert stats["rejected_by_filter"]["visibility"] == 1
 
     def test_apply_filters_visibility_field_fallback(self) -> None:
         """Test _apply_filters falls back to private field for visibility."""
@@ -114,9 +127,11 @@ class TestApplyFilters:
             visibility="public",
         )
 
-        filtered = _apply_filters(repos, config)
+        filter_chain = FilterChain(config)
+        filtered, stats = _apply_filters(repos, filter_chain)
         assert len(filtered) == 1
         assert filtered[0]["name"] == "repo1"
+        assert stats["rejected_by_filter"]["visibility"] == 1
 
     def test_apply_filters_combined(self) -> None:
         """Test _apply_filters with multiple filters active."""
@@ -133,9 +148,11 @@ class TestApplyFilters:
             visibility="public",
         )
 
-        filtered = _apply_filters(repos, config)
+        filter_chain = FilterChain(config)
+        filtered, stats = _apply_filters(repos, filter_chain)
         assert len(filtered) == 1
         assert filtered[0]["name"] == "repo1"
+        assert stats["total_rejected"] == 3
 
     def test_apply_filters_empty_list(self) -> None:
         """Test _apply_filters with empty repository list."""
@@ -147,8 +164,11 @@ class TestApplyFilters:
             visibility="all",
         )
 
-        filtered = _apply_filters(repos, config)
+        filter_chain = FilterChain(config)
+        filtered, stats = _apply_filters(repos, filter_chain)
         assert len(filtered) == 0
+        assert stats["total_discovered"] == 0
+        assert stats["passed_filters"] == 0
 
     def test_apply_filters_missing_fork_field(self) -> None:
         """Test _apply_filters handles missing fork field."""
@@ -162,9 +182,11 @@ class TestApplyFilters:
             visibility="all",
         )
 
-        filtered = _apply_filters(repos, config)
+        filter_chain = FilterChain(config)
+        filtered, stats = _apply_filters(repos, filter_chain)
         # Should include repo since fork field is missing (defaults to False)
         assert len(filtered) == 1
+        assert stats["total_rejected"] == 0
 
     def test_apply_filters_missing_archived_field(self) -> None:
         """Test _apply_filters handles missing archived field."""
@@ -178,9 +200,11 @@ class TestApplyFilters:
             visibility="all",
         )
 
-        filtered = _apply_filters(repos, config)
+        filter_chain = FilterChain(config)
+        filtered, stats = _apply_filters(repos, filter_chain)
         # Should include repo since archived field is missing (defaults to False)
         assert len(filtered) == 1
+        assert stats["total_rejected"] == 0
 
 
 class TestExtractMetadata:

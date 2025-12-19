@@ -13,7 +13,7 @@ class PathManager:
     - Raw: data/raw/year=YYYY/source=github/target=<name>/
     - Curated: data/curated/year=YYYY/
     - Metrics: data/metrics/year=YYYY/
-    - Site: site/year=YYYY/
+    - Site: site/YYYY/
     """
 
     def __init__(self, config: Config) -> None:
@@ -45,7 +45,7 @@ class PathManager:
     @property
     def site_root(self) -> Path:
         """Root path for generated site."""
-        return Path(self.config.report.output_dir) / f"year={self.year}"
+        return Path(self.config.report.output_dir) / str(self.year)
 
     # Raw data paths
 
@@ -58,6 +58,11 @@ class PathManager:
     def rate_limit_samples_path(self) -> Path:
         """Path to rate limit samples JSONL."""
         return self.raw_root / "rate_limit_samples.jsonl"
+
+    @property
+    def checkpoint_path(self) -> Path:
+        """Path to checkpoint file."""
+        return self.raw_root / "checkpoint.json"
 
     @property
     def repos_raw_path(self) -> Path:

@@ -1,0 +1,66 @@
+# Deploy Year-End Report Site to GitHub Pages
+#
+# This workflow deploys the complete year-end report site, including:
+#   - Root index.html with year redirection
+#   - Year-specific directories (2024/, 2025/, etc.)
+#   - Shared assets
+#
+# To update the site:
+#   1. Run `gh-year-end all --config config/config.yaml` locally
+#   2. Commit the generated `site/` directory
+#   3. Push to main branch
+#
+# The workflow triggers on:
+#   - Push to main when site/ changes
+#   - Manual workflow dispatch
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepare site directory
+        run: |
+          # Ensure .nojekyll exists in root to disable Jekyll processing
+          touch site/.nojekyll
+
+          # Remove any old year=YYYY directories (should be YYYY format)
+          rm -rf site/year=* || true
+
+          # Remove templates directory (not needed in production)
+          rm -rf site/templates || true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

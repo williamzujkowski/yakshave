@@ -1,0 +1,4369 @@
+{
+  "timeseries": {
+    "month": {
+      "issues_opened": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-02-01",
+            "value": 41
+          },
+          {
+            "period_start": "2024-02-01",
+            "period_end": "2024-03-01",
+            "value": 35
+          },
+          {
+            "period_start": "2024-03-01",
+            "period_end": "2024-04-01",
+            "value": 35
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-05-01",
+            "value": 43
+          },
+          {
+            "period_start": "2024-05-01",
+            "period_end": "2024-06-01",
+            "value": 35
+          },
+          {
+            "period_start": "2024-06-01",
+            "period_end": "2024-07-01",
+            "value": 42
+          },
+          {
+            "period_start": "2024-07-01",
+            "period_end": "2024-08-01",
+            "value": 44
+          },
+          {
+            "period_start": "2024-08-01",
+            "period_end": "2024-09-01",
+            "value": 36
+          },
+          {
+            "period_start": "2024-09-01",
+            "period_end": "2024-10-01",
+            "value": 37
+          },
+          {
+            "period_start": "2024-10-01",
+            "period_end": "2024-11-01",
+            "value": 36
+          },
+          {
+            "period_start": "2024-11-01",
+            "period_end": "2024-12-01",
+            "value": 38
+          },
+          {
+            "period_start": "2024-12-01",
+            "period_end": "2025-01-01",
+            "value": 45
+          }
+        ],
+        "repos": {}
+      },
+      "reviews_submitted": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-02-01",
+            "value": 40
+          },
+          {
+            "period_start": "2024-02-01",
+            "period_end": "2024-03-01",
+            "value": 49
+          },
+          {
+            "period_start": "2024-03-01",
+            "period_end": "2024-04-01",
+            "value": 49
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-05-01",
+            "value": 42
+          },
+          {
+            "period_start": "2024-05-01",
+            "period_end": "2024-06-01",
+            "value": 41
+          },
+          {
+            "period_start": "2024-06-01",
+            "period_end": "2024-07-01",
+            "value": 41
+          },
+          {
+            "period_start": "2024-07-01",
+            "period_end": "2024-08-01",
+            "value": 43
+          },
+          {
+            "period_start": "2024-08-01",
+            "period_end": "2024-09-01",
+            "value": 35
+          },
+          {
+            "period_start": "2024-09-01",
+            "period_end": "2024-10-01",
+            "value": 36
+          },
+          {
+            "period_start": "2024-10-01",
+            "period_end": "2024-11-01",
+            "value": 35
+          },
+          {
+            "period_start": "2024-11-01",
+            "period_end": "2024-12-01",
+            "value": 44
+          },
+          {
+            "period_start": "2024-12-01",
+            "period_end": "2025-01-01",
+            "value": 44
+          }
+        ],
+        "repos": {}
+      },
+      "prs_merged": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-02-01",
+            "value": 41
+          },
+          {
+            "period_start": "2024-02-01",
+            "period_end": "2024-03-01",
+            "value": 43
+          },
+          {
+            "period_start": "2024-03-01",
+            "period_end": "2024-04-01",
+            "value": 35
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-05-01",
+            "value": 37
+          },
+          {
+            "period_start": "2024-05-01",
+            "period_end": "2024-06-01",
+            "value": 35
+          },
+          {
+            "period_start": "2024-06-01",
+            "period_end": "2024-07-01",
+            "value": 42
+          },
+          {
+            "period_start": "2024-07-01",
+            "period_end": "2024-08-01",
+            "value": 44
+          },
+          {
+            "period_start": "2024-08-01",
+            "period_end": "2024-09-01",
+            "value": 44
+          },
+          {
+            "period_start": "2024-09-01",
+            "period_end": "2024-10-01",
+            "value": 38
+          },
+          {
+            "period_start": "2024-10-01",
+            "period_end": "2024-11-01",
+            "value": 36
+          },
+          {
+            "period_start": "2024-11-01",
+            "period_end": "2024-12-01",
+            "value": 38
+          },
+          {
+            "period_start": "2024-12-01",
+            "period_end": "2025-01-01",
+            "value": 45
+          }
+        ],
+        "repos": {}
+      },
+      "prs_opened": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-02-01",
+            "value": 40
+          },
+          {
+            "period_start": "2024-02-01",
+            "period_end": "2024-03-01",
+            "value": 41
+          },
+          {
+            "period_start": "2024-03-01",
+            "period_end": "2024-04-01",
+            "value": 48
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-05-01",
+            "value": 35
+          },
+          {
+            "period_start": "2024-05-01",
+            "period_end": "2024-06-01",
+            "value": 49
+          },
+          {
+            "period_start": "2024-06-01",
+            "period_end": "2024-07-01",
+            "value": 41
+          },
+          {
+            "period_start": "2024-07-01",
+            "period_end": "2024-08-01",
+            "value": 42
+          },
+          {
+            "period_start": "2024-08-01",
+            "period_end": "2024-09-01",
+            "value": 49
+          },
+          {
+            "period_start": "2024-09-01",
+            "period_end": "2024-10-01",
+            "value": 36
+          },
+          {
+            "period_start": "2024-10-01",
+            "period_end": "2024-11-01",
+            "value": 35
+          },
+          {
+            "period_start": "2024-11-01",
+            "period_end": "2024-12-01",
+            "value": 36
+          },
+          {
+            "period_start": "2024-12-01",
+            "period_end": "2025-01-01",
+            "value": 43
+          }
+        ],
+        "repos": {}
+      },
+      "issues_closed": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-02-01",
+            "value": 49
+          },
+          {
+            "period_start": "2024-02-01",
+            "period_end": "2024-03-01",
+            "value": 36
+          },
+          {
+            "period_start": "2024-03-01",
+            "period_end": "2024-04-01",
+            "value": 43
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-05-01",
+            "value": 44
+          },
+          {
+            "period_start": "2024-05-01",
+            "period_end": "2024-06-01",
+            "value": 43
+          },
+          {
+            "period_start": "2024-06-01",
+            "period_end": "2024-07-01",
+            "value": 35
+          },
+          {
+            "period_start": "2024-07-01",
+            "period_end": "2024-08-01",
+            "value": 37
+          },
+          {
+            "period_start": "2024-08-01",
+            "period_end": "2024-09-01",
+            "value": 44
+          },
+          {
+            "period_start": "2024-09-01",
+            "period_end": "2024-10-01",
+            "value": 45
+          },
+          {
+            "period_start": "2024-10-01",
+            "period_end": "2024-11-01",
+            "value": 44
+          },
+          {
+            "period_start": "2024-11-01",
+            "period_end": "2024-12-01",
+            "value": 45
+          },
+          {
+            "period_start": "2024-12-01",
+            "period_end": "2025-01-01",
+            "value": 38
+          }
+        ],
+        "repos": {}
+      }
+    },
+    "week": {
+      "prs_opened": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-01-08",
+            "value": 10
+          },
+          {
+            "period_start": "2024-01-08",
+            "period_end": "2024-01-15",
+            "value": 8
+          },
+          {
+            "period_start": "2024-01-15",
+            "period_end": "2024-01-22",
+            "value": 9
+          },
+          {
+            "period_start": "2024-01-22",
+            "period_end": "2024-01-29",
+            "value": 11
+          },
+          {
+            "period_start": "2024-01-29",
+            "period_end": "2024-02-05",
+            "value": 10
+          },
+          {
+            "period_start": "2024-02-05",
+            "period_end": "2024-02-12",
+            "value": 11
+          },
+          {
+            "period_start": "2024-02-12",
+            "period_end": "2024-02-19",
+            "value": 9
+          },
+          {
+            "period_start": "2024-02-19",
+            "period_end": "2024-02-26",
+            "value": 10
+          },
+          {
+            "period_start": "2024-02-26",
+            "period_end": "2024-03-04",
+            "value": 12
+          },
+          {
+            "period_start": "2024-03-04",
+            "period_end": "2024-03-11",
+            "value": 11
+          },
+          {
+            "period_start": "2024-03-11",
+            "period_end": "2024-03-18",
+            "value": 9
+          },
+          {
+            "period_start": "2024-03-18",
+            "period_end": "2024-03-25",
+            "value": 10
+          },
+          {
+            "period_start": "2024-03-25",
+            "period_end": "2024-04-01",
+            "value": 13
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-04-08",
+            "value": 11
+          },
+          {
+            "period_start": "2024-04-08",
+            "period_end": "2024-04-15",
+            "value": 10
+          },
+          {
+            "period_start": "2024-04-15",
+            "period_end": "2024-04-22",
+            "value": 10
+          },
+          {
+            "period_start": "2024-04-22",
+            "period_end": "2024-04-29",
+            "value": 13
+          },
+          {
+            "period_start": "2024-04-29",
+            "period_end": "2024-05-06",
+            "value": 13
+          },
+          {
+            "period_start": "2024-05-06",
+            "period_end": "2024-05-13",
+            "value": 12
+          },
+          {
+            "period_start": "2024-05-13",
+            "period_end": "2024-05-20",
+            "value": 11
+          },
+          {
+            "period_start": "2024-05-20",
+            "period_end": "2024-05-27",
+            "value": 13
+          },
+          {
+            "period_start": "2024-05-27",
+            "period_end": "2024-06-03",
+            "value": 12
+          },
+          {
+            "period_start": "2024-06-03",
+            "period_end": "2024-06-10",
+            "value": 8
+          },
+          {
+            "period_start": "2024-06-10",
+            "period_end": "2024-06-17",
+            "value": 11
+          },
+          {
+            "period_start": "2024-06-17",
+            "period_end": "2024-06-24",
+            "value": 13
+          },
+          {
+            "period_start": "2024-06-24",
+            "period_end": "2024-07-01",
+            "value": 12
+          },
+          {
+            "period_start": "2024-07-01",
+            "period_end": "2024-07-08",
+            "value": 13
+          },
+          {
+            "period_start": "2024-07-08",
+            "period_end": "2024-07-15",
+            "value": 11
+          },
+          {
+            "period_start": "2024-07-15",
+            "period_end": "2024-07-22",
+            "value": 12
+          },
+          {
+            "period_start": "2024-07-22",
+            "period_end": "2024-07-29",
+            "value": 8
+          },
+          {
+            "period_start": "2024-07-29",
+            "period_end": "2024-08-05",
+            "value": 13
+          },
+          {
+            "period_start": "2024-08-05",
+            "period_end": "2024-08-12",
+            "value": 8
+          },
+          {
+            "period_start": "2024-08-12",
+            "period_end": "2024-08-19",
+            "value": 12
+          },
+          {
+            "period_start": "2024-08-19",
+            "period_end": "2024-08-26",
+            "value": 13
+          },
+          {
+            "period_start": "2024-08-26",
+            "period_end": "2024-09-02",
+            "value": 9
+          },
+          {
+            "period_start": "2024-09-02",
+            "period_end": "2024-09-09",
+            "value": 8
+          },
+          {
+            "period_start": "2024-09-09",
+            "period_end": "2024-09-16",
+            "value": 12
+          },
+          {
+            "period_start": "2024-09-16",
+            "period_end": "2024-09-23",
+            "value": 13
+          },
+          {
+            "period_start": "2024-09-23",
+            "period_end": "2024-09-30",
+            "value": 12
+          },
+          {
+            "period_start": "2024-09-30",
+            "period_end": "2024-10-07",
+            "value": 8
+          },
+          {
+            "period_start": "2024-10-07",
+            "period_end": "2024-10-14",
+            "value": 9
+          },
+          {
+            "period_start": "2024-10-14",
+            "period_end": "2024-10-21",
+            "value": 13
+          },
+          {
+            "period_start": "2024-10-21",
+            "period_end": "2024-10-28",
+            "value": 12
+          },
+          {
+            "period_start": "2024-10-28",
+            "period_end": "2024-11-04",
+            "value": 10
+          },
+          {
+            "period_start": "2024-11-04",
+            "period_end": "2024-11-11",
+            "value": 9
+          },
+          {
+            "period_start": "2024-11-11",
+            "period_end": "2024-11-18",
+            "value": 8
+          },
+          {
+            "period_start": "2024-11-18",
+            "period_end": "2024-11-25",
+            "value": 12
+          },
+          {
+            "period_start": "2024-11-25",
+            "period_end": "2024-12-02",
+            "value": 9
+          },
+          {
+            "period_start": "2024-12-02",
+            "period_end": "2024-12-09",
+            "value": 11
+          },
+          {
+            "period_start": "2024-12-09",
+            "period_end": "2024-12-16",
+            "value": 8
+          },
+          {
+            "period_start": "2024-12-16",
+            "period_end": "2024-12-23",
+            "value": 13
+          },
+          {
+            "period_start": "2024-12-23",
+            "period_end": "2024-12-30",
+            "value": 9
+          },
+          {
+            "period_start": "2024-12-30",
+            "period_end": "2025-01-01",
+            "value": 10
+          }
+        ],
+        "repos": {
+          "R_001": [
+            {
+              "period_start": "2024-01-01",
+              "period_end": "2024-01-08",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-08",
+              "period_end": "2024-01-15",
+              "value": 4
+            },
+            {
+              "period_start": "2024-01-15",
+              "period_end": "2024-01-22",
+              "value": 3
+            },
+            {
+              "period_start": "2024-01-22",
+              "period_end": "2024-01-29",
+              "value": 4
+            },
+            {
+              "period_start": "2024-01-29",
+              "period_end": "2024-02-05",
+              "value": 2
+            },
+            {
+              "period_start": "2024-02-05",
+              "period_end": "2024-02-12",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-12",
+              "period_end": "2024-02-19",
+              "value": 2
+            },
+            {
+              "period_start": "2024-02-19",
+              "period_end": "2024-02-26",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-26",
+              "period_end": "2024-03-04",
+              "value": 4
+            },
+            {
+              "period_start": "2024-03-04",
+              "period_end": "2024-03-11",
+              "value": 2
+            },
+            {
+              "period_start": "2024-03-11",
+              "period_end": "2024-03-18",
+              "value": 2
+            },
+            {
+              "period_start": "2024-03-18",
+              "period_end": "2024-03-25",
+              "value": 2
+            },
+            {
+              "period_start": "2024-03-25",
+              "period_end": "2024-04-01",
+              "value": 3
+            },
+            {
+              "period_start": "2024-04-01",
+              "period_end": "2024-04-08",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-08",
+              "period_end": "2024-04-15",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-15",
+              "period_end": "2024-04-22",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-22",
+              "period_end": "2024-04-29",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-29",
+              "period_end": "2024-05-06",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-06",
+              "period_end": "2024-05-13",
+              "value": 4
+            },
+            {
+              "period_start": "2024-05-13",
+              "period_end": "2024-05-20",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-20",
+              "period_end": "2024-05-27",
+              "value": 4
+            },
+            {
+              "period_start": "2024-05-27",
+              "period_end": "2024-06-03",
+              "value": 2
+            },
+            {
+              "period_start": "2024-06-03",
+              "period_end": "2024-06-10",
+              "value": 4
+            },
+            {
+              "period_start": "2024-06-10",
+              "period_end": "2024-06-17",
+              "value": 2
+            },
+            {
+              "period_start": "2024-06-17",
+              "period_end": "2024-06-24",
+              "value": 5
+            },
+            {
+              "period_start": "2024-06-24",
+              "period_end": "2024-07-01",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-01",
+              "period_end": "2024-07-08",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-08",
+              "period_end": "2024-07-15",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-15",
+              "period_end": "2024-07-22",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-22",
+              "period_end": "2024-07-29",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-29",
+              "period_end": "2024-08-05",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-05",
+              "period_end": "2024-08-12",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-12",
+              "period_end": "2024-08-19",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-19",
+              "period_end": "2024-08-26",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-26",
+              "period_end": "2024-09-02",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-02",
+              "period_end": "2024-09-09",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-09",
+              "period_end": "2024-09-16",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-16",
+              "period_end": "2024-09-23",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-23",
+              "period_end": "2024-09-30",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-30",
+              "period_end": "2024-10-07",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-07",
+              "period_end": "2024-10-14",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-14",
+              "period_end": "2024-10-21",
+              "value": 5
+            },
+            {
+              "period_start": "2024-10-21",
+              "period_end": "2024-10-28",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-28",
+              "period_end": "2024-11-04",
+              "value": 3
+            },
+            {
+              "period_start": "2024-11-04",
+              "period_end": "2024-11-11",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-11",
+              "period_end": "2024-11-18",
+              "value": 4
+            },
+            {
+              "period_start": "2024-11-18",
+              "period_end": "2024-11-25",
+              "value": 3
+            },
+            {
+              "period_start": "2024-11-25",
+              "period_end": "2024-12-02",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-02",
+              "period_end": "2024-12-09",
+              "value": 3
+            },
+            {
+              "period_start": "2024-12-09",
+              "period_end": "2024-12-16",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-16",
+              "period_end": "2024-12-23",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-23",
+              "period_end": "2024-12-30",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-30",
+              "period_end": "2025-01-01",
+              "value": 5
+            }
+          ],
+          "R_002": [
+            {
+              "period_start": "2024-01-01",
+              "period_end": "2024-01-08",
+              "value": 3
+            },
+            {
+              "period_start": "2024-01-08",
+              "period_end": "2024-01-15",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-15",
+              "period_end": "2024-01-22",
+              "value": 3
+            },
+            {
+              "period_start": "2024-01-22",
+              "period_end": "2024-01-29",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-29",
+              "period_end": "2024-02-05",
+              "value": 3
+            },
+            {
+              "period_start": "2024-02-05",
+              "period_end": "2024-02-12",
+              "value": 4
+            },
+            {
+              "period_start": "2024-02-12",
+              "period_end": "2024-02-19",
+              "value": 3
+            },
+            {
+              "period_start": "2024-02-19",
+              "period_end": "2024-02-26",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-26",
+              "period_end": "2024-03-04",
+              "value": 3
+            },
+            {
+              "period_start": "2024-03-04",
+              "period_end": "2024-03-11",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-11",
+              "period_end": "2024-03-18",
+              "value": 4
+            },
+            {
+              "period_start": "2024-03-18",
+              "period_end": "2024-03-25",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-25",
+              "period_end": "2024-04-01",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-01",
+              "period_end": "2024-04-08",
+              "value": 5
+            },
+            {
+              "period_start": "2024-04-08",
+              "period_end": "2024-04-15",
+              "value": 5
+            },
+            {
+              "period_start": "2024-04-15",
+              "period_end": "2024-04-22",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-22",
+              "period_end": "2024-04-29",
+              "value": 5
+            },
+            {
+              "period_start": "2024-04-29",
+              "period_end": "2024-05-06",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-06",
+              "period_end": "2024-05-13",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-13",
+              "period_end": "2024-05-20",
+              "value": 3
+            },
+            {
+              "period_start": "2024-05-20",
+              "period_end": "2024-05-27",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-27",
+              "period_end": "2024-06-03",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-03",
+              "period_end": "2024-06-10",
+              "value": 4
+            },
+            {
+              "period_start": "2024-06-10",
+              "period_end": "2024-06-17",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-17",
+              "period_end": "2024-06-24",
+              "value": 2
+            },
+            {
+              "period_start": "2024-06-24",
+              "period_end": "2024-07-01",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-01",
+              "period_end": "2024-07-08",
+              "value": 5
+            },
+            {
+              "period_start": "2024-07-08",
+              "period_end": "2024-07-15",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-15",
+              "period_end": "2024-07-22",
+              "value": 5
+            },
+            {
+              "period_start": "2024-07-22",
+              "period_end": "2024-07-29",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-29",
+              "period_end": "2024-08-05",
+              "value": 5
+            },
+            {
+              "period_start": "2024-08-05",
+              "period_end": "2024-08-12",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-12",
+              "period_end": "2024-08-19",
+              "value": 2
+            },
+            {
+              "period_start": "2024-08-19",
+              "period_end": "2024-08-26",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-26",
+              "period_end": "2024-09-02",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-02",
+              "period_end": "2024-09-09",
+              "value": 3
+            },
+            {
+              "period_start": "2024-09-09",
+              "period_end": "2024-09-16",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-16",
+              "period_end": "2024-09-23",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-23",
+              "period_end": "2024-09-30",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-30",
+              "period_end": "2024-10-07",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-07",
+              "period_end": "2024-10-14",
+              "value": 3
+            },
+            {
+              "period_start": "2024-10-14",
+              "period_end": "2024-10-21",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-21",
+              "period_end": "2024-10-28",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-28",
+              "period_end": "2024-11-04",
+              "value": 4
+            },
+            {
+              "period_start": "2024-11-04",
+              "period_end": "2024-11-11",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-11",
+              "period_end": "2024-11-18",
+              "value": 5
+            },
+            {
+              "period_start": "2024-11-18",
+              "period_end": "2024-11-25",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-25",
+              "period_end": "2024-12-02",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-02",
+              "period_end": "2024-12-09",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-09",
+              "period_end": "2024-12-16",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-16",
+              "period_end": "2024-12-23",
+              "value": 3
+            },
+            {
+              "period_start": "2024-12-23",
+              "period_end": "2024-12-30",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-30",
+              "period_end": "2025-01-01",
+              "value": 3
+            }
+          ]
+        }
+      },
+      "issues_closed": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-01-08",
+            "value": 10
+          },
+          {
+            "period_start": "2024-01-08",
+            "period_end": "2024-01-15",
+            "value": 12
+          },
+          {
+            "period_start": "2024-01-15",
+            "period_end": "2024-01-22",
+            "value": 13
+          },
+          {
+            "period_start": "2024-01-22",
+            "period_end": "2024-01-29",
+            "value": 11
+          },
+          {
+            "period_start": "2024-01-29",
+            "period_end": "2024-02-05",
+            "value": 10
+          },
+          {
+            "period_start": "2024-02-05",
+            "period_end": "2024-02-12",
+            "value": 11
+          },
+          {
+            "period_start": "2024-02-12",
+            "period_end": "2024-02-19",
+            "value": 13
+          },
+          {
+            "period_start": "2024-02-19",
+            "period_end": "2024-02-26",
+            "value": 8
+          },
+          {
+            "period_start": "2024-02-26",
+            "period_end": "2024-03-04",
+            "value": 12
+          },
+          {
+            "period_start": "2024-03-04",
+            "period_end": "2024-03-11",
+            "value": 11
+          },
+          {
+            "period_start": "2024-03-11",
+            "period_end": "2024-03-18",
+            "value": 9
+          },
+          {
+            "period_start": "2024-03-18",
+            "period_end": "2024-03-25",
+            "value": 8
+          },
+          {
+            "period_start": "2024-03-25",
+            "period_end": "2024-04-01",
+            "value": 9
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-04-08",
+            "value": 11
+          },
+          {
+            "period_start": "2024-04-08",
+            "period_end": "2024-04-15",
+            "value": 12
+          },
+          {
+            "period_start": "2024-04-15",
+            "period_end": "2024-04-22",
+            "value": 10
+          },
+          {
+            "period_start": "2024-04-22",
+            "period_end": "2024-04-29",
+            "value": 9
+          },
+          {
+            "period_start": "2024-04-29",
+            "period_end": "2024-05-06",
+            "value": 11
+          },
+          {
+            "period_start": "2024-05-06",
+            "period_end": "2024-05-13",
+            "value": 12
+          },
+          {
+            "period_start": "2024-05-13",
+            "period_end": "2024-05-20",
+            "value": 9
+          },
+          {
+            "period_start": "2024-05-20",
+            "period_end": "2024-05-27",
+            "value": 11
+          },
+          {
+            "period_start": "2024-05-27",
+            "period_end": "2024-06-03",
+            "value": 10
+          },
+          {
+            "period_start": "2024-06-03",
+            "period_end": "2024-06-10",
+            "value": 12
+          },
+          {
+            "period_start": "2024-06-10",
+            "period_end": "2024-06-17",
+            "value": 9
+          },
+          {
+            "period_start": "2024-06-17",
+            "period_end": "2024-06-24",
+            "value": 11
+          },
+          {
+            "period_start": "2024-06-24",
+            "period_end": "2024-07-01",
+            "value": 10
+          },
+          {
+            "period_start": "2024-07-01",
+            "period_end": "2024-07-08",
+            "value": 13
+          },
+          {
+            "period_start": "2024-07-08",
+            "period_end": "2024-07-15",
+            "value": 9
+          },
+          {
+            "period_start": "2024-07-15",
+            "period_end": "2024-07-22",
+            "value": 10
+          },
+          {
+            "period_start": "2024-07-22",
+            "period_end": "2024-07-29",
+            "value": 10
+          },
+          {
+            "period_start": "2024-07-29",
+            "period_end": "2024-08-05",
+            "value": 13
+          },
+          {
+            "period_start": "2024-08-05",
+            "period_end": "2024-08-12",
+            "value": 8
+          },
+          {
+            "period_start": "2024-08-12",
+            "period_end": "2024-08-19",
+            "value": 10
+          },
+          {
+            "period_start": "2024-08-19",
+            "period_end": "2024-08-26",
+            "value": 11
+          },
+          {
+            "period_start": "2024-08-26",
+            "period_end": "2024-09-02",
+            "value": 13
+          },
+          {
+            "period_start": "2024-09-02",
+            "period_end": "2024-09-09",
+            "value": 8
+          },
+          {
+            "period_start": "2024-09-09",
+            "period_end": "2024-09-16",
+            "value": 12
+          },
+          {
+            "period_start": "2024-09-16",
+            "period_end": "2024-09-23",
+            "value": 11
+          },
+          {
+            "period_start": "2024-09-23",
+            "period_end": "2024-09-30",
+            "value": 9
+          },
+          {
+            "period_start": "2024-09-30",
+            "period_end": "2024-10-07",
+            "value": 8
+          },
+          {
+            "period_start": "2024-10-07",
+            "period_end": "2024-10-14",
+            "value": 9
+          },
+          {
+            "period_start": "2024-10-14",
+            "period_end": "2024-10-21",
+            "value": 13
+          },
+          {
+            "period_start": "2024-10-21",
+            "period_end": "2024-10-28",
+            "value": 12
+          },
+          {
+            "period_start": "2024-10-28",
+            "period_end": "2024-11-04",
+            "value": 8
+          },
+          {
+            "period_start": "2024-11-04",
+            "period_end": "2024-11-11",
+            "value": 9
+          },
+          {
+            "period_start": "2024-11-11",
+            "period_end": "2024-11-18",
+            "value": 12
+          },
+          {
+            "period_start": "2024-11-18",
+            "period_end": "2024-11-25",
+            "value": 12
+          },
+          {
+            "period_start": "2024-11-25",
+            "period_end": "2024-12-02",
+            "value": 13
+          },
+          {
+            "period_start": "2024-12-02",
+            "period_end": "2024-12-09",
+            "value": 9
+          },
+          {
+            "period_start": "2024-12-09",
+            "period_end": "2024-12-16",
+            "value": 12
+          },
+          {
+            "period_start": "2024-12-16",
+            "period_end": "2024-12-23",
+            "value": 10
+          },
+          {
+            "period_start": "2024-12-23",
+            "period_end": "2024-12-30",
+            "value": 13
+          },
+          {
+            "period_start": "2024-12-30",
+            "period_end": "2025-01-01",
+            "value": 10
+          }
+        ],
+        "repos": {
+          "R_002": [
+            {
+              "period_start": "2024-01-01",
+              "period_end": "2024-01-08",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-08",
+              "period_end": "2024-01-15",
+              "value": 4
+            },
+            {
+              "period_start": "2024-01-15",
+              "period_end": "2024-01-22",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-22",
+              "period_end": "2024-01-29",
+              "value": 4
+            },
+            {
+              "period_start": "2024-01-29",
+              "period_end": "2024-02-05",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-05",
+              "period_end": "2024-02-12",
+              "value": 3
+            },
+            {
+              "period_start": "2024-02-12",
+              "period_end": "2024-02-19",
+              "value": 2
+            },
+            {
+              "period_start": "2024-02-19",
+              "period_end": "2024-02-26",
+              "value": 3
+            },
+            {
+              "period_start": "2024-02-26",
+              "period_end": "2024-03-04",
+              "value": 2
+            },
+            {
+              "period_start": "2024-03-04",
+              "period_end": "2024-03-11",
+              "value": 3
+            },
+            {
+              "period_start": "2024-03-11",
+              "period_end": "2024-03-18",
+              "value": 2
+            },
+            {
+              "period_start": "2024-03-18",
+              "period_end": "2024-03-25",
+              "value": 4
+            },
+            {
+              "period_start": "2024-03-25",
+              "period_end": "2024-04-01",
+              "value": 3
+            },
+            {
+              "period_start": "2024-04-01",
+              "period_end": "2024-04-08",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-08",
+              "period_end": "2024-04-15",
+              "value": 3
+            },
+            {
+              "period_start": "2024-04-15",
+              "period_end": "2024-04-22",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-22",
+              "period_end": "2024-04-29",
+              "value": 3
+            },
+            {
+              "period_start": "2024-04-29",
+              "period_end": "2024-05-06",
+              "value": 4
+            },
+            {
+              "period_start": "2024-05-06",
+              "period_end": "2024-05-13",
+              "value": 4
+            },
+            {
+              "period_start": "2024-05-13",
+              "period_end": "2024-05-20",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-20",
+              "period_end": "2024-05-27",
+              "value": 4
+            },
+            {
+              "period_start": "2024-05-27",
+              "period_end": "2024-06-03",
+              "value": 5
+            },
+            {
+              "period_start": "2024-06-03",
+              "period_end": "2024-06-10",
+              "value": 2
+            },
+            {
+              "period_start": "2024-06-10",
+              "period_end": "2024-06-17",
+              "value": 2
+            },
+            {
+              "period_start": "2024-06-17",
+              "period_end": "2024-06-24",
+              "value": 4
+            },
+            {
+              "period_start": "2024-06-24",
+              "period_end": "2024-07-01",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-01",
+              "period_end": "2024-07-08",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-08",
+              "period_end": "2024-07-15",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-15",
+              "period_end": "2024-07-22",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-22",
+              "period_end": "2024-07-29",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-29",
+              "period_end": "2024-08-05",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-05",
+              "period_end": "2024-08-12",
+              "value": 5
+            },
+            {
+              "period_start": "2024-08-12",
+              "period_end": "2024-08-19",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-19",
+              "period_end": "2024-08-26",
+              "value": 5
+            },
+            {
+              "period_start": "2024-08-26",
+              "period_end": "2024-09-02",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-02",
+              "period_end": "2024-09-09",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-09",
+              "period_end": "2024-09-16",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-16",
+              "period_end": "2024-09-23",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-23",
+              "period_end": "2024-09-30",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-30",
+              "period_end": "2024-10-07",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-07",
+              "period_end": "2024-10-14",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-14",
+              "period_end": "2024-10-21",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-21",
+              "period_end": "2024-10-28",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-28",
+              "period_end": "2024-11-04",
+              "value": 3
+            },
+            {
+              "period_start": "2024-11-04",
+              "period_end": "2024-11-11",
+              "value": 4
+            },
+            {
+              "period_start": "2024-11-11",
+              "period_end": "2024-11-18",
+              "value": 3
+            },
+            {
+              "period_start": "2024-11-18",
+              "period_end": "2024-11-25",
+              "value": 4
+            },
+            {
+              "period_start": "2024-11-25",
+              "period_end": "2024-12-02",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-02",
+              "period_end": "2024-12-09",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-09",
+              "period_end": "2024-12-16",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-16",
+              "period_end": "2024-12-23",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-23",
+              "period_end": "2024-12-30",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-30",
+              "period_end": "2025-01-01",
+              "value": 5
+            }
+          ],
+          "R_001": [
+            {
+              "period_start": "2024-01-01",
+              "period_end": "2024-01-08",
+              "value": 4
+            },
+            {
+              "period_start": "2024-01-08",
+              "period_end": "2024-01-15",
+              "value": 2
+            },
+            {
+              "period_start": "2024-01-15",
+              "period_end": "2024-01-22",
+              "value": 2
+            },
+            {
+              "period_start": "2024-01-22",
+              "period_end": "2024-01-29",
+              "value": 3
+            },
+            {
+              "period_start": "2024-01-29",
+              "period_end": "2024-02-05",
+              "value": 4
+            },
+            {
+              "period_start": "2024-02-05",
+              "period_end": "2024-02-12",
+              "value": 4
+            },
+            {
+              "period_start": "2024-02-12",
+              "period_end": "2024-02-19",
+              "value": 4
+            },
+            {
+              "period_start": "2024-02-19",
+              "period_end": "2024-02-26",
+              "value": 4
+            },
+            {
+              "period_start": "2024-02-26",
+              "period_end": "2024-03-04",
+              "value": 2
+            },
+            {
+              "period_start": "2024-03-04",
+              "period_end": "2024-03-11",
+              "value": 4
+            },
+            {
+              "period_start": "2024-03-11",
+              "period_end": "2024-03-18",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-18",
+              "period_end": "2024-03-25",
+              "value": 4
+            },
+            {
+              "period_start": "2024-03-25",
+              "period_end": "2024-04-01",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-01",
+              "period_end": "2024-04-08",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-08",
+              "period_end": "2024-04-15",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-15",
+              "period_end": "2024-04-22",
+              "value": 5
+            },
+            {
+              "period_start": "2024-04-22",
+              "period_end": "2024-04-29",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-29",
+              "period_end": "2024-05-06",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-06",
+              "period_end": "2024-05-13",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-13",
+              "period_end": "2024-05-20",
+              "value": 4
+            },
+            {
+              "period_start": "2024-05-20",
+              "period_end": "2024-05-27",
+              "value": 3
+            },
+            {
+              "period_start": "2024-05-27",
+              "period_end": "2024-06-03",
+              "value": 4
+            },
+            {
+              "period_start": "2024-06-03",
+              "period_end": "2024-06-10",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-10",
+              "period_end": "2024-06-17",
+              "value": 4
+            },
+            {
+              "period_start": "2024-06-17",
+              "period_end": "2024-06-24",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-24",
+              "period_end": "2024-07-01",
+              "value": 5
+            },
+            {
+              "period_start": "2024-07-01",
+              "period_end": "2024-07-08",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-08",
+              "period_end": "2024-07-15",
+              "value": 5
+            },
+            {
+              "period_start": "2024-07-15",
+              "period_end": "2024-07-22",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-22",
+              "period_end": "2024-07-29",
+              "value": 5
+            },
+            {
+              "period_start": "2024-07-29",
+              "period_end": "2024-08-05",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-05",
+              "period_end": "2024-08-12",
+              "value": 2
+            },
+            {
+              "period_start": "2024-08-12",
+              "period_end": "2024-08-19",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-19",
+              "period_end": "2024-08-26",
+              "value": 2
+            },
+            {
+              "period_start": "2024-08-26",
+              "period_end": "2024-09-02",
+              "value": 3
+            },
+            {
+              "period_start": "2024-09-02",
+              "period_end": "2024-09-09",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-09",
+              "period_end": "2024-09-16",
+              "value": 3
+            },
+            {
+              "period_start": "2024-09-16",
+              "period_end": "2024-09-23",
+              "value": 3
+            },
+            {
+              "period_start": "2024-09-23",
+              "period_end": "2024-09-30",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-30",
+              "period_end": "2024-10-07",
+              "value": 3
+            },
+            {
+              "period_start": "2024-10-07",
+              "period_end": "2024-10-14",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-14",
+              "period_end": "2024-10-21",
+              "value": 3
+            },
+            {
+              "period_start": "2024-10-21",
+              "period_end": "2024-10-28",
+              "value": 5
+            },
+            {
+              "period_start": "2024-10-28",
+              "period_end": "2024-11-04",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-04",
+              "period_end": "2024-11-11",
+              "value": 5
+            },
+            {
+              "period_start": "2024-11-11",
+              "period_end": "2024-11-18",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-18",
+              "period_end": "2024-11-25",
+              "value": 5
+            },
+            {
+              "period_start": "2024-11-25",
+              "period_end": "2024-12-02",
+              "value": 3
+            },
+            {
+              "period_start": "2024-12-02",
+              "period_end": "2024-12-09",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-09",
+              "period_end": "2024-12-16",
+              "value": 3
+            },
+            {
+              "period_start": "2024-12-16",
+              "period_end": "2024-12-23",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-23",
+              "period_end": "2024-12-30",
+              "value": 3
+            },
+            {
+              "period_start": "2024-12-30",
+              "period_end": "2025-01-01",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "reviews_submitted": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-01-08",
+            "value": 10
+          },
+          {
+            "period_start": "2024-01-08",
+            "period_end": "2024-01-15",
+            "value": 13
+          },
+          {
+            "period_start": "2024-01-15",
+            "period_end": "2024-01-22",
+            "value": 10
+          },
+          {
+            "period_start": "2024-01-22",
+            "period_end": "2024-01-29",
+            "value": 12
+          },
+          {
+            "period_start": "2024-01-29",
+            "period_end": "2024-02-05",
+            "value": 8
+          },
+          {
+            "period_start": "2024-02-05",
+            "period_end": "2024-02-12",
+            "value": 11
+          },
+          {
+            "period_start": "2024-02-12",
+            "period_end": "2024-02-19",
+            "value": 10
+          },
+          {
+            "period_start": "2024-02-19",
+            "period_end": "2024-02-26",
+            "value": 11
+          },
+          {
+            "period_start": "2024-02-26",
+            "period_end": "2024-03-04",
+            "value": 9
+          },
+          {
+            "period_start": "2024-03-04",
+            "period_end": "2024-03-11",
+            "value": 11
+          },
+          {
+            "period_start": "2024-03-11",
+            "period_end": "2024-03-18",
+            "value": 8
+          },
+          {
+            "period_start": "2024-03-18",
+            "period_end": "2024-03-25",
+            "value": 11
+          },
+          {
+            "period_start": "2024-03-25",
+            "period_end": "2024-04-01",
+            "value": 12
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-04-08",
+            "value": 13
+          },
+          {
+            "period_start": "2024-04-08",
+            "period_end": "2024-04-15",
+            "value": 12
+          },
+          {
+            "period_start": "2024-04-15",
+            "period_end": "2024-04-22",
+            "value": 13
+          },
+          {
+            "period_start": "2024-04-22",
+            "period_end": "2024-04-29",
+            "value": 12
+          },
+          {
+            "period_start": "2024-04-29",
+            "period_end": "2024-05-06",
+            "value": 8
+          },
+          {
+            "period_start": "2024-05-06",
+            "period_end": "2024-05-13",
+            "value": 9
+          },
+          {
+            "period_start": "2024-05-13",
+            "period_end": "2024-05-20",
+            "value": 13
+          },
+          {
+            "period_start": "2024-05-20",
+            "period_end": "2024-05-27",
+            "value": 8
+          },
+          {
+            "period_start": "2024-05-27",
+            "period_end": "2024-06-03",
+            "value": 10
+          },
+          {
+            "period_start": "2024-06-03",
+            "period_end": "2024-06-10",
+            "value": 9
+          },
+          {
+            "period_start": "2024-06-10",
+            "period_end": "2024-06-17",
+            "value": 10
+          },
+          {
+            "period_start": "2024-06-17",
+            "period_end": "2024-06-24",
+            "value": 8
+          },
+          {
+            "period_start": "2024-06-24",
+            "period_end": "2024-07-01",
+            "value": 10
+          },
+          {
+            "period_start": "2024-07-01",
+            "period_end": "2024-07-08",
+            "value": 11
+          },
+          {
+            "period_start": "2024-07-08",
+            "period_end": "2024-07-15",
+            "value": 10
+          },
+          {
+            "period_start": "2024-07-15",
+            "period_end": "2024-07-22",
+            "value": 13
+          },
+          {
+            "period_start": "2024-07-22",
+            "period_end": "2024-07-29",
+            "value": 10
+          },
+          {
+            "period_start": "2024-07-29",
+            "period_end": "2024-08-05",
+            "value": 11
+          },
+          {
+            "period_start": "2024-08-05",
+            "period_end": "2024-08-12",
+            "value": 8
+          },
+          {
+            "period_start": "2024-08-12",
+            "period_end": "2024-08-19",
+            "value": 11
+          },
+          {
+            "period_start": "2024-08-19",
+            "period_end": "2024-08-26",
+            "value": 8
+          },
+          {
+            "period_start": "2024-08-26",
+            "period_end": "2024-09-02",
+            "value": 11
+          },
+          {
+            "period_start": "2024-09-02",
+            "period_end": "2024-09-09",
+            "value": 8
+          },
+          {
+            "period_start": "2024-09-09",
+            "period_end": "2024-09-16",
+            "value": 11
+          },
+          {
+            "period_start": "2024-09-16",
+            "period_end": "2024-09-23",
+            "value": 8
+          },
+          {
+            "period_start": "2024-09-23",
+            "period_end": "2024-09-30",
+            "value": 12
+          },
+          {
+            "period_start": "2024-09-30",
+            "period_end": "2024-10-07",
+            "value": 10
+          },
+          {
+            "period_start": "2024-10-07",
+            "period_end": "2024-10-14",
+            "value": 9
+          },
+          {
+            "period_start": "2024-10-14",
+            "period_end": "2024-10-21",
+            "value": 10
+          },
+          {
+            "period_start": "2024-10-21",
+            "period_end": "2024-10-28",
+            "value": 12
+          },
+          {
+            "period_start": "2024-10-28",
+            "period_end": "2024-11-04",
+            "value": 11
+          },
+          {
+            "period_start": "2024-11-04",
+            "period_end": "2024-11-11",
+            "value": 11
+          },
+          {
+            "period_start": "2024-11-11",
+            "period_end": "2024-11-18",
+            "value": 10
+          },
+          {
+            "period_start": "2024-11-18",
+            "period_end": "2024-11-25",
+            "value": 12
+          },
+          {
+            "period_start": "2024-11-25",
+            "period_end": "2024-12-02",
+            "value": 13
+          },
+          {
+            "period_start": "2024-12-02",
+            "period_end": "2024-12-09",
+            "value": 12
+          },
+          {
+            "period_start": "2024-12-09",
+            "period_end": "2024-12-16",
+            "value": 12
+          },
+          {
+            "period_start": "2024-12-16",
+            "period_end": "2024-12-23",
+            "value": 11
+          },
+          {
+            "period_start": "2024-12-23",
+            "period_end": "2024-12-30",
+            "value": 13
+          },
+          {
+            "period_start": "2024-12-30",
+            "period_end": "2025-01-01",
+            "value": 10
+          }
+        ],
+        "repos": {
+          "R_001": [
+            {
+              "period_start": "2024-01-01",
+              "period_end": "2024-01-08",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-08",
+              "period_end": "2024-01-15",
+              "value": 4
+            },
+            {
+              "period_start": "2024-01-15",
+              "period_end": "2024-01-22",
+              "value": 3
+            },
+            {
+              "period_start": "2024-01-22",
+              "period_end": "2024-01-29",
+              "value": 4
+            },
+            {
+              "period_start": "2024-01-29",
+              "period_end": "2024-02-05",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-05",
+              "period_end": "2024-02-12",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-12",
+              "period_end": "2024-02-19",
+              "value": 2
+            },
+            {
+              "period_start": "2024-02-19",
+              "period_end": "2024-02-26",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-26",
+              "period_end": "2024-03-04",
+              "value": 4
+            },
+            {
+              "period_start": "2024-03-04",
+              "period_end": "2024-03-11",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-11",
+              "period_end": "2024-03-18",
+              "value": 2
+            },
+            {
+              "period_start": "2024-03-18",
+              "period_end": "2024-03-25",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-25",
+              "period_end": "2024-04-01",
+              "value": 3
+            },
+            {
+              "period_start": "2024-04-01",
+              "period_end": "2024-04-08",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-08",
+              "period_end": "2024-04-15",
+              "value": 3
+            },
+            {
+              "period_start": "2024-04-15",
+              "period_end": "2024-04-22",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-22",
+              "period_end": "2024-04-29",
+              "value": 3
+            },
+            {
+              "period_start": "2024-04-29",
+              "period_end": "2024-05-06",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-06",
+              "period_end": "2024-05-13",
+              "value": 4
+            },
+            {
+              "period_start": "2024-05-13",
+              "period_end": "2024-05-20",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-20",
+              "period_end": "2024-05-27",
+              "value": 4
+            },
+            {
+              "period_start": "2024-05-27",
+              "period_end": "2024-06-03",
+              "value": 5
+            },
+            {
+              "period_start": "2024-06-03",
+              "period_end": "2024-06-10",
+              "value": 4
+            },
+            {
+              "period_start": "2024-06-10",
+              "period_end": "2024-06-17",
+              "value": 2
+            },
+            {
+              "period_start": "2024-06-17",
+              "period_end": "2024-06-24",
+              "value": 4
+            },
+            {
+              "period_start": "2024-06-24",
+              "period_end": "2024-07-01",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-01",
+              "period_end": "2024-07-08",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-08",
+              "period_end": "2024-07-15",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-15",
+              "period_end": "2024-07-22",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-22",
+              "period_end": "2024-07-29",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-29",
+              "period_end": "2024-08-05",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-05",
+              "period_end": "2024-08-12",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-12",
+              "period_end": "2024-08-19",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-19",
+              "period_end": "2024-08-26",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-26",
+              "period_end": "2024-09-02",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-02",
+              "period_end": "2024-09-09",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-09",
+              "period_end": "2024-09-16",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-16",
+              "period_end": "2024-09-23",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-23",
+              "period_end": "2024-09-30",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-30",
+              "period_end": "2024-10-07",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-07",
+              "period_end": "2024-10-14",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-14",
+              "period_end": "2024-10-21",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-21",
+              "period_end": "2024-10-28",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-28",
+              "period_end": "2024-11-04",
+              "value": 3
+            },
+            {
+              "period_start": "2024-11-04",
+              "period_end": "2024-11-11",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-11",
+              "period_end": "2024-11-18",
+              "value": 4
+            },
+            {
+              "period_start": "2024-11-18",
+              "period_end": "2024-11-25",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-25",
+              "period_end": "2024-12-02",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-02",
+              "period_end": "2024-12-09",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-09",
+              "period_end": "2024-12-16",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-16",
+              "period_end": "2024-12-23",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-23",
+              "period_end": "2024-12-30",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-30",
+              "period_end": "2025-01-01",
+              "value": 5
+            }
+          ],
+          "R_002": [
+            {
+              "period_start": "2024-01-01",
+              "period_end": "2024-01-08",
+              "value": 2
+            },
+            {
+              "period_start": "2024-01-08",
+              "period_end": "2024-01-15",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-15",
+              "period_end": "2024-01-22",
+              "value": 2
+            },
+            {
+              "period_start": "2024-01-22",
+              "period_end": "2024-01-29",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-29",
+              "period_end": "2024-02-05",
+              "value": 3
+            },
+            {
+              "period_start": "2024-02-05",
+              "period_end": "2024-02-12",
+              "value": 4
+            },
+            {
+              "period_start": "2024-02-12",
+              "period_end": "2024-02-19",
+              "value": 3
+            },
+            {
+              "period_start": "2024-02-19",
+              "period_end": "2024-02-26",
+              "value": 4
+            },
+            {
+              "period_start": "2024-02-26",
+              "period_end": "2024-03-04",
+              "value": 3
+            },
+            {
+              "period_start": "2024-03-04",
+              "period_end": "2024-03-11",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-11",
+              "period_end": "2024-03-18",
+              "value": 3
+            },
+            {
+              "period_start": "2024-03-18",
+              "period_end": "2024-03-25",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-25",
+              "period_end": "2024-04-01",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-01",
+              "period_end": "2024-04-08",
+              "value": 5
+            },
+            {
+              "period_start": "2024-04-08",
+              "period_end": "2024-04-15",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-15",
+              "period_end": "2024-04-22",
+              "value": 5
+            },
+            {
+              "period_start": "2024-04-22",
+              "period_end": "2024-04-29",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-29",
+              "period_end": "2024-05-06",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-06",
+              "period_end": "2024-05-13",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-13",
+              "period_end": "2024-05-20",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-20",
+              "period_end": "2024-05-27",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-27",
+              "period_end": "2024-06-03",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-03",
+              "period_end": "2024-06-10",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-10",
+              "period_end": "2024-06-17",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-17",
+              "period_end": "2024-06-24",
+              "value": 5
+            },
+            {
+              "period_start": "2024-06-24",
+              "period_end": "2024-07-01",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-01",
+              "period_end": "2024-07-08",
+              "value": 5
+            },
+            {
+              "period_start": "2024-07-08",
+              "period_end": "2024-07-15",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-15",
+              "period_end": "2024-07-22",
+              "value": 5
+            },
+            {
+              "period_start": "2024-07-22",
+              "period_end": "2024-07-29",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-29",
+              "period_end": "2024-08-05",
+              "value": 5
+            },
+            {
+              "period_start": "2024-08-05",
+              "period_end": "2024-08-12",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-12",
+              "period_end": "2024-08-19",
+              "value": 5
+            },
+            {
+              "period_start": "2024-08-19",
+              "period_end": "2024-08-26",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-26",
+              "period_end": "2024-09-02",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-02",
+              "period_end": "2024-09-09",
+              "value": 3
+            },
+            {
+              "period_start": "2024-09-09",
+              "period_end": "2024-09-16",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-16",
+              "period_end": "2024-09-23",
+              "value": 3
+            },
+            {
+              "period_start": "2024-09-23",
+              "period_end": "2024-09-30",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-30",
+              "period_end": "2024-10-07",
+              "value": 3
+            },
+            {
+              "period_start": "2024-10-07",
+              "period_end": "2024-10-14",
+              "value": 3
+            },
+            {
+              "period_start": "2024-10-14",
+              "period_end": "2024-10-21",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-21",
+              "period_end": "2024-10-28",
+              "value": 5
+            },
+            {
+              "period_start": "2024-10-28",
+              "period_end": "2024-11-04",
+              "value": 4
+            },
+            {
+              "period_start": "2024-11-04",
+              "period_end": "2024-11-11",
+              "value": 5
+            },
+            {
+              "period_start": "2024-11-11",
+              "period_end": "2024-11-18",
+              "value": 5
+            },
+            {
+              "period_start": "2024-11-18",
+              "period_end": "2024-11-25",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-25",
+              "period_end": "2024-12-02",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-02",
+              "period_end": "2024-12-09",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-09",
+              "period_end": "2024-12-16",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-16",
+              "period_end": "2024-12-23",
+              "value": 3
+            },
+            {
+              "period_start": "2024-12-23",
+              "period_end": "2024-12-30",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-30",
+              "period_end": "2025-01-01",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "issues_opened": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-01-08",
+            "value": 8
+          },
+          {
+            "period_start": "2024-01-08",
+            "period_end": "2024-01-15",
+            "value": 8
+          },
+          {
+            "period_start": "2024-01-15",
+            "period_end": "2024-01-22",
+            "value": 11
+          },
+          {
+            "period_start": "2024-01-22",
+            "period_end": "2024-01-29",
+            "value": 13
+          },
+          {
+            "period_start": "2024-01-29",
+            "period_end": "2024-02-05",
+            "value": 8
+          },
+          {
+            "period_start": "2024-02-05",
+            "period_end": "2024-02-12",
+            "value": 9
+          },
+          {
+            "period_start": "2024-02-12",
+            "period_end": "2024-02-19",
+            "value": 11
+          },
+          {
+            "period_start": "2024-02-19",
+            "period_end": "2024-02-26",
+            "value": 12
+          },
+          {
+            "period_start": "2024-02-26",
+            "period_end": "2024-03-04",
+            "value": 10
+          },
+          {
+            "period_start": "2024-03-04",
+            "period_end": "2024-03-11",
+            "value": 9
+          },
+          {
+            "period_start": "2024-03-11",
+            "period_end": "2024-03-18",
+            "value": 11
+          },
+          {
+            "period_start": "2024-03-18",
+            "period_end": "2024-03-25",
+            "value": 12
+          },
+          {
+            "period_start": "2024-03-25",
+            "period_end": "2024-04-01",
+            "value": 13
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-04-08",
+            "value": 9
+          },
+          {
+            "period_start": "2024-04-08",
+            "period_end": "2024-04-15",
+            "value": 10
+          },
+          {
+            "period_start": "2024-04-15",
+            "period_end": "2024-04-22",
+            "value": 12
+          },
+          {
+            "period_start": "2024-04-22",
+            "period_end": "2024-04-29",
+            "value": 13
+          },
+          {
+            "period_start": "2024-04-29",
+            "period_end": "2024-05-06",
+            "value": 9
+          },
+          {
+            "period_start": "2024-05-06",
+            "period_end": "2024-05-13",
+            "value": 10
+          },
+          {
+            "period_start": "2024-05-13",
+            "period_end": "2024-05-20",
+            "value": 11
+          },
+          {
+            "period_start": "2024-05-20",
+            "period_end": "2024-05-27",
+            "value": 13
+          },
+          {
+            "period_start": "2024-05-27",
+            "period_end": "2024-06-03",
+            "value": 8
+          },
+          {
+            "period_start": "2024-06-03",
+            "period_end": "2024-06-10",
+            "value": 10
+          },
+          {
+            "period_start": "2024-06-10",
+            "period_end": "2024-06-17",
+            "value": 11
+          },
+          {
+            "period_start": "2024-06-17",
+            "period_end": "2024-06-24",
+            "value": 9
+          },
+          {
+            "period_start": "2024-06-24",
+            "period_end": "2024-07-01",
+            "value": 8
+          },
+          {
+            "period_start": "2024-07-01",
+            "period_end": "2024-07-08",
+            "value": 11
+          },
+          {
+            "period_start": "2024-07-08",
+            "period_end": "2024-07-15",
+            "value": 11
+          },
+          {
+            "period_start": "2024-07-15",
+            "period_end": "2024-07-22",
+            "value": 8
+          },
+          {
+            "period_start": "2024-07-22",
+            "period_end": "2024-07-29",
+            "value": 8
+          },
+          {
+            "period_start": "2024-07-29",
+            "period_end": "2024-08-05",
+            "value": 11
+          },
+          {
+            "period_start": "2024-08-05",
+            "period_end": "2024-08-12",
+            "value": 12
+          },
+          {
+            "period_start": "2024-08-12",
+            "period_end": "2024-08-19",
+            "value": 8
+          },
+          {
+            "period_start": "2024-08-19",
+            "period_end": "2024-08-26",
+            "value": 9
+          },
+          {
+            "period_start": "2024-08-26",
+            "period_end": "2024-09-02",
+            "value": 9
+          },
+          {
+            "period_start": "2024-09-02",
+            "period_end": "2024-09-09",
+            "value": 12
+          },
+          {
+            "period_start": "2024-09-09",
+            "period_end": "2024-09-16",
+            "value": 8
+          },
+          {
+            "period_start": "2024-09-16",
+            "period_end": "2024-09-23",
+            "value": 9
+          },
+          {
+            "period_start": "2024-09-23",
+            "period_end": "2024-09-30",
+            "value": 8
+          },
+          {
+            "period_start": "2024-09-30",
+            "period_end": "2024-10-07",
+            "value": 12
+          },
+          {
+            "period_start": "2024-10-07",
+            "period_end": "2024-10-14",
+            "value": 13
+          },
+          {
+            "period_start": "2024-10-14",
+            "period_end": "2024-10-21",
+            "value": 9
+          },
+          {
+            "period_start": "2024-10-21",
+            "period_end": "2024-10-28",
+            "value": 10
+          },
+          {
+            "period_start": "2024-10-28",
+            "period_end": "2024-11-04",
+            "value": 12
+          },
+          {
+            "period_start": "2024-11-04",
+            "period_end": "2024-11-11",
+            "value": 13
+          },
+          {
+            "period_start": "2024-11-11",
+            "period_end": "2024-11-18",
+            "value": 8
+          },
+          {
+            "period_start": "2024-11-18",
+            "period_end": "2024-11-25",
+            "value": 10
+          },
+          {
+            "period_start": "2024-11-25",
+            "period_end": "2024-12-02",
+            "value": 11
+          },
+          {
+            "period_start": "2024-12-02",
+            "period_end": "2024-12-09",
+            "value": 13
+          },
+          {
+            "period_start": "2024-12-09",
+            "period_end": "2024-12-16",
+            "value": 8
+          },
+          {
+            "period_start": "2024-12-16",
+            "period_end": "2024-12-23",
+            "value": 12
+          },
+          {
+            "period_start": "2024-12-23",
+            "period_end": "2024-12-30",
+            "value": 11
+          },
+          {
+            "period_start": "2024-12-30",
+            "period_end": "2025-01-01",
+            "value": 8
+          }
+        ],
+        "repos": {
+          "R_001": [
+            {
+              "period_start": "2024-01-01",
+              "period_end": "2024-01-08",
+              "value": 2
+            },
+            {
+              "period_start": "2024-01-08",
+              "period_end": "2024-01-15",
+              "value": 4
+            },
+            {
+              "period_start": "2024-01-15",
+              "period_end": "2024-01-22",
+              "value": 4
+            },
+            {
+              "period_start": "2024-01-22",
+              "period_end": "2024-01-29",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-29",
+              "period_end": "2024-02-05",
+              "value": 2
+            },
+            {
+              "period_start": "2024-02-05",
+              "period_end": "2024-02-12",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-12",
+              "period_end": "2024-02-19",
+              "value": 2
+            },
+            {
+              "period_start": "2024-02-19",
+              "period_end": "2024-02-26",
+              "value": 2
+            },
+            {
+              "period_start": "2024-02-26",
+              "period_end": "2024-03-04",
+              "value": 4
+            },
+            {
+              "period_start": "2024-03-04",
+              "period_end": "2024-03-11",
+              "value": 2
+            },
+            {
+              "period_start": "2024-03-11",
+              "period_end": "2024-03-18",
+              "value": 3
+            },
+            {
+              "period_start": "2024-03-18",
+              "period_end": "2024-03-25",
+              "value": 2
+            },
+            {
+              "period_start": "2024-03-25",
+              "period_end": "2024-04-01",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-01",
+              "period_end": "2024-04-08",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-08",
+              "period_end": "2024-04-15",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-15",
+              "period_end": "2024-04-22",
+              "value": 3
+            },
+            {
+              "period_start": "2024-04-22",
+              "period_end": "2024-04-29",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-29",
+              "period_end": "2024-05-06",
+              "value": 3
+            },
+            {
+              "period_start": "2024-05-06",
+              "period_end": "2024-05-13",
+              "value": 4
+            },
+            {
+              "period_start": "2024-05-13",
+              "period_end": "2024-05-20",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-20",
+              "period_end": "2024-05-27",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-27",
+              "period_end": "2024-06-03",
+              "value": 2
+            },
+            {
+              "period_start": "2024-06-03",
+              "period_end": "2024-06-10",
+              "value": 5
+            },
+            {
+              "period_start": "2024-06-10",
+              "period_end": "2024-06-17",
+              "value": 2
+            },
+            {
+              "period_start": "2024-06-17",
+              "period_end": "2024-06-24",
+              "value": 5
+            },
+            {
+              "period_start": "2024-06-24",
+              "period_end": "2024-07-01",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-01",
+              "period_end": "2024-07-08",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-08",
+              "period_end": "2024-07-15",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-15",
+              "period_end": "2024-07-22",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-22",
+              "period_end": "2024-07-29",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-29",
+              "period_end": "2024-08-05",
+              "value": 5
+            },
+            {
+              "period_start": "2024-08-05",
+              "period_end": "2024-08-12",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-12",
+              "period_end": "2024-08-19",
+              "value": 5
+            },
+            {
+              "period_start": "2024-08-19",
+              "period_end": "2024-08-26",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-26",
+              "period_end": "2024-09-02",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-02",
+              "period_end": "2024-09-09",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-09",
+              "period_end": "2024-09-16",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-16",
+              "period_end": "2024-09-23",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-23",
+              "period_end": "2024-09-30",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-30",
+              "period_end": "2024-10-07",
+              "value": 5
+            },
+            {
+              "period_start": "2024-10-07",
+              "period_end": "2024-10-14",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-14",
+              "period_end": "2024-10-21",
+              "value": 5
+            },
+            {
+              "period_start": "2024-10-21",
+              "period_end": "2024-10-28",
+              "value": 3
+            },
+            {
+              "period_start": "2024-10-28",
+              "period_end": "2024-11-04",
+              "value": 4
+            },
+            {
+              "period_start": "2024-11-04",
+              "period_end": "2024-11-11",
+              "value": 3
+            },
+            {
+              "period_start": "2024-11-11",
+              "period_end": "2024-11-18",
+              "value": 4
+            },
+            {
+              "period_start": "2024-11-18",
+              "period_end": "2024-11-25",
+              "value": 3
+            },
+            {
+              "period_start": "2024-11-25",
+              "period_end": "2024-12-02",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-02",
+              "period_end": "2024-12-09",
+              "value": 3
+            },
+            {
+              "period_start": "2024-12-09",
+              "period_end": "2024-12-16",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-16",
+              "period_end": "2024-12-23",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-23",
+              "period_end": "2024-12-30",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-30",
+              "period_end": "2025-01-01",
+              "value": 2
+            }
+          ],
+          "R_002": [
+            {
+              "period_start": "2024-01-01",
+              "period_end": "2024-01-08",
+              "value": 3
+            },
+            {
+              "period_start": "2024-01-08",
+              "period_end": "2024-01-15",
+              "value": 2
+            },
+            {
+              "period_start": "2024-01-15",
+              "period_end": "2024-01-22",
+              "value": 3
+            },
+            {
+              "period_start": "2024-01-22",
+              "period_end": "2024-01-29",
+              "value": 2
+            },
+            {
+              "period_start": "2024-01-29",
+              "period_end": "2024-02-05",
+              "value": 3
+            },
+            {
+              "period_start": "2024-02-05",
+              "period_end": "2024-02-12",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-12",
+              "period_end": "2024-02-19",
+              "value": 4
+            },
+            {
+              "period_start": "2024-02-19",
+              "period_end": "2024-02-26",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-26",
+              "period_end": "2024-03-04",
+              "value": 4
+            },
+            {
+              "period_start": "2024-03-04",
+              "period_end": "2024-03-11",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-11",
+              "period_end": "2024-03-18",
+              "value": 4
+            },
+            {
+              "period_start": "2024-03-18",
+              "period_end": "2024-03-25",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-25",
+              "period_end": "2024-04-01",
+              "value": 5
+            },
+            {
+              "period_start": "2024-04-01",
+              "period_end": "2024-04-08",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-08",
+              "period_end": "2024-04-15",
+              "value": 5
+            },
+            {
+              "period_start": "2024-04-15",
+              "period_end": "2024-04-22",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-22",
+              "period_end": "2024-04-29",
+              "value": 5
+            },
+            {
+              "period_start": "2024-04-29",
+              "period_end": "2024-05-06",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-06",
+              "period_end": "2024-05-13",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-13",
+              "period_end": "2024-05-20",
+              "value": 3
+            },
+            {
+              "period_start": "2024-05-20",
+              "period_end": "2024-05-27",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-27",
+              "period_end": "2024-06-03",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-03",
+              "period_end": "2024-06-10",
+              "value": 4
+            },
+            {
+              "period_start": "2024-06-10",
+              "period_end": "2024-06-17",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-17",
+              "period_end": "2024-06-24",
+              "value": 2
+            },
+            {
+              "period_start": "2024-06-24",
+              "period_end": "2024-07-01",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-01",
+              "period_end": "2024-07-08",
+              "value": 5
+            },
+            {
+              "period_start": "2024-07-08",
+              "period_end": "2024-07-15",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-15",
+              "period_end": "2024-07-22",
+              "value": 5
+            },
+            {
+              "period_start": "2024-07-22",
+              "period_end": "2024-07-29",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-29",
+              "period_end": "2024-08-05",
+              "value": 2
+            },
+            {
+              "period_start": "2024-08-05",
+              "period_end": "2024-08-12",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-12",
+              "period_end": "2024-08-19",
+              "value": 2
+            },
+            {
+              "period_start": "2024-08-19",
+              "period_end": "2024-08-26",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-26",
+              "period_end": "2024-09-02",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-02",
+              "period_end": "2024-09-09",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-09",
+              "period_end": "2024-09-16",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-16",
+              "period_end": "2024-09-23",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-23",
+              "period_end": "2024-09-30",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-30",
+              "period_end": "2024-10-07",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-07",
+              "period_end": "2024-10-14",
+              "value": 3
+            },
+            {
+              "period_start": "2024-10-14",
+              "period_end": "2024-10-21",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-21",
+              "period_end": "2024-10-28",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-28",
+              "period_end": "2024-11-04",
+              "value": 5
+            },
+            {
+              "period_start": "2024-11-04",
+              "period_end": "2024-11-11",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-11",
+              "period_end": "2024-11-18",
+              "value": 5
+            },
+            {
+              "period_start": "2024-11-18",
+              "period_end": "2024-11-25",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-25",
+              "period_end": "2024-12-02",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-02",
+              "period_end": "2024-12-09",
+              "value": 3
+            },
+            {
+              "period_start": "2024-12-09",
+              "period_end": "2024-12-16",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-16",
+              "period_end": "2024-12-23",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-23",
+              "period_end": "2024-12-30",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-30",
+              "period_end": "2025-01-01",
+              "value": 3
+            }
+          ]
+        }
+      },
+      "prs_merged": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-01-08",
+            "value": 8
+          },
+          {
+            "period_start": "2024-01-08",
+            "period_end": "2024-01-15",
+            "value": 13
+          },
+          {
+            "period_start": "2024-01-15",
+            "period_end": "2024-01-22",
+            "value": 8
+          },
+          {
+            "period_start": "2024-01-22",
+            "period_end": "2024-01-29",
+            "value": 10
+          },
+          {
+            "period_start": "2024-01-29",
+            "period_end": "2024-02-05",
+            "value": 8
+          },
+          {
+            "period_start": "2024-02-05",
+            "period_end": "2024-02-12",
+            "value": 9
+          },
+          {
+            "period_start": "2024-02-12",
+            "period_end": "2024-02-19",
+            "value": 8
+          },
+          {
+            "period_start": "2024-02-19",
+            "period_end": "2024-02-26",
+            "value": 11
+          },
+          {
+            "period_start": "2024-02-26",
+            "period_end": "2024-03-04",
+            "value": 11
+          },
+          {
+            "period_start": "2024-03-04",
+            "period_end": "2024-03-11",
+            "value": 9
+          },
+          {
+            "period_start": "2024-03-11",
+            "period_end": "2024-03-18",
+            "value": 8
+          },
+          {
+            "period_start": "2024-03-18",
+            "period_end": "2024-03-25",
+            "value": 9
+          },
+          {
+            "period_start": "2024-03-25",
+            "period_end": "2024-04-01",
+            "value": 12
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-04-08",
+            "value": 10
+          },
+          {
+            "period_start": "2024-04-08",
+            "period_end": "2024-04-15",
+            "value": 12
+          },
+          {
+            "period_start": "2024-04-15",
+            "period_end": "2024-04-22",
+            "value": 9
+          },
+          {
+            "period_start": "2024-04-22",
+            "period_end": "2024-04-29",
+            "value": 12
+          },
+          {
+            "period_start": "2024-04-29",
+            "period_end": "2024-05-06",
+            "value": 12
+          },
+          {
+            "period_start": "2024-05-06",
+            "period_end": "2024-05-13",
+            "value": 9
+          },
+          {
+            "period_start": "2024-05-13",
+            "period_end": "2024-05-20",
+            "value": 13
+          },
+          {
+            "period_start": "2024-05-20",
+            "period_end": "2024-05-27",
+            "value": 12
+          },
+          {
+            "period_start": "2024-05-27",
+            "period_end": "2024-06-03",
+            "value": 10
+          },
+          {
+            "period_start": "2024-06-03",
+            "period_end": "2024-06-10",
+            "value": 9
+          },
+          {
+            "period_start": "2024-06-10",
+            "period_end": "2024-06-17",
+            "value": 10
+          },
+          {
+            "period_start": "2024-06-17",
+            "period_end": "2024-06-24",
+            "value": 12
+          },
+          {
+            "period_start": "2024-06-24",
+            "period_end": "2024-07-01",
+            "value": 10
+          },
+          {
+            "period_start": "2024-07-01",
+            "period_end": "2024-07-08",
+            "value": 11
+          },
+          {
+            "period_start": "2024-07-08",
+            "period_end": "2024-07-15",
+            "value": 10
+          },
+          {
+            "period_start": "2024-07-15",
+            "period_end": "2024-07-22",
+            "value": 11
+          },
+          {
+            "period_start": "2024-07-22",
+            "period_end": "2024-07-29",
+            "value": 10
+          },
+          {
+            "period_start": "2024-07-29",
+            "period_end": "2024-08-05",
+            "value": 11
+          },
+          {
+            "period_start": "2024-08-05",
+            "period_end": "2024-08-12",
+            "value": 12
+          },
+          {
+            "period_start": "2024-08-12",
+            "period_end": "2024-08-19",
+            "value": 11
+          },
+          {
+            "period_start": "2024-08-19",
+            "period_end": "2024-08-26",
+            "value": 12
+          },
+          {
+            "period_start": "2024-08-26",
+            "period_end": "2024-09-02",
+            "value": 11
+          },
+          {
+            "period_start": "2024-09-02",
+            "period_end": "2024-09-09",
+            "value": 12
+          },
+          {
+            "period_start": "2024-09-09",
+            "period_end": "2024-09-16",
+            "value": 11
+          },
+          {
+            "period_start": "2024-09-16",
+            "period_end": "2024-09-23",
+            "value": 12
+          },
+          {
+            "period_start": "2024-09-23",
+            "period_end": "2024-09-30",
+            "value": 10
+          },
+          {
+            "period_start": "2024-09-30",
+            "period_end": "2024-10-07",
+            "value": 12
+          },
+          {
+            "period_start": "2024-10-07",
+            "period_end": "2024-10-14",
+            "value": 9
+          },
+          {
+            "period_start": "2024-10-14",
+            "period_end": "2024-10-21",
+            "value": 12
+          },
+          {
+            "period_start": "2024-10-21",
+            "period_end": "2024-10-28",
+            "value": 8
+          },
+          {
+            "period_start": "2024-10-28",
+            "period_end": "2024-11-04",
+            "value": 9
+          },
+          {
+            "period_start": "2024-11-04",
+            "period_end": "2024-11-11",
+            "value": 9
+          },
+          {
+            "period_start": "2024-11-11",
+            "period_end": "2024-11-18",
+            "value": 10
+          },
+          {
+            "period_start": "2024-11-18",
+            "period_end": "2024-11-25",
+            "value": 8
+          },
+          {
+            "period_start": "2024-11-25",
+            "period_end": "2024-12-02",
+            "value": 13
+          },
+          {
+            "period_start": "2024-12-02",
+            "period_end": "2024-12-09",
+            "value": 10
+          },
+          {
+            "period_start": "2024-12-09",
+            "period_end": "2024-12-16",
+            "value": 10
+          },
+          {
+            "period_start": "2024-12-16",
+            "period_end": "2024-12-23",
+            "value": 9
+          },
+          {
+            "period_start": "2024-12-23",
+            "period_end": "2024-12-30",
+            "value": 13
+          },
+          {
+            "period_start": "2024-12-30",
+            "period_end": "2025-01-01",
+            "value": 8
+          }
+        ],
+        "repos": {
+          "R_002": [
+            {
+              "period_start": "2024-01-01",
+              "period_end": "2024-01-08",
+              "value": 2
+            },
+            {
+              "period_start": "2024-01-08",
+              "period_end": "2024-01-15",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-15",
+              "period_end": "2024-01-22",
+              "value": 2
+            },
+            {
+              "period_start": "2024-01-22",
+              "period_end": "2024-01-29",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-29",
+              "period_end": "2024-02-05",
+              "value": 3
+            },
+            {
+              "period_start": "2024-02-05",
+              "period_end": "2024-02-12",
+              "value": 4
+            },
+            {
+              "period_start": "2024-02-12",
+              "period_end": "2024-02-19",
+              "value": 3
+            },
+            {
+              "period_start": "2024-02-19",
+              "period_end": "2024-02-26",
+              "value": 4
+            },
+            {
+              "period_start": "2024-02-26",
+              "period_end": "2024-03-04",
+              "value": 3
+            },
+            {
+              "period_start": "2024-03-04",
+              "period_end": "2024-03-11",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-11",
+              "period_end": "2024-03-18",
+              "value": 3
+            },
+            {
+              "period_start": "2024-03-18",
+              "period_end": "2024-03-25",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-25",
+              "period_end": "2024-04-01",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-01",
+              "period_end": "2024-04-08",
+              "value": 5
+            },
+            {
+              "period_start": "2024-04-08",
+              "period_end": "2024-04-15",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-15",
+              "period_end": "2024-04-22",
+              "value": 5
+            },
+            {
+              "period_start": "2024-04-22",
+              "period_end": "2024-04-29",
+              "value": 4
+            },
+            {
+              "period_start": "2024-04-29",
+              "period_end": "2024-05-06",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-06",
+              "period_end": "2024-05-13",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-13",
+              "period_end": "2024-05-20",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-20",
+              "period_end": "2024-05-27",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-27",
+              "period_end": "2024-06-03",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-03",
+              "period_end": "2024-06-10",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-10",
+              "period_end": "2024-06-17",
+              "value": 3
+            },
+            {
+              "period_start": "2024-06-17",
+              "period_end": "2024-06-24",
+              "value": 5
+            },
+            {
+              "period_start": "2024-06-24",
+              "period_end": "2024-07-01",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-01",
+              "period_end": "2024-07-08",
+              "value": 5
+            },
+            {
+              "period_start": "2024-07-08",
+              "period_end": "2024-07-15",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-15",
+              "period_end": "2024-07-22",
+              "value": 5
+            },
+            {
+              "period_start": "2024-07-22",
+              "period_end": "2024-07-29",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-29",
+              "period_end": "2024-08-05",
+              "value": 5
+            },
+            {
+              "period_start": "2024-08-05",
+              "period_end": "2024-08-12",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-12",
+              "period_end": "2024-08-19",
+              "value": 5
+            },
+            {
+              "period_start": "2024-08-19",
+              "period_end": "2024-08-26",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-26",
+              "period_end": "2024-09-02",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-02",
+              "period_end": "2024-09-09",
+              "value": 3
+            },
+            {
+              "period_start": "2024-09-09",
+              "period_end": "2024-09-16",
+              "value": 2
+            },
+            {
+              "period_start": "2024-09-16",
+              "period_end": "2024-09-23",
+              "value": 3
+            },
+            {
+              "period_start": "2024-09-23",
+              "period_end": "2024-09-30",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-30",
+              "period_end": "2024-10-07",
+              "value": 3
+            },
+            {
+              "period_start": "2024-10-07",
+              "period_end": "2024-10-14",
+              "value": 3
+            },
+            {
+              "period_start": "2024-10-14",
+              "period_end": "2024-10-21",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-21",
+              "period_end": "2024-10-28",
+              "value": 5
+            },
+            {
+              "period_start": "2024-10-28",
+              "period_end": "2024-11-04",
+              "value": 4
+            },
+            {
+              "period_start": "2024-11-04",
+              "period_end": "2024-11-11",
+              "value": 5
+            },
+            {
+              "period_start": "2024-11-11",
+              "period_end": "2024-11-18",
+              "value": 5
+            },
+            {
+              "period_start": "2024-11-18",
+              "period_end": "2024-11-25",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-25",
+              "period_end": "2024-12-02",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-02",
+              "period_end": "2024-12-09",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-09",
+              "period_end": "2024-12-16",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-16",
+              "period_end": "2024-12-23",
+              "value": 3
+            },
+            {
+              "period_start": "2024-12-23",
+              "period_end": "2024-12-30",
+              "value": 5
+            },
+            {
+              "period_start": "2024-12-30",
+              "period_end": "2025-01-01",
+              "value": 2
+            }
+          ],
+          "R_001": [
+            {
+              "period_start": "2024-01-01",
+              "period_end": "2024-01-08",
+              "value": 5
+            },
+            {
+              "period_start": "2024-01-08",
+              "period_end": "2024-01-15",
+              "value": 4
+            },
+            {
+              "period_start": "2024-01-15",
+              "period_end": "2024-01-22",
+              "value": 3
+            },
+            {
+              "period_start": "2024-01-22",
+              "period_end": "2024-01-29",
+              "value": 4
+            },
+            {
+              "period_start": "2024-01-29",
+              "period_end": "2024-02-05",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-05",
+              "period_end": "2024-02-12",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-12",
+              "period_end": "2024-02-19",
+              "value": 2
+            },
+            {
+              "period_start": "2024-02-19",
+              "period_end": "2024-02-26",
+              "value": 5
+            },
+            {
+              "period_start": "2024-02-26",
+              "period_end": "2024-03-04",
+              "value": 4
+            },
+            {
+              "period_start": "2024-03-04",
+              "period_end": "2024-03-11",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-11",
+              "period_end": "2024-03-18",
+              "value": 2
+            },
+            {
+              "period_start": "2024-03-18",
+              "period_end": "2024-03-25",
+              "value": 5
+            },
+            {
+              "period_start": "2024-03-25",
+              "period_end": "2024-04-01",
+              "value": 3
+            },
+            {
+              "period_start": "2024-04-01",
+              "period_end": "2024-04-08",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-08",
+              "period_end": "2024-04-15",
+              "value": 3
+            },
+            {
+              "period_start": "2024-04-15",
+              "period_end": "2024-04-22",
+              "value": 2
+            },
+            {
+              "period_start": "2024-04-22",
+              "period_end": "2024-04-29",
+              "value": 3
+            },
+            {
+              "period_start": "2024-04-29",
+              "period_end": "2024-05-06",
+              "value": 2
+            },
+            {
+              "period_start": "2024-05-06",
+              "period_end": "2024-05-13",
+              "value": 4
+            },
+            {
+              "period_start": "2024-05-13",
+              "period_end": "2024-05-20",
+              "value": 5
+            },
+            {
+              "period_start": "2024-05-20",
+              "period_end": "2024-05-27",
+              "value": 4
+            },
+            {
+              "period_start": "2024-05-27",
+              "period_end": "2024-06-03",
+              "value": 5
+            },
+            {
+              "period_start": "2024-06-03",
+              "period_end": "2024-06-10",
+              "value": 4
+            },
+            {
+              "period_start": "2024-06-10",
+              "period_end": "2024-06-17",
+              "value": 2
+            },
+            {
+              "period_start": "2024-06-17",
+              "period_end": "2024-06-24",
+              "value": 4
+            },
+            {
+              "period_start": "2024-06-24",
+              "period_end": "2024-07-01",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-01",
+              "period_end": "2024-07-08",
+              "value": 3
+            },
+            {
+              "period_start": "2024-07-08",
+              "period_end": "2024-07-15",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-15",
+              "period_end": "2024-07-22",
+              "value": 4
+            },
+            {
+              "period_start": "2024-07-22",
+              "period_end": "2024-07-29",
+              "value": 2
+            },
+            {
+              "period_start": "2024-07-29",
+              "period_end": "2024-08-05",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-05",
+              "period_end": "2024-08-12",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-12",
+              "period_end": "2024-08-19",
+              "value": 4
+            },
+            {
+              "period_start": "2024-08-19",
+              "period_end": "2024-08-26",
+              "value": 3
+            },
+            {
+              "period_start": "2024-08-26",
+              "period_end": "2024-09-02",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-02",
+              "period_end": "2024-09-09",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-09",
+              "period_end": "2024-09-16",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-16",
+              "period_end": "2024-09-23",
+              "value": 4
+            },
+            {
+              "period_start": "2024-09-23",
+              "period_end": "2024-09-30",
+              "value": 5
+            },
+            {
+              "period_start": "2024-09-30",
+              "period_end": "2024-10-07",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-07",
+              "period_end": "2024-10-14",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-14",
+              "period_end": "2024-10-21",
+              "value": 4
+            },
+            {
+              "period_start": "2024-10-21",
+              "period_end": "2024-10-28",
+              "value": 2
+            },
+            {
+              "period_start": "2024-10-28",
+              "period_end": "2024-11-04",
+              "value": 3
+            },
+            {
+              "period_start": "2024-11-04",
+              "period_end": "2024-11-11",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-11",
+              "period_end": "2024-11-18",
+              "value": 4
+            },
+            {
+              "period_start": "2024-11-18",
+              "period_end": "2024-11-25",
+              "value": 2
+            },
+            {
+              "period_start": "2024-11-25",
+              "period_end": "2024-12-02",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-02",
+              "period_end": "2024-12-09",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-09",
+              "period_end": "2024-12-16",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-16",
+              "period_end": "2024-12-23",
+              "value": 2
+            },
+            {
+              "period_start": "2024-12-23",
+              "period_end": "2024-12-30",
+              "value": 4
+            },
+            {
+              "period_start": "2024-12-30",
+              "period_end": "2025-01-01",
+              "value": 5
+            }
+          ]
+        }
+      }
+    }
+  },
+  "period_types": [
+    "month",
+    "week"
+  ],
+  "metrics_available": [
+    "issues_closed",
+    "prs_opened",
+    "reviews_submitted",
+    "issues_opened",
+    "prs_merged"
+  ]
+}

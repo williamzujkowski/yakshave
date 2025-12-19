@@ -31,8 +31,10 @@ def paths(config: Config, tmp_path: Path) -> PathManager:
 class TestRunMetrics:
     """Tests for run_metrics function."""
 
-    def test_fails_if_curated_data_missing(self, config: Config) -> None:
+    def test_fails_if_curated_data_missing(self, config: Config, tmp_path: Path) -> None:
         """Test that run_metrics fails if curated data doesn't exist."""
+        # Override storage root to use tmp_path (empty directory)
+        config.storage.root = str(tmp_path)
         # Don't create curated_root, so it doesn't exist
         with pytest.raises(ValueError, match="Curated data not found"):
             run_metrics(config)

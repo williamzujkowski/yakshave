@@ -1,0 +1,8552 @@
+[
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-01-01",
+    "period_end": "2024-02-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 40
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-01-01",
+    "period_end": "2024-02-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 41
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-01-01",
+    "period_end": "2024-02-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 41
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-01-01",
+    "period_end": "2024-02-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 49
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-01-01",
+    "period_end": "2024-02-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 40
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-02-01",
+    "period_end": "2024-03-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 41
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-02-01",
+    "period_end": "2024-03-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 43
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-02-01",
+    "period_end": "2024-03-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 35
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-02-01",
+    "period_end": "2024-03-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 36
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-02-01",
+    "period_end": "2024-03-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 49
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-03-01",
+    "period_end": "2024-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 48
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-03-01",
+    "period_end": "2024-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 35
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-03-01",
+    "period_end": "2024-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 35
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-03-01",
+    "period_end": "2024-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 43
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-03-01",
+    "period_end": "2024-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 49
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-04-01",
+    "period_end": "2024-05-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 35
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-04-01",
+    "period_end": "2024-05-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 37
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-04-01",
+    "period_end": "2024-05-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 43
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-04-01",
+    "period_end": "2024-05-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 44
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-04-01",
+    "period_end": "2024-05-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 42
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-05-01",
+    "period_end": "2024-06-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 49
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-05-01",
+    "period_end": "2024-06-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 35
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-05-01",
+    "period_end": "2024-06-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 35
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-05-01",
+    "period_end": "2024-06-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 43
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-05-01",
+    "period_end": "2024-06-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 41
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-06-01",
+    "period_end": "2024-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 41
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-06-01",
+    "period_end": "2024-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 42
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-06-01",
+    "period_end": "2024-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 42
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-06-01",
+    "period_end": "2024-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 35
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-06-01",
+    "period_end": "2024-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 41
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-07-01",
+    "period_end": "2024-08-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 42
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-07-01",
+    "period_end": "2024-08-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 44
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-07-01",
+    "period_end": "2024-08-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 44
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-07-01",
+    "period_end": "2024-08-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 37
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-07-01",
+    "period_end": "2024-08-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 43
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-08-01",
+    "period_end": "2024-09-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 49
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-08-01",
+    "period_end": "2024-09-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 44
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-08-01",
+    "period_end": "2024-09-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 36
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-08-01",
+    "period_end": "2024-09-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 44
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-08-01",
+    "period_end": "2024-09-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 35
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-09-01",
+    "period_end": "2024-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 36
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-09-01",
+    "period_end": "2024-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 38
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-09-01",
+    "period_end": "2024-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 37
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-09-01",
+    "period_end": "2024-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 45
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-09-01",
+    "period_end": "2024-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 36
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-10-01",
+    "period_end": "2024-11-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 35
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-10-01",
+    "period_end": "2024-11-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 36
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-10-01",
+    "period_end": "2024-11-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 36
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-10-01",
+    "period_end": "2024-11-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 44
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-10-01",
+    "period_end": "2024-11-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 35
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-11-01",
+    "period_end": "2024-12-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 36
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-11-01",
+    "period_end": "2024-12-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 38
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-11-01",
+    "period_end": "2024-12-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 38
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-11-01",
+    "period_end": "2024-12-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 45
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-11-01",
+    "period_end": "2024-12-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 44
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-12-01",
+    "period_end": "2025-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 43
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-12-01",
+    "period_end": "2025-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 45
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-12-01",
+    "period_end": "2025-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 45
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-12-01",
+    "period_end": "2025-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 38
+  },
+  {
+    "year": 2024,
+    "period_type": "month",
+    "period_start": "2024-12-01",
+    "period_end": "2025-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 44
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-01",
+    "period_end": "2024-01-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-08",
+    "period_end": "2024-01-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-15",
+    "period_end": "2024-01-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-22",
+    "period_end": "2024-01-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-01-29",
+    "period_end": "2024-02-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-05",
+    "period_end": "2024-02-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-12",
+    "period_end": "2024-02-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-19",
+    "period_end": "2024-02-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-02-26",
+    "period_end": "2024-03-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-04",
+    "period_end": "2024-03-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-11",
+    "period_end": "2024-03-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-18",
+    "period_end": "2024-03-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-03-25",
+    "period_end": "2024-04-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-01",
+    "period_end": "2024-04-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-08",
+    "period_end": "2024-04-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-15",
+    "period_end": "2024-04-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-22",
+    "period_end": "2024-04-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-04-29",
+    "period_end": "2024-05-06",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-06",
+    "period_end": "2024-05-13",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-13",
+    "period_end": "2024-05-20",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-20",
+    "period_end": "2024-05-27",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-05-27",
+    "period_end": "2024-06-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-03",
+    "period_end": "2024-06-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-10",
+    "period_end": "2024-06-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-17",
+    "period_end": "2024-06-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-06-24",
+    "period_end": "2024-07-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-01",
+    "period_end": "2024-07-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-08",
+    "period_end": "2024-07-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-15",
+    "period_end": "2024-07-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-22",
+    "period_end": "2024-07-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-07-29",
+    "period_end": "2024-08-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-05",
+    "period_end": "2024-08-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-12",
+    "period_end": "2024-08-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-19",
+    "period_end": "2024-08-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-08-26",
+    "period_end": "2024-09-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-02",
+    "period_end": "2024-09-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-09",
+    "period_end": "2024-09-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-16",
+    "period_end": "2024-09-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-23",
+    "period_end": "2024-09-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-09-30",
+    "period_end": "2024-10-07",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-07",
+    "period_end": "2024-10-14",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-14",
+    "period_end": "2024-10-21",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-21",
+    "period_end": "2024-10-28",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-10-28",
+    "period_end": "2024-11-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-04",
+    "period_end": "2024-11-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-11",
+    "period_end": "2024-11-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-18",
+    "period_end": "2024-11-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-11-25",
+    "period_end": "2024-12-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-02",
+    "period_end": "2024-12-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-09",
+    "period_end": "2024-12-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-16",
+    "period_end": "2024-12-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-23",
+    "period_end": "2024-12-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2024,
+    "period_type": "week",
+    "period_start": "2024-12-30",
+    "period_end": "2025-01-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  }
+]

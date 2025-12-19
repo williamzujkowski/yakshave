@@ -1,0 +1,80 @@
+github:
+  target:
+    mode: user
+    name: williamzujkowski
+  auth:
+    token_env: GITHUB_TOKEN
+  discovery:
+    include_forks: false
+    include_archived: false
+    visibility: all
+  windows:
+    year: 2025
+    since: "2025-01-01T00:00:00Z"
+    until: "2026-01-01T00:00:00Z"
+
+rate_limit:
+  strategy: adaptive
+  max_concurrency: 6
+  min_sleep_seconds: 0.5
+  max_sleep_seconds: 60
+  sample_rate_limit_endpoint_every_n_requests: 50
+  burst:
+    capacity: 30
+    sustained_rate: 10.0
+    recovery_rate: 2.0
+  secondary:
+    max_requests_per_minute: 90
+    detection_window_seconds: 60
+    backoff_multiplier: 1.5
+    threshold: 0.8
+    max_backoff_multiplier: 2.0
+
+identity:
+  bots:
+    exclude_patterns:
+      - ".*\\[bot\\]$"
+      - "^dependabot$"
+      - "^renovate\\[bot\\]$"
+    include_overrides: []
+  humans_only: true
+
+collection:
+  enable:
+    pulls: true
+    issues: true
+    reviews: true
+    comments: true
+    commits: true
+    hygiene: true
+  commits:
+    include_files: true
+    classify_files: true
+  hygiene:
+    paths:
+      - "SECURITY.md"
+      - "README.md"
+      - "LICENSE"
+      - "CONTRIBUTING.md"
+      - "CODE_OF_CONDUCT.md"
+      - "CODEOWNERS"
+      - ".github/CODEOWNERS"
+    workflow_prefixes:
+      - ".github/workflows/"
+    branch_protection:
+      mode: sample
+      sample_top_repos_by: prs_merged
+      sample_count: 25
+    security_features:
+      best_effort: true
+
+storage:
+  root: "./data"
+  raw_format: jsonl
+  curated_format: parquet
+  dataset_version: "v1"
+
+report:
+  title: "williamzujkowski Year in Review 2025"
+  output_dir: "./site"
+  theme: "engineer_exec_toggle"

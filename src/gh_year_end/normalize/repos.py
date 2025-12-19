@@ -49,16 +49,9 @@ def normalize_repos(raw_data_path: Path, config: Config) -> pd.DataFrame:
     Raises:
         FileNotFoundError: If repos.jsonl file is not found.
     """
-    target_name = config.github.target.name
-
-    # Build expected path to repos.jsonl
-    repos_file = (
-        raw_data_path
-        / f"year={config.github.windows.year}"
-        / "source=github"
-        / f"target={target_name}"
-        / "repos.jsonl"
-    )
+    # raw_data_path is already the full path (e.g., data/raw/year=2024/source=github/target=foo)
+    # so we just append repos.jsonl
+    repos_file = raw_data_path / "repos.jsonl"
 
     if not repos_file.exists():
         msg = f"Repository data file not found: {repos_file}"

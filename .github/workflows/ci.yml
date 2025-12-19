@@ -17,6 +17,7 @@ jobs:
         uses: astral-sh/setup-uv@v4
         with:
           version: "latest"
+          enable-cache: true
 
       - name: Set up Python
         run: uv python install 3.12
@@ -40,6 +41,7 @@ jobs:
         uses: astral-sh/setup-uv@v4
         with:
           version: "latest"
+          enable-cache: true
 
       - name: Set up Python
         run: uv python install 3.12
@@ -50,8 +52,82 @@ jobs:
       - name: Run mypy
         run: uv run mypy src/
 
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: Install bandit
+        run: uv pip install bandit[toml]
+
+      - name: Run bandit security scan
+        run: uv run bandit -r src/ -f json -o bandit-report.json
+        continue-on-error: true
+
+      - name: Display bandit results
+        if: always()
+        run: uv run bandit -r src/ || true
+
+      - name: Upload bandit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bandit-report
+          path: bandit-report.json
+          retention-days: 30
+
+  dependency-check:
+    name: Dependency Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: Install safety
+        run: uv pip install safety
+
+      - name: Check dependencies for known vulnerabilities
+        run: uv run safety check --json --output safety-report.json
+        continue-on-error: true
+
+      - name: Display safety results
+        if: always()
+        run: uv run safety check || true
+
+      - name: Upload safety report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: safety-report
+          path: safety-report.json
+          retention-days: 30
+
   test:
-    name: Test
+    name: Test (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -63,6 +139,7 @@ jobs:
         uses: astral-sh/setup-uv@v4
         with:
           version: "latest"
+          enable-cache: true
 
       - name: Set up Python ${{ matrix.python-version }}
         run: uv python install ${{ matrix.python-version }}
@@ -70,8 +147,8 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras
 
-      - name: Run tests with coverage
-        run: uv run pytest --cov=src/gh_year_end --cov-report=xml --cov-report=term-missing
+      - name: Run unit tests with coverage
+        run: uv run pytest -m "not integration" --cov=src/gh_year_end --cov-report=xml --cov-report=term-missing
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -79,3 +156,212 @@ jobs:
           file: ./coverage.xml
           fail_ci_if_error: false
         continue-on-error: true
+
+  integration-test:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: Run integration tests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: uv run pytest -m integration --tb=short
+        continue-on-error: true
+
+  live-integration-test:
+    name: Live API Integration Tests
+    runs-on: ubuntu-latest
+    # Only run on push to main or PRs from same repo (has secrets access)
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: Run live integration tests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          uv run pytest -m "live_api" \
+            --tb=short \
+            -v \
+            --timeout=300 \
+            tests/test_pipeline_live*.py
+        timeout-minutes: 10
+        continue-on-error: true  # Live API tests are informational, don't block PRs
+
+      - name: Upload test artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-test-output
+          path: |
+            test_output/
+            *.log
+          retention-days: 7
+
+  site-validation:
+    name: Site Generation Validation
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: Install Node.js for HTML validation
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install HTML validator
+        run: npm install -g html-validate
+
+      - name: Run site smoke tests
+        run: uv run pytest tests/test_smoke_site.py tests/test_templates.py -v
+
+      - name: Generate test site with minimal data
+        run: |
+          mkdir -p test_site_output
+          uv run pytest tests/test_smoke_site.py::test_site_structure -v
+
+      - name: Validate generated HTML files
+        if: always()
+        run: |
+          if [ -d "test_site_output" ] && [ "$(find test_site_output -name '*.html' | wc -l)" -gt 0 ]; then
+            echo "Validating HTML files..."
+            find test_site_output -name "*.html" -exec html-validate {} \; || true
+          else
+            echo "No HTML files generated to validate"
+          fi
+        continue-on-error: true
+
+      - name: Check required assets exist
+        if: always()
+        run: |
+          echo "Checking site template structure..."
+          test -f site/templates/base.html && echo "✓ base.html exists" || echo "✗ base.html missing"
+          test -f site/templates/index.html && echo "✓ index.html exists" || echo "✗ index.html missing"
+          test -f site/templates/summary.html && echo "✓ summary.html exists" || echo "✗ summary.html missing"
+          test -f site/templates/engineers.html && echo "✓ engineers.html exists" || echo "✗ engineers.html missing"
+          test -f site/assets/css/style.css && echo "✓ style.css exists" || echo "✗ style.css missing"
+          test -f site/assets/js/app.js && echo "✓ app.js exists" || echo "✗ app.js missing"
+
+      - name: Basic accessibility check
+        if: always()
+        run: |
+          echo "Running basic accessibility checks..."
+          uv pip install beautifulsoup4 lxml
+          python -c "
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          import sys
+
+          issues = []
+          for html_file in Path('site/templates').glob('*.html'):
+              with open(html_file) as f:
+                  soup = BeautifulSoup(f, 'html.parser')
+
+              # Check for lang attribute
+              html_tag = soup.find('html')
+              if html_tag and not html_tag.get('lang'):
+                  issues.append(f'{html_file.name}: Missing lang attribute on html tag')
+
+              # Check for alt text on images
+              imgs = soup.find_all('img')
+              for img in imgs:
+                  if not img.get('alt'):
+                      issues.append(f'{html_file.name}: Image missing alt text')
+
+              # Check for form labels
+              inputs = soup.find_all('input', {'type': ['text', 'email', 'password', 'search']})
+              for inp in inputs:
+                  inp_id = inp.get('id')
+                  if inp_id:
+                      label = soup.find('label', {'for': inp_id})
+                      if not label:
+                          issues.append(f'{html_file.name}: Input {inp_id} missing associated label')
+
+          if issues:
+              print('Accessibility issues found:')
+              for issue in issues:
+                  print(f'  - {issue}')
+              sys.exit(0)  # Don't fail the build, just warn
+          else:
+              print('No accessibility issues found')
+          " || echo "Accessibility check completed with warnings"
+
+      - name: Upload site artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-site-output
+          path: test_site_output/
+          retention-days: 7
+          if-no-files-found: ignore
+
+  quality-gate:
+    name: Quality Gate
+    runs-on: ubuntu-latest
+    needs: [lint, typecheck, security, dependency-check, test, site-validation]
+    if: always()
+    steps:
+      - name: Check job status
+        run: |
+          echo "Lint: ${{ needs.lint.result }}"
+          echo "Typecheck: ${{ needs.typecheck.result }}"
+          echo "Security: ${{ needs.security.result }}"
+          echo "Dependency Check: ${{ needs.dependency-check.result }}"
+          echo "Test: ${{ needs.test.result }}"
+          echo "Site Validation: ${{ needs.site-validation.result }}"
+
+          # P0 checks (must pass)
+          if [ "${{ needs.lint.result }}" != "success" ] || \
+             [ "${{ needs.typecheck.result }}" != "success" ] || \
+             [ "${{ needs.test.result }}" != "success" ]; then
+            echo "❌ P0 quality gates failed"
+            exit 1
+          fi
+
+          # P1 checks (warn but don't fail)
+          if [ "${{ needs.security.result }}" != "success" ] || \
+             [ "${{ needs.dependency-check.result }}" != "success" ] || \
+             [ "${{ needs.site-validation.result }}" != "success" ]; then
+            echo "⚠️  P1 quality gates have warnings"
+          fi
+
+          echo "✅ All P0 quality gates passed"

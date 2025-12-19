@@ -4,14 +4,19 @@ Collects repository tree data and derives file presence information for
 configured hygiene paths (SECURITY.md, README.md, LICENSE, etc.) and CI workflows.
 """
 
-import logging
-from typing import Any
+from __future__ import annotations
 
-from gh_year_end.config import Config
-from gh_year_end.github.ratelimit import AdaptiveRateLimiter
-from gh_year_end.github.rest import RestClient
-from gh_year_end.storage.paths import PathManager
+import logging
+from typing import TYPE_CHECKING, Any
+
 from gh_year_end.storage.writer import AsyncJSONLWriter
+
+if TYPE_CHECKING:
+    from gh_year_end.config import Config
+    from gh_year_end.github.ratelimit import AdaptiveRateLimiter
+    from gh_year_end.github.rest import RestClient
+    from gh_year_end.storage.checkpoint import CheckpointManager
+    from gh_year_end.storage.paths import PathManager
 
 logger = logging.getLogger(__name__)
 
@@ -260,6 +265,7 @@ async def collect_security_features(
     rest_client: RestClient,
     paths: PathManager,
     config: Config,
+    checkpoint: CheckpointManager | None = None,
 ) -> dict[str, Any]:
     """Collect security feature status for all repositories.
 
@@ -271,6 +277,7 @@ async def collect_security_features(
         rest_client: REST client for API calls.
         paths: Path manager for storage.
         config: Application configuration.
+        checkpoint: Optional CheckpointManager for resume support.
 
     Returns:
         Stats dictionary with counts of repos processed, errors, etc.
@@ -287,6 +294,7 @@ async def collect_security_features(
             "repos_total": len(repos),
             "repos_processed": 0,
             "repos_skipped": len(repos),
+            "repos_resumed": 0,
             "repos_with_all_features": 0,
             "repos_with_partial_features": 0,
             "repos_with_no_access": 0,
@@ -296,6 +304,7 @@ async def collect_security_features(
         "repos_total": len(repos),
         "repos_processed": 0,
         "repos_skipped": 0,
+        "repos_resumed": 0,
         "repos_with_all_features": 0,
         "repos_with_partial_features": 0,
         "repos_with_no_access": 0,
@@ -304,12 +313,23 @@ async def collect_security_features(
 
     for idx, repo in enumerate(repos, 1):
         repo_full_name = repo.get("full_name", "unknown")
+
+        # Check if already complete via checkpoint
+        if checkpoint and checkpoint.is_repo_endpoint_complete(repo_full_name, "security_features"):
+            logger.debug("Skipping %s - security_features already complete", repo_full_name)
+            stats["repos_resumed"] += 1
+            continue
+
         logger.info(
             "Collecting security features for repo %d/%d: %s",
             idx,
             len(repos),
             repo_full_name,
         )
+
+        # Mark as in progress
+        if checkpoint:
+            checkpoint.mark_repo_endpoint_in_progress(repo_full_name, "security_features")
 
         try:
             # Parse owner and repo name
@@ -350,6 +370,10 @@ async def collect_security_features(
             else:
                 stats["repos_with_partial_features"] += 1
 
+            # Mark as complete
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_complete(repo_full_name, "security_features")
+
             logger.debug(
                 "Successfully collected security features for %s (%d/%d)",
                 repo_full_name,
@@ -369,15 +393,22 @@ async def collect_security_features(
                     "error": str(e),
                 }
             )
+
+            # Mark as failed
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_failed(
+                    repo_full_name, "security_features", str(e), retryable=True
+                )
             continue
 
     logger.info(
         "Security features collection complete: processed=%d, all_features=%d, "
-        "partial_features=%d, no_access=%d",
+        "partial_features=%d, no_access=%d, resumed=%d",
         stats["repos_processed"],
         stats["repos_with_all_features"],
         stats["repos_with_partial_features"],
         stats["repos_with_no_access"],
+        stats["repos_resumed"],
     )
 
     return stats
@@ -472,6 +503,7 @@ async def collect_branch_protection(
     rest_client: RestClient,
     path_manager: PathManager,
     config: Config,
+    checkpoint: CheckpointManager | None = None,
 ) -> dict[str, Any]:
     """Collect branch protection settings for repositories.
 
@@ -485,6 +517,7 @@ async def collect_branch_protection(
         rest_client: REST client for API calls.
         path_manager: Path manager for file paths.
         config: Application configuration.
+        checkpoint: Optional CheckpointManager for resume support.
 
     Returns:
         Stats dictionary with counts of repos processed, errors, etc.
@@ -502,6 +535,7 @@ async def collect_branch_protection(
         "repos_total": len(repos),
         "repos_processed": 0,
         "repos_skipped": 0,
+        "repos_resumed": 0,
         "protection_enabled": 0,
         "protection_disabled": 0,
         "permission_denied": 0,
@@ -530,12 +564,23 @@ async def collect_branch_protection(
 
     for idx, repo in enumerate(repos_to_collect, 1):
         repo_name = repo.get("full_name", repo.get("nameWithOwner", "unknown"))
+
+        # Check if already complete via checkpoint
+        if checkpoint and checkpoint.is_repo_endpoint_complete(repo_name, "branch_protection"):
+            logger.debug("Skipping %s - branch_protection already complete", repo_name)
+            stats["repos_resumed"] += 1
+            continue
+
         logger.info(
             "Collecting branch protection %d/%d: %s",
             idx,
             len(repos_to_collect),
             repo_name,
         )
+
+        # Mark as in progress
+        if checkpoint:
+            checkpoint.mark_repo_endpoint_in_progress(repo_name, "branch_protection")
 
         try:
             # Parse owner and repo name
@@ -575,6 +620,10 @@ async def collect_branch_protection(
             else:
                 stats["protection_disabled"] += 1
 
+            # Mark as complete
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_complete(repo_name, "branch_protection")
+
             logger.debug(
                 "Successfully collected branch protection for %s (%d/%d)",
                 repo_name,
@@ -594,14 +643,22 @@ async def collect_branch_protection(
                     "error": str(e),
                 }
             )
+
+            # Mark as failed
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_failed(
+                    repo_name, "branch_protection", str(e), retryable=True
+                )
             continue
 
     logger.info(
-        "Branch protection collection complete: processed=%d, enabled=%d, disabled=%d, permission_denied=%d",
+        "Branch protection collection complete: processed=%d, enabled=%d, disabled=%d, "
+        "permission_denied=%d, resumed=%d",
         stats["repos_processed"],
         stats["protection_enabled"],
         stats["protection_disabled"],
         stats["permission_denied"],
+        stats["repos_resumed"],
     )
 
     return stats

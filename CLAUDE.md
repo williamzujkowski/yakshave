@@ -214,6 +214,9 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 | src/gh_year_end/cli.py | CLI entrypoint and commands |
 | src/gh_year_end/config.py | Config loading and validation |
 | src/gh_year_end/github/ratelimit.py | Adaptive rate limiting |
+| src/gh_year_end/storage/checkpoint.py | Checkpoint/resume functionality for collection |
+| src/gh_year_end/report/build.py | Report generation and site building |
+| src/gh_year_end/report/export.py | Metrics export to JSON |
 | config/schema.json | Config schema for validation |
 
 ---
@@ -226,6 +229,8 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 - Always store headers relevant to rate limiting
 - Always keep identity/bot filtering explainable (`dim_identity_rule`, `bot_reason`)
 - Always ensure deterministic ordering and stable IDs in normalized outputs
+- Checkpoint support: collection can be interrupted and resumed using `--resume`, `--retry-failed`, or `--from-repo` flags
+- Checkpoints track per-repo progress and errors, enabling granular retry strategies
 
 ### Module Size Limits
 - Modules <= 300-400 lines (some modules like checkpoint.py exceed this due to complexity, which is acceptable for cohesive functionality)
@@ -258,6 +263,10 @@ uv run gh-year-end normalize --config config/config.yaml
 uv run gh-year-end metrics --config config/config.yaml
 uv run gh-year-end report --config config/config.yaml
 
+# Validate cached data integrity
+uv run gh-year-end validate --config config/config.yaml
+uv run gh-year-end validate --config config/config.yaml --repair
+
 # Collection with checkpoints
 # Resume interrupted collection
 uv run gh-year-end collect --config config/config.yaml --resume
@@ -267,6 +276,12 @@ uv run gh-year-end collect --config config/config.yaml --retry-failed
 
 # Start from specific repo
 uv run gh-year-end collect --config config/config.yaml --from-repo owner/repo
+
+# Minimal output (no progress display)
+uv run gh-year-end collect --config config/config.yaml --quiet
+
+# Force re-fetch (delete checkpoint and start fresh)
+uv run gh-year-end collect --config config/config.yaml --force
 ```
 
 ---

@@ -131,6 +131,11 @@ def _calculate_pr_metrics(
     Returns:
         List of leaderboard DataFrames for PR metrics.
     """
+    # Early return for empty DataFrame to avoid schema mismatch on join
+    if len(fact_pr) == 0:
+        logger.debug("No PRs to calculate metrics from")
+        return []
+
     results: list[pl.DataFrame] = []
 
     # PRs opened (all non-null created_at), filtered to target users
@@ -201,6 +206,11 @@ def _calculate_review_metrics(
     Returns:
         List of leaderboard DataFrames for review metrics.
     """
+    # Early return for empty DataFrame to avoid schema mismatch on join
+    if len(fact_review) == 0:
+        logger.debug("No reviews to calculate metrics from")
+        return []
+
     results: list[pl.DataFrame] = []
 
     # Reviews submitted (all reviews), filtered to target users
@@ -252,19 +262,22 @@ def _calculate_comment_metrics(
     # Review comments total
     if review_comment_path.exists():
         fact_review_comment = pl.read_parquet(review_comment_path)
-        fact_review_comment = fact_review_comment.join(
-            human_users.rename({"user_id": "author_user_id"}),
-            on="author_user_id",
-            how="inner",
-        )
-        results.append(
-            _calculate_metric(
-                fact_review_comment,
-                "review_comments_total",
-                "author_user_id",
-                year,
+        if len(fact_review_comment) > 0:
+            fact_review_comment = fact_review_comment.join(
+                human_users.rename({"user_id": "author_user_id"}),
+                on="author_user_id",
+                how="inner",
             )
-        )
+            results.append(
+                _calculate_metric(
+                    fact_review_comment,
+                    "review_comments_total",
+                    "author_user_id",
+                    year,
+                )
+            )
+        else:
+            logger.debug("No review comments to calculate metrics from")
     else:
         logger.warning("fact_review_comment not found, skipping review comment metrics")
 
@@ -273,25 +286,27 @@ def _calculate_comment_metrics(
 
     if issue_comment_path.exists():
         fact_issue_comment = pl.read_parquet(issue_comment_path)
-        comment_dfs.append(
-            fact_issue_comment.select(
-                [
-                    "author_user_id",
-                    "repo_id",
-                ]
+        if len(fact_issue_comment) > 0:
+            comment_dfs.append(
+                fact_issue_comment.select(
+                    [
+                        "author_user_id",
+                        "repo_id",
+                    ]
+                )
             )
-        )
 
     if review_comment_path.exists():
         fact_review_comment = pl.read_parquet(review_comment_path)
-        comment_dfs.append(
-            fact_review_comment.select(
-                [
-                    "author_user_id",
-                    "repo_id",
-                ]
+        if len(fact_review_comment) > 0:
+            comment_dfs.append(
+                fact_review_comment.select(
+                    [
+                        "author_user_id",
+                        "repo_id",
+                    ]
+                )
             )
-        )
 
     if comment_dfs:
         all_comments = pl.concat(comment_dfs, how="vertical")
@@ -309,7 +324,7 @@ def _calculate_comment_metrics(
             )
         )
     else:
-        logger.warning("No comment tables found, skipping total comment metrics")
+        logger.debug("No comment data found, skipping total comment metrics")
 
     return results
 

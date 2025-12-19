@@ -1,0 +1,37 @@
+{
+  "repos": {
+    "R_001": {
+      "repo_full_name": "test-org/backend",
+      "year": 2024,
+      "active_contributors_30d": 2,
+      "active_contributors_90d": 3,
+      "active_contributors_365d": 3,
+      "prs_opened": 10,
+      "prs_merged": 8,
+      "issues_opened": 5,
+      "issues_closed": 4,
+      "review_coverage": 80.0,
+      "median_time_to_first_review": 2.5,
+      "median_time_to_merge": 18.0,
+      "stale_pr_count": 1,
+      "stale_issue_count": 1
+    },
+    "R_002": {
+      "repo_full_name": "test-org/frontend",
+      "year": 2024,
+      "active_contributors_30d": 2,
+      "active_contributors_90d": 2,
+      "active_contributors_365d": 2,
+      "prs_opened": 8,
+      "prs_merged": 7,
+      "issues_opened": 3,
+      "issues_closed": 3,
+      "review_coverage": 75.0,
+      "median_time_to_first_review": 4.0,
+      "median_time_to_merge": 24.0,
+      "stale_pr_count": 0,
+      "stale_issue_count": 0
+    }
+  },
+  "total_repos": 2
+}

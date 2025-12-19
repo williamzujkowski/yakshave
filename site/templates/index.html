@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.report.title }} - Overview{% endblock %}
+{% block nav_index %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Year in Review: {{ config.github.windows.year }}</h1>
+    <p class="lead">A comprehensive look at {{ config.github.target.name }}'s GitHub activity</p>
+</div>
+
+<div class="overview-grid">
+    <div class="stat-card stat-card-primary">
+        <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ summary.total_contributors | default(0) }}</div>
+            <div class="stat-label">Active Contributors</div>
+            <div class="stat-description">Unique individuals who contributed</div>
+        </div>
+    </div>
+
+    <div class="stat-card stat-card-success">
+        <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ summary.total_prs_merged | default(0) }}</div>
+            <div class="stat-label">PRs Merged</div>
+            <div class="stat-description">Pull requests successfully merged</div>
+        </div>
+    </div>
+
+    <div class="stat-card stat-card-info">
+        <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ summary.total_reviews | default(0) }}</div>
+            <div class="stat-label">Code Reviews</div>
+            <div class="stat-description">Reviews submitted on pull requests</div>
+        </div>
+    </div>
+
+    <div class="stat-card stat-card-warning">
+        <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 0 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 0 1 1-1h8z"/>
+            </svg>
+        </div>
+        <div class="stat-content">
+            <div class="stat-value">{{ summary.total_repos | default(0) }}</div>
+            <div class="stat-label">Repositories</div>
+            <div class="stat-description">Active repositories analyzed</div>
+        </div>
+    </div>
+</div>
+
+<section class="highlights-section">
+    <h2>Highlights</h2>
+    <div class="highlights-grid">
+        <div class="highlight-card">
+            <h3>Most Active Month</h3>
+            <div class="highlight-value">{{ highlights.most_active_month | default('N/A') }}</div>
+            <p>{{ highlights.most_active_month_prs | default(0) }} PRs merged</p>
+        </div>
+
+        <div class="highlight-card">
+            <h3>Average Review Time</h3>
+            <div class="highlight-value">{{ highlights.avg_review_time | default('N/A') }}</div>
+            <p>Time to first review on PRs</p>
+        </div>
+
+        <div class="highlight-card">
+            <h3>Review Coverage</h3>
+            <div class="highlight-value">{{ highlights.review_coverage | default('0') }}%</div>
+            <p>PRs with at least one review</p>
+        </div>
+
+        <div class="highlight-card">
+            <h3>Community Growth</h3>
+            <div class="highlight-value">+{{ highlights.new_contributors | default(0) }}</div>
+            <p>New contributors this year</p>
+        </div>
+    </div>
+</section>
+
+<section class="activity-section">
+    <h2>Activity Overview</h2>
+    <div class="chart-container">
+        <div id="chart-activity-timeline" class="chart"></div>
+    </div>
+    <script>
+        // Load activity data for D3 chart
+        const activityData = {{ activity_timeline | tojson }};
+    </script>
+</section>
+
+<section class="quick-links-section exec-only">
+    <h2>Executive Summary</h2>
+    <div class="quick-links-grid">
+        <a href="summary.html" class="quick-link-card">
+            <div class="quick-link-icon">
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5z"/>
+                </svg>
+            </div>
+            <h3>Health Signals</h3>
+            <p>Key metrics and risk indicators</p>
+        </a>
+
+        <a href="repos.html" class="quick-link-card">
+            <div class="quick-link-icon">
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 0 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9z"/>
+                </svg>
+            </div>
+            <h3>Repository Health</h3>
+            <p>Hygiene scores and best practices</p>
+        </a>
+
+        <a href="awards.html" class="quick-link-card">
+            <div class="quick-link-icon">
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68z"/>
+                </svg>
+            </div>
+            <h3>Awards & Recognition</h3>
+            <p>Top contributors and achievements</p>
+        </a>
+    </div>
+</section>
+
+<section class="quick-links-section engineer-only">
+    <h2>Explore More</h2>
+    <div class="quick-links-grid">
+        <a href="engineers.html" class="quick-link-card">
+            <div class="quick-link-icon">
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8z"/>
+                    <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                </svg>
+            </div>
+            <h3>Contributors</h3>
+            <p>Individual contribution stats</p>
+        </a>
+
+        <a href="leaderboards.html" class="quick-link-card">
+            <div class="quick-link-icon">
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7z"/>
+                    <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                </svg>
+            </div>
+            <h3>Leaderboards</h3>
+            <p>Rankings and bragging rights</p>
+        </a>
+
+        <a href="awards.html" class="quick-link-card">
+            <div class="quick-link-icon">
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864z"/>
+                </svg>
+            </div>
+            <h3>Awards</h3>
+            <p>Special achievements and milestones</p>
+        </a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="assets/js/charts.js"></script>
+<script>
+    // Render activity timeline chart
+    if (activityData && activityData.length > 0) {
+        // Transform data: convert date strings to Date objects
+        const chartData = activityData.map(d => ({
+            date: new Date(d.date),
+            value: d.value
+        }));
+
+        // Render using TimeSeriesChart
+        const chart = new TimeSeriesChart('chart-activity-timeline', {
+            theme: 'light',
+            height: 300,
+            showArea: true,
+            xAxisLabel: 'Week',
+            yAxisLabel: 'Activity (PRs + Reviews)'
+        });
+        chart.render(chartData);
+    } else {
+        // Show message if no data
+        document.getElementById('chart-activity-timeline').innerHTML =
+            '<p style="text-align: center; color: #888; padding: 40px;">No activity data available</p>';
+    }
+</script>
+{% endblock %}

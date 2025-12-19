@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.report.title }} - Executive Summary{% endblock %}
+{% block nav_summary %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Executive Summary</h1>
+    <p class="lead">Health signals, risks, and key insights for {{ config.github.windows.year }}</p>
+</div>
+
+<section class="health-signals-section">
+    <h2>Health Signals</h2>
+    <div class="signals-grid">
+        <div class="signal-card signal-positive">
+            <div class="signal-header">
+                <div class="signal-icon">
+                    <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </svg>
+                </div>
+                <h3>Strong Review Culture</h3>
+            </div>
+            <div class="signal-value">{{ health.review_coverage | default(0) }}%</div>
+            <p>of PRs receive at least one review</p>
+            <div class="signal-trend signal-trend-up">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                </svg>
+                +{{ health.review_coverage_change | default(0) }}% vs previous period
+            </div>
+        </div>
+
+        <div class="signal-card signal-neutral">
+            <div class="signal-header">
+                <div class="signal-icon">
+                    <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319z"/>
+                    </svg>
+                </div>
+                <h3>Average Merge Time</h3>
+            </div>
+            <div class="signal-value">{{ health.avg_merge_time | default('N/A') }}</div>
+            <p>median time from PR open to merge</p>
+            <div class="signal-trend signal-trend-neutral">
+                Similar to previous period
+            </div>
+        </div>
+
+        <div class="signal-card signal-negative">
+            <div class="signal-header">
+                <div class="signal-icon">
+                    <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                </div>
+                <h3>Stale PRs</h3>
+            </div>
+            <div class="signal-value">{{ health.stale_pr_count | default(0) }}</div>
+            <p>open PRs older than 30 days</p>
+            <div class="signal-trend signal-trend-down">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                </svg>
+                Needs attention
+            </div>
+        </div>
+
+        <div class="signal-card signal-positive">
+            <div class="signal-header">
+                <div class="signal-icon">
+                    <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8z"/>
+                        <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    </svg>
+                </div>
+                <h3>Active Contributors</h3>
+            </div>
+            <div class="signal-value">{{ health.active_contributors | default(0) }}</div>
+            <p>contributors in the last 90 days</p>
+            <div class="signal-trend signal-trend-up">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                </svg>
+                Growing community
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="risk-signals-section">
+    <h2>Risk Indicators</h2>
+    <div class="risk-list">
+        {% for risk in risks %}
+        <div class="risk-item risk-{{ risk.severity | default('medium') }}">
+            <div class="risk-header">
+                <div class="risk-icon">
+                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                </div>
+                <h3>{{ risk.title }}</h3>
+                <span class="risk-badge">{{ risk.category | upper }}</span>
+            </div>
+            <p class="risk-description">{{ risk.description }}</p>
+            <div class="risk-details">
+                <span class="risk-count">{{ risk.affected_count | default(0) }} affected</span>
+                {% if risk.recommendation %}
+                <span class="risk-recommendation">{{ risk.recommendation }}</span>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="key-insights-section">
+    <h2>Key Insights</h2>
+    <div class="insights-grid">
+        <div class="insight-card">
+            <h3>Collaboration</h3>
+            <div class="insight-chart">
+                <div id="chart-collaboration" class="chart"></div>
+            </div>
+            <ul class="insight-points">
+                <li>{{ insights.avg_reviewers_per_pr | default(0) | round(1) }} average reviewers per PR</li>
+                <li>{{ insights.review_participation_rate | default(0) }}% of contributors review code</li>
+                <li>{{ insights.cross_team_reviews | default(0) }}% of reviews are cross-team</li>
+            </ul>
+        </div>
+
+        <div class="insight-card">
+            <h3>Velocity</h3>
+            <div class="insight-chart">
+                <div id="chart-velocity" class="chart"></div>
+            </div>
+            <ul class="insight-points">
+                <li>{{ insights.prs_per_week | default(0) | round(1) }} PRs merged per week</li>
+                <li>{{ insights.median_pr_size | default(0) }} median lines changed per PR</li>
+                <li>{{ insights.merge_rate | default(0) }}% of opened PRs get merged</li>
+            </ul>
+        </div>
+
+        <div class="insight-card">
+            <h3>Quality</h3>
+            <div class="insight-chart">
+                <div id="chart-quality" class="chart"></div>
+            </div>
+            <ul class="insight-points">
+                <li>{{ insights.repos_with_ci | default(0) }}% repos have CI workflows</li>
+                <li>{{ insights.repos_with_codeowners | default(0) }}% repos have CODEOWNERS</li>
+                <li>{{ insights.repos_with_security_policy | default(0) }}% repos have security policy</li>
+            </ul>
+        </div>
+
+        <div class="insight-card">
+            <h3>Community</h3>
+            <div class="insight-chart">
+                <div id="chart-community" class="chart"></div>
+            </div>
+            <ul class="insight-points">
+                <li>{{ insights.new_contributors | default(0) }} new contributors this year</li>
+                <li>{{ insights.contributor_retention | default(0) }}% contributor retention rate</li>
+                <li>{{ insights.bus_factor | default(0) }} estimated bus factor</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="recommendations-section">
+    <h2>Recommendations</h2>
+    <div class="recommendations-list">
+        {% for rec in recommendations %}
+        <div class="recommendation-card">
+            <div class="recommendation-priority priority-{{ rec.priority | default('medium') }}">
+                {{ rec.priority | upper }}
+            </div>
+            <h3>{{ rec.title }}</h3>
+            <p>{{ rec.description }}</p>
+            <div class="recommendation-actions">
+                {% if rec.actions %}
+                <strong>Suggested actions:</strong>
+                <ul>
+                    {% for action in rec.actions %}
+                    <li>{{ action }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="top-repos-section">
+    <h2>Top Performing Repositories</h2>
+    <div class="table-responsive">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Repository</th>
+                    <th>PRs Merged</th>
+                    <th>Contributors</th>
+                    <th>Review Coverage</th>
+                    <th>Hygiene Score</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for repo in top_repos %}
+                <tr>
+                    <td class="repo-name">
+                        <a href="#" class="repo-link">{{ repo.name }}</a>
+                    </td>
+                    <td>{{ repo.prs_merged | default(0) }}</td>
+                    <td>{{ repo.contributors | default(0) }}</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {{ repo.review_coverage | default(0) }}%"></div>
+                            <span class="progress-text">{{ repo.review_coverage | default(0) }}%</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="score-badge score-{{ repo.hygiene_score_category | default('medium') }}">
+                            {{ repo.hygiene_score | default(0) }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="status-badge status-{{ repo.status | default('healthy') }}">
+                            {{ repo.status | default('Healthy') | capitalize }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="assets/js/charts.js"></script>
+<script>
+    // Load data for charts
+    const collaborationData = {{ collaboration_data | tojson }};
+    const velocityData = {{ velocity_data | tojson }};
+    const qualityData = {{ quality_data | tojson }};
+    const communityData = {{ community_data | tojson }};
+
+    // Render charts
+    if (typeof renderCollaborationChart === 'function') {
+        renderCollaborationChart('#chart-collaboration', collaborationData);
+    }
+    if (typeof renderVelocityChart === 'function') {
+        renderVelocityChart('#chart-velocity', velocityData);
+    }
+    if (typeof renderQualityChart === 'function') {
+        renderQualityChart('#chart-quality', qualityData);
+    }
+    if (typeof renderCommunityChart === 'function') {
+        renderCommunityChart('#chart-community', communityData);
+    }
+</script>
+{% endblock %}

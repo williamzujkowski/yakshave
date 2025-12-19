@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}{{ config.report.title }} - Contributors{% endblock %}
+{% block nav_engineers %}active{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Contributors</h1>
+    <p class="lead">Individual contribution statistics and drilldowns</p>
+</div>
+
+<section class="contributor-search-section">
+    <div class="search-bar">
+        <input type="text" id="contributor-search" placeholder="Search contributors by name..." class="search-input">
+        <div class="search-filters">
+            <select id="metric-filter" class="filter-select">
+                <option value="all">All Metrics</option>
+                <option value="prs">Pull Requests</option>
+                <option value="reviews">Reviews</option>
+                <option value="issues">Issues</option>
+                <option value="comments">Comments</option>
+            </select>
+            <select id="sort-by" class="filter-select">
+                <option value="prs_merged">Most PRs Merged</option>
+                <option value="reviews_submitted">Most Reviews</option>
+                <option value="comments_total">Most Comments</option>
+                <option value="contributions_total">Most Active</option>
+            </select>
+        </div>
+    </div>
+</section>
+
+<section class="top-contributors-section">
+    <h2>Top Contributors</h2>
+    <div class="contributors-grid">
+        {% for contributor in top_contributors %}
+        <div class="contributor-card" data-user-id="{{ contributor.user_id }}">
+            <div class="contributor-header">
+                <div class="contributor-avatar">
+                    <img src="{{ contributor.avatar_url | default('https://github.com/identicons/' + contributor.login + '.png') }}"
+                         alt="{{ contributor.login }}"
+                         loading="lazy">
+                </div>
+                <div class="contributor-info">
+                    <h3 class="contributor-name">
+                        <a href="https://github.com/{{ contributor.login }}" target="_blank" rel="noopener noreferrer">
+                            {{ contributor.login }}
+                        </a>
+                    </h3>
+                    <p class="contributor-rank">Rank #{{ contributor.rank }}</p>
+                </div>
+            </div>
+            <div class="contributor-stats">
+                <div class="stat-item">
+                    <span class="stat-label">PRs Merged</span>
+                    <span class="stat-value">{{ contributor.prs_merged | default(0) }}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Reviews</span>
+                    <span class="stat-value">{{ contributor.reviews_submitted | default(0) }}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Issues Closed</span>
+                    <span class="stat-value">{{ contributor.issues_closed | default(0) }}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Comments</span>
+                    <span class="stat-value">{{ contributor.comments_total | default(0) }}</span>
+                </div>
+            </div>
+            <button class="contributor-expand" onclick="showContributorDetails('{{ contributor.user_id }}')">
+                View Details
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="all-contributors-section">
+    <h2>All Contributors</h2>
+    <div class="table-responsive">
+        <table class="data-table" id="contributors-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Contributor</th>
+                    <th class="sortable" data-sort="prs_merged">
+                        PRs Merged
+                        <svg class="sort-icon" width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+                        </svg>
+                    </th>
+                    <th class="sortable" data-sort="prs_opened">PRs Opened</th>
+                    <th class="sortable" data-sort="reviews_submitted">Reviews</th>
+                    <th class="sortable" data-sort="approvals">Approvals</th>
+                    <th class="sortable" data-sort="issues_opened">Issues Opened</th>
+                    <th class="sortable" data-sort="issues_closed">Issues Closed</th>
+                    <th class="sortable" data-sort="comments_total">Comments</th>
+                    <th>Activity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contributor in all_contributors %}
+                <tr data-user-id="{{ contributor.user_id }}">
+                    <td class="rank-cell">{{ contributor.rank }}</td>
+                    <td class="contributor-cell">
+                        <div class="contributor-mini">
+                            <img src="{{ contributor.avatar_url | default('https://github.com/identicons/' + contributor.login + '.png') }}"
+                                 alt="{{ contributor.login }}"
+                                 class="mini-avatar"
+                                 loading="lazy">
+                            <a href="https://github.com/{{ contributor.login }}"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                {{ contributor.login }}
+                            </a>
+                        </div>
+                    </td>
+                    <td>{{ contributor.prs_merged | default(0) }}</td>
+                    <td>{{ contributor.prs_opened | default(0) }}</td>
+                    <td>{{ contributor.reviews_submitted | default(0) }}</td>
+                    <td>{{ contributor.approvals | default(0) }}</td>
+                    <td>{{ contributor.issues_opened | default(0) }}</td>
+                    <td>{{ contributor.issues_closed | default(0) }}</td>
+                    <td>{{ contributor.comments_total | default(0) }}</td>
+                    <td>
+                        <div class="sparkline" data-values="{{ contributor.activity_timeline | tojson }}"></div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="contributor-activity-section">
+    <h2>Contribution Activity Over Time</h2>
+    <div class="chart-container">
+        <div id="chart-contribution-timeline" class="chart"></div>
+    </div>
+</section>
+
+<section class="contribution-types-section">
+    <h2>Contribution Types Distribution</h2>
+    <div class="charts-row">
+        <div class="chart-container">
+            <h3>By Activity Type</h3>
+            <div id="chart-contribution-types" class="chart"></div>
+        </div>
+        <div class="chart-container">
+            <h3>By Repository</h3>
+            <div id="chart-contribution-by-repo" class="chart"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Contributor Detail Modal -->
+<div id="contributor-modal" class="modal" style="display: none;">
+    <div class="modal-overlay" onclick="closeContributorModal()"></div>
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeContributorModal()" aria-label="Close modal">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </button>
+        <div id="modal-contributor-content">
+            <!-- Content will be loaded dynamically -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="assets/js/charts.js"></script>
+<script src="assets/js/contributors.js"></script>
+<script>
+    // Load data
+    const contributionTimelineData = {{ contribution_timeline | tojson }};
+    const contributionTypesData = {{ contribution_types | tojson }};
+    const contributionByRepoData = {{ contribution_by_repo | tojson }};
+    const contributorsData = {{ all_contributors | tojson }};
+
+    // Render charts
+    if (typeof renderContributionTimeline === 'function') {
+        renderContributionTimeline('#chart-contribution-timeline', contributionTimelineData);
+    }
+    if (typeof renderContributionTypes === 'function') {
+        renderContributionTypes('#chart-contribution-types', contributionTypesData);
+    }
+    if (typeof renderContributionByRepo === 'function') {
+        renderContributionByRepo('#chart-contribution-by-repo', contributionByRepoData);
+    }
+
+    // Initialize contributor table features
+    if (typeof initContributorTable === 'function') {
+        initContributorTable('#contributors-table', contributorsData);
+    }
+</script>
+{% endblock %}

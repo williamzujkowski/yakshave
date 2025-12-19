@@ -43,6 +43,9 @@ collection:
   commits:
     include_files: true    # Include file changes in commits
     classify_files: true   # Classify files (docs, test, ci, etc.)
+    max_per_repo: null     # Limit to N commits per repo (null = no limit, e.g., 1000)
+    max_pages: null        # Limit to N pages per repo (null = no limit, e.g., 10)
+    since_days: null       # Only commits from last N days of year window (null = full window, e.g., 365)
   hygiene:
     paths:
       - "SECURITY.md"

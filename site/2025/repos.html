@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="williamzujkowski Year in Review 2025 - GitHub Community Health Report">
+    <title>williamzujkowski Year in Review 2025 - Repositories</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">williamzujkowski Year in Review 2025</h1>
+                <div class="header-meta">
+                    <span class="target-info">williamzujkowski</span>
+                    <div class="year-selector">
+                        <button class="year-badge" id="yearToggle" aria-label="Select year" aria-expanded="false">
+                            2025
+                            <svg class="year-dropdown-icon" width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </button>
+                        <div class="year-dropdown" id="yearDropdown" aria-hidden="true">
+                            <ul class="year-list">
+                                <li>
+                                    <a href="/2025/"
+                                       class="year-option active"
+aria-current="true">
+                                        2025
+                                        <svg class="check-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/2024/"
+                                       class="year-option"
+>
+                                        2024
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="view-toggle">
+                    <button class="view-btn" data-view="exec" aria-label="Executive View">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2z"/>
+                        </svg>
+                        Exec View
+                    </button>
+                    <button class="view-btn active" data-view="engineer" aria-label="Engineer View">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm4.5 9.5v-7h1v7h-1zm3 0v-7h1v7h-1zm3 0v-7h1v7h-1z"/>
+                        </svg>
+                        Engineer View
+                    </button>
+                </div>
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                    </svg>
+                    <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html" class="nav-link ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+                            <path d="m8 3.293 6 6V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V9.293l6-6Z"/>
+                        </svg>
+                        Overview
+                    </a></li>
+                    <li><a href="summary.html" class="nav-link exec-only ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 4v1a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 3v3a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5z"/>
+                        </svg>
+                        Executive Summary
+                    </a></li>
+                    <li><a href="engineers.html" class="nav-link engineer-only ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                        </svg>
+                        Contributors
+                    </a></li>
+                    <li><a href="leaderboards.html" class="nav-link engineer-only ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                        </svg>
+                        Leaderboards
+                    </a></li>
+                    <li><a href="repos.html" class="nav-link active">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 0 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 0 1 1-1h8zM5 12.25v3.25a.25.25 0 0 0 .4.2l1.45-1.087a.25.25 0 0 1 .3 0L8.6 15.7a.25.25 0 0 0 .4-.2v-3.25a.25.25 0 0 0-.25-.25h-3.5a.25.25 0 0 0-.25.25z"/>
+                        </svg>
+                        Repositories
+                    </a></li>
+                    <li><a href="awards.html" class="nav-link ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702 1.509.229z"/>
+                            <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                        </svg>
+                        Awards
+                    </a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="generation-info">
+                    <small>Generated: 2025-12-19</small>
+                    <small>Version: 1.0.0</small>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content">
+<div class="page-header">
+    <h1>Repository Health Dashboard</h1>
+    <p class="lead">Health metrics, hygiene scores, and activity analysis</p>
+</div>
+
+<section class="repo-filters-section">
+    <div class="filters-bar">
+        <input type="text" id="repo-search" placeholder="Search repositories..." class="search-input">
+        <select id="health-filter" class="filter-select">
+            <option value="all">All Repositories</option>
+            <option value="healthy">Healthy</option>
+            <option value="warning">Needs Attention</option>
+            <option value="critical">Critical</option>
+        </select>
+        <select id="sort-repos" class="filter-select">
+            <option value="activity">Most Active</option>
+            <option value="hygiene">Best Hygiene</option>
+            <option value="contributors">Most Contributors</option>
+            <option value="prs">Most PRs</option>
+        </select>
+    </div>
+</section>
+
+<section class="repo-overview-section">
+    <h2>Repository Overview</h2>
+    <div class="overview-grid">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                </svg>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Healthy Repositories</div>
+            </div>
+        </div>
+
+        <div class="stat-card stat-card-warning">
+            <div class="stat-icon">
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </svg>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value">2</div>
+                <div class="stat-label">Need Attention</div>
+            </div>
+        </div>
+
+        <div class="stat-card stat-card-info">
+            <div class="stat-icon">
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492z"/>
+                </svg>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value">65.0</div>
+                <div class="stat-label">Average Hygiene Score</div>
+            </div>
+        </div>
+
+        <div class="stat-card stat-card-success">
+            <div class="stat-icon">
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8z"/>
+                </svg>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value">10.0</div>
+                <div class="stat-label">Avg Contributors</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="repo-health-section">
+    <h2>Repository Health Matrix</h2>
+    <div class="table-responsive">
+        <table class="data-table" id="repos-table">
+            <thead>
+                <tr>
+                    <th>Repository</th>
+                    <th class="sortable" data-sort="hygiene_score">
+                        Hygiene Score
+                        <svg class="sort-icon" width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+                        </svg>
+                    </th>
+                    <th class="sortable" data-sort="prs_merged">PRs Merged</th>
+                    <th class="sortable" data-sort="active_contributors_365d">Contributors</th>
+                    <th class="sortable" data-sort="review_coverage">Review Coverage</th>
+                    <th class="sortable" data-sort="median_time_to_merge">Merge Time</th>
+                    <th>Health Status</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-repo-id="R_001">
+                    <td class="repo-name">
+                        <div class="repo-info">
+                            <a href="https://github.com/test-org/backend-api"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="repo-link">
+                                backend-api
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="hygiene-score-cell">
+                            <span class="score-badge score-high">
+                                85
+                            </span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>115</td>
+                    <td>8</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85.0%"></div>
+                            <span class="progress-text">85.0%</span>
+                        </div>
+                    </td>
+                    <td>24.0</td>
+                    <td>
+                        <span class="status-badge status-healthy">
+                            Healthy
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn-icon" onclick="showRepoDetails('R_001')" aria-label="View details">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286z"/>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+                <tr data-repo-id="R_002">
+                    <td class="repo-name">
+                        <div class="repo-info">
+                            <a href="https://github.com/test-org/frontend-web"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="repo-link">
+                                frontend-web
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="hygiene-score-cell">
+                            <span class="score-badge score-medium">
+                                75
+                            </span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>100</td>
+                    <td>9</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80.0%"></div>
+                            <span class="progress-text">80.0%</span>
+                        </div>
+                    </td>
+                    <td>30.0</td>
+                    <td>
+                        <span class="status-badge status-warning">
+                            Warning
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn-icon" onclick="showRepoDetails('R_002')" aria-label="View details">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286z"/>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+                <tr data-repo-id="R_003">
+                    <td class="repo-name">
+                        <div class="repo-info">
+                            <a href="https://github.com/test-org/mobile-app"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="repo-link">
+                                mobile-app
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="hygiene-score-cell">
+                            <span class="score-badge score-medium">
+                                65
+                            </span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>85</td>
+                    <td>10</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75.0%"></div>
+                            <span class="progress-text">75.0%</span>
+                        </div>
+                    </td>
+                    <td>36.0</td>
+                    <td>
+                        <span class="status-badge status-warning">
+                            Warning
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn-icon" onclick="showRepoDetails('R_003')" aria-label="View details">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286z"/>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+                <tr data-repo-id="R_004">
+                    <td class="repo-name">
+                        <div class="repo-info">
+                            <a href="https://github.com/test-org/data-pipeline"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="repo-link">
+                                data-pipeline
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="hygiene-score-cell">
+                            <span class="score-badge score-low">
+                                55
+                            </span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 55%"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>70</td>
+                    <td>11</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70.0%"></div>
+                            <span class="progress-text">70.0%</span>
+                        </div>
+                    </td>
+                    <td>42.0</td>
+                    <td>
+                        <span class="status-badge status-critical">
+                            Critical
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn-icon" onclick="showRepoDetails('R_004')" aria-label="View details">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286z"/>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+                <tr data-repo-id="R_005">
+                    <td class="repo-name">
+                        <div class="repo-info">
+                            <a href="https://github.com/test-org/docs-site"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="repo-link">
+                                docs-site
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="hygiene-score-cell">
+                            <span class="score-badge score-low">
+                                45
+                            </span>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 45%"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>55</td>
+                    <td>12</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65.0%"></div>
+                            <span class="progress-text">65.0%</span>
+                        </div>
+                    </td>
+                    <td>48.0</td>
+                    <td>
+                        <span class="status-badge status-critical">
+                            Critical
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn-icon" onclick="showRepoDetails('R_005')" aria-label="View details">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286z"/>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="hygiene-breakdown-section">
+    <h2>Hygiene Breakdown</h2>
+    <div class="hygiene-grid">
+        <div class="hygiene-card">
+            <h3>Security Policies</h3>
+            <div class="hygiene-stat">
+                <div class="hygiene-chart">
+                    <div id="chart-security-policies" class="chart"></div>
+                </div>
+                <div class="hygiene-details">
+                    <div class="hygiene-item">
+                        <span class="hygiene-label">SECURITY.md</span>
+                        <span class="hygiene-value">4/5</span>
+                    </div>
+                    <div class="hygiene-item">
+                        <span class="hygiene-label">Security Features</span>
+                        <span class="hygiene-value">4/5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hygiene-card">
+            <h3>Code Ownership</h3>
+            <div class="hygiene-stat">
+                <div class="hygiene-chart">
+                    <div id="chart-codeowners" class="chart"></div>
+                </div>
+                <div class="hygiene-details">
+                    <div class="hygiene-item">
+                        <span class="hygiene-label">CODEOWNERS</span>
+                        <span class="hygiene-value">3/5</span>
+                    </div>
+                    <div class="hygiene-item">
+                        <span class="hygiene-label">Branch Protection</span>
+                        <span class="hygiene-value">2/5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hygiene-card">
+            <h3>CI/CD</h3>
+            <div class="hygiene-stat">
+                <div class="hygiene-chart">
+                    <div id="chart-ci-workflows" class="chart"></div>
+                </div>
+                <div class="hygiene-details">
+                    <div class="hygiene-item">
+                        <span class="hygiene-label">With Workflows</span>
+                        <span class="hygiene-value">5/5</span>
+                    </div>
+                    <div class="hygiene-item">
+                        <span class="hygiene-label">Avg Workflows/Repo</span>
+                        <span class="hygiene-value">1.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hygiene-card">
+            <h3>Documentation</h3>
+            <div class="hygiene-stat">
+                <div class="hygiene-chart">
+                    <div id="chart-documentation" class="chart"></div>
+                </div>
+                <div class="hygiene-details">
+                    <div class="hygiene-item">
+                        <span class="hygiene-label">README.md</span>
+                        <span class="hygiene-value">5/5</span>
+                    </div>
+                    <div class="hygiene-item">
+                        <span class="hygiene-label">CONTRIBUTING.md</span>
+                        <span class="hygiene-value">3/5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="repo-activity-section">
+    <h2>Repository Activity Trends</h2>
+    <div class="chart-container">
+        <div id="chart-repo-activity" class="chart"></div>
+    </div>
+</section>
+
+<!-- Repository Detail Modal -->
+<div id="repo-modal" class="modal" style="display: none;">
+    <div class="modal-overlay" onclick="closeRepoModal()"></div>
+    <div class="modal-content modal-wide">
+        <button class="modal-close" onclick="closeRepoModal()" aria-label="Close modal">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+        </button>
+        <div id="modal-repo-content">
+            <!-- Content will be loaded dynamically -->
+        </div>
+    </div>
+</div>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About this Report</h3>
+                    <p>Generated by gh-year-end, a tool for GitHub Community Health Reports.</p>
+                    <p>Data covers January 01, 2025 to January 01, 2026</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Data Sources</h3>
+                    <ul>
+                        <li>Pull Requests: 450</li>
+                        <li>Issues: 174</li>
+                        <li>Reviews: 0</li>
+                        <li>Repositories: 5</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>View Mode</h3>
+                    <p>Toggle between Executive and Engineer views using the controls above.</p>
+                    <p>Dark mode available for comfortable viewing.</p>
+                </div>
+            </div>
+            <div class="footer-legal">
+                <p>&copy; 2025 williamzujkowski. Generated with gh-year-end.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/view-toggle.js"></script>
+    <script src="assets/js/year-selector.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="assets/js/charts.js"></script>
+<script src="assets/js/repos.js"></script>
+<script>
+    // Load data
+    const reposData = [{"active_contributors_365d": 8, "full_name": "test-org/backend-api", "health_status": "healthy", "hygiene_score": 85, "hygiene_score_category": "high", "is_private": false, "language": null, "median_time_to_merge": 24.0, "name": "backend-api", "prs_merged": 115, "repo_id": "R_001", "review_coverage": 85.0}, {"active_contributors_365d": 9, "full_name": "test-org/frontend-web", "health_status": "warning", "hygiene_score": 75, "hygiene_score_category": "medium", "is_private": false, "language": null, "median_time_to_merge": 30.0, "name": "frontend-web", "prs_merged": 100, "repo_id": "R_002", "review_coverage": 80.0}, {"active_contributors_365d": 10, "full_name": "test-org/mobile-app", "health_status": "warning", "hygiene_score": 65, "hygiene_score_category": "medium", "is_private": false, "language": null, "median_time_to_merge": 36.0, "name": "mobile-app", "prs_merged": 85, "repo_id": "R_003", "review_coverage": 75.0}, {"active_contributors_365d": 11, "full_name": "test-org/data-pipeline", "health_status": "critical", "hygiene_score": 55, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": 42.0, "name": "data-pipeline", "prs_merged": 70, "repo_id": "R_004", "review_coverage": 70.0}, {"active_contributors_365d": 12, "full_name": "test-org/docs-site", "health_status": "critical", "hygiene_score": 45, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": 48.0, "name": "docs-site", "prs_merged": 55, "repo_id": "R_005", "review_coverage": 65.0}];
+    const hygieneData = {"avg_workflows": 1.0, "branch_protection_count": 2, "ci_workflows_count": 5, "codeowners_count": 3, "contributing_count": 3, "readme_count": 5, "security_features_count": 4, "security_md_count": 4};
+    const repoActivityData = [];
+
+    // Render charts
+    if (typeof renderSecurityPoliciesChart === 'function') {
+        renderSecurityPoliciesChart('#chart-security-policies', hygieneData);
+    }
+    if (typeof renderCodeownersChart === 'function') {
+        renderCodeownersChart('#chart-codeowners', hygieneData);
+    }
+    if (typeof renderCIWorkflowsChart === 'function') {
+        renderCIWorkflowsChart('#chart-ci-workflows', hygieneData);
+    }
+    if (typeof renderDocumentationChart === 'function') {
+        renderDocumentationChart('#chart-documentation', hygieneData);
+    }
+    if (typeof renderRepoActivity === 'function') {
+        renderRepoActivity('#chart-repo-activity', repoActivityData);
+    }
+
+    // Initialize repo table features
+    if (typeof initRepoTable === 'function') {
+        initRepoTable('#repos-table', reposData);
+    }
+</script>
+</body>
+</html>

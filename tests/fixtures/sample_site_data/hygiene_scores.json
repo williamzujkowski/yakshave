@@ -1,0 +1,44 @@
+{
+  "repos": {
+    "R_001": {
+      "repo_full_name": "test-org/backend",
+      "year": 2024,
+      "score": 80,
+      "has_readme": true,
+      "has_license": true,
+      "has_contributing": true,
+      "has_code_of_conduct": true,
+      "has_security_md": true,
+      "has_codeowners": true,
+      "has_ci_workflows": true,
+      "branch_protection_enabled": true,
+      "requires_reviews": true,
+      "dependabot_enabled": true,
+      "secret_scanning_enabled": true,
+      "notes": ""
+    },
+    "R_002": {
+      "repo_full_name": "test-org/frontend",
+      "year": 2024,
+      "score": 60,
+      "has_readme": true,
+      "has_license": true,
+      "has_contributing": false,
+      "has_code_of_conduct": false,
+      "has_security_md": true,
+      "has_codeowners": false,
+      "has_ci_workflows": true,
+      "branch_protection_enabled": true,
+      "requires_reviews": true,
+      "dependabot_enabled": false,
+      "secret_scanning_enabled": false,
+      "notes": "Missing some best practice files"
+    }
+  },
+  "summary": {
+    "total_repos": 2,
+    "average_score": 70.0,
+    "min_score": 60,
+    "max_score": 80
+  }
+}

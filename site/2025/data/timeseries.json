@@ -1,0 +1,4369 @@
+{
+  "timeseries": {
+    "week": {
+      "issues_opened": {
+        "org": [
+          {
+            "period_start": "2025-01-01",
+            "period_end": "2025-01-08",
+            "value": 10
+          },
+          {
+            "period_start": "2025-01-08",
+            "period_end": "2025-01-15",
+            "value": 12
+          },
+          {
+            "period_start": "2025-01-15",
+            "period_end": "2025-01-22",
+            "value": 9
+          },
+          {
+            "period_start": "2025-01-22",
+            "period_end": "2025-01-29",
+            "value": 9
+          },
+          {
+            "period_start": "2025-01-29",
+            "period_end": "2025-02-05",
+            "value": 10
+          },
+          {
+            "period_start": "2025-02-05",
+            "period_end": "2025-02-12",
+            "value": 11
+          },
+          {
+            "period_start": "2025-02-12",
+            "period_end": "2025-02-19",
+            "value": 9
+          },
+          {
+            "period_start": "2025-02-19",
+            "period_end": "2025-02-26",
+            "value": 10
+          },
+          {
+            "period_start": "2025-02-26",
+            "period_end": "2025-03-05",
+            "value": 12
+          },
+          {
+            "period_start": "2025-03-05",
+            "period_end": "2025-03-12",
+            "value": 11
+          },
+          {
+            "period_start": "2025-03-12",
+            "period_end": "2025-03-19",
+            "value": 9
+          },
+          {
+            "period_start": "2025-03-19",
+            "period_end": "2025-03-26",
+            "value": 10
+          },
+          {
+            "period_start": "2025-03-26",
+            "period_end": "2025-04-02",
+            "value": 11
+          },
+          {
+            "period_start": "2025-04-02",
+            "period_end": "2025-04-09",
+            "value": 11
+          },
+          {
+            "period_start": "2025-04-09",
+            "period_end": "2025-04-16",
+            "value": 12
+          },
+          {
+            "period_start": "2025-04-16",
+            "period_end": "2025-04-23",
+            "value": 10
+          },
+          {
+            "period_start": "2025-04-23",
+            "period_end": "2025-04-30",
+            "value": 11
+          },
+          {
+            "period_start": "2025-04-30",
+            "period_end": "2025-05-07",
+            "value": 13
+          },
+          {
+            "period_start": "2025-05-07",
+            "period_end": "2025-05-14",
+            "value": 12
+          },
+          {
+            "period_start": "2025-05-14",
+            "period_end": "2025-05-21",
+            "value": 13
+          },
+          {
+            "period_start": "2025-05-21",
+            "period_end": "2025-05-28",
+            "value": 11
+          },
+          {
+            "period_start": "2025-05-28",
+            "period_end": "2025-06-04",
+            "value": 10
+          },
+          {
+            "period_start": "2025-06-04",
+            "period_end": "2025-06-11",
+            "value": 8
+          },
+          {
+            "period_start": "2025-06-11",
+            "period_end": "2025-06-18",
+            "value": 13
+          },
+          {
+            "period_start": "2025-06-18",
+            "period_end": "2025-06-25",
+            "value": 11
+          },
+          {
+            "period_start": "2025-06-25",
+            "period_end": "2025-07-02",
+            "value": 10
+          },
+          {
+            "period_start": "2025-07-02",
+            "period_end": "2025-07-09",
+            "value": 13
+          },
+          {
+            "period_start": "2025-07-09",
+            "period_end": "2025-07-16",
+            "value": 9
+          },
+          {
+            "period_start": "2025-07-16",
+            "period_end": "2025-07-23",
+            "value": 12
+          },
+          {
+            "period_start": "2025-07-23",
+            "period_end": "2025-07-30",
+            "value": 10
+          },
+          {
+            "period_start": "2025-07-30",
+            "period_end": "2025-08-06",
+            "value": 11
+          },
+          {
+            "period_start": "2025-08-06",
+            "period_end": "2025-08-13",
+            "value": 8
+          },
+          {
+            "period_start": "2025-08-13",
+            "period_end": "2025-08-20",
+            "value": 12
+          },
+          {
+            "period_start": "2025-08-20",
+            "period_end": "2025-08-27",
+            "value": 13
+          },
+          {
+            "period_start": "2025-08-27",
+            "period_end": "2025-09-03",
+            "value": 11
+          },
+          {
+            "period_start": "2025-09-03",
+            "period_end": "2025-09-10",
+            "value": 8
+          },
+          {
+            "period_start": "2025-09-10",
+            "period_end": "2025-09-17",
+            "value": 12
+          },
+          {
+            "period_start": "2025-09-17",
+            "period_end": "2025-09-24",
+            "value": 13
+          },
+          {
+            "period_start": "2025-09-24",
+            "period_end": "2025-10-01",
+            "value": 12
+          },
+          {
+            "period_start": "2025-10-01",
+            "period_end": "2025-10-08",
+            "value": 8
+          },
+          {
+            "period_start": "2025-10-08",
+            "period_end": "2025-10-15",
+            "value": 9
+          },
+          {
+            "period_start": "2025-10-15",
+            "period_end": "2025-10-22",
+            "value": 13
+          },
+          {
+            "period_start": "2025-10-22",
+            "period_end": "2025-10-29",
+            "value": 12
+          },
+          {
+            "period_start": "2025-10-29",
+            "period_end": "2025-11-05",
+            "value": 10
+          },
+          {
+            "period_start": "2025-11-05",
+            "period_end": "2025-11-12",
+            "value": 9
+          },
+          {
+            "period_start": "2025-11-12",
+            "period_end": "2025-11-19",
+            "value": 10
+          },
+          {
+            "period_start": "2025-11-19",
+            "period_end": "2025-11-26",
+            "value": 12
+          },
+          {
+            "period_start": "2025-11-26",
+            "period_end": "2025-12-03",
+            "value": 13
+          },
+          {
+            "period_start": "2025-12-03",
+            "period_end": "2025-12-10",
+            "value": 11
+          },
+          {
+            "period_start": "2025-12-10",
+            "period_end": "2025-12-17",
+            "value": 10
+          },
+          {
+            "period_start": "2025-12-17",
+            "period_end": "2025-12-24",
+            "value": 11
+          },
+          {
+            "period_start": "2025-12-24",
+            "period_end": "2025-12-31",
+            "value": 13
+          },
+          {
+            "period_start": "2025-12-31",
+            "period_end": "2026-01-01",
+            "value": 10
+          }
+        ],
+        "repos": {
+          "R_002": [
+            {
+              "period_start": "2025-01-01",
+              "period_end": "2025-01-08",
+              "value": 5
+            },
+            {
+              "period_start": "2025-01-08",
+              "period_end": "2025-01-15",
+              "value": 2
+            },
+            {
+              "period_start": "2025-01-15",
+              "period_end": "2025-01-22",
+              "value": 2
+            },
+            {
+              "period_start": "2025-01-22",
+              "period_end": "2025-01-29",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-29",
+              "period_end": "2025-02-05",
+              "value": 2
+            },
+            {
+              "period_start": "2025-02-05",
+              "period_end": "2025-02-12",
+              "value": 3
+            },
+            {
+              "period_start": "2025-02-12",
+              "period_end": "2025-02-19",
+              "value": 2
+            },
+            {
+              "period_start": "2025-02-19",
+              "period_end": "2025-02-26",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-26",
+              "period_end": "2025-03-05",
+              "value": 2
+            },
+            {
+              "period_start": "2025-03-05",
+              "period_end": "2025-03-12",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-12",
+              "period_end": "2025-03-19",
+              "value": 3
+            },
+            {
+              "period_start": "2025-03-19",
+              "period_end": "2025-03-26",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-26",
+              "period_end": "2025-04-02",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-02",
+              "period_end": "2025-04-09",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-09",
+              "period_end": "2025-04-16",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-16",
+              "period_end": "2025-04-23",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-23",
+              "period_end": "2025-04-30",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-30",
+              "period_end": "2025-05-07",
+              "value": 5
+            },
+            {
+              "period_start": "2025-05-07",
+              "period_end": "2025-05-14",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-14",
+              "period_end": "2025-05-21",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-21",
+              "period_end": "2025-05-28",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-28",
+              "period_end": "2025-06-04",
+              "value": 4
+            },
+            {
+              "period_start": "2025-06-04",
+              "period_end": "2025-06-11",
+              "value": 3
+            },
+            {
+              "period_start": "2025-06-11",
+              "period_end": "2025-06-18",
+              "value": 4
+            },
+            {
+              "period_start": "2025-06-18",
+              "period_end": "2025-06-25",
+              "value": 3
+            },
+            {
+              "period_start": "2025-06-25",
+              "period_end": "2025-07-02",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-02",
+              "period_end": "2025-07-09",
+              "value": 4
+            },
+            {
+              "period_start": "2025-07-09",
+              "period_end": "2025-07-16",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-16",
+              "period_end": "2025-07-23",
+              "value": 4
+            },
+            {
+              "period_start": "2025-07-23",
+              "period_end": "2025-07-30",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-30",
+              "period_end": "2025-08-06",
+              "value": 3
+            },
+            {
+              "period_start": "2025-08-06",
+              "period_end": "2025-08-13",
+              "value": 2
+            },
+            {
+              "period_start": "2025-08-13",
+              "period_end": "2025-08-20",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-20",
+              "period_end": "2025-08-27",
+              "value": 2
+            },
+            {
+              "period_start": "2025-08-27",
+              "period_end": "2025-09-03",
+              "value": 3
+            },
+            {
+              "period_start": "2025-09-03",
+              "period_end": "2025-09-10",
+              "value": 2
+            },
+            {
+              "period_start": "2025-09-10",
+              "period_end": "2025-09-17",
+              "value": 3
+            },
+            {
+              "period_start": "2025-09-17",
+              "period_end": "2025-09-24",
+              "value": 2
+            },
+            {
+              "period_start": "2025-09-24",
+              "period_end": "2025-10-01",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-01",
+              "period_end": "2025-10-08",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-08",
+              "period_end": "2025-10-15",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-15",
+              "period_end": "2025-10-22",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-22",
+              "period_end": "2025-10-29",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-29",
+              "period_end": "2025-11-05",
+              "value": 3
+            },
+            {
+              "period_start": "2025-11-05",
+              "period_end": "2025-11-12",
+              "value": 5
+            },
+            {
+              "period_start": "2025-11-12",
+              "period_end": "2025-11-19",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-19",
+              "period_end": "2025-11-26",
+              "value": 5
+            },
+            {
+              "period_start": "2025-11-26",
+              "period_end": "2025-12-03",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-03",
+              "period_end": "2025-12-10",
+              "value": 5
+            },
+            {
+              "period_start": "2025-12-10",
+              "period_end": "2025-12-17",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-17",
+              "period_end": "2025-12-24",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-24",
+              "period_end": "2025-12-31",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-31",
+              "period_end": "2026-01-01",
+              "value": 5
+            }
+          ],
+          "R_001": [
+            {
+              "period_start": "2025-01-01",
+              "period_end": "2025-01-08",
+              "value": 5
+            },
+            {
+              "period_start": "2025-01-08",
+              "period_end": "2025-01-15",
+              "value": 2
+            },
+            {
+              "period_start": "2025-01-15",
+              "period_end": "2025-01-22",
+              "value": 2
+            },
+            {
+              "period_start": "2025-01-22",
+              "period_end": "2025-01-29",
+              "value": 2
+            },
+            {
+              "period_start": "2025-01-29",
+              "period_end": "2025-02-05",
+              "value": 2
+            },
+            {
+              "period_start": "2025-02-05",
+              "period_end": "2025-02-12",
+              "value": 3
+            },
+            {
+              "period_start": "2025-02-12",
+              "period_end": "2025-02-19",
+              "value": 2
+            },
+            {
+              "period_start": "2025-02-19",
+              "period_end": "2025-02-26",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-26",
+              "period_end": "2025-03-05",
+              "value": 2
+            },
+            {
+              "period_start": "2025-03-05",
+              "period_end": "2025-03-12",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-12",
+              "period_end": "2025-03-19",
+              "value": 2
+            },
+            {
+              "period_start": "2025-03-19",
+              "period_end": "2025-03-26",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-26",
+              "period_end": "2025-04-02",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-02",
+              "period_end": "2025-04-09",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-09",
+              "period_end": "2025-04-16",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-16",
+              "period_end": "2025-04-23",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-23",
+              "period_end": "2025-04-30",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-30",
+              "period_end": "2025-05-07",
+              "value": 5
+            },
+            {
+              "period_start": "2025-05-07",
+              "period_end": "2025-05-14",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-14",
+              "period_end": "2025-05-21",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-21",
+              "period_end": "2025-05-28",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-28",
+              "period_end": "2025-06-04",
+              "value": 4
+            },
+            {
+              "period_start": "2025-06-04",
+              "period_end": "2025-06-11",
+              "value": 3
+            },
+            {
+              "period_start": "2025-06-11",
+              "period_end": "2025-06-18",
+              "value": 4
+            },
+            {
+              "period_start": "2025-06-18",
+              "period_end": "2025-06-25",
+              "value": 3
+            },
+            {
+              "period_start": "2025-06-25",
+              "period_end": "2025-07-02",
+              "value": 4
+            },
+            {
+              "period_start": "2025-07-02",
+              "period_end": "2025-07-09",
+              "value": 4
+            },
+            {
+              "period_start": "2025-07-09",
+              "period_end": "2025-07-16",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-16",
+              "period_end": "2025-07-23",
+              "value": 4
+            },
+            {
+              "period_start": "2025-07-23",
+              "period_end": "2025-07-30",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-30",
+              "period_end": "2025-08-06",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-06",
+              "period_end": "2025-08-13",
+              "value": 2
+            },
+            {
+              "period_start": "2025-08-13",
+              "period_end": "2025-08-20",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-20",
+              "period_end": "2025-08-27",
+              "value": 2
+            },
+            {
+              "period_start": "2025-08-27",
+              "period_end": "2025-09-03",
+              "value": 3
+            },
+            {
+              "period_start": "2025-09-03",
+              "period_end": "2025-09-10",
+              "value": 2
+            },
+            {
+              "period_start": "2025-09-10",
+              "period_end": "2025-09-17",
+              "value": 5
+            },
+            {
+              "period_start": "2025-09-17",
+              "period_end": "2025-09-24",
+              "value": 2
+            },
+            {
+              "period_start": "2025-09-24",
+              "period_end": "2025-10-01",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-01",
+              "period_end": "2025-10-08",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-08",
+              "period_end": "2025-10-15",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-15",
+              "period_end": "2025-10-22",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-22",
+              "period_end": "2025-10-29",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-29",
+              "period_end": "2025-11-05",
+              "value": 3
+            },
+            {
+              "period_start": "2025-11-05",
+              "period_end": "2025-11-12",
+              "value": 5
+            },
+            {
+              "period_start": "2025-11-12",
+              "period_end": "2025-11-19",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-19",
+              "period_end": "2025-11-26",
+              "value": 5
+            },
+            {
+              "period_start": "2025-11-26",
+              "period_end": "2025-12-03",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-03",
+              "period_end": "2025-12-10",
+              "value": 5
+            },
+            {
+              "period_start": "2025-12-10",
+              "period_end": "2025-12-17",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-17",
+              "period_end": "2025-12-24",
+              "value": 5
+            },
+            {
+              "period_start": "2025-12-24",
+              "period_end": "2025-12-31",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-31",
+              "period_end": "2026-01-01",
+              "value": 5
+            }
+          ]
+        }
+      },
+      "prs_merged": {
+        "org": [
+          {
+            "period_start": "2025-01-01",
+            "period_end": "2025-01-08",
+            "value": 9
+          },
+          {
+            "period_start": "2025-01-08",
+            "period_end": "2025-01-15",
+            "value": 13
+          },
+          {
+            "period_start": "2025-01-15",
+            "period_end": "2025-01-22",
+            "value": 8
+          },
+          {
+            "period_start": "2025-01-22",
+            "period_end": "2025-01-29",
+            "value": 10
+          },
+          {
+            "period_start": "2025-01-29",
+            "period_end": "2025-02-05",
+            "value": 9
+          },
+          {
+            "period_start": "2025-02-05",
+            "period_end": "2025-02-12",
+            "value": 10
+          },
+          {
+            "period_start": "2025-02-12",
+            "period_end": "2025-02-19",
+            "value": 8
+          },
+          {
+            "period_start": "2025-02-19",
+            "period_end": "2025-02-26",
+            "value": 9
+          },
+          {
+            "period_start": "2025-02-26",
+            "period_end": "2025-03-05",
+            "value": 11
+          },
+          {
+            "period_start": "2025-03-05",
+            "period_end": "2025-03-12",
+            "value": 10
+          },
+          {
+            "period_start": "2025-03-12",
+            "period_end": "2025-03-19",
+            "value": 8
+          },
+          {
+            "period_start": "2025-03-19",
+            "period_end": "2025-03-26",
+            "value": 9
+          },
+          {
+            "period_start": "2025-03-26",
+            "period_end": "2025-04-02",
+            "value": 12
+          },
+          {
+            "period_start": "2025-04-02",
+            "period_end": "2025-04-09",
+            "value": 10
+          },
+          {
+            "period_start": "2025-04-09",
+            "period_end": "2025-04-16",
+            "value": 11
+          },
+          {
+            "period_start": "2025-04-16",
+            "period_end": "2025-04-23",
+            "value": 9
+          },
+          {
+            "period_start": "2025-04-23",
+            "period_end": "2025-04-30",
+            "value": 10
+          },
+          {
+            "period_start": "2025-04-30",
+            "period_end": "2025-05-07",
+            "value": 12
+          },
+          {
+            "period_start": "2025-05-07",
+            "period_end": "2025-05-14",
+            "value": 11
+          },
+          {
+            "period_start": "2025-05-14",
+            "period_end": "2025-05-21",
+            "value": 10
+          },
+          {
+            "period_start": "2025-05-21",
+            "period_end": "2025-05-28",
+            "value": 10
+          },
+          {
+            "period_start": "2025-05-28",
+            "period_end": "2025-06-04",
+            "value": 11
+          },
+          {
+            "period_start": "2025-06-04",
+            "period_end": "2025-06-11",
+            "value": 13
+          },
+          {
+            "period_start": "2025-06-11",
+            "period_end": "2025-06-18",
+            "value": 10
+          },
+          {
+            "period_start": "2025-06-18",
+            "period_end": "2025-06-25",
+            "value": 10
+          },
+          {
+            "period_start": "2025-06-25",
+            "period_end": "2025-07-02",
+            "value": 9
+          },
+          {
+            "period_start": "2025-07-02",
+            "period_end": "2025-07-09",
+            "value": 12
+          },
+          {
+            "period_start": "2025-07-09",
+            "period_end": "2025-07-16",
+            "value": 10
+          },
+          {
+            "period_start": "2025-07-16",
+            "period_end": "2025-07-23",
+            "value": 11
+          },
+          {
+            "period_start": "2025-07-23",
+            "period_end": "2025-07-30",
+            "value": 9
+          },
+          {
+            "period_start": "2025-07-30",
+            "period_end": "2025-08-06",
+            "value": 12
+          },
+          {
+            "period_start": "2025-08-06",
+            "period_end": "2025-08-13",
+            "value": 13
+          },
+          {
+            "period_start": "2025-08-13",
+            "period_end": "2025-08-20",
+            "value": 11
+          },
+          {
+            "period_start": "2025-08-20",
+            "period_end": "2025-08-27",
+            "value": 12
+          },
+          {
+            "period_start": "2025-08-27",
+            "period_end": "2025-09-03",
+            "value": 12
+          },
+          {
+            "period_start": "2025-09-03",
+            "period_end": "2025-09-10",
+            "value": 13
+          },
+          {
+            "period_start": "2025-09-10",
+            "period_end": "2025-09-17",
+            "value": 11
+          },
+          {
+            "period_start": "2025-09-17",
+            "period_end": "2025-09-24",
+            "value": 12
+          },
+          {
+            "period_start": "2025-09-24",
+            "period_end": "2025-10-01",
+            "value": 11
+          },
+          {
+            "period_start": "2025-10-01",
+            "period_end": "2025-10-08",
+            "value": 13
+          },
+          {
+            "period_start": "2025-10-08",
+            "period_end": "2025-10-15",
+            "value": 8
+          },
+          {
+            "period_start": "2025-10-15",
+            "period_end": "2025-10-22",
+            "value": 12
+          },
+          {
+            "period_start": "2025-10-22",
+            "period_end": "2025-10-29",
+            "value": 11
+          },
+          {
+            "period_start": "2025-10-29",
+            "period_end": "2025-11-05",
+            "value": 9
+          },
+          {
+            "period_start": "2025-11-05",
+            "period_end": "2025-11-12",
+            "value": 8
+          },
+          {
+            "period_start": "2025-11-12",
+            "period_end": "2025-11-19",
+            "value": 13
+          },
+          {
+            "period_start": "2025-11-19",
+            "period_end": "2025-11-26",
+            "value": 11
+          },
+          {
+            "period_start": "2025-11-26",
+            "period_end": "2025-12-03",
+            "value": 12
+          },
+          {
+            "period_start": "2025-12-03",
+            "period_end": "2025-12-10",
+            "value": 10
+          },
+          {
+            "period_start": "2025-12-10",
+            "period_end": "2025-12-17",
+            "value": 13
+          },
+          {
+            "period_start": "2025-12-17",
+            "period_end": "2025-12-24",
+            "value": 12
+          },
+          {
+            "period_start": "2025-12-24",
+            "period_end": "2025-12-31",
+            "value": 12
+          },
+          {
+            "period_start": "2025-12-31",
+            "period_end": "2026-01-01",
+            "value": 9
+          }
+        ],
+        "repos": {
+          "R_001": [
+            {
+              "period_start": "2025-01-01",
+              "period_end": "2025-01-08",
+              "value": 2
+            },
+            {
+              "period_start": "2025-01-08",
+              "period_end": "2025-01-15",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-15",
+              "period_end": "2025-01-22",
+              "value": 2
+            },
+            {
+              "period_start": "2025-01-22",
+              "period_end": "2025-01-29",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-29",
+              "period_end": "2025-02-05",
+              "value": 3
+            },
+            {
+              "period_start": "2025-02-05",
+              "period_end": "2025-02-12",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-12",
+              "period_end": "2025-02-19",
+              "value": 3
+            },
+            {
+              "period_start": "2025-02-19",
+              "period_end": "2025-02-26",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-26",
+              "period_end": "2025-03-05",
+              "value": 3
+            },
+            {
+              "period_start": "2025-03-05",
+              "period_end": "2025-03-12",
+              "value": 5
+            },
+            {
+              "period_start": "2025-03-12",
+              "period_end": "2025-03-19",
+              "value": 3
+            },
+            {
+              "period_start": "2025-03-19",
+              "period_end": "2025-03-26",
+              "value": 5
+            },
+            {
+              "period_start": "2025-03-26",
+              "period_end": "2025-04-02",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-02",
+              "period_end": "2025-04-09",
+              "value": 5
+            },
+            {
+              "period_start": "2025-04-09",
+              "period_end": "2025-04-16",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-16",
+              "period_end": "2025-04-23",
+              "value": 5
+            },
+            {
+              "period_start": "2025-04-23",
+              "period_end": "2025-04-30",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-30",
+              "period_end": "2025-05-07",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-07",
+              "period_end": "2025-05-14",
+              "value": 3
+            },
+            {
+              "period_start": "2025-05-14",
+              "period_end": "2025-05-21",
+              "value": 5
+            },
+            {
+              "period_start": "2025-05-21",
+              "period_end": "2025-05-28",
+              "value": 3
+            },
+            {
+              "period_start": "2025-05-28",
+              "period_end": "2025-06-04",
+              "value": 5
+            },
+            {
+              "period_start": "2025-06-04",
+              "period_end": "2025-06-11",
+              "value": 4
+            },
+            {
+              "period_start": "2025-06-11",
+              "period_end": "2025-06-18",
+              "value": 5
+            },
+            {
+              "period_start": "2025-06-18",
+              "period_end": "2025-06-25",
+              "value": 4
+            },
+            {
+              "period_start": "2025-06-25",
+              "period_end": "2025-07-02",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-02",
+              "period_end": "2025-07-09",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-09",
+              "period_end": "2025-07-16",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-16",
+              "period_end": "2025-07-23",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-23",
+              "period_end": "2025-07-30",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-30",
+              "period_end": "2025-08-06",
+              "value": 5
+            },
+            {
+              "period_start": "2025-08-06",
+              "period_end": "2025-08-13",
+              "value": 3
+            },
+            {
+              "period_start": "2025-08-13",
+              "period_end": "2025-08-20",
+              "value": 5
+            },
+            {
+              "period_start": "2025-08-20",
+              "period_end": "2025-08-27",
+              "value": 3
+            },
+            {
+              "period_start": "2025-08-27",
+              "period_end": "2025-09-03",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-03",
+              "period_end": "2025-09-10",
+              "value": 3
+            },
+            {
+              "period_start": "2025-09-10",
+              "period_end": "2025-09-17",
+              "value": 2
+            },
+            {
+              "period_start": "2025-09-17",
+              "period_end": "2025-09-24",
+              "value": 3
+            },
+            {
+              "period_start": "2025-09-24",
+              "period_end": "2025-10-01",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-01",
+              "period_end": "2025-10-08",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-08",
+              "period_end": "2025-10-15",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-15",
+              "period_end": "2025-10-22",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-22",
+              "period_end": "2025-10-29",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-29",
+              "period_end": "2025-11-05",
+              "value": 4
+            },
+            {
+              "period_start": "2025-11-05",
+              "period_end": "2025-11-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-12",
+              "period_end": "2025-11-19",
+              "value": 3
+            },
+            {
+              "period_start": "2025-11-19",
+              "period_end": "2025-11-26",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-26",
+              "period_end": "2025-12-03",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-03",
+              "period_end": "2025-12-10",
+              "value": 2
+            },
+            {
+              "period_start": "2025-12-10",
+              "period_end": "2025-12-17",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-17",
+              "period_end": "2025-12-24",
+              "value": 2
+            },
+            {
+              "period_start": "2025-12-24",
+              "period_end": "2025-12-31",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-31",
+              "period_end": "2026-01-01",
+              "value": 2
+            }
+          ],
+          "R_002": [
+            {
+              "period_start": "2025-01-01",
+              "period_end": "2025-01-08",
+              "value": 2
+            },
+            {
+              "period_start": "2025-01-08",
+              "period_end": "2025-01-15",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-15",
+              "period_end": "2025-01-22",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-22",
+              "period_end": "2025-01-29",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-29",
+              "period_end": "2025-02-05",
+              "value": 3
+            },
+            {
+              "period_start": "2025-02-05",
+              "period_end": "2025-02-12",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-12",
+              "period_end": "2025-02-19",
+              "value": 3
+            },
+            {
+              "period_start": "2025-02-19",
+              "period_end": "2025-02-26",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-26",
+              "period_end": "2025-03-05",
+              "value": 3
+            },
+            {
+              "period_start": "2025-03-05",
+              "period_end": "2025-03-12",
+              "value": 5
+            },
+            {
+              "period_start": "2025-03-12",
+              "period_end": "2025-03-19",
+              "value": 3
+            },
+            {
+              "period_start": "2025-03-19",
+              "period_end": "2025-03-26",
+              "value": 5
+            },
+            {
+              "period_start": "2025-03-26",
+              "period_end": "2025-04-02",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-02",
+              "period_end": "2025-04-09",
+              "value": 5
+            },
+            {
+              "period_start": "2025-04-09",
+              "period_end": "2025-04-16",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-16",
+              "period_end": "2025-04-23",
+              "value": 5
+            },
+            {
+              "period_start": "2025-04-23",
+              "period_end": "2025-04-30",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-30",
+              "period_end": "2025-05-07",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-07",
+              "period_end": "2025-05-14",
+              "value": 3
+            },
+            {
+              "period_start": "2025-05-14",
+              "period_end": "2025-05-21",
+              "value": 5
+            },
+            {
+              "period_start": "2025-05-21",
+              "period_end": "2025-05-28",
+              "value": 3
+            },
+            {
+              "period_start": "2025-05-28",
+              "period_end": "2025-06-04",
+              "value": 5
+            },
+            {
+              "period_start": "2025-06-04",
+              "period_end": "2025-06-11",
+              "value": 4
+            },
+            {
+              "period_start": "2025-06-11",
+              "period_end": "2025-06-18",
+              "value": 5
+            },
+            {
+              "period_start": "2025-06-18",
+              "period_end": "2025-06-25",
+              "value": 4
+            },
+            {
+              "period_start": "2025-06-25",
+              "period_end": "2025-07-02",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-02",
+              "period_end": "2025-07-09",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-09",
+              "period_end": "2025-07-16",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-16",
+              "period_end": "2025-07-23",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-23",
+              "period_end": "2025-07-30",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-30",
+              "period_end": "2025-08-06",
+              "value": 3
+            },
+            {
+              "period_start": "2025-08-06",
+              "period_end": "2025-08-13",
+              "value": 3
+            },
+            {
+              "period_start": "2025-08-13",
+              "period_end": "2025-08-20",
+              "value": 5
+            },
+            {
+              "period_start": "2025-08-20",
+              "period_end": "2025-08-27",
+              "value": 3
+            },
+            {
+              "period_start": "2025-08-27",
+              "period_end": "2025-09-03",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-03",
+              "period_end": "2025-09-10",
+              "value": 3
+            },
+            {
+              "period_start": "2025-09-10",
+              "period_end": "2025-09-17",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-17",
+              "period_end": "2025-09-24",
+              "value": 3
+            },
+            {
+              "period_start": "2025-09-24",
+              "period_end": "2025-10-01",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-01",
+              "period_end": "2025-10-08",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-08",
+              "period_end": "2025-10-15",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-15",
+              "period_end": "2025-10-22",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-22",
+              "period_end": "2025-10-29",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-29",
+              "period_end": "2025-11-05",
+              "value": 4
+            },
+            {
+              "period_start": "2025-11-05",
+              "period_end": "2025-11-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-12",
+              "period_end": "2025-11-19",
+              "value": 3
+            },
+            {
+              "period_start": "2025-11-19",
+              "period_end": "2025-11-26",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-26",
+              "period_end": "2025-12-03",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-03",
+              "period_end": "2025-12-10",
+              "value": 2
+            },
+            {
+              "period_start": "2025-12-10",
+              "period_end": "2025-12-17",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-17",
+              "period_end": "2025-12-24",
+              "value": 5
+            },
+            {
+              "period_start": "2025-12-24",
+              "period_end": "2025-12-31",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-31",
+              "period_end": "2026-01-01",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "reviews_submitted": {
+        "org": [
+          {
+            "period_start": "2025-01-01",
+            "period_end": "2025-01-08",
+            "value": 10
+          },
+          {
+            "period_start": "2025-01-08",
+            "period_end": "2025-01-15",
+            "value": 8
+          },
+          {
+            "period_start": "2025-01-15",
+            "period_end": "2025-01-22",
+            "value": 13
+          },
+          {
+            "period_start": "2025-01-22",
+            "period_end": "2025-01-29",
+            "value": 8
+          },
+          {
+            "period_start": "2025-01-29",
+            "period_end": "2025-02-05",
+            "value": 10
+          },
+          {
+            "period_start": "2025-02-05",
+            "period_end": "2025-02-12",
+            "value": 11
+          },
+          {
+            "period_start": "2025-02-12",
+            "period_end": "2025-02-19",
+            "value": 9
+          },
+          {
+            "period_start": "2025-02-19",
+            "period_end": "2025-02-26",
+            "value": 12
+          },
+          {
+            "period_start": "2025-02-26",
+            "period_end": "2025-03-05",
+            "value": 9
+          },
+          {
+            "period_start": "2025-03-05",
+            "period_end": "2025-03-12",
+            "value": 11
+          },
+          {
+            "period_start": "2025-03-12",
+            "period_end": "2025-03-19",
+            "value": 9
+          },
+          {
+            "period_start": "2025-03-19",
+            "period_end": "2025-03-26",
+            "value": 12
+          },
+          {
+            "period_start": "2025-03-26",
+            "period_end": "2025-04-02",
+            "value": 13
+          },
+          {
+            "period_start": "2025-04-02",
+            "period_end": "2025-04-09",
+            "value": 11
+          },
+          {
+            "period_start": "2025-04-09",
+            "period_end": "2025-04-16",
+            "value": 8
+          },
+          {
+            "period_start": "2025-04-16",
+            "period_end": "2025-04-23",
+            "value": 10
+          },
+          {
+            "period_start": "2025-04-23",
+            "period_end": "2025-04-30",
+            "value": 13
+          },
+          {
+            "period_start": "2025-04-30",
+            "period_end": "2025-05-07",
+            "value": 11
+          },
+          {
+            "period_start": "2025-05-07",
+            "period_end": "2025-05-14",
+            "value": 10
+          },
+          {
+            "period_start": "2025-05-14",
+            "period_end": "2025-05-21",
+            "value": 9
+          },
+          {
+            "period_start": "2025-05-21",
+            "period_end": "2025-05-28",
+            "value": 13
+          },
+          {
+            "period_start": "2025-05-28",
+            "period_end": "2025-06-04",
+            "value": 12
+          },
+          {
+            "period_start": "2025-06-04",
+            "period_end": "2025-06-11",
+            "value": 10
+          },
+          {
+            "period_start": "2025-06-11",
+            "period_end": "2025-06-18",
+            "value": 11
+          },
+          {
+            "period_start": "2025-06-18",
+            "period_end": "2025-06-25",
+            "value": 13
+          },
+          {
+            "period_start": "2025-06-25",
+            "period_end": "2025-07-02",
+            "value": 12
+          },
+          {
+            "period_start": "2025-07-02",
+            "period_end": "2025-07-09",
+            "value": 13
+          },
+          {
+            "period_start": "2025-07-09",
+            "period_end": "2025-07-16",
+            "value": 11
+          },
+          {
+            "period_start": "2025-07-16",
+            "period_end": "2025-07-23",
+            "value": 10
+          },
+          {
+            "period_start": "2025-07-23",
+            "period_end": "2025-07-30",
+            "value": 12
+          },
+          {
+            "period_start": "2025-07-30",
+            "period_end": "2025-08-06",
+            "value": 13
+          },
+          {
+            "period_start": "2025-08-06",
+            "period_end": "2025-08-13",
+            "value": 8
+          },
+          {
+            "period_start": "2025-08-13",
+            "period_end": "2025-08-20",
+            "value": 12
+          },
+          {
+            "period_start": "2025-08-20",
+            "period_end": "2025-08-27",
+            "value": 9
+          },
+          {
+            "period_start": "2025-08-27",
+            "period_end": "2025-09-03",
+            "value": 13
+          },
+          {
+            "period_start": "2025-09-03",
+            "period_end": "2025-09-10",
+            "value": 8
+          },
+          {
+            "period_start": "2025-09-10",
+            "period_end": "2025-09-17",
+            "value": 12
+          },
+          {
+            "period_start": "2025-09-17",
+            "period_end": "2025-09-24",
+            "value": 13
+          },
+          {
+            "period_start": "2025-09-24",
+            "period_end": "2025-10-01",
+            "value": 8
+          },
+          {
+            "period_start": "2025-10-01",
+            "period_end": "2025-10-08",
+            "value": 8
+          },
+          {
+            "period_start": "2025-10-08",
+            "period_end": "2025-10-15",
+            "value": 11
+          },
+          {
+            "period_start": "2025-10-15",
+            "period_end": "2025-10-22",
+            "value": 13
+          },
+          {
+            "period_start": "2025-10-22",
+            "period_end": "2025-10-29",
+            "value": 8
+          },
+          {
+            "period_start": "2025-10-29",
+            "period_end": "2025-11-05",
+            "value": 8
+          },
+          {
+            "period_start": "2025-11-05",
+            "period_end": "2025-11-12",
+            "value": 13
+          },
+          {
+            "period_start": "2025-11-12",
+            "period_end": "2025-11-19",
+            "value": 12
+          },
+          {
+            "period_start": "2025-11-19",
+            "period_end": "2025-11-26",
+            "value": 12
+          },
+          {
+            "period_start": "2025-11-26",
+            "period_end": "2025-12-03",
+            "value": 9
+          },
+          {
+            "period_start": "2025-12-03",
+            "period_end": "2025-12-10",
+            "value": 13
+          },
+          {
+            "period_start": "2025-12-10",
+            "period_end": "2025-12-17",
+            "value": 8
+          },
+          {
+            "period_start": "2025-12-17",
+            "period_end": "2025-12-24",
+            "value": 13
+          },
+          {
+            "period_start": "2025-12-24",
+            "period_end": "2025-12-31",
+            "value": 9
+          },
+          {
+            "period_start": "2025-12-31",
+            "period_end": "2026-01-01",
+            "value": 10
+          }
+        ],
+        "repos": {
+          "R_002": [
+            {
+              "period_start": "2025-01-01",
+              "period_end": "2025-01-08",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-08",
+              "period_end": "2025-01-15",
+              "value": 4
+            },
+            {
+              "period_start": "2025-01-15",
+              "period_end": "2025-01-22",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-22",
+              "period_end": "2025-01-29",
+              "value": 4
+            },
+            {
+              "period_start": "2025-01-29",
+              "period_end": "2025-02-05",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-05",
+              "period_end": "2025-02-12",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-12",
+              "period_end": "2025-02-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-19",
+              "period_end": "2025-02-26",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-26",
+              "period_end": "2025-03-05",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-05",
+              "period_end": "2025-03-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-03-12",
+              "period_end": "2025-03-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-19",
+              "period_end": "2025-03-26",
+              "value": 2
+            },
+            {
+              "period_start": "2025-03-26",
+              "period_end": "2025-04-02",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-02",
+              "period_end": "2025-04-09",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-09",
+              "period_end": "2025-04-16",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-16",
+              "period_end": "2025-04-23",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-23",
+              "period_end": "2025-04-30",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-30",
+              "period_end": "2025-05-07",
+              "value": 3
+            },
+            {
+              "period_start": "2025-05-07",
+              "period_end": "2025-05-14",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-14",
+              "period_end": "2025-05-21",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-21",
+              "period_end": "2025-05-28",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-28",
+              "period_end": "2025-06-04",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-04",
+              "period_end": "2025-06-11",
+              "value": 5
+            },
+            {
+              "period_start": "2025-06-11",
+              "period_end": "2025-06-18",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-18",
+              "period_end": "2025-06-25",
+              "value": 5
+            },
+            {
+              "period_start": "2025-06-25",
+              "period_end": "2025-07-02",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-02",
+              "period_end": "2025-07-09",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-09",
+              "period_end": "2025-07-16",
+              "value": 3
+            },
+            {
+              "period_start": "2025-07-16",
+              "period_end": "2025-07-23",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-23",
+              "period_end": "2025-07-30",
+              "value": 3
+            },
+            {
+              "period_start": "2025-07-30",
+              "period_end": "2025-08-06",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-06",
+              "period_end": "2025-08-13",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-13",
+              "period_end": "2025-08-20",
+              "value": 2
+            },
+            {
+              "period_start": "2025-08-20",
+              "period_end": "2025-08-27",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-27",
+              "period_end": "2025-09-03",
+              "value": 5
+            },
+            {
+              "period_start": "2025-09-03",
+              "period_end": "2025-09-10",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-10",
+              "period_end": "2025-09-17",
+              "value": 5
+            },
+            {
+              "period_start": "2025-09-17",
+              "period_end": "2025-09-24",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-24",
+              "period_end": "2025-10-01",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-01",
+              "period_end": "2025-10-08",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-08",
+              "period_end": "2025-10-15",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-15",
+              "period_end": "2025-10-22",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-22",
+              "period_end": "2025-10-29",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-29",
+              "period_end": "2025-11-05",
+              "value": 5
+            },
+            {
+              "period_start": "2025-11-05",
+              "period_end": "2025-11-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-12",
+              "period_end": "2025-11-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-11-19",
+              "period_end": "2025-11-26",
+              "value": 3
+            },
+            {
+              "period_start": "2025-11-26",
+              "period_end": "2025-12-03",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-03",
+              "period_end": "2025-12-10",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-10",
+              "period_end": "2025-12-17",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-17",
+              "period_end": "2025-12-24",
+              "value": 2
+            },
+            {
+              "period_start": "2025-12-24",
+              "period_end": "2025-12-31",
+              "value": 5
+            },
+            {
+              "period_start": "2025-12-31",
+              "period_end": "2026-01-01",
+              "value": 3
+            }
+          ],
+          "R_001": [
+            {
+              "period_start": "2025-01-01",
+              "period_end": "2025-01-08",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-08",
+              "period_end": "2025-01-15",
+              "value": 4
+            },
+            {
+              "period_start": "2025-01-15",
+              "period_end": "2025-01-22",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-22",
+              "period_end": "2025-01-29",
+              "value": 4
+            },
+            {
+              "period_start": "2025-01-29",
+              "period_end": "2025-02-05",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-05",
+              "period_end": "2025-02-12",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-12",
+              "period_end": "2025-02-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-19",
+              "period_end": "2025-02-26",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-26",
+              "period_end": "2025-03-05",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-05",
+              "period_end": "2025-03-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-03-12",
+              "period_end": "2025-03-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-19",
+              "period_end": "2025-03-26",
+              "value": 2
+            },
+            {
+              "period_start": "2025-03-26",
+              "period_end": "2025-04-02",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-02",
+              "period_end": "2025-04-09",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-09",
+              "period_end": "2025-04-16",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-16",
+              "period_end": "2025-04-23",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-23",
+              "period_end": "2025-04-30",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-30",
+              "period_end": "2025-05-07",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-07",
+              "period_end": "2025-05-14",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-14",
+              "period_end": "2025-05-21",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-21",
+              "period_end": "2025-05-28",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-28",
+              "period_end": "2025-06-04",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-04",
+              "period_end": "2025-06-11",
+              "value": 4
+            },
+            {
+              "period_start": "2025-06-11",
+              "period_end": "2025-06-18",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-18",
+              "period_end": "2025-06-25",
+              "value": 5
+            },
+            {
+              "period_start": "2025-06-25",
+              "period_end": "2025-07-02",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-02",
+              "period_end": "2025-07-09",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-09",
+              "period_end": "2025-07-16",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-16",
+              "period_end": "2025-07-23",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-23",
+              "period_end": "2025-07-30",
+              "value": 3
+            },
+            {
+              "period_start": "2025-07-30",
+              "period_end": "2025-08-06",
+              "value": 2
+            },
+            {
+              "period_start": "2025-08-06",
+              "period_end": "2025-08-13",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-13",
+              "period_end": "2025-08-20",
+              "value": 2
+            },
+            {
+              "period_start": "2025-08-20",
+              "period_end": "2025-08-27",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-27",
+              "period_end": "2025-09-03",
+              "value": 5
+            },
+            {
+              "period_start": "2025-09-03",
+              "period_end": "2025-09-10",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-10",
+              "period_end": "2025-09-17",
+              "value": 3
+            },
+            {
+              "period_start": "2025-09-17",
+              "period_end": "2025-09-24",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-24",
+              "period_end": "2025-10-01",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-01",
+              "period_end": "2025-10-08",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-08",
+              "period_end": "2025-10-15",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-15",
+              "period_end": "2025-10-22",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-22",
+              "period_end": "2025-10-29",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-29",
+              "period_end": "2025-11-05",
+              "value": 5
+            },
+            {
+              "period_start": "2025-11-05",
+              "period_end": "2025-11-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-12",
+              "period_end": "2025-11-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-11-19",
+              "period_end": "2025-11-26",
+              "value": 3
+            },
+            {
+              "period_start": "2025-11-26",
+              "period_end": "2025-12-03",
+              "value": 5
+            },
+            {
+              "period_start": "2025-12-03",
+              "period_end": "2025-12-10",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-10",
+              "period_end": "2025-12-17",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-17",
+              "period_end": "2025-12-24",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-24",
+              "period_end": "2025-12-31",
+              "value": 5
+            },
+            {
+              "period_start": "2025-12-31",
+              "period_end": "2026-01-01",
+              "value": 3
+            }
+          ]
+        }
+      },
+      "prs_opened": {
+        "org": [
+          {
+            "period_start": "2025-01-01",
+            "period_end": "2025-01-08",
+            "value": 13
+          },
+          {
+            "period_start": "2025-01-08",
+            "period_end": "2025-01-15",
+            "value": 9
+          },
+          {
+            "period_start": "2025-01-15",
+            "period_end": "2025-01-22",
+            "value": 10
+          },
+          {
+            "period_start": "2025-01-22",
+            "period_end": "2025-01-29",
+            "value": 8
+          },
+          {
+            "period_start": "2025-01-29",
+            "period_end": "2025-02-05",
+            "value": 13
+          },
+          {
+            "period_start": "2025-02-05",
+            "period_end": "2025-02-12",
+            "value": 10
+          },
+          {
+            "period_start": "2025-02-12",
+            "period_end": "2025-02-19",
+            "value": 10
+          },
+          {
+            "period_start": "2025-02-19",
+            "period_end": "2025-02-26",
+            "value": 13
+          },
+          {
+            "period_start": "2025-02-26",
+            "period_end": "2025-03-05",
+            "value": 9
+          },
+          {
+            "period_start": "2025-03-05",
+            "period_end": "2025-03-12",
+            "value": 10
+          },
+          {
+            "period_start": "2025-03-12",
+            "period_end": "2025-03-19",
+            "value": 12
+          },
+          {
+            "period_start": "2025-03-19",
+            "period_end": "2025-03-26",
+            "value": 9
+          },
+          {
+            "period_start": "2025-03-26",
+            "period_end": "2025-04-02",
+            "value": 8
+          },
+          {
+            "period_start": "2025-04-02",
+            "period_end": "2025-04-09",
+            "value": 8
+          },
+          {
+            "period_start": "2025-04-09",
+            "period_end": "2025-04-16",
+            "value": 11
+          },
+          {
+            "period_start": "2025-04-16",
+            "period_end": "2025-04-23",
+            "value": 9
+          },
+          {
+            "period_start": "2025-04-23",
+            "period_end": "2025-04-30",
+            "value": 10
+          },
+          {
+            "period_start": "2025-04-30",
+            "period_end": "2025-05-07",
+            "value": 8
+          },
+          {
+            "period_start": "2025-05-07",
+            "period_end": "2025-05-14",
+            "value": 11
+          },
+          {
+            "period_start": "2025-05-14",
+            "period_end": "2025-05-21",
+            "value": 12
+          },
+          {
+            "period_start": "2025-05-21",
+            "period_end": "2025-05-28",
+            "value": 10
+          },
+          {
+            "period_start": "2025-05-28",
+            "period_end": "2025-06-04",
+            "value": 9
+          },
+          {
+            "period_start": "2025-06-04",
+            "period_end": "2025-06-11",
+            "value": 11
+          },
+          {
+            "period_start": "2025-06-11",
+            "period_end": "2025-06-18",
+            "value": 12
+          },
+          {
+            "period_start": "2025-06-18",
+            "period_end": "2025-06-25",
+            "value": 10
+          },
+          {
+            "period_start": "2025-06-25",
+            "period_end": "2025-07-02",
+            "value": 9
+          },
+          {
+            "period_start": "2025-07-02",
+            "period_end": "2025-07-09",
+            "value": 10
+          },
+          {
+            "period_start": "2025-07-09",
+            "period_end": "2025-07-16",
+            "value": 12
+          },
+          {
+            "period_start": "2025-07-16",
+            "period_end": "2025-07-23",
+            "value": 13
+          },
+          {
+            "period_start": "2025-07-23",
+            "period_end": "2025-07-30",
+            "value": 9
+          },
+          {
+            "period_start": "2025-07-30",
+            "period_end": "2025-08-06",
+            "value": 10
+          },
+          {
+            "period_start": "2025-08-06",
+            "period_end": "2025-08-13",
+            "value": 13
+          },
+          {
+            "period_start": "2025-08-13",
+            "period_end": "2025-08-20",
+            "value": 13
+          },
+          {
+            "period_start": "2025-08-20",
+            "period_end": "2025-08-27",
+            "value": 10
+          },
+          {
+            "period_start": "2025-08-27",
+            "period_end": "2025-09-03",
+            "value": 10
+          },
+          {
+            "period_start": "2025-09-03",
+            "period_end": "2025-09-10",
+            "value": 11
+          },
+          {
+            "period_start": "2025-09-10",
+            "period_end": "2025-09-17",
+            "value": 13
+          },
+          {
+            "period_start": "2025-09-17",
+            "period_end": "2025-09-24",
+            "value": 12
+          },
+          {
+            "period_start": "2025-09-24",
+            "period_end": "2025-10-01",
+            "value": 11
+          },
+          {
+            "period_start": "2025-10-01",
+            "period_end": "2025-10-08",
+            "value": 11
+          },
+          {
+            "period_start": "2025-10-08",
+            "period_end": "2025-10-15",
+            "value": 8
+          },
+          {
+            "period_start": "2025-10-15",
+            "period_end": "2025-10-22",
+            "value": 8
+          },
+          {
+            "period_start": "2025-10-22",
+            "period_end": "2025-10-29",
+            "value": 11
+          },
+          {
+            "period_start": "2025-10-29",
+            "period_end": "2025-11-05",
+            "value": 11
+          },
+          {
+            "period_start": "2025-11-05",
+            "period_end": "2025-11-12",
+            "value": 8
+          },
+          {
+            "period_start": "2025-11-12",
+            "period_end": "2025-11-19",
+            "value": 9
+          },
+          {
+            "period_start": "2025-11-19",
+            "period_end": "2025-11-26",
+            "value": 11
+          },
+          {
+            "period_start": "2025-11-26",
+            "period_end": "2025-12-03",
+            "value": 12
+          },
+          {
+            "period_start": "2025-12-03",
+            "period_end": "2025-12-10",
+            "value": 8
+          },
+          {
+            "period_start": "2025-12-10",
+            "period_end": "2025-12-17",
+            "value": 9
+          },
+          {
+            "period_start": "2025-12-17",
+            "period_end": "2025-12-24",
+            "value": 8
+          },
+          {
+            "period_start": "2025-12-24",
+            "period_end": "2025-12-31",
+            "value": 12
+          },
+          {
+            "period_start": "2025-12-31",
+            "period_end": "2026-01-01",
+            "value": 13
+          }
+        ],
+        "repos": {
+          "R_002": [
+            {
+              "period_start": "2025-01-01",
+              "period_end": "2025-01-08",
+              "value": 4
+            },
+            {
+              "period_start": "2025-01-08",
+              "period_end": "2025-01-15",
+              "value": 5
+            },
+            {
+              "period_start": "2025-01-15",
+              "period_end": "2025-01-22",
+              "value": 5
+            },
+            {
+              "period_start": "2025-01-22",
+              "period_end": "2025-01-29",
+              "value": 5
+            },
+            {
+              "period_start": "2025-01-29",
+              "period_end": "2025-02-05",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-05",
+              "period_end": "2025-02-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-02-12",
+              "period_end": "2025-02-19",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-19",
+              "period_end": "2025-02-26",
+              "value": 3
+            },
+            {
+              "period_start": "2025-02-26",
+              "period_end": "2025-03-05",
+              "value": 5
+            },
+            {
+              "period_start": "2025-03-05",
+              "period_end": "2025-03-12",
+              "value": 3
+            },
+            {
+              "period_start": "2025-03-12",
+              "period_end": "2025-03-19",
+              "value": 5
+            },
+            {
+              "period_start": "2025-03-19",
+              "period_end": "2025-03-26",
+              "value": 3
+            },
+            {
+              "period_start": "2025-03-26",
+              "period_end": "2025-04-02",
+              "value": 5
+            },
+            {
+              "period_start": "2025-04-02",
+              "period_end": "2025-04-09",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-09",
+              "period_end": "2025-04-16",
+              "value": 5
+            },
+            {
+              "period_start": "2025-04-16",
+              "period_end": "2025-04-23",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-23",
+              "period_end": "2025-04-30",
+              "value": 5
+            },
+            {
+              "period_start": "2025-04-30",
+              "period_end": "2025-05-07",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-07",
+              "period_end": "2025-05-14",
+              "value": 5
+            },
+            {
+              "period_start": "2025-05-14",
+              "period_end": "2025-05-21",
+              "value": 3
+            },
+            {
+              "period_start": "2025-05-21",
+              "period_end": "2025-05-28",
+              "value": 5
+            },
+            {
+              "period_start": "2025-05-28",
+              "period_end": "2025-06-04",
+              "value": 3
+            },
+            {
+              "period_start": "2025-06-04",
+              "period_end": "2025-06-11",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-11",
+              "period_end": "2025-06-18",
+              "value": 3
+            },
+            {
+              "period_start": "2025-06-18",
+              "period_end": "2025-06-25",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-25",
+              "period_end": "2025-07-02",
+              "value": 4
+            },
+            {
+              "period_start": "2025-07-02",
+              "period_end": "2025-07-09",
+              "value": 3
+            },
+            {
+              "period_start": "2025-07-09",
+              "period_end": "2025-07-16",
+              "value": 4
+            },
+            {
+              "period_start": "2025-07-16",
+              "period_end": "2025-07-23",
+              "value": 3
+            },
+            {
+              "period_start": "2025-07-23",
+              "period_end": "2025-07-30",
+              "value": 4
+            },
+            {
+              "period_start": "2025-07-30",
+              "period_end": "2025-08-06",
+              "value": 5
+            },
+            {
+              "period_start": "2025-08-06",
+              "period_end": "2025-08-13",
+              "value": 5
+            },
+            {
+              "period_start": "2025-08-13",
+              "period_end": "2025-08-20",
+              "value": 3
+            },
+            {
+              "period_start": "2025-08-20",
+              "period_end": "2025-08-27",
+              "value": 5
+            },
+            {
+              "period_start": "2025-08-27",
+              "period_end": "2025-09-03",
+              "value": 2
+            },
+            {
+              "period_start": "2025-09-03",
+              "period_end": "2025-09-10",
+              "value": 5
+            },
+            {
+              "period_start": "2025-09-10",
+              "period_end": "2025-09-17",
+              "value": 2
+            },
+            {
+              "period_start": "2025-09-17",
+              "period_end": "2025-09-24",
+              "value": 5
+            },
+            {
+              "period_start": "2025-09-24",
+              "period_end": "2025-10-01",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-01",
+              "period_end": "2025-10-08",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-08",
+              "period_end": "2025-10-15",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-15",
+              "period_end": "2025-10-22",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-22",
+              "period_end": "2025-10-29",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-29",
+              "period_end": "2025-11-05",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-05",
+              "period_end": "2025-11-12",
+              "value": 4
+            },
+            {
+              "period_start": "2025-11-12",
+              "period_end": "2025-11-19",
+              "value": 5
+            },
+            {
+              "period_start": "2025-11-19",
+              "period_end": "2025-11-26",
+              "value": 4
+            },
+            {
+              "period_start": "2025-11-26",
+              "period_end": "2025-12-03",
+              "value": 5
+            },
+            {
+              "period_start": "2025-12-03",
+              "period_end": "2025-12-10",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-10",
+              "period_end": "2025-12-17",
+              "value": 2
+            },
+            {
+              "period_start": "2025-12-17",
+              "period_end": "2025-12-24",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-24",
+              "period_end": "2025-12-31",
+              "value": 2
+            },
+            {
+              "period_start": "2025-12-31",
+              "period_end": "2026-01-01",
+              "value": 4
+            }
+          ],
+          "R_001": [
+            {
+              "period_start": "2025-01-01",
+              "period_end": "2025-01-08",
+              "value": 4
+            },
+            {
+              "period_start": "2025-01-08",
+              "period_end": "2025-01-15",
+              "value": 5
+            },
+            {
+              "period_start": "2025-01-15",
+              "period_end": "2025-01-22",
+              "value": 4
+            },
+            {
+              "period_start": "2025-01-22",
+              "period_end": "2025-01-29",
+              "value": 5
+            },
+            {
+              "period_start": "2025-01-29",
+              "period_end": "2025-02-05",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-05",
+              "period_end": "2025-02-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-02-12",
+              "period_end": "2025-02-19",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-19",
+              "period_end": "2025-02-26",
+              "value": 2
+            },
+            {
+              "period_start": "2025-02-26",
+              "period_end": "2025-03-05",
+              "value": 5
+            },
+            {
+              "period_start": "2025-03-05",
+              "period_end": "2025-03-12",
+              "value": 3
+            },
+            {
+              "period_start": "2025-03-12",
+              "period_end": "2025-03-19",
+              "value": 5
+            },
+            {
+              "period_start": "2025-03-19",
+              "period_end": "2025-03-26",
+              "value": 3
+            },
+            {
+              "period_start": "2025-03-26",
+              "period_end": "2025-04-02",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-02",
+              "period_end": "2025-04-09",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-09",
+              "period_end": "2025-04-16",
+              "value": 5
+            },
+            {
+              "period_start": "2025-04-16",
+              "period_end": "2025-04-23",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-23",
+              "period_end": "2025-04-30",
+              "value": 5
+            },
+            {
+              "period_start": "2025-04-30",
+              "period_end": "2025-05-07",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-07",
+              "period_end": "2025-05-14",
+              "value": 5
+            },
+            {
+              "period_start": "2025-05-14",
+              "period_end": "2025-05-21",
+              "value": 3
+            },
+            {
+              "period_start": "2025-05-21",
+              "period_end": "2025-05-28",
+              "value": 5
+            },
+            {
+              "period_start": "2025-05-28",
+              "period_end": "2025-06-04",
+              "value": 3
+            },
+            {
+              "period_start": "2025-06-04",
+              "period_end": "2025-06-11",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-11",
+              "period_end": "2025-06-18",
+              "value": 3
+            },
+            {
+              "period_start": "2025-06-18",
+              "period_end": "2025-06-25",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-25",
+              "period_end": "2025-07-02",
+              "value": 3
+            },
+            {
+              "period_start": "2025-07-02",
+              "period_end": "2025-07-09",
+              "value": 3
+            },
+            {
+              "period_start": "2025-07-09",
+              "period_end": "2025-07-16",
+              "value": 4
+            },
+            {
+              "period_start": "2025-07-16",
+              "period_end": "2025-07-23",
+              "value": 3
+            },
+            {
+              "period_start": "2025-07-23",
+              "period_end": "2025-07-30",
+              "value": 4
+            },
+            {
+              "period_start": "2025-07-30",
+              "period_end": "2025-08-06",
+              "value": 3
+            },
+            {
+              "period_start": "2025-08-06",
+              "period_end": "2025-08-13",
+              "value": 5
+            },
+            {
+              "period_start": "2025-08-13",
+              "period_end": "2025-08-20",
+              "value": 3
+            },
+            {
+              "period_start": "2025-08-20",
+              "period_end": "2025-08-27",
+              "value": 5
+            },
+            {
+              "period_start": "2025-08-27",
+              "period_end": "2025-09-03",
+              "value": 2
+            },
+            {
+              "period_start": "2025-09-03",
+              "period_end": "2025-09-10",
+              "value": 5
+            },
+            {
+              "period_start": "2025-09-10",
+              "period_end": "2025-09-17",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-17",
+              "period_end": "2025-09-24",
+              "value": 5
+            },
+            {
+              "period_start": "2025-09-24",
+              "period_end": "2025-10-01",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-01",
+              "period_end": "2025-10-08",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-08",
+              "period_end": "2025-10-15",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-15",
+              "period_end": "2025-10-22",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-22",
+              "period_end": "2025-10-29",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-29",
+              "period_end": "2025-11-05",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-05",
+              "period_end": "2025-11-12",
+              "value": 4
+            },
+            {
+              "period_start": "2025-11-12",
+              "period_end": "2025-11-19",
+              "value": 5
+            },
+            {
+              "period_start": "2025-11-19",
+              "period_end": "2025-11-26",
+              "value": 4
+            },
+            {
+              "period_start": "2025-11-26",
+              "period_end": "2025-12-03",
+              "value": 2
+            },
+            {
+              "period_start": "2025-12-03",
+              "period_end": "2025-12-10",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-10",
+              "period_end": "2025-12-17",
+              "value": 2
+            },
+            {
+              "period_start": "2025-12-17",
+              "period_end": "2025-12-24",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-24",
+              "period_end": "2025-12-31",
+              "value": 2
+            },
+            {
+              "period_start": "2025-12-31",
+              "period_end": "2026-01-01",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "issues_closed": {
+        "org": [
+          {
+            "period_start": "2025-01-01",
+            "period_end": "2025-01-08",
+            "value": 8
+          },
+          {
+            "period_start": "2025-01-08",
+            "period_end": "2025-01-15",
+            "value": 10
+          },
+          {
+            "period_start": "2025-01-15",
+            "period_end": "2025-01-22",
+            "value": 11
+          },
+          {
+            "period_start": "2025-01-22",
+            "period_end": "2025-01-29",
+            "value": 10
+          },
+          {
+            "period_start": "2025-01-29",
+            "period_end": "2025-02-05",
+            "value": 8
+          },
+          {
+            "period_start": "2025-02-05",
+            "period_end": "2025-02-12",
+            "value": 11
+          },
+          {
+            "period_start": "2025-02-12",
+            "period_end": "2025-02-19",
+            "value": 11
+          },
+          {
+            "period_start": "2025-02-19",
+            "period_end": "2025-02-26",
+            "value": 8
+          },
+          {
+            "period_start": "2025-02-26",
+            "period_end": "2025-03-05",
+            "value": 11
+          },
+          {
+            "period_start": "2025-03-05",
+            "period_end": "2025-03-12",
+            "value": 11
+          },
+          {
+            "period_start": "2025-03-12",
+            "period_end": "2025-03-19",
+            "value": 11
+          },
+          {
+            "period_start": "2025-03-19",
+            "period_end": "2025-03-26",
+            "value": 8
+          },
+          {
+            "period_start": "2025-03-26",
+            "period_end": "2025-04-02",
+            "value": 9
+          },
+          {
+            "period_start": "2025-04-02",
+            "period_end": "2025-04-09",
+            "value": 9
+          },
+          {
+            "period_start": "2025-04-09",
+            "period_end": "2025-04-16",
+            "value": 12
+          },
+          {
+            "period_start": "2025-04-16",
+            "period_end": "2025-04-23",
+            "value": 8
+          },
+          {
+            "period_start": "2025-04-23",
+            "period_end": "2025-04-30",
+            "value": 9
+          },
+          {
+            "period_start": "2025-04-30",
+            "period_end": "2025-05-07",
+            "value": 9
+          },
+          {
+            "period_start": "2025-05-07",
+            "period_end": "2025-05-14",
+            "value": 12
+          },
+          {
+            "period_start": "2025-05-14",
+            "period_end": "2025-05-21",
+            "value": 13
+          },
+          {
+            "period_start": "2025-05-21",
+            "period_end": "2025-05-28",
+            "value": 9
+          },
+          {
+            "period_start": "2025-05-28",
+            "period_end": "2025-06-04",
+            "value": 10
+          },
+          {
+            "period_start": "2025-06-04",
+            "period_end": "2025-06-11",
+            "value": 12
+          },
+          {
+            "period_start": "2025-06-11",
+            "period_end": "2025-06-18",
+            "value": 13
+          },
+          {
+            "period_start": "2025-06-18",
+            "period_end": "2025-06-25",
+            "value": 12
+          },
+          {
+            "period_start": "2025-06-25",
+            "period_end": "2025-07-02",
+            "value": 10
+          },
+          {
+            "period_start": "2025-07-02",
+            "period_end": "2025-07-09",
+            "value": 11
+          },
+          {
+            "period_start": "2025-07-09",
+            "period_end": "2025-07-16",
+            "value": 13
+          },
+          {
+            "period_start": "2025-07-16",
+            "period_end": "2025-07-23",
+            "value": 8
+          },
+          {
+            "period_start": "2025-07-23",
+            "period_end": "2025-07-30",
+            "value": 10
+          },
+          {
+            "period_start": "2025-07-30",
+            "period_end": "2025-08-06",
+            "value": 11
+          },
+          {
+            "period_start": "2025-08-06",
+            "period_end": "2025-08-13",
+            "value": 8
+          },
+          {
+            "period_start": "2025-08-13",
+            "period_end": "2025-08-20",
+            "value": 8
+          },
+          {
+            "period_start": "2025-08-20",
+            "period_end": "2025-08-27",
+            "value": 11
+          },
+          {
+            "period_start": "2025-08-27",
+            "period_end": "2025-09-03",
+            "value": 11
+          },
+          {
+            "period_start": "2025-09-03",
+            "period_end": "2025-09-10",
+            "value": 12
+          },
+          {
+            "period_start": "2025-09-10",
+            "period_end": "2025-09-17",
+            "value": 8
+          },
+          {
+            "period_start": "2025-09-17",
+            "period_end": "2025-09-24",
+            "value": 11
+          },
+          {
+            "period_start": "2025-09-24",
+            "period_end": "2025-10-01",
+            "value": 12
+          },
+          {
+            "period_start": "2025-10-01",
+            "period_end": "2025-10-08",
+            "value": 12
+          },
+          {
+            "period_start": "2025-10-08",
+            "period_end": "2025-10-15",
+            "value": 9
+          },
+          {
+            "period_start": "2025-10-15",
+            "period_end": "2025-10-22",
+            "value": 9
+          },
+          {
+            "period_start": "2025-10-22",
+            "period_end": "2025-10-29",
+            "value": 12
+          },
+          {
+            "period_start": "2025-10-29",
+            "period_end": "2025-11-05",
+            "value": 12
+          },
+          {
+            "period_start": "2025-11-05",
+            "period_end": "2025-11-12",
+            "value": 9
+          },
+          {
+            "period_start": "2025-11-12",
+            "period_end": "2025-11-19",
+            "value": 10
+          },
+          {
+            "period_start": "2025-11-19",
+            "period_end": "2025-11-26",
+            "value": 12
+          },
+          {
+            "period_start": "2025-11-26",
+            "period_end": "2025-12-03",
+            "value": 13
+          },
+          {
+            "period_start": "2025-12-03",
+            "period_end": "2025-12-10",
+            "value": 9
+          },
+          {
+            "period_start": "2025-12-10",
+            "period_end": "2025-12-17",
+            "value": 10
+          },
+          {
+            "period_start": "2025-12-17",
+            "period_end": "2025-12-24",
+            "value": 9
+          },
+          {
+            "period_start": "2025-12-24",
+            "period_end": "2025-12-31",
+            "value": 13
+          },
+          {
+            "period_start": "2025-12-31",
+            "period_end": "2026-01-01",
+            "value": 8
+          }
+        ],
+        "repos": {
+          "R_001": [
+            {
+              "period_start": "2025-01-01",
+              "period_end": "2025-01-08",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-08",
+              "period_end": "2025-01-15",
+              "value": 4
+            },
+            {
+              "period_start": "2025-01-15",
+              "period_end": "2025-01-22",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-22",
+              "period_end": "2025-01-29",
+              "value": 4
+            },
+            {
+              "period_start": "2025-01-29",
+              "period_end": "2025-02-05",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-05",
+              "period_end": "2025-02-12",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-12",
+              "period_end": "2025-02-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-19",
+              "period_end": "2025-02-26",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-26",
+              "period_end": "2025-03-05",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-05",
+              "period_end": "2025-03-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-03-12",
+              "period_end": "2025-03-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-19",
+              "period_end": "2025-03-26",
+              "value": 2
+            },
+            {
+              "period_start": "2025-03-26",
+              "period_end": "2025-04-02",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-02",
+              "period_end": "2025-04-09",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-09",
+              "period_end": "2025-04-16",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-16",
+              "period_end": "2025-04-23",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-23",
+              "period_end": "2025-04-30",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-30",
+              "period_end": "2025-05-07",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-07",
+              "period_end": "2025-05-14",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-14",
+              "period_end": "2025-05-21",
+              "value": 5
+            },
+            {
+              "period_start": "2025-05-21",
+              "period_end": "2025-05-28",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-28",
+              "period_end": "2025-06-04",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-04",
+              "period_end": "2025-06-11",
+              "value": 4
+            },
+            {
+              "period_start": "2025-06-11",
+              "period_end": "2025-06-18",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-18",
+              "period_end": "2025-06-25",
+              "value": 5
+            },
+            {
+              "period_start": "2025-06-25",
+              "period_end": "2025-07-02",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-02",
+              "period_end": "2025-07-09",
+              "value": 5
+            },
+            {
+              "period_start": "2025-07-09",
+              "period_end": "2025-07-16",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-16",
+              "period_end": "2025-07-23",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-23",
+              "period_end": "2025-07-30",
+              "value": 3
+            },
+            {
+              "period_start": "2025-07-30",
+              "period_end": "2025-08-06",
+              "value": 2
+            },
+            {
+              "period_start": "2025-08-06",
+              "period_end": "2025-08-13",
+              "value": 3
+            },
+            {
+              "period_start": "2025-08-13",
+              "period_end": "2025-08-20",
+              "value": 2
+            },
+            {
+              "period_start": "2025-08-20",
+              "period_end": "2025-08-27",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-27",
+              "period_end": "2025-09-03",
+              "value": 5
+            },
+            {
+              "period_start": "2025-09-03",
+              "period_end": "2025-09-10",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-10",
+              "period_end": "2025-09-17",
+              "value": 3
+            },
+            {
+              "period_start": "2025-09-17",
+              "period_end": "2025-09-24",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-24",
+              "period_end": "2025-10-01",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-01",
+              "period_end": "2025-10-08",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-08",
+              "period_end": "2025-10-15",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-15",
+              "period_end": "2025-10-22",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-22",
+              "period_end": "2025-10-29",
+              "value": 3
+            },
+            {
+              "period_start": "2025-10-29",
+              "period_end": "2025-11-05",
+              "value": 5
+            },
+            {
+              "period_start": "2025-11-05",
+              "period_end": "2025-11-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-12",
+              "period_end": "2025-11-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-11-19",
+              "period_end": "2025-11-26",
+              "value": 3
+            },
+            {
+              "period_start": "2025-11-26",
+              "period_end": "2025-12-03",
+              "value": 5
+            },
+            {
+              "period_start": "2025-12-03",
+              "period_end": "2025-12-10",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-10",
+              "period_end": "2025-12-17",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-17",
+              "period_end": "2025-12-24",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-24",
+              "period_end": "2025-12-31",
+              "value": 5
+            },
+            {
+              "period_start": "2025-12-31",
+              "period_end": "2026-01-01",
+              "value": 3
+            }
+          ],
+          "R_002": [
+            {
+              "period_start": "2025-01-01",
+              "period_end": "2025-01-08",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-08",
+              "period_end": "2025-01-15",
+              "value": 4
+            },
+            {
+              "period_start": "2025-01-15",
+              "period_end": "2025-01-22",
+              "value": 3
+            },
+            {
+              "period_start": "2025-01-22",
+              "period_end": "2025-01-29",
+              "value": 4
+            },
+            {
+              "period_start": "2025-01-29",
+              "period_end": "2025-02-05",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-05",
+              "period_end": "2025-02-12",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-12",
+              "period_end": "2025-02-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-02-19",
+              "period_end": "2025-02-26",
+              "value": 5
+            },
+            {
+              "period_start": "2025-02-26",
+              "period_end": "2025-03-05",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-05",
+              "period_end": "2025-03-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-03-12",
+              "period_end": "2025-03-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-03-19",
+              "period_end": "2025-03-26",
+              "value": 2
+            },
+            {
+              "period_start": "2025-03-26",
+              "period_end": "2025-04-02",
+              "value": 3
+            },
+            {
+              "period_start": "2025-04-02",
+              "period_end": "2025-04-09",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-09",
+              "period_end": "2025-04-16",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-16",
+              "period_end": "2025-04-23",
+              "value": 2
+            },
+            {
+              "period_start": "2025-04-23",
+              "period_end": "2025-04-30",
+              "value": 4
+            },
+            {
+              "period_start": "2025-04-30",
+              "period_end": "2025-05-07",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-07",
+              "period_end": "2025-05-14",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-14",
+              "period_end": "2025-05-21",
+              "value": 2
+            },
+            {
+              "period_start": "2025-05-21",
+              "period_end": "2025-05-28",
+              "value": 4
+            },
+            {
+              "period_start": "2025-05-28",
+              "period_end": "2025-06-04",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-04",
+              "period_end": "2025-06-11",
+              "value": 4
+            },
+            {
+              "period_start": "2025-06-11",
+              "period_end": "2025-06-18",
+              "value": 2
+            },
+            {
+              "period_start": "2025-06-18",
+              "period_end": "2025-06-25",
+              "value": 5
+            },
+            {
+              "period_start": "2025-06-25",
+              "period_end": "2025-07-02",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-02",
+              "period_end": "2025-07-09",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-09",
+              "period_end": "2025-07-16",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-16",
+              "period_end": "2025-07-23",
+              "value": 2
+            },
+            {
+              "period_start": "2025-07-23",
+              "period_end": "2025-07-30",
+              "value": 3
+            },
+            {
+              "period_start": "2025-07-30",
+              "period_end": "2025-08-06",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-06",
+              "period_end": "2025-08-13",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-13",
+              "period_end": "2025-08-20",
+              "value": 2
+            },
+            {
+              "period_start": "2025-08-20",
+              "period_end": "2025-08-27",
+              "value": 4
+            },
+            {
+              "period_start": "2025-08-27",
+              "period_end": "2025-09-03",
+              "value": 5
+            },
+            {
+              "period_start": "2025-09-03",
+              "period_end": "2025-09-10",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-10",
+              "period_end": "2025-09-17",
+              "value": 5
+            },
+            {
+              "period_start": "2025-09-17",
+              "period_end": "2025-09-24",
+              "value": 4
+            },
+            {
+              "period_start": "2025-09-24",
+              "period_end": "2025-10-01",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-01",
+              "period_end": "2025-10-08",
+              "value": 4
+            },
+            {
+              "period_start": "2025-10-08",
+              "period_end": "2025-10-15",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-15",
+              "period_end": "2025-10-22",
+              "value": 5
+            },
+            {
+              "period_start": "2025-10-22",
+              "period_end": "2025-10-29",
+              "value": 2
+            },
+            {
+              "period_start": "2025-10-29",
+              "period_end": "2025-11-05",
+              "value": 5
+            },
+            {
+              "period_start": "2025-11-05",
+              "period_end": "2025-11-12",
+              "value": 2
+            },
+            {
+              "period_start": "2025-11-12",
+              "period_end": "2025-11-19",
+              "value": 4
+            },
+            {
+              "period_start": "2025-11-19",
+              "period_end": "2025-11-26",
+              "value": 3
+            },
+            {
+              "period_start": "2025-11-26",
+              "period_end": "2025-12-03",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-03",
+              "period_end": "2025-12-10",
+              "value": 3
+            },
+            {
+              "period_start": "2025-12-10",
+              "period_end": "2025-12-17",
+              "value": 4
+            },
+            {
+              "period_start": "2025-12-17",
+              "period_end": "2025-12-24",
+              "value": 2
+            },
+            {
+              "period_start": "2025-12-24",
+              "period_end": "2025-12-31",
+              "value": 5
+            },
+            {
+              "period_start": "2025-12-31",
+              "period_end": "2026-01-01",
+              "value": 3
+            }
+          ]
+        }
+      }
+    },
+    "month": {
+      "issues_closed": {
+        "org": [
+          {
+            "period_start": "2025-01-01",
+            "period_end": "2025-02-01",
+            "value": 35
+          },
+          {
+            "period_start": "2025-02-01",
+            "period_end": "2025-03-01",
+            "value": 37
+          },
+          {
+            "period_start": "2025-03-01",
+            "period_end": "2025-04-01",
+            "value": 44
+          },
+          {
+            "period_start": "2025-04-01",
+            "period_end": "2025-05-01",
+            "value": 46
+          },
+          {
+            "period_start": "2025-05-01",
+            "period_end": "2025-06-01",
+            "value": 44
+          },
+          {
+            "period_start": "2025-06-01",
+            "period_end": "2025-07-01",
+            "value": 44
+          },
+          {
+            "period_start": "2025-07-01",
+            "period_end": "2025-08-01",
+            "value": 38
+          },
+          {
+            "period_start": "2025-08-01",
+            "period_end": "2025-09-01",
+            "value": 38
+          },
+          {
+            "period_start": "2025-09-01",
+            "period_end": "2025-10-01",
+            "value": 47
+          },
+          {
+            "period_start": "2025-10-01",
+            "period_end": "2025-11-01",
+            "value": 38
+          },
+          {
+            "period_start": "2025-11-01",
+            "period_end": "2025-12-01",
+            "value": 47
+          },
+          {
+            "period_start": "2025-12-01",
+            "period_end": "2026-01-01",
+            "value": 47
+          }
+        ],
+        "repos": {}
+      },
+      "reviews_submitted": {
+        "org": [
+          {
+            "period_start": "2025-01-01",
+            "period_end": "2025-02-01",
+            "value": 37
+          },
+          {
+            "period_start": "2025-02-01",
+            "period_end": "2025-03-01",
+            "value": 38
+          },
+          {
+            "period_start": "2025-03-01",
+            "period_end": "2025-04-01",
+            "value": 46
+          },
+          {
+            "period_start": "2025-04-01",
+            "period_end": "2025-05-01",
+            "value": 47
+          },
+          {
+            "period_start": "2025-05-01",
+            "period_end": "2025-06-01",
+            "value": 46
+          },
+          {
+            "period_start": "2025-06-01",
+            "period_end": "2025-07-01",
+            "value": 38
+          },
+          {
+            "period_start": "2025-07-01",
+            "period_end": "2025-08-01",
+            "value": 39
+          },
+          {
+            "period_start": "2025-08-01",
+            "period_end": "2025-09-01",
+            "value": 39
+          },
+          {
+            "period_start": "2025-09-01",
+            "period_end": "2025-10-01",
+            "value": 48
+          },
+          {
+            "period_start": "2025-10-01",
+            "period_end": "2025-11-01",
+            "value": 47
+          },
+          {
+            "period_start": "2025-11-01",
+            "period_end": "2025-12-01",
+            "value": 48
+          },
+          {
+            "period_start": "2025-12-01",
+            "period_end": "2026-01-01",
+            "value": 48
+          }
+        ],
+        "repos": {}
+      },
+      "issues_opened": {
+        "org": [
+          {
+            "period_start": "2025-01-01",
+            "period_end": "2025-02-01",
+            "value": 40
+          },
+          {
+            "period_start": "2025-02-01",
+            "period_end": "2025-03-01",
+            "value": 48
+          },
+          {
+            "period_start": "2025-03-01",
+            "period_end": "2025-04-01",
+            "value": 48
+          },
+          {
+            "period_start": "2025-04-01",
+            "period_end": "2025-05-01",
+            "value": 42
+          },
+          {
+            "period_start": "2025-05-01",
+            "period_end": "2025-06-01",
+            "value": 49
+          },
+          {
+            "period_start": "2025-06-01",
+            "period_end": "2025-07-01",
+            "value": 41
+          },
+          {
+            "period_start": "2025-07-01",
+            "period_end": "2025-08-01",
+            "value": 42
+          },
+          {
+            "period_start": "2025-08-01",
+            "period_end": "2025-09-01",
+            "value": 49
+          },
+          {
+            "period_start": "2025-09-01",
+            "period_end": "2025-10-01",
+            "value": 36
+          },
+          {
+            "period_start": "2025-10-01",
+            "period_end": "2025-11-01",
+            "value": 35
+          },
+          {
+            "period_start": "2025-11-01",
+            "period_end": "2025-12-01",
+            "value": 36
+          },
+          {
+            "period_start": "2025-12-01",
+            "period_end": "2026-01-01",
+            "value": 43
+          }
+        ],
+        "repos": {}
+      },
+      "prs_merged": {
+        "org": [
+          {
+            "period_start": "2025-01-01",
+            "period_end": "2025-02-01",
+            "value": 36
+          },
+          {
+            "period_start": "2025-02-01",
+            "period_end": "2025-03-01",
+            "value": 37
+          },
+          {
+            "period_start": "2025-03-01",
+            "period_end": "2025-04-01",
+            "value": 44
+          },
+          {
+            "period_start": "2025-04-01",
+            "period_end": "2025-05-01",
+            "value": 46
+          },
+          {
+            "period_start": "2025-05-01",
+            "period_end": "2025-06-01",
+            "value": 45
+          },
+          {
+            "period_start": "2025-06-01",
+            "period_end": "2025-07-01",
+            "value": 37
+          },
+          {
+            "period_start": "2025-07-01",
+            "period_end": "2025-08-01",
+            "value": 38
+          },
+          {
+            "period_start": "2025-08-01",
+            "period_end": "2025-09-01",
+            "value": 45
+          },
+          {
+            "period_start": "2025-09-01",
+            "period_end": "2025-10-01",
+            "value": 47
+          },
+          {
+            "period_start": "2025-10-01",
+            "period_end": "2025-11-01",
+            "value": 46
+          },
+          {
+            "period_start": "2025-11-01",
+            "period_end": "2025-12-01",
+            "value": 47
+          },
+          {
+            "period_start": "2025-12-01",
+            "period_end": "2026-01-01",
+            "value": 39
+          }
+        ],
+        "repos": {}
+      },
+      "prs_opened": {
+        "org": [
+          {
+            "period_start": "2025-01-01",
+            "period_end": "2025-02-01",
+            "value": 40
+          },
+          {
+            "period_start": "2025-02-01",
+            "period_end": "2025-03-01",
+            "value": 42
+          },
+          {
+            "period_start": "2025-03-01",
+            "period_end": "2025-04-01",
+            "value": 49
+          },
+          {
+            "period_start": "2025-04-01",
+            "period_end": "2025-05-01",
+            "value": 35
+          },
+          {
+            "period_start": "2025-05-01",
+            "period_end": "2025-06-01",
+            "value": 49
+          },
+          {
+            "period_start": "2025-06-01",
+            "period_end": "2025-07-01",
+            "value": 49
+          },
+          {
+            "period_start": "2025-07-01",
+            "period_end": "2025-08-01",
+            "value": 43
+          },
+          {
+            "period_start": "2025-08-01",
+            "period_end": "2025-09-01",
+            "value": 43
+          },
+          {
+            "period_start": "2025-09-01",
+            "period_end": "2025-10-01",
+            "value": 36
+          },
+          {
+            "period_start": "2025-10-01",
+            "period_end": "2025-11-01",
+            "value": 43
+          },
+          {
+            "period_start": "2025-11-01",
+            "period_end": "2025-12-01",
+            "value": 36
+          },
+          {
+            "period_start": "2025-12-01",
+            "period_end": "2026-01-01",
+            "value": 36
+          }
+        ],
+        "repos": {}
+      }
+    }
+  },
+  "period_types": [
+    "week",
+    "month"
+  ],
+  "metrics_available": [
+    "issues_closed",
+    "issues_opened",
+    "reviews_submitted",
+    "prs_opened",
+    "prs_merged"
+  ]
+}

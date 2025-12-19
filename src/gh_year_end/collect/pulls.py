@@ -1,17 +1,22 @@
 """Pull Request collector for GitHub repositories.
 
 Collects pull requests for all discovered repositories, applying date filters
-and writing raw PR data to JSONL storage.
+and writing raw PR data to JSONL storage. Supports checkpoint-based resume.
 """
+
+from __future__ import annotations
 
 import logging
 from datetime import datetime
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from gh_year_end.config import Config
-from gh_year_end.github.rest import RestClient
-from gh_year_end.storage.paths import PathManager
 from gh_year_end.storage.writer import AsyncJSONLWriter
+
+if TYPE_CHECKING:
+    from gh_year_end.config import Config
+    from gh_year_end.github.rest import RestClient
+    from gh_year_end.storage.checkpoint import CheckpointManager
+    from gh_year_end.storage.paths import PathManager
 
 logger = logging.getLogger(__name__)
 
@@ -20,28 +25,84 @@ class PullsCollectorError(Exception):
     """Raised when pull request collection fails."""
 
 
+async def collect_single_repo_pulls(
+    repo: dict[str, Any],
+    rest_client: RestClient,
+    paths: PathManager,
+    config: Config,
+    checkpoint: CheckpointManager | None = None,
+) -> dict[str, Any]:
+    """Collect pull requests for a single repository.
+
+    This function is designed to be called in parallel for multiple repos.
+
+    Args:
+        repo: Repository metadata dict.
+        rest_client: RestClient for GitHub API access.
+        paths: PathManager for storage locations.
+        config: Application configuration with date filters.
+        checkpoint: Optional CheckpointManager for resume support.
+
+    Returns:
+        Stats dictionary with:
+            - pulls_collected: Number of PRs collected.
+
+    Raises:
+        Exception: If collection fails.
+    """
+    repo_full_name = repo["full_name"]
+    owner, repo_name = repo_full_name.split("/", 1)
+    since = config.github.windows.since
+    until = config.github.windows.until
+
+    logger.debug("Processing pulls for %s", repo_full_name)
+
+    # Mark as in progress
+    if checkpoint:
+        checkpoint.mark_repo_endpoint_in_progress(repo_full_name, "pulls")
+
+    # Collect PRs for this repo
+    pr_count = await _collect_repo_pulls(
+        owner=owner,
+        repo=repo_name,
+        repo_full_name=repo_full_name,
+        rest_client=rest_client,
+        paths=paths,
+        since=since,
+        until=until,
+        checkpoint=checkpoint,
+    )
+
+    logger.debug("Collected %d PRs from %s", pr_count, repo_full_name)
+
+    return {"pulls_collected": pr_count}
+
+
 async def collect_pulls(
     repos: list[dict[str, Any]],
     rest_client: RestClient,
     paths: PathManager,
     config: Config,
+    checkpoint: CheckpointManager | None = None,
 ) -> dict[str, Any]:
     """Collect pull requests for all discovered repositories.
 
     Fetches PRs for each repository, filters by date range, writes to JSONL,
-    and tracks progress and errors.
+    and tracks progress and errors. Supports checkpoint-based resume.
 
     Args:
         repos: List of repo metadata dicts from discovery.
         rest_client: RestClient for GitHub API access.
         paths: PathManager for storage locations.
         config: Application configuration with date filters.
+        checkpoint: Optional CheckpointManager for resume support.
 
     Returns:
         Stats dictionary with:
             - repos_processed: Number of repos processed.
             - pulls_collected: Total PRs collected.
             - repos_skipped: Repos skipped due to errors.
+            - repos_resumed: Repos skipped because already complete.
             - errors: List of error messages.
 
     Raises:
@@ -61,6 +122,7 @@ async def collect_pulls(
         "repos_processed": 0,
         "pulls_collected": 0,
         "repos_skipped": 0,
+        "repos_resumed": 0,
         "errors": [],
     }
 
@@ -68,12 +130,22 @@ async def collect_pulls(
         repo_full_name = repo["full_name"]
         owner, repo_name = repo_full_name.split("/", 1)
 
+        # Check if already complete via checkpoint
+        if checkpoint and checkpoint.is_repo_endpoint_complete(repo_full_name, "pulls"):
+            logger.debug("Skipping %s - pulls already complete", repo_full_name)
+            stats["repos_resumed"] += 1
+            continue
+
         logger.info(
             "Processing repo %d/%d: %s",
             idx,
             len(repos),
             repo_full_name,
         )
+
+        # Mark as in progress
+        if checkpoint:
+            checkpoint.mark_repo_endpoint_in_progress(repo_full_name, "pulls")
 
         try:
             # Collect PRs for this repo
@@ -85,10 +157,15 @@ async def collect_pulls(
                 paths=paths,
                 since=since,
                 until=until,
+                checkpoint=checkpoint,
             )
 
             stats["repos_processed"] += 1
             stats["pulls_collected"] += pr_count
+
+            # Mark as complete
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_complete(repo_full_name, "pulls")
 
             logger.info(
                 "Collected %d PRs from %s (total: %d)",
@@ -102,13 +179,21 @@ async def collect_pulls(
             logger.error(error_msg)
             stats["errors"].append(error_msg)
             stats["repos_skipped"] += 1
+
+            # Mark as failed
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_failed(
+                    repo_full_name, "pulls", str(e), retryable=True
+                )
             continue
 
     logger.info(
-        "PR collection complete: %d repos processed, %d PRs collected, %d repos skipped",
+        "PR collection complete: %d repos processed, %d PRs collected, "
+        "%d repos skipped, %d resumed from checkpoint",
         stats["repos_processed"],
         stats["pulls_collected"],
         stats["repos_skipped"],
+        stats["repos_resumed"],
     )
 
     return stats
@@ -122,6 +207,7 @@ async def _collect_repo_pulls(
     paths: PathManager,
     since: datetime,
     until: datetime,
+    checkpoint: CheckpointManager | None = None,
 ) -> int:
     """Collect pull requests for a single repository.
 
@@ -133,6 +219,7 @@ async def _collect_repo_pulls(
         paths: PathManager for storage locations.
         since: Filter PRs updated after this date.
         until: Filter PRs updated before this date.
+        checkpoint: Optional CheckpointManager for progress tracking.
 
     Returns:
         Number of PRs collected.
@@ -166,6 +253,12 @@ async def _collect_repo_pulls(
                         page=metadata["page"],
                     )
                     pr_count += 1
+
+                # Update checkpoint with page progress
+                if checkpoint:
+                    checkpoint.update_progress(
+                        repo_full_name, "pulls", metadata["page"], len(filtered_prs)
+                    )
 
                 logger.debug(
                     "Fetched page %d: %d PRs (%d after date filter)",
@@ -206,8 +299,8 @@ def _filter_prs_by_date(
 
     Args:
         prs: List of PR data dicts.
-        since: Include PRs updated on or after this date.
-        until: Include PRs updated before this date.
+        since: Include PRs updated on or after this date (timezone-aware).
+        until: Include PRs updated before this date (timezone-aware).
 
     Returns:
         Filtered list of PRs.
@@ -221,14 +314,12 @@ def _filter_prs_by_date(
             continue
 
         try:
-            # Parse ISO 8601 timestamp
+            # Parse ISO 8601 timestamp to timezone-aware datetime
             updated_at = datetime.fromisoformat(updated_at_str.replace("Z", "+00:00"))
 
-            # Remove timezone for comparison with config dates
-            updated_at_naive = updated_at.replace(tzinfo=None)
-
             # Check if within range [since, until)
-            if since <= updated_at_naive < until:
+            # Both updated_at and since/until are timezone-aware (UTC)
+            if since <= updated_at < until:
                 filtered.append(pr)
 
         except (ValueError, AttributeError) as e:
@@ -251,7 +342,7 @@ def _all_prs_before_date(prs: list[dict[str, Any]], since: datetime) -> bool:
 
     Args:
         prs: List of PR data dicts.
-        since: Date threshold.
+        since: Date threshold (timezone-aware).
 
     Returns:
         True if all PRs have updated_at before since date.
@@ -262,11 +353,12 @@ def _all_prs_before_date(prs: list[dict[str, Any]], since: datetime) -> bool:
             continue
 
         try:
+            # Parse ISO 8601 timestamp to timezone-aware datetime
             updated_at = datetime.fromisoformat(updated_at_str.replace("Z", "+00:00"))
-            updated_at_naive = updated_at.replace(tzinfo=None)
 
             # If any PR is on or after since date, return False
-            if updated_at_naive >= since:
+            # Both updated_at and since are timezone-aware (UTC)
+            if updated_at >= since:
                 return False
 
         except (ValueError, AttributeError):

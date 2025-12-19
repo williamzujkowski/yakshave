@@ -1,0 +1,75 @@
+# GitHub Year-End Report Configuration
+# Demo configuration for williamzujkowski user account
+# Run with: uv run gh-year-end all --config config/demo-williamzujkowski.yaml
+
+github:
+  target:
+    mode: user
+    name: williamzujkowski
+  auth:
+    token_env: GITHUB_TOKEN
+  discovery:
+    include_forks: false
+    include_archived: false
+    visibility: public  # Only public repos for demo
+  windows:
+    year: 2025
+    since: "2025-01-01T00:00:00Z"
+    until: "2026-01-01T00:00:00Z"
+
+rate_limit:
+  strategy: adaptive
+  max_concurrency: 2         # Conservative for demo/safety
+  min_sleep_seconds: 1
+  max_sleep_seconds: 60
+  sample_rate_limit_endpoint_every_n_requests: 50
+
+identity:
+  bots:
+    exclude_patterns:
+      - ".*\\[bot\\]$"
+      - "^dependabot$"
+      - "^renovate\\[bot\\]$"
+    include_overrides: []
+  humans_only: true
+
+collection:
+  enable:
+    pulls: true
+    issues: true
+    reviews: true
+    comments: true
+    commits: true
+    hygiene: true
+  commits:
+    include_files: true
+    classify_files: true
+  hygiene:
+    paths:
+      - "SECURITY.md"
+      - "README.md"
+      - "LICENSE"
+      - "CONTRIBUTING.md"
+      - "CODE_OF_CONDUCT.md"
+      - "CODEOWNERS"
+      - ".github/CODEOWNERS"
+    workflow_prefixes:
+      - ".github/workflows/"
+    branch_protection:
+      mode: sample
+      sample_top_repos_by: prs_merged
+      sample_count: 25
+    security_features:
+      best_effort: true
+
+storage:
+  root: "./data"
+  raw_format: jsonl
+  curated_format: parquet
+  dataset_version: "v1"
+
+report:
+  title: "williamzujkowski Year in Review 2025"
+  output_dir: "./site"
+  theme: "engineer_exec_toggle"
+  awards_config: "./config/awards.yaml"
