@@ -858,6 +858,94 @@ def report(ctx: click.Context, config: Path, force: bool) -> None:
         console.print(f"[yellow]Completed with {total_errors} warning(s)[/yellow]")
 
 
+@main.command()
+@click.option(
+    "--config",
+    "-c",
+    type=click.Path(exists=True, path_type=Path),
+    required=True,
+    help="Path to config.yaml file",
+)
+@click.option(
+    "--repair",
+    is_flag=True,
+    default=False,
+    help="Attempt to repair truncated JSONL files",
+)
+@click.pass_context
+def validate(ctx: click.Context, config: Path, repair: bool) -> None:
+    """Validate cached collection data integrity.
+
+    Checks JSONL files for:
+    - JSON validity (proper JSON per line)
+    - Required envelope fields (request_id, timestamp, source, endpoint, data)
+    - Endpoint-specific data fields
+    - Checkpoint consistency with actual files
+
+    Use --repair to remove truncated records from JSONL files.
+    """
+    from gh_year_end.storage.paths import PathManager
+    from gh_year_end.storage.validator import validate_collection
+
+    cfg = load_config(config)
+    paths = PathManager(cfg)
+
+    console.print(f"[bold]Validating data for year {cfg.github.windows.year}[/bold]")
+    console.print(f"  Raw data: {paths.raw_root}")
+    if repair:
+        console.print("  [yellow]Repair mode enabled[/yellow]")
+    console.print()
+
+    # Check if raw data exists
+    if not paths.raw_root.exists():
+        console.print("[bold red]Error:[/bold red] No raw data found. Run 'collect' command first.")
+        raise click.Abort()
+
+    console.print("[bold cyan]Validating...[/bold cyan]")
+
+    try:
+        result = validate_collection(
+            raw_root=paths.raw_root,
+            checkpoint_path=paths.checkpoint_path if paths.checkpoint_path.exists() else None,
+            repair=repair,
+        )
+
+        console.print()
+        console.print("[bold]Validation Results:[/bold]")
+        console.print(f"  Total records: {result.total_records}")
+        console.print(f"  Valid records: {result.valid_records}")
+
+        if result.errors:
+            console.print(f"\n[bold red]Errors ({len(result.errors)}):[/bold red]")
+            for error in result.errors[:10]:  # Show first 10
+                console.print(f"  - {error}")
+            if len(result.errors) > 10:
+                console.print(f"  ... and {len(result.errors) - 10} more")
+
+        if result.warnings:
+            console.print(f"\n[yellow]Warnings ({len(result.warnings)}):[/yellow]")
+            for warning in result.warnings[:10]:
+                console.print(f"  - {warning}")
+            if len(result.warnings) > 10:
+                console.print(f"  ... and {len(result.warnings) - 10} more")
+
+        console.print()
+        if result.valid:
+            console.print("[bold green]Validation passed![/bold green]")
+        else:
+            console.print("[bold red]Validation failed![/bold red]")
+            raise click.Abort()
+
+    except Exception as e:
+        console.print(f"\n[bold red]Validation error:[/bold red] {e}")
+        if ctx.obj.get("verbose"):
+            import traceback
+
+            console.print("\n[dim]Traceback:[/dim]")
+            console.print(traceback.format_exc())
+        raise click.Abort() from e
+
+
 @main.command(name="all")
 @click.option(
     "--config",
