@@ -4,17 +4,22 @@ Collects reviews for all pull requests across repositories.
 Writes raw review data to JSONL storage with proper tracking.
 """
 
+from __future__ import annotations
+
 import json
 import logging
 from collections.abc import AsyncIterator
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from gh_year_end.config import Config
 from gh_year_end.github.ratelimit import AdaptiveRateLimiter
 from gh_year_end.github.rest import RestClient
 from gh_year_end.storage.paths import PathManager
 from gh_year_end.storage.writer import AsyncJSONLWriter
+
+if TYPE_CHECKING:
+    from gh_year_end.storage.checkpoint import CheckpointManager
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +32,9 @@ class ReviewCollectionStats:
 
     def __init__(self) -> None:
         """Initialize stats counters."""
+        self.repos_processed = 0
+        self.repos_skipped = 0
+        self.repos_resumed = 0
         self.prs_processed = 0
         self.reviews_collected = 0
         self.errors = 0
@@ -39,6 +47,9 @@ class ReviewCollectionStats:
             Dictionary with stat counters.
         """
         return {
+            "repos_processed": self.repos_processed,
+            "repos_skipped": self.repos_skipped,
+            "repos_resumed": self.repos_resumed,
             "prs_processed": self.prs_processed,
             "reviews_collected": self.reviews_collected,
             "errors": self.errors,
@@ -53,6 +64,7 @@ async def collect_reviews(
     rate_limiter: AdaptiveRateLimiter | None,
     config: Config,
     pr_numbers_by_repo: dict[str, list[int]] | None = None,
+    checkpoint: CheckpointManager | None = None,
 ) -> dict[str, int]:
     """Collect reviews for all PRs across repositories.
 
@@ -64,6 +76,7 @@ async def collect_reviews(
         config: Application configuration.
         pr_numbers_by_repo: Optional dict mapping repo full_name to list of PR numbers.
             If not provided, will read from raw PR JSONL files.
+        checkpoint: Optional CheckpointManager for resume support.
 
     Returns:
         Dictionary with collection statistics.
@@ -73,6 +86,7 @@ async def collect_reviews(
         - Respects rate limiting through RestClient's integration
         - Handles 404s gracefully (missing PRs/repos)
         - Logs progress at DEBUG level due to high request volume
+        - Supports checkpoint-based resume to skip already completed repos
     """
     stats = ReviewCollectionStats()
 
@@ -100,39 +114,74 @@ async def collect_reviews(
             logger.debug("No PRs to process for %s, skipping", repo_full_name)
             continue
 
+        # Check if already complete via checkpoint
+        if checkpoint and checkpoint.is_repo_endpoint_complete(repo_full_name, "reviews"):
+            logger.debug("Skipping %s - reviews already complete", repo_full_name)
+            stats.repos_resumed += 1
+            continue
+
         logger.info(
             "Collecting reviews for %s (%d PRs)",
             repo_full_name,
             len(pr_numbers),
         )
 
-        repo_stats = await _collect_reviews_for_repo(
-            repo_full_name,
-            pr_numbers,
-            rest_client,
-            paths,
-        )
+        # Mark as in progress
+        if checkpoint:
+            checkpoint.mark_repo_endpoint_in_progress(repo_full_name, "reviews")
 
-        stats.prs_processed += repo_stats["prs_processed"]
-        stats.reviews_collected += repo_stats["reviews_collected"]
-        stats.errors += repo_stats["errors"]
-        stats.skipped_404 += repo_stats["skipped_404"]
+        try:
+            repo_stats = await _collect_reviews_for_repo(
+                repo_full_name,
+                pr_numbers,
+                rest_client,
+                paths,
+            )
 
-        logger.info(
-            "Completed %s: %d PRs, %d reviews, %d errors, %d skipped (404)",
-            repo_full_name,
-            repo_stats["prs_processed"],
-            repo_stats["reviews_collected"],
-            repo_stats["errors"],
-            repo_stats["skipped_404"],
-        )
+            stats.repos_processed += 1
+            stats.prs_processed += repo_stats["prs_processed"]
+            stats.reviews_collected += repo_stats["reviews_collected"]
+            stats.errors += repo_stats["errors"]
+            stats.skipped_404 += repo_stats["skipped_404"]
+
+            # Mark as complete
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_complete(repo_full_name, "reviews")
+
+            logger.info(
+                "Completed %s: %d PRs, %d reviews, %d errors, %d skipped (404)",
+                repo_full_name,
+                repo_stats["prs_processed"],
+                repo_stats["reviews_collected"],
+                repo_stats["errors"],
+                repo_stats["skipped_404"],
+            )
+
+        except Exception as e:
+            logger.error(
+                "Failed to collect reviews for %s: %s",
+                repo_full_name,
+                e,
+                exc_info=True,
+            )
+            stats.repos_skipped += 1
+
+            # Mark as failed
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_failed(
+                    repo_full_name, "reviews", str(e), retryable=True
+                )
+            continue
 
     logger.info(
-        "Review collection complete: %d PRs processed, %d reviews collected, %d errors, %d skipped",
+        "Review collection complete: %d repos processed, %d PRs processed, %d reviews collected, "
+        "%d errors, %d skipped (404), %d resumed from checkpoint",
+        stats.repos_processed,
         stats.prs_processed,
         stats.reviews_collected,
         stats.errors,
         stats.skipped_404,
+        stats.repos_resumed,
     )
 
     return stats.to_dict()

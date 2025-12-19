@@ -4,14 +4,19 @@ Collects commit history for all discovered repositories using the GitHub REST AP
 applying date filters and writing raw data to JSONL storage.
 """
 
+from __future__ import annotations
+
 import logging
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from gh_year_end.config import Config
 from gh_year_end.github.ratelimit import AdaptiveRateLimiter
 from gh_year_end.github.rest import RestClient
 from gh_year_end.storage.paths import PathManager
 from gh_year_end.storage.writer import AsyncJSONLWriter
+
+if TYPE_CHECKING:
+    from gh_year_end.storage.checkpoint import CheckpointManager
 
 logger = logging.getLogger(__name__)
 
@@ -26,12 +31,13 @@ async def collect_commits(
     paths: PathManager,
     rate_limiter: AdaptiveRateLimiter | None = None,
     config: Config | None = None,
+    checkpoint: CheckpointManager | None = None,
 ) -> dict[str, Any]:
     """Collect commits for all discovered repositories.
 
     Uses the GitHub REST API to fetch commits for each repository within
     the configured date range. Handles pagination automatically via the
-    RestClient and respects rate limiting.
+    RestClient and respects rate limiting. Supports checkpoint-based resume.
 
     Args:
         repos: List of repository metadata dicts from discovery.
@@ -39,12 +45,14 @@ async def collect_commits(
         paths: Path manager for storage locations.
         rate_limiter: Optional rate limiter for throttling.
         config: Optional configuration for date range filtering.
+        checkpoint: Optional CheckpointManager for resume support.
 
     Returns:
         Statistics dict with:
             - repos_processed: Number of repos successfully processed.
             - repos_skipped: Number of repos skipped (404, empty, etc).
             - repos_errored: Number of repos with errors.
+            - repos_resumed: Number of repos skipped because already complete.
             - commits_collected: Total number of commits collected.
             - errors: List of error details.
 
@@ -57,6 +65,7 @@ async def collect_commits(
         "repos_processed": 0,
         "repos_skipped": 0,
         "repos_errored": 0,
+        "repos_resumed": 0,
         "commits_collected": 0,
         "errors": [],
     }
@@ -70,6 +79,18 @@ async def collect_commits(
         logger.info("Using date range: since=%s, until=%s", since, until)
 
     for repo in repos:
+        repo_full_name = repo.get("full_name", "unknown")
+
+        # Check if already complete via checkpoint
+        if checkpoint and checkpoint.is_repo_endpoint_complete(repo_full_name, "commits"):
+            logger.debug("Skipping %s - commits already complete", repo_full_name)
+            stats["repos_resumed"] += 1
+            continue
+
+        # Mark as in progress
+        if checkpoint:
+            checkpoint.mark_repo_endpoint_in_progress(repo_full_name, "commits")
+
         try:
             repo_stats = await _collect_repo_commits(
                 repo=repo,
@@ -77,6 +98,7 @@ async def collect_commits(
                 paths=paths,
                 since=since,
                 until=until,
+                checkpoint=checkpoint,
             )
 
             if repo_stats["skipped"]:
@@ -85,26 +107,37 @@ async def collect_commits(
                 stats["repos_processed"] += 1
                 stats["commits_collected"] += repo_stats["commits_count"]
 
+            # Mark as complete
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_complete(repo_full_name, "commits")
+
         except Exception as e:
             stats["repos_errored"] += 1
             error_detail = {
-                "repo": repo.get("full_name", "unknown"),
+                "repo": repo_full_name,
                 "error": str(e),
             }
             stats["errors"].append(error_detail)
             logger.error(
                 "Failed to collect commits for %s: %s",
-                repo.get("full_name", "unknown"),
+                repo_full_name,
                 e,
             )
 
+            # Mark as failed
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_failed(
+                    repo_full_name, "commits", str(e), retryable=True
+                )
+
     logger.info(
         "Commit collection complete: %d repos processed, %d commits collected, "
-        "%d repos skipped, %d repos errored",
+        "%d repos skipped, %d repos errored, %d resumed from checkpoint",
         stats["repos_processed"],
         stats["commits_collected"],
         stats["repos_skipped"],
         stats["repos_errored"],
+        stats["repos_resumed"],
     )
 
     return stats
@@ -116,6 +149,7 @@ async def _collect_repo_commits(
     paths: PathManager,
     since: str | None = None,
     until: str | None = None,
+    checkpoint: CheckpointManager | None = None,
 ) -> dict[str, Any]:
     """Collect commits for a single repository.
 
@@ -125,6 +159,7 @@ async def _collect_repo_commits(
         paths: Path manager for storage locations.
         since: ISO 8601 timestamp to filter commits after this date.
         until: ISO 8601 timestamp to filter commits before this date.
+        checkpoint: Optional CheckpointManager for progress tracking.
 
     Returns:
         Statistics dict with:
@@ -163,6 +198,12 @@ async def _collect_repo_commits(
                         page=metadata["page"],
                     )
                     commits_count += 1
+
+                # Update checkpoint with page progress
+                if checkpoint:
+                    checkpoint.update_progress(
+                        full_name, "commits", metadata["page"], len(commits_page)
+                    )
 
                 logger.debug(
                     "Collected page %d for %s: %d commits (total: %d)",

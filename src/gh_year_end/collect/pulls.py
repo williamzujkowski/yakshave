@@ -1,17 +1,22 @@
 """Pull Request collector for GitHub repositories.
 
 Collects pull requests for all discovered repositories, applying date filters
-and writing raw PR data to JSONL storage.
+and writing raw PR data to JSONL storage. Supports checkpoint-based resume.
 """
+
+from __future__ import annotations
 
 import logging
 from datetime import datetime
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from gh_year_end.config import Config
 from gh_year_end.github.rest import RestClient
 from gh_year_end.storage.paths import PathManager
 from gh_year_end.storage.writer import AsyncJSONLWriter
+
+if TYPE_CHECKING:
+    from gh_year_end.storage.checkpoint import CheckpointManager
 
 logger = logging.getLogger(__name__)
 
@@ -25,23 +30,26 @@ async def collect_pulls(
     rest_client: RestClient,
     paths: PathManager,
     config: Config,
+    checkpoint: CheckpointManager | None = None,
 ) -> dict[str, Any]:
     """Collect pull requests for all discovered repositories.
 
     Fetches PRs for each repository, filters by date range, writes to JSONL,
-    and tracks progress and errors.
+    and tracks progress and errors. Supports checkpoint-based resume.
 
     Args:
         repos: List of repo metadata dicts from discovery.
         rest_client: RestClient for GitHub API access.
         paths: PathManager for storage locations.
         config: Application configuration with date filters.
+        checkpoint: Optional CheckpointManager for resume support.
 
     Returns:
         Stats dictionary with:
             - repos_processed: Number of repos processed.
             - pulls_collected: Total PRs collected.
             - repos_skipped: Repos skipped due to errors.
+            - repos_resumed: Repos skipped because already complete.
             - errors: List of error messages.
 
     Raises:
@@ -61,6 +69,7 @@ async def collect_pulls(
         "repos_processed": 0,
         "pulls_collected": 0,
         "repos_skipped": 0,
+        "repos_resumed": 0,
         "errors": [],
     }
 
@@ -68,12 +77,22 @@ async def collect_pulls(
         repo_full_name = repo["full_name"]
         owner, repo_name = repo_full_name.split("/", 1)
 
+        # Check if already complete via checkpoint
+        if checkpoint and checkpoint.is_repo_endpoint_complete(repo_full_name, "pulls"):
+            logger.debug("Skipping %s - pulls already complete", repo_full_name)
+            stats["repos_resumed"] += 1
+            continue
+
         logger.info(
             "Processing repo %d/%d: %s",
             idx,
             len(repos),
             repo_full_name,
         )
+
+        # Mark as in progress
+        if checkpoint:
+            checkpoint.mark_repo_endpoint_in_progress(repo_full_name, "pulls")
 
         try:
             # Collect PRs for this repo
@@ -85,10 +104,15 @@ async def collect_pulls(
                 paths=paths,
                 since=since,
                 until=until,
+                checkpoint=checkpoint,
             )
 
             stats["repos_processed"] += 1
             stats["pulls_collected"] += pr_count
+
+            # Mark as complete
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_complete(repo_full_name, "pulls")
 
             logger.info(
                 "Collected %d PRs from %s (total: %d)",
@@ -102,13 +126,21 @@ async def collect_pulls(
             logger.error(error_msg)
             stats["errors"].append(error_msg)
             stats["repos_skipped"] += 1
+
+            # Mark as failed
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_failed(
+                    repo_full_name, "pulls", str(e), retryable=True
+                )
             continue
 
     logger.info(
-        "PR collection complete: %d repos processed, %d PRs collected, %d repos skipped",
+        "PR collection complete: %d repos processed, %d PRs collected, "
+        "%d repos skipped, %d resumed from checkpoint",
         stats["repos_processed"],
         stats["pulls_collected"],
         stats["repos_skipped"],
+        stats["repos_resumed"],
     )
 
     return stats
@@ -122,6 +154,7 @@ async def _collect_repo_pulls(
     paths: PathManager,
     since: datetime,
     until: datetime,
+    checkpoint: CheckpointManager | None = None,
 ) -> int:
     """Collect pull requests for a single repository.
 
@@ -133,6 +166,7 @@ async def _collect_repo_pulls(
         paths: PathManager for storage locations.
         since: Filter PRs updated after this date.
         until: Filter PRs updated before this date.
+        checkpoint: Optional CheckpointManager for progress tracking.
 
     Returns:
         Number of PRs collected.
@@ -166,6 +200,12 @@ async def _collect_repo_pulls(
                         page=metadata["page"],
                     )
                     pr_count += 1
+
+                # Update checkpoint with page progress
+                if checkpoint:
+                    checkpoint.update_progress(
+                        repo_full_name, "pulls", metadata["page"], len(filtered_prs)
+                    )
 
                 logger.debug(
                     "Fetched page %d: %d PRs (%d after date filter)",

@@ -4,16 +4,21 @@ Collects issue comments and review comments (inline code review comments) from
 GitHub repositories. Requires pre-collected issues and PRs to extract numbers.
 """
 
+from __future__ import annotations
+
 import json
 import logging
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from gh_year_end.config import Config
 from gh_year_end.github.ratelimit import AdaptiveRateLimiter
 from gh_year_end.github.rest import RestClient
 from gh_year_end.storage.paths import PathManager
 from gh_year_end.storage.writer import AsyncJSONLWriter
+
+if TYPE_CHECKING:
+    from gh_year_end.storage.checkpoint import CheckpointManager
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +34,7 @@ async def collect_issue_comments(
     rate_limiter: AdaptiveRateLimiter,
     config: Config,
     issue_numbers_by_repo: dict[str, list[int]],
+    checkpoint: CheckpointManager | None = None,
 ) -> dict[str, Any]:
     """Collect issue comments for repositories.
 
@@ -39,12 +45,14 @@ async def collect_issue_comments(
         rate_limiter: AdaptiveRateLimiter for throttling.
         config: Application configuration.
         issue_numbers_by_repo: Dict mapping repo full_name to list of issue numbers.
+        checkpoint: Optional CheckpointManager for resume support.
 
     Returns:
         Dict with collection statistics:
             - repos_processed: Number of repos processed.
             - issues_processed: Number of issues processed.
             - comments_collected: Total comments collected.
+            - repos_resumed: Repos skipped because already complete.
             - errors: Number of errors encountered.
     """
     logger.info("Starting issue comment collection for %d repositories", len(repos))
@@ -52,11 +60,18 @@ async def collect_issue_comments(
     repos_processed = 0
     issues_processed = 0
     comments_collected = 0
+    repos_resumed = 0
     errors = 0
 
     for repo in repos:
         repo_name = repo["full_name"]
         owner, repo_short = repo_name.split("/", 1)
+
+        # Check if already complete via checkpoint
+        if checkpoint and checkpoint.is_repo_endpoint_complete(repo_name, "issue_comments"):
+            logger.debug("Skipping %s - issue_comments already complete", repo_name)
+            repos_resumed += 1
+            continue
 
         # Get issue numbers for this repo
         issue_numbers = issue_numbers_by_repo.get(repo_name, [])
@@ -70,6 +85,10 @@ async def collect_issue_comments(
             repo_name,
             len(issue_numbers),
         )
+
+        # Mark as in progress
+        if checkpoint:
+            checkpoint.mark_repo_endpoint_in_progress(repo_name, "issue_comments")
 
         output_path = paths.issue_comments_raw_path(repo_name)
 
@@ -123,6 +142,10 @@ async def collect_issue_comments(
 
             repos_processed += 1
 
+            # Mark as complete
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_complete(repo_name, "issue_comments")
+
             logger.info(
                 "Completed issue comment collection for %s: %d issues, %d comments",
                 repo_name,
@@ -135,11 +158,19 @@ async def collect_issue_comments(
             errors += 1
             repos_processed += 1
 
+            # Mark as failed
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_failed(
+                    repo_name, "issue_comments", str(e), retryable=True
+                )
+
     logger.info(
-        "Issue comment collection complete: %d repos, %d issues, %d comments, %d errors",
+        "Issue comment collection complete: %d repos, %d issues, %d comments, "
+        "%d resumed from checkpoint, %d errors",
         repos_processed,
         issues_processed,
         comments_collected,
+        repos_resumed,
         errors,
     )
 
@@ -147,6 +178,7 @@ async def collect_issue_comments(
         "repos_processed": repos_processed,
         "issues_processed": issues_processed,
         "comments_collected": comments_collected,
+        "repos_resumed": repos_resumed,
         "errors": errors,
     }
 
@@ -158,6 +190,7 @@ async def collect_review_comments(
     rate_limiter: AdaptiveRateLimiter,
     config: Config,
     pr_numbers_by_repo: dict[str, list[int]],
+    checkpoint: CheckpointManager | None = None,
 ) -> dict[str, Any]:
     """Collect review comments (inline code review comments) for pull requests.
 
@@ -168,12 +201,14 @@ async def collect_review_comments(
         rate_limiter: AdaptiveRateLimiter for throttling.
         config: Application configuration.
         pr_numbers_by_repo: Dict mapping repo full_name to list of PR numbers.
+        checkpoint: Optional CheckpointManager for resume support.
 
     Returns:
         Dict with collection statistics:
             - repos_processed: Number of repos processed.
             - prs_processed: Number of PRs processed.
             - comments_collected: Total review comments collected.
+            - repos_resumed: Repos skipped because already complete.
             - errors: Number of errors encountered.
     """
     logger.info("Starting review comment collection for %d repositories", len(repos))
@@ -181,11 +216,18 @@ async def collect_review_comments(
     repos_processed = 0
     prs_processed = 0
     comments_collected = 0
+    repos_resumed = 0
     errors = 0
 
     for repo in repos:
         repo_name = repo["full_name"]
         owner, repo_short = repo_name.split("/", 1)
+
+        # Check if already complete via checkpoint
+        if checkpoint and checkpoint.is_repo_endpoint_complete(repo_name, "review_comments"):
+            logger.debug("Skipping %s - review_comments already complete", repo_name)
+            repos_resumed += 1
+            continue
 
         # Get PR numbers for this repo
         pr_numbers = pr_numbers_by_repo.get(repo_name, [])
@@ -199,6 +241,10 @@ async def collect_review_comments(
             repo_name,
             len(pr_numbers),
         )
+
+        # Mark as in progress
+        if checkpoint:
+            checkpoint.mark_repo_endpoint_in_progress(repo_name, "review_comments")
 
         output_path = paths.review_comments_raw_path(repo_name)
 
@@ -252,6 +298,10 @@ async def collect_review_comments(
 
             repos_processed += 1
 
+            # Mark as complete
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_complete(repo_name, "review_comments")
+
             logger.info(
                 "Completed review comment collection for %s: %d PRs, %d comments",
                 repo_name,
@@ -264,11 +314,19 @@ async def collect_review_comments(
             errors += 1
             repos_processed += 1
 
+            # Mark as failed
+            if checkpoint:
+                checkpoint.mark_repo_endpoint_failed(
+                    repo_name, "review_comments", str(e), retryable=True
+                )
+
     logger.info(
-        "Review comment collection complete: %d repos, %d PRs, %d comments, %d errors",
+        "Review comment collection complete: %d repos, %d PRs, %d comments, "
+        "%d resumed from checkpoint, %d errors",
         repos_processed,
         prs_processed,
         comments_collected,
+        repos_resumed,
         errors,
     )
 
@@ -276,6 +334,7 @@ async def collect_review_comments(
         "repos_processed": repos_processed,
         "prs_processed": prs_processed,
         "comments_collected": comments_collected,
+        "repos_resumed": repos_resumed,
         "errors": errors,
     }
 
