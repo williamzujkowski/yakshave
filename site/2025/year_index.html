@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=" - GitHub Year-End Reports">
+    <title> - GitHub Year-End Reports</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <style>
+        /* Inline styles for standalone page */
+        :root {
+            --color-bg-primary: #ffffff;
+            --color-bg-secondary: #f6f8fa;
+            --color-bg-tertiary: #f0f3f5;
+            --color-text-primary: #24292f;
+            --color-text-secondary: #57606a;
+            --color-text-tertiary: #6e7781;
+            --color-border-primary: #d0d7de;
+            --color-border-secondary: #e1e4e8;
+            --color-accent-primary: #0969da;
+            --color-accent-hover: #0550ae;
+            --color-success: #1a7f37;
+            --color-success-bg: #dafbe1;
+            --color-warning: #9a6700;
+            --color-warning-bg: #fff8c5;
+            --color-info: #0969da;
+            --color-info-bg: #ddf4ff;
+            --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-medium: 0 3px 6px rgba(0, 0, 0, 0.15);
+            --shadow-large: 0 8px 16px rgba(0, 0, 0, 0.15);
+            --radius-md: 6px;
+            --radius-lg: 12px;
+            --transition-base: 200ms ease;
+            --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --color-bg-primary: #0d1117;
+            --color-bg-secondary: #161b22;
+            --color-bg-tertiary: #21262d;
+            --color-text-primary: #c9d1d9;
+            --color-text-secondary: #8b949e;
+            --color-text-tertiary: #6e7681;
+            --color-border-primary: #30363d;
+            --color-border-secondary: #21262d;
+            --color-accent-primary: #58a6ff;
+            --color-accent-hover: #79c0ff;
+            --color-success: #3fb950;
+            --color-success-bg: #1a4d2e;
+            --color-warning: #d29922;
+            --color-warning-bg: #4d3800;
+            --color-info: #58a6ff;
+            --color-info-bg: #0c2d6b;
+            --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.4);
+            --shadow-medium: 0 3px 6px rgba(0, 0, 0, 0.5);
+            --shadow-large: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background-color var(--transition-base), color var(--transition-base);
+        }
+
+        .header {
+            background-color: var(--color-bg-secondary);
+            border-bottom: 1px solid var(--color-border-primary);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .header-content p {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--color-border-primary);
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            cursor: pointer;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color var(--transition-base), border-color var(--transition-base);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--color-bg-tertiary);
+            border-color: var(--color-border-secondary);
+        }
+
+        .theme-toggle svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        [data-theme="light"] .moon-icon {
+            display: none;
+        }
+
+        [data-theme="dark"] .sun-icon {
+            display: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            flex: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-text-primary);
+        }
+
+        .page-header p {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+        }
+
+        .redirect-notice {
+            background-color: var(--color-info-bg);
+            border: 1px solid var(--color-accent-primary);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--color-text-primary);
+        }
+
+        .redirect-notice strong {
+            color: var(--color-accent-primary);
+            font-weight: 600;
+        }
+
+        .redirect-notice button {
+            background: transparent;
+            border: none;
+            color: var(--color-accent-primary);
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+        }
+
+        .redirect-notice button:hover {
+            color: var(--color-accent-hover);
+        }
+
+        .years-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .year-card {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border-primary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--color-text-primary);
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-small);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .year-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--color-accent-primary);
+        }
+
+        .year-card.coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .year-card.coming-soon:hover {
+            transform: none;
+            box-shadow: var(--shadow-small);
+            border-color: var(--color-border-primary);
+        }
+
+        .year-card.current {
+            border-color: var(--color-accent-primary);
+            border-width: 2px;
+        }
+
+        .year-badge {
+            display: inline-block;
+            background-color: var(--color-accent-primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+        }
+
+        .year-badge.coming-soon-badge {
+            background-color: var(--color-warning);
+        }
+
+        .year-badge.current-badge {
+            background-color: var(--color-success);
+        }
+
+        .year-card h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-primary);
+        }
+
+        .year-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .year-card .stats {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-border-secondary);
+            font-size: 0.75rem;
+            color: var(--color-text-tertiary);
+        }
+
+        .year-card .stats span {
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        .coming-soon-text {
+            font-style: italic;
+            color: var(--color-text-tertiary);
+            margin-top: 0.5rem;
+        }
+
+        .footer {
+            background-color: var(--color-bg-secondary);
+            border-top: 1px solid var(--color-border-primary);
+            padding: 2rem;
+            text-align: center;
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .years-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1></h1>
+            <p>GitHub Year-End Reports</p>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle dark mode">
+            <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+            </svg>
+            <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+            </svg>
+        </button>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Year-End Reports</h1>
+            <p>Explore GitHub activity and community health metrics across the years</p>
+        </div>
+
+
+        <div class="years-grid">
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 . Generated with gh-year-end.</p>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+
+        // Load saved theme preference or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Auto-redirect functionality
+    </script>
+</body>
+</html>

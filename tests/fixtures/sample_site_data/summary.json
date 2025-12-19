@@ -1,0 +1,20 @@
+{
+  "year": 2024,
+  "target": {
+    "mode": "org",
+    "name": "test-org"
+  },
+  "generated_at": "2024-12-31T23:59:59.000000",
+  "total_contributors": 3,
+  "total_prs_merged": 15,
+  "total_issues_opened": 8,
+  "total_reviews_submitted": 12,
+  "total_repos": 2,
+  "total_prs_opened": 18,
+  "total_issues_closed": 7,
+  "hygiene": {
+    "average_score": 70.0,
+    "min_score": 60,
+    "max_score": 80
+  }
+}

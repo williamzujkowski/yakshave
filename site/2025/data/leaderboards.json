@@ -1,0 +1,1401 @@
+{
+  "leaderboards": {
+    "issues_closed": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+          "login": "williamzujkowski",
+          "display_name": null,
+          "value": 151
+        },
+        {
+          "rank": 2,
+          "user_id": "MDQ6VXNlcjExNzg0MTI=",
+          "login": "mhrst",
+          "display_name": null,
+          "value": 2
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjg1ODAzODk2",
+          "login": "Maria-Papa",
+          "display_name": null,
+          "value": 1
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjU0ODM4OTc1",
+          "login": "scarf005",
+          "display_name": null,
+          "value": 1
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjM2MTkxNTI3",
+          "login": "bartunlimited",
+          "display_name": null,
+          "value": 1
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjEyMTQ0NDA0",
+          "login": "endcycles",
+          "display_name": null,
+          "value": 1
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjUxODkwMjM2",
+          "login": "racso-dev",
+          "display_name": null,
+          "value": 1
+        }
+      ],
+      "repos": {}
+    },
+    "comments_total": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+          "login": "williamzujkowski",
+          "display_name": null,
+          "value": 108
+        },
+        {
+          "rank": 2,
+          "user_id": "MDQ6VXNlcjQ0MjgzMTAx",
+          "login": "adrione",
+          "display_name": null,
+          "value": 2
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjg1ODAzODk2",
+          "login": "Maria-Papa",
+          "display_name": null,
+          "value": 1
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjU0ODM4OTc1",
+          "login": "scarf005",
+          "display_name": null,
+          "value": 1
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjEyMTQ0NDA0",
+          "login": "endcycles",
+          "display_name": null,
+          "value": 1
+        }
+      ],
+      "repos": {
+        "IC_kwDOQqzwlM7az1b5": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7az1b5",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zj36R": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zj36R",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aCx20": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aCx20",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7apidN": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7apidN",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Y96Sx": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Y96Sx",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayLZ6": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayLZ6",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uO_": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uO_",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uSn": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uSn",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Y96nP": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Y96nP",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87Zq7Pe": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87Zq7Pe",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uIu": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uIu",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uM3": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uM3",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Y96Tm": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Y96Tm",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aDIfm": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aDIfm",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uP5": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uP5",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uHi": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uHi",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayq6N": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayq6N",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uRb": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uRb",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayrBK": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayrBK",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayLSP": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayLSP",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zj9QM": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zj9QM",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayq_3": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayq_3",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Y-Lm5": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjU0ODM4OTc1",
+            "login": "scarf005",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Y-Lm5",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aD2t1": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aD2t1",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uBH": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uBH",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7azXbb": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7azXbb",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87Zq7LS": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87Zq7LS",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7azawS": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7azawS",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7az1YM": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7az1YM",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7apicb": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7apicb",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7azXdU": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7azXdU",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87ZfVfF": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87ZfVfF",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zjxtj": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zjxtj",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87ZkLRC": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87ZkLRC",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7az1d-": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7az1d-",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zifr2": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjEyMTQ0NDA0",
+            "login": "endcycles",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zifr2",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zjxt_": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zjxt_",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a4DU6": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a4DU6",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87ZffxU": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87ZffxU",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7az1hn": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7az1hn",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aCx4f": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aCx4f",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayLVO": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayLVO",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87ZkLRf": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87ZkLRf",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zjxtx": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zjxtx",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7azXlP": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7azXlP",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Y9pPl": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Y9pPl",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7az1jU": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7az1jU",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87Zq7Lv": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87Zq7Lv",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87Zq7NA": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87Zq7NA",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87ZxGeL": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87ZxGeL",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zfae8": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zfae8",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aCx9P": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aCx9P",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aDpVo": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aDpVo",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87VpTki": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjQ0MjgzMTAx",
+            "login": "adrione",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87VpTki",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zj4NC": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zj4NC",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zj5Sv": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zj5Sv",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aDpTu": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aDpTu",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7apia0": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7apia0",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7az1f4": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7az1f4",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayLTv": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayLTv",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zj7RO": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zj7RO",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uGb": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uGb",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87VpTO0": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjQ0MjgzMTAx",
+            "login": "adrione",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87VpTO0",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87ZkGe8": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87ZkGe8",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a4DWN": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a4DWN",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7azXjp": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7azXjp",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aWxru": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aWxru",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uDR": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uDR",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7apib8": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7apib8",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uOB": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uOB",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zfaew": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zfaew",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7azXfv": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7azXfv",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayq4m": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayq4m",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a4Dd0": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a4Dd0",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Y96mw": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Y96mw",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a4DXa": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a4DXa",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7az1Z6": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7az1Z6",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zj_zD": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zj_zD",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7azXhY": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7azXhY",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayq7_": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayq7_",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayLc-": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayLc-",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uCN": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uCN",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aCx7C": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aCx7C",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayLW4": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayLW4",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87ZkGc8": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87ZkGc8",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uEZ": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uEZ",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87ZkGbx": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87ZkGbx",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uK3": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uK3",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aDpUt": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aDpUt",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Y98HC": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Y98HC",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7az1I8": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7az1I8",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Rn9-V": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjg1ODAzODk2",
+            "login": "Maria-Papa",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Rn9-V",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a4DYY": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a4DYY",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayq-d": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayq-d",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87ZkPnL": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87ZkPnL",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayq9g": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayq9g",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7ayLf7": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7ayLf7",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3t_y": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3t_y",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uMI": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uMI",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aD2uW": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aD2uW",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aDQ54": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aDQ54",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87ZkGhQ": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87ZkGhQ",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a4ZjV": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a4ZjV",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7apibb": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7apibb",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zj5TP": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zj5TP",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQJKxW87aCxy3": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQJKxW87aCxy3",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7azauj": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7azauj",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zj5ST": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zj5ST",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uJw": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uJw",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Zfaeh": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Zfaeh",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOPfoZc87Y9r5Y": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOPfoZc87Y9r5Y",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7apieK": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7apieK",
+            "repo_full_name": null
+          }
+        ],
+        "IC_kwDOQqzwlM7a3uFZ": [
+          {
+            "rank": 1,
+            "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+            "login": "williamzujkowski",
+            "display_name": null,
+            "value": 1,
+            "repo_id": "IC_kwDOQqzwlM7a3uFZ",
+            "repo_full_name": null
+          }
+        ]
+      }
+    },
+    "issues_opened": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "MDQ6VXNlcjE0MzAzMjQ5",
+          "login": "williamzujkowski",
+          "display_name": null,
+          "value": 161
+        },
+        {
+          "rank": 2,
+          "user_id": "MDQ6VXNlcjExNzg0MTI=",
+          "login": "mhrst",
+          "display_name": null,
+          "value": 2
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjEyMTQ0NDA0",
+          "login": "endcycles",
+          "display_name": null,
+          "value": 1
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjUxODkwMjM2",
+          "login": "racso-dev",
+          "display_name": null,
+          "value": 1
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjM2MTkxNTI3",
+          "login": "bartunlimited",
+          "display_name": null,
+          "value": 1
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjU0ODM4OTc1",
+          "login": "scarf005",
+          "display_name": null,
+          "value": 1
+        },
+        {
+          "rank": 3,
+          "user_id": "MDQ6VXNlcjg1ODAzODk2",
+          "login": "Maria-Papa",
+          "display_name": null,
+          "value": 1
+        }
+      ],
+      "repos": {}
+    }
+  },
+  "metrics_available": [
+    "issues_opened",
+    "issues_closed",
+    "comments_total"
+  ]
+}

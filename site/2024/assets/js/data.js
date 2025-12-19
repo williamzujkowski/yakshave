@@ -6,6 +6,40 @@
  */
 
 /**
+ * Extract the year from the current URL path.
+ *
+ * Expects URL format: /YYYY/index.html or /YYYY/engineer.html
+ *
+ * @returns {string|null} Year as a string (e.g., "2024"), or null if not found
+ */
+function getCurrentYearFromURL() {
+    const pathname = window.location.pathname;
+    // Match /YYYY/ pattern in the path
+    const yearMatch = pathname.match(/\/(\d{4})\//);
+    if (yearMatch) {
+        return yearMatch[1];
+    }
+    console.warn(`Could not extract year from URL path: ${pathname}`);
+    return null;
+}
+
+/**
+ * Get the data directory path for the current year.
+ *
+ * @returns {string} Path to data directory (e.g., "/2024/data" or "../data" as fallback)
+ */
+function getDataPath() {
+    const year = getCurrentYearFromURL();
+    if (year) {
+        // Construct path relative to site root
+        return `/${year}/data`;
+    }
+    // Fallback to relative path if year cannot be determined
+    console.warn("Using fallback data path: ../data");
+    return "../data";
+}
+
+/**
  * Load JSON data from a URL.
  *
  * @param {string} url - URL or path to the JSON file
@@ -23,6 +57,19 @@ async function loadJSON(url) {
         console.error(`Failed to load JSON from ${url}:`, error);
         throw error;
     }
+}
+
+/**
+ * Load a data file for the current year.
+ *
+ * @param {string} filename - Name of the JSON file (e.g., "metrics_time_series.json")
+ * @returns {Promise<Object>} Parsed JSON data
+ * @throws {Error} If the fetch fails or response is not OK
+ */
+async function loadYearData(filename) {
+    const dataPath = getDataPath();
+    const url = `${dataPath}/${filename}`;
+    return loadJSON(url);
 }
 
 /**

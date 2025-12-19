@@ -1,0 +1,117 @@
+{
+  "leaderboards": {
+    "prs_merged": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "U_001",
+          "login": "alice",
+          "display_name": "Alice Developer",
+          "value": 8
+        },
+        {
+          "rank": 2,
+          "user_id": "U_002",
+          "login": "bob",
+          "display_name": "Bob Engineer",
+          "value": 5
+        },
+        {
+          "rank": 3,
+          "user_id": "U_003",
+          "login": "charlie",
+          "display_name": "Charlie Coder",
+          "value": 2
+        }
+      ],
+      "repos": {
+        "R_001": [
+          {
+            "rank": 1,
+            "user_id": "U_001",
+            "login": "alice",
+            "display_name": "Alice Developer",
+            "value": 5,
+            "repo_id": "R_001",
+            "repo_full_name": "test-org/backend"
+          },
+          {
+            "rank": 2,
+            "user_id": "U_002",
+            "login": "bob",
+            "display_name": "Bob Engineer",
+            "value": 3,
+            "repo_id": "R_001",
+            "repo_full_name": "test-org/backend"
+          }
+        ],
+        "R_002": [
+          {
+            "rank": 1,
+            "user_id": "U_001",
+            "login": "alice",
+            "display_name": "Alice Developer",
+            "value": 3,
+            "repo_id": "R_002",
+            "repo_full_name": "test-org/frontend"
+          },
+          {
+            "rank": 2,
+            "user_id": "U_003",
+            "login": "charlie",
+            "display_name": "Charlie Coder",
+            "value": 2,
+            "repo_id": "R_002",
+            "repo_full_name": "test-org/frontend"
+          }
+        ]
+      }
+    },
+    "reviews_submitted": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "U_002",
+          "login": "bob",
+          "display_name": "Bob Engineer",
+          "value": 7
+        },
+        {
+          "rank": 2,
+          "user_id": "U_001",
+          "login": "alice",
+          "display_name": "Alice Developer",
+          "value": 5
+        }
+      ],
+      "repos": {}
+    },
+    "issues_opened": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "U_003",
+          "login": "charlie",
+          "display_name": "Charlie Coder",
+          "value": 4
+        },
+        {
+          "rank": 2,
+          "user_id": "U_001",
+          "login": "alice",
+          "display_name": "Alice Developer",
+          "value": 3
+        },
+        {
+          "rank": 3,
+          "user_id": "U_002",
+          "login": "bob",
+          "display_name": "Bob Engineer",
+          "value": 1
+        }
+      ],
+      "repos": {}
+    }
+  },
+  "metrics_available": ["prs_merged", "reviews_submitted", "issues_opened"]
+}

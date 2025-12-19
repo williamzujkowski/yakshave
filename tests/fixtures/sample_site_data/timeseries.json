@@ -1,0 +1,103 @@
+{
+  "timeseries": {
+    "month": {
+      "prs_merged": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-02-01",
+            "value": 3
+          },
+          {
+            "period_start": "2024-02-01",
+            "period_end": "2024-03-01",
+            "value": 4
+          },
+          {
+            "period_start": "2024-03-01",
+            "period_end": "2024-04-01",
+            "value": 2
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-05-01",
+            "value": 6
+          }
+        ],
+        "repos": {
+          "R_001": [
+            {
+              "period_start": "2024-01-01",
+              "period_end": "2024-02-01",
+              "value": 2
+            },
+            {
+              "period_start": "2024-02-01",
+              "period_end": "2024-03-01",
+              "value": 3
+            },
+            {
+              "period_start": "2024-03-01",
+              "period_end": "2024-04-01",
+              "value": 1
+            },
+            {
+              "period_start": "2024-04-01",
+              "period_end": "2024-05-01",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "issues_opened": {
+        "org": [
+          {
+            "period_start": "2024-01-01",
+            "period_end": "2024-02-01",
+            "value": 2
+          },
+          {
+            "period_start": "2024-02-01",
+            "period_end": "2024-03-01",
+            "value": 1
+          },
+          {
+            "period_start": "2024-03-01",
+            "period_end": "2024-04-01",
+            "value": 3
+          },
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-05-01",
+            "value": 2
+          }
+        ],
+        "repos": {}
+      }
+    },
+    "week": {
+      "prs_merged": {
+        "org": [
+          {
+            "period_start": "2024-04-01",
+            "period_end": "2024-04-08",
+            "value": 2
+          },
+          {
+            "period_start": "2024-04-08",
+            "period_end": "2024-04-15",
+            "value": 1
+          },
+          {
+            "period_start": "2024-04-15",
+            "period_end": "2024-04-22",
+            "value": 3
+          }
+        ],
+        "repos": {}
+      }
+    }
+  },
+  "period_types": ["month", "week"],
+  "metrics_available": ["prs_merged", "issues_opened"]
+}

@@ -1,0 +1,8552 @@
+[
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 11
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 12
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 13
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 9
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 8
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 10
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-01-01",
+    "period_end": "2025-02-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 40
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-01-01",
+    "period_end": "2025-02-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 36
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-01-01",
+    "period_end": "2025-02-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 40
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-01-01",
+    "period_end": "2025-02-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 35
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-01-01",
+    "period_end": "2025-02-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 37
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-02-01",
+    "period_end": "2025-03-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 42
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-02-01",
+    "period_end": "2025-03-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 37
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-02-01",
+    "period_end": "2025-03-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 48
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-02-01",
+    "period_end": "2025-03-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 37
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-02-01",
+    "period_end": "2025-03-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 38
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-03-01",
+    "period_end": "2025-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 49
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-03-01",
+    "period_end": "2025-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 44
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-03-01",
+    "period_end": "2025-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 48
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-03-01",
+    "period_end": "2025-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 44
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-03-01",
+    "period_end": "2025-04-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 46
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-04-01",
+    "period_end": "2025-05-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 35
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-04-01",
+    "period_end": "2025-05-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 46
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-04-01",
+    "period_end": "2025-05-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 42
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-04-01",
+    "period_end": "2025-05-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 46
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-04-01",
+    "period_end": "2025-05-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 47
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-05-01",
+    "period_end": "2025-06-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 49
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-05-01",
+    "period_end": "2025-06-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 45
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-05-01",
+    "period_end": "2025-06-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 49
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-05-01",
+    "period_end": "2025-06-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 44
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-05-01",
+    "period_end": "2025-06-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 46
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-06-01",
+    "period_end": "2025-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 49
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-06-01",
+    "period_end": "2025-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 37
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-06-01",
+    "period_end": "2025-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 41
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-06-01",
+    "period_end": "2025-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 44
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-06-01",
+    "period_end": "2025-07-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 38
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-07-01",
+    "period_end": "2025-08-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 43
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-07-01",
+    "period_end": "2025-08-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 38
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-07-01",
+    "period_end": "2025-08-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 42
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-07-01",
+    "period_end": "2025-08-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 38
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-07-01",
+    "period_end": "2025-08-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 39
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-08-01",
+    "period_end": "2025-09-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 43
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-08-01",
+    "period_end": "2025-09-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 45
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-08-01",
+    "period_end": "2025-09-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 49
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-08-01",
+    "period_end": "2025-09-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 38
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-08-01",
+    "period_end": "2025-09-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 39
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-09-01",
+    "period_end": "2025-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 36
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-09-01",
+    "period_end": "2025-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 47
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-09-01",
+    "period_end": "2025-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 36
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-09-01",
+    "period_end": "2025-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 47
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-09-01",
+    "period_end": "2025-10-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 48
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-10-01",
+    "period_end": "2025-11-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 43
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-10-01",
+    "period_end": "2025-11-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 46
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-10-01",
+    "period_end": "2025-11-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 35
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-10-01",
+    "period_end": "2025-11-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 38
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-10-01",
+    "period_end": "2025-11-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 47
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-11-01",
+    "period_end": "2025-12-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 36
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-11-01",
+    "period_end": "2025-12-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 47
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-11-01",
+    "period_end": "2025-12-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 36
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-11-01",
+    "period_end": "2025-12-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 47
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-11-01",
+    "period_end": "2025-12-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 48
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-12-01",
+    "period_end": "2026-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_opened",
+    "value": 36
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-12-01",
+    "period_end": "2026-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "prs_merged",
+    "value": 39
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-12-01",
+    "period_end": "2026-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_opened",
+    "value": 43
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-12-01",
+    "period_end": "2026-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "issues_closed",
+    "value": 47
+  },
+  {
+    "year": 2025,
+    "period_type": "month",
+    "period_start": "2025-12-01",
+    "period_end": "2026-01-01",
+    "scope": "org",
+    "repo_id": null,
+    "metric_key": "reviews_submitted",
+    "value": 48
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-01",
+    "period_end": "2025-01-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-08",
+    "period_end": "2025-01-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-15",
+    "period_end": "2025-01-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-22",
+    "period_end": "2025-01-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-01-29",
+    "period_end": "2025-02-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-05",
+    "period_end": "2025-02-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-12",
+    "period_end": "2025-02-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-19",
+    "period_end": "2025-02-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-02-26",
+    "period_end": "2025-03-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-05",
+    "period_end": "2025-03-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-12",
+    "period_end": "2025-03-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-19",
+    "period_end": "2025-03-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-03-26",
+    "period_end": "2025-04-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-02",
+    "period_end": "2025-04-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-09",
+    "period_end": "2025-04-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-16",
+    "period_end": "2025-04-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-23",
+    "period_end": "2025-04-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-04-30",
+    "period_end": "2025-05-07",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-07",
+    "period_end": "2025-05-14",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-14",
+    "period_end": "2025-05-21",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-21",
+    "period_end": "2025-05-28",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-05-28",
+    "period_end": "2025-06-04",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-04",
+    "period_end": "2025-06-11",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-11",
+    "period_end": "2025-06-18",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-18",
+    "period_end": "2025-06-25",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-06-25",
+    "period_end": "2025-07-02",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-02",
+    "period_end": "2025-07-09",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-09",
+    "period_end": "2025-07-16",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-16",
+    "period_end": "2025-07-23",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-23",
+    "period_end": "2025-07-30",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-07-30",
+    "period_end": "2025-08-06",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-06",
+    "period_end": "2025-08-13",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-13",
+    "period_end": "2025-08-20",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-20",
+    "period_end": "2025-08-27",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-08-27",
+    "period_end": "2025-09-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-03",
+    "period_end": "2025-09-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-10",
+    "period_end": "2025-09-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-17",
+    "period_end": "2025-09-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-09-24",
+    "period_end": "2025-10-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-01",
+    "period_end": "2025-10-08",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-08",
+    "period_end": "2025-10-15",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-15",
+    "period_end": "2025-10-22",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-22",
+    "period_end": "2025-10-29",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-10-29",
+    "period_end": "2025-11-05",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-05",
+    "period_end": "2025-11-12",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-12",
+    "period_end": "2025-11-19",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-19",
+    "period_end": "2025-11-26",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-11-26",
+    "period_end": "2025-12-03",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-03",
+    "period_end": "2025-12-10",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-10",
+    "period_end": "2025-12-17",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-17",
+    "period_end": "2025-12-24",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-24",
+    "period_end": "2025-12-31",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "repo",
+    "repo_id": "R_001",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_opened",
+    "value": 4
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "prs_merged",
+    "value": 2
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_opened",
+    "value": 5
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "issues_closed",
+    "value": 3
+  },
+  {
+    "year": 2025,
+    "period_type": "week",
+    "period_start": "2025-12-31",
+    "period_end": "2026-01-01",
+    "scope": "repo",
+    "repo_id": "R_002",
+    "metric_key": "reviews_submitted",
+    "value": 3
+  }
+]

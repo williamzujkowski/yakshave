@@ -18,7 +18,32 @@
                 <h1 class="site-title">{{ config.report.title }}</h1>
                 <div class="header-meta">
                     <span class="target-info">{{ config.github.target.name }}</span>
-                    <span class="year-badge">{{ config.github.windows.year }}</span>
+                    <div class="year-selector">
+                        <button class="year-badge" id="yearToggle" aria-label="Select year" aria-expanded="false">
+                            {{ config.github.windows.year }}
+                            <svg class="year-dropdown-icon" width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </button>
+                        <div class="year-dropdown" id="yearDropdown" aria-hidden="true">
+                            <ul class="year-list">
+                                {% for year in available_years %}
+                                <li>
+                                    <a href="/{{ year }}/"
+                                       class="year-option{% if year == config.github.windows.year %} active{% endif %}"
+                                       {% if year == config.github.windows.year %}aria-current="true"{% endif %}>
+                                        {{ year }}
+                                        {% if year == config.github.windows.year %}
+                                        <svg class="check-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                        </svg>
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <nav class="header-nav">
@@ -139,6 +164,7 @@
 
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/view-toggle.js"></script>
+    <script src="assets/js/year-selector.js"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>
