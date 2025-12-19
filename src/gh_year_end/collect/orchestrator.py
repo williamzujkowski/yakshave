@@ -5,9 +5,11 @@ manages clients and rate limiting, and aggregates statistics.
 Supports checkpoint-based resume for long-running collections.
 """
 
+import asyncio
 import json
 import logging
 import os
+from collections.abc import Callable
 from datetime import datetime
 from typing import Any, cast
 
@@ -17,7 +19,7 @@ from gh_year_end.collect.discovery import discover_repos
 from gh_year_end.collect.hygiene import collect_branch_protection, collect_security_features
 from gh_year_end.collect.issues import collect_issues
 from gh_year_end.collect.progress import ProgressTracker
-from gh_year_end.collect.pulls import collect_pulls
+from gh_year_end.collect.pulls import collect_single_repo_pulls
 from gh_year_end.collect.repos import collect_repo_metadata
 from gh_year_end.collect.reviews import collect_reviews
 from gh_year_end.config import Config
@@ -31,6 +33,101 @@ from gh_year_end.storage.paths import PathManager
 from gh_year_end.storage.writer import AsyncJSONLWriter
 
 logger = logging.getLogger(__name__)
+
+
+async def _collect_repos_parallel(
+    repos: list[dict[str, Any]],
+    collect_fn: Callable[..., Any],
+    endpoint_name: str,
+    checkpoint: CheckpointManager | None,
+    max_concurrency: int,
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Process multiple repos in parallel with semaphore control.
+
+    Args:
+        repos: List of repo dicts to process.
+        collect_fn: Async function that takes a single repo and returns stats.
+            The function is responsible for checkpoint management.
+        endpoint_name: Name of endpoint for checkpoint tracking.
+        checkpoint: Checkpoint manager for resume support.
+        max_concurrency: Maximum concurrent repos to process.
+        **kwargs: Additional args to pass to collect_fn.
+
+    Returns:
+        Aggregated stats dict with keys matching the individual collection functions
+        (e.g., pulls_collected, repos_processed, errors, etc.).
+    """
+    semaphore = asyncio.Semaphore(max_concurrency)
+
+    async def process_repo(repo: dict[str, Any]) -> dict[str, Any]:
+        repo_full_name = repo["full_name"]
+
+        # Skip if already complete
+        if checkpoint and checkpoint.is_repo_endpoint_complete(repo_full_name, endpoint_name):
+            logger.debug("Skipping %s - %s already complete", repo_full_name, endpoint_name)
+            return {"skipped": True, "repo": repo_full_name}
+
+        async with semaphore:
+            try:
+                # Call the collection function - it handles checkpoint management
+                result = await collect_fn(repo, **kwargs)
+                return {"success": True, "repo": repo_full_name, **result}
+            except Exception as e:
+                logger.error(
+                    "Error collecting %s for %s: %s",
+                    endpoint_name,
+                    repo_full_name,
+                    e,
+                )
+                # Mark as failed in checkpoint if not already done
+                if checkpoint:
+                    checkpoint.mark_repo_endpoint_failed(
+                        repo_full_name,
+                        endpoint_name,
+                        str(e),
+                        retryable=True,
+                    )
+                return {"error": True, "repo": repo_full_name, "message": str(e)}
+
+    # Create tasks for all repos
+    tasks = [process_repo(repo) for repo in repos]
+
+    # Execute in parallel
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    # Aggregate results
+    stats: dict[str, Any] = {
+        "repos_processed": 0,
+        "repos_skipped": 0,
+        "repos_errored": 0,
+        "errors": [],
+    }
+
+    # Track collection-specific metrics (e.g., pulls_collected, issues_collected)
+    collection_metrics: dict[str, Any] = {}
+
+    for result in results:
+        if isinstance(result, Exception):
+            stats["repos_errored"] += 1
+            stats["errors"].append(str(result))
+        elif isinstance(result, dict):
+            if result.get("skipped"):
+                stats["repos_skipped"] += 1
+            elif result.get("error"):
+                stats["repos_errored"] += 1
+                stats["errors"].append(result.get("message", "Unknown error"))
+            else:
+                stats["repos_processed"] += 1
+                # Aggregate collection-specific metrics
+                for key, value in result.items():
+                    if key not in ("success", "repo") and isinstance(value, (int, float)):
+                        collection_metrics[key] = collection_metrics.get(key, 0) + value
+
+    # Merge collection metrics into stats
+    stats.update(collection_metrics)
+
+    return stats
 
 
 class CollectionError(Exception):
@@ -285,23 +382,39 @@ async def run_collection(
                 progress.mark_phase_complete("pulls")
             else:
                 logger.info("=" * 80)
-                logger.info("STEP 3: Pull Request Collection")
+                logger.info("STEP 3: Pull Request Collection (Parallel)")
                 logger.info("=" * 80)
                 checkpoint.set_current_phase("pulls")
 
-                pull_stats = await collect_pulls(
+                # Use parallel processing for faster collection
+                logger.info(
+                    "Processing %d repos in parallel (max_concurrency=%d)",
+                    len(repos),
+                    config.rate_limit.max_concurrency,
+                )
+
+                pull_stats = await _collect_repos_parallel(
                     repos=repos,
+                    collect_fn=collect_single_repo_pulls,
+                    endpoint_name="pulls",
+                    checkpoint=checkpoint,
+                    max_concurrency=config.rate_limit.max_concurrency,
                     rest_client=rest_client,
                     paths=paths,
                     config=config,
-                    checkpoint=checkpoint,
                 )
+
                 stats["pulls"] = pull_stats
                 checkpoint.mark_phase_complete("pulls")
                 progress.update_items_collected("pulls", pull_stats.get("pulls_collected", 0))
                 progress.mark_phase_complete("pulls")
                 logger.info(
-                    "Pull request complete: %d PRs collected", pull_stats.get("pulls_collected", 0)
+                    "Pull request complete: %d repos processed, %d PRs collected, "
+                    "%d repos skipped, %d errors",
+                    pull_stats.get("repos_processed", 0),
+                    pull_stats.get("pulls_collected", 0),
+                    pull_stats.get("repos_skipped", 0),
+                    pull_stats.get("repos_errored", 0),
                 )
         else:
             logger.info("Skipping pull request collection (disabled in config)")

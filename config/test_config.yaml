@@ -1,0 +1,70 @@
+github:
+  target:
+    mode: org
+    name: sample-org
+  auth:
+    token_env: GITHUB_TOKEN
+  discovery:
+    include_forks: false
+    include_archived: false
+    visibility: all
+  windows:
+    year: 2024
+    since: "2024-01-01T00:00:00Z"
+    until: "2025-01-01T00:00:00Z"
+
+rate_limit:
+  strategy: adaptive
+  max_concurrency: 4
+  min_sleep_seconds: 1
+  max_sleep_seconds: 60
+  sample_rate_limit_endpoint_every_n_requests: 50
+
+identity:
+  bots:
+    exclude_patterns:
+      - ".*\\[bot\\]$"
+      - "^dependabot$"
+      - "^renovate\\[bot\\]$"
+    include_overrides: []
+  humans_only: true
+
+collection:
+  enable:
+    pulls: true
+    issues: true
+    reviews: true
+    comments: true
+    commits: true
+    hygiene: true
+  commits:
+    include_files: true
+    classify_files: true
+  hygiene:
+    paths:
+      - "SECURITY.md"
+      - "README.md"
+      - "LICENSE"
+      - "CONTRIBUTING.md"
+      - "CODE_OF_CONDUCT.md"
+      - "CODEOWNERS"
+      - ".github/CODEOWNERS"
+    workflow_prefixes:
+      - ".github/workflows/"
+    branch_protection:
+      mode: sample
+      sample_top_repos_by: prs_merged
+      sample_count: 25
+    security_features:
+      best_effort: true
+
+storage:
+  root: "./data"
+  raw_format: jsonl
+  curated_format: parquet
+  dataset_version: "v1"
+
+report:
+  title: "Sample Org Year in Review 2024"
+  output_dir: "./site"
+  theme: "engineer_exec_toggle"

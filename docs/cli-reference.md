@@ -2,6 +2,19 @@
 
 Command-line interface for gh-year-end.
 
+## Commands Overview
+
+| Command | Purpose | Common Flags |
+|---------|---------|--------------|
+| `plan` | Preview collection plan without making changes | `--config` |
+| `collect` | Fetch raw data from GitHub API to JSONL files | `--config`, `--force`, `--resume`, `--retry-failed`, `--quiet` |
+| `status` | Show collection progress from checkpoint | `--config` |
+| `normalize` | Convert raw JSONL to curated Parquet tables | `--config` |
+| `metrics` | Compute analytics from curated data | `--config` |
+| `report` | Generate static HTML site with visualizations | `--config`, `--force` |
+| `validate` | Validate cached collection data integrity | `--config`, `--repair` |
+| `all` | Run complete pipeline (collect → normalize → metrics → report) | `--config`, `--force` |
+
 ## Entry Point
 
 ```bash
@@ -78,6 +91,7 @@ Fetches all configured data types (PRs, issues, reviews, comments, commits, hygi
 | `--resume` | `-r` | No | Require existing checkpoint (fails if none exists) |
 | `--from-repo` | | No | Resume starting from specific repo (e.g., 'owner/repo') |
 | `--retry-failed` | | No | Only retry repos marked as failed in checkpoint |
+| `--quiet` | `-q` | No | Minimal output (no progress display) |
 
 **Checkpoint/Resume Behavior:**
 
@@ -122,6 +136,9 @@ gh-year-end collect -c config/config.yaml --from-repo myorg/myrepo
 
 # Retry only failed repos
 gh-year-end collect -c config/config.yaml --retry-failed
+
+# Quiet mode (minimal output, useful for scripts/automation)
+gh-year-end collect -c config/config.yaml --quiet
 ```
 
 **Interrupt Handling:**
@@ -326,6 +343,57 @@ gh-year-end all -c config/config.yaml --force
 
 ---
 
+### validate
+
+Validate cached collection data integrity.
+
+```bash
+gh-year-end validate --config CONFIG [OPTIONS]
+```
+
+Checks JSONL files for JSON validity, required envelope fields, endpoint-specific data fields, and checkpoint consistency.
+
+**Options:**
+
+| Option | Short | Required | Description |
+|--------|-------|----------|-------------|
+| `--config` | `-c` | Yes | Path to config.yaml file |
+| `--repair` | | No | Attempt to repair truncated JSONL files by removing invalid records |
+
+**Validation Checks:**
+
+- JSON validity (proper JSON per line)
+- Required envelope fields (request_id, timestamp, source, endpoint, data)
+- Endpoint-specific data fields
+- Checkpoint consistency with actual files
+
+**Output:**
+
+- Total records count
+- Valid records count
+- List of errors (if any)
+- List of warnings (if any)
+- Pass/fail status
+
+**Example:**
+
+```bash
+# Validate collection data
+gh-year-end validate -c config/config.yaml
+
+# Validate and repair truncated files
+gh-year-end validate -c config/config.yaml --repair
+```
+
+**When to Use:**
+
+- After interrupted collection to check data integrity
+- Before normalization to catch corrupted JSONL files
+- After manual data recovery
+- When seeing unexpected normalization errors
+
+---
+
 ## Typical Workflows
 
 ### First-Time Full Report
@@ -374,6 +442,19 @@ gh-year-end collect -c config/config.yaml --resume
 
 # Or retry only failed repos
 gh-year-end collect -c config/config.yaml --retry-failed
+```
+
+### Validate and Repair Data
+
+```bash
+# After interrupted collection or errors
+gh-year-end validate -c config/config.yaml
+
+# If validation finds truncated records, repair them
+gh-year-end validate -c config/config.yaml --repair
+
+# Continue pipeline after repair
+gh-year-end normalize -c config/config.yaml
 ```
 
 ---
@@ -759,6 +840,44 @@ rm -rf data/metrics/year=2024/
 rm -rf site/2024/
 
 # Or change storage.root in config to different volume
+```
+
+---
+
+### Validation errors (corrupted JSONL)
+
+**Error:**
+```
+Validation failed!
+Errors: [...truncated JSON records...]
+```
+
+**Cause:**
+
+Collection was interrupted mid-write, leaving truncated JSON records in JSONL files.
+
+**Solution:**
+
+```bash
+# Validate and identify corrupted files
+gh-year-end validate -c config/config.yaml
+
+# Attempt automatic repair
+gh-year-end validate -c config/config.yaml --repair
+
+# If repair succeeds, continue pipeline
+gh-year-end normalize -c config/config.yaml
+```
+
+**Manual repair (if automatic repair fails):**
+
+```bash
+# Find the corrupted file from validation output
+# Edit JSONL file to remove truncated line(s)
+# Or delete and re-collect specific endpoint
+
+# Re-validate
+gh-year-end validate -c config/config.yaml
 ```
 
 ---

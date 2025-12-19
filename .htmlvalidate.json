@@ -1,0 +1,19 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "void-style": "off",
+    "no-trailing-whitespace": "off",
+    "require-sri": "off",
+    "no-inline-style": "off",
+    "attr-quotes": ["error", { "style": "double", "unquoted": false }],
+    "doctype-style": ["error", "html5"],
+    "element-required-attributes": "error",
+    "no-dup-attr": "error",
+    "no-dup-id": "error",
+    "no-missing-references": "error",
+    "require-closing-tags": ["error", { "allowSelfclose": true }]
+  },
+  "elements": [
+    "html5"
+  ]
+}

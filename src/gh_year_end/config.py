@@ -200,6 +200,17 @@ class CommitsConfig(BaseModel):
 
     include_files: bool = True
     classify_files: bool = True
+    max_per_repo: int | None = Field(
+        default=None, ge=1, description="Maximum commits to collect per repo"
+    )
+    max_pages: int | None = Field(
+        default=None, ge=1, description="Maximum pages to paginate per repo"
+    )
+    since_days: int | None = Field(
+        default=None,
+        ge=1,
+        description="Only collect commits from last N days of year window",
+    )
 
 
 class BranchProtectionConfig(BaseModel):

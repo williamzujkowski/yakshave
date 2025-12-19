@@ -1,7 +1,7 @@
 # Testing Summary
 
 **Last Updated**: 2025-12-18
-**Total Tests**: 771
+**Total Tests**: 811
 **Test Files**: 51 (48 test files + 3 utility/fixture files)
 **Coverage**: 45% (target: 80%)
 
@@ -10,11 +10,11 @@ This document summarizes the testing infrastructure for gh-year-end.
 ## Test Statistics
 
 ```
-Total Tests: 771 across 48 files
+Total Tests: 811 across 48 files
 By Category:
-  - Unit Tests: ~700
-  - Integration Tests: ~50
-  - End-to-End Tests: ~20
+  - Unit Tests: ~757
+  - Integration Tests: ~10
+  - Live API Tests: ~54
 
 By Phase:
   - Phase 1 (GitHub Client): ~150
@@ -23,6 +23,7 @@ By Phase:
   - Phase 4 (Normalization): ~150
   - Phase 5 (Metrics): ~150
   - Phase 6 (Report): ~70
+  - End-to-End: ~40
 ```
 
 ## Running Tests
@@ -148,15 +149,22 @@ See [docs/testing.md](../docs/testing.md) for comprehensive testing guide includ
 
 ## Marker Configuration
 
-The `@pytest.mark.integration` marker is configured in `pyproject.toml`:
+Test markers are configured in `pyproject.toml`:
 
 ```toml
 [tool.pytest.ini_options]
 markers = [
     "integration: marks tests as integration tests (require GITHUB_TOKEN)",
+    "live_api: marks tests that make real GitHub API calls",
     "slow: marks tests as slow",
 ]
 ```
+
+Current test counts by marker:
+- Total: 811 tests
+- Integration (`-m integration`): 10 tests
+- Live API (`-m live_api`): 54 tests
+- Slow (`-m slow`): 1 test
 
 ## CI/CD Recommendations
 

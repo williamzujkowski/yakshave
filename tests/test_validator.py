@@ -4,8 +4,6 @@ import json
 import tempfile
 from pathlib import Path
 
-import pytest
-
 from gh_year_end.storage.validator import (
     DataValidator,
     ValidationError,

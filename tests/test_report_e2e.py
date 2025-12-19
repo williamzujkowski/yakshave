@@ -100,7 +100,7 @@ class TestReportGenerationE2E:
         assert written_filenames == set(expected_files)
 
     def test_template_rendering_creates_all_html_files(
-        self, sample_metrics_config: Config, sample_metrics_paths: PathManager, tmp_path: Path
+        self, sample_metrics_config: Config, sample_metrics_paths: PathManager, tmp_path: Path  # noqa: ARG002
     ) -> None:
         """Verify that all templates are rendered correctly."""
         # Copy templates and assets from site/ to the test output directory
@@ -239,9 +239,8 @@ class TestReportGenerationE2E:
                 # Skip lines that are in JSON data islands or script tags
                 if "data-" in line or "<script" in line or "// " in line:
                     continue
-                if "{{" in line and "}}" in line:
-                    if 'data-' not in line:
-                        lines_with_issues.append((line_num, line.strip()[:100]))
+                if "{{" in line and "}}" in line and 'data-' not in line:
+                    lines_with_issues.append((line_num, line.strip()[:100]))
 
             # Allow some template syntax in data attributes but shouldn't be excessive
             assert len(lines_with_issues) < 10, (
@@ -300,7 +299,7 @@ class TestReportGenerationE2E:
 
         # Verify year directory exists
         year = sample_metrics_config.github.windows.year
-        year_dir = Path(sample_metrics_config.report.output_dir) / str(year)
+        Path(sample_metrics_config.report.output_dir) / str(year)
 
         # The year directory should be the site_root
         assert sample_metrics_paths.site_root.exists()
@@ -364,7 +363,7 @@ class TestReportGenerationE2E:
         assert len(export_stats["files_written"]) <= len(actual_json_files) * 2
 
         # Build stats should match actual templates
-        actual_html_files = list(test_paths.site_root.glob("*.html"))
+        list(test_paths.site_root.glob("*.html"))
         # Note: build may render more or fewer than templates_rendered count
         # if templates include/extend each other
         assert len(build_stats["templates_rendered"]) > 0
@@ -375,13 +374,13 @@ class TestReportGenerationE2E:
     # Helper methods for verification
 
     def _setup_test_site(
-        self, config: Config, paths: PathManager, tmp_path: Path
+        self, config: Config, paths: PathManager, tmp_path: Path  # noqa: ARG002
     ) -> PathManager:
         """Setup test site with templates and assets.
 
         Args:
             config: Configuration object.
-            paths: Original path manager.
+            paths: Original path manager (unused, kept for signature consistency).
             tmp_path: Pytest temp directory.
 
         Returns:
@@ -486,7 +485,7 @@ class TestReportOutputValidation:
     """Additional validation tests for report output quality."""
 
     def _setup_test_site(
-        self, config: Config, paths: PathManager, tmp_path: Path
+        self, config: Config, paths: PathManager, tmp_path: Path  # noqa: ARG002
     ) -> PathManager:
         """Setup test site with templates and assets."""
         import shutil
@@ -556,10 +555,9 @@ class TestReportOutputValidation:
                 # Skip lines that are in JSON data islands or script tags
                 if "data-" in line or "<script" in line:
                     continue
-                if "{{" in line and "}}" in line:
-                    # Check if it's not a data attribute value
-                    if 'data-' not in line:
-                        lines_with_issues.append((line_num, line.strip()[:80]))
+                # Check for unrendered variables (but not in data attributes)
+                if "{{" in line and "}}" in line and 'data-' not in line:
+                    lines_with_issues.append((line_num, line.strip()[:80]))
 
             # Allow some minor issues (e.g., in comments) but not too many
             assert len(lines_with_issues) < 5, (

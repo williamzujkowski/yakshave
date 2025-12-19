@@ -441,33 +441,33 @@ class AdaptiveRateLimiter:
         # Priority multiplier (CRITICAL gets 0.5x, LOW gets 1.5x)
         priority_multiplier: float = 1.0 + (float(priority.value) * 0.25) - 0.5
 
-        # > 75%: full speed (no delay)
-        if remaining_pct > 75:
+        # > 50%: full speed (no delay) - optimized threshold
+        if remaining_pct > 50:
             return 0.0
 
-        # 50-75%: minimal delay for LOW priority only
-        if remaining_pct > 50:
+        # 25-50%: minimal delay for LOW priority only
+        if remaining_pct > 25:
             if priority == RequestPriority.LOW:
-                factor = (75 - remaining_pct) / 25  # 0.0 to 1.0
+                factor = (50 - remaining_pct) / 25  # 0.0 to 1.0
                 return self.config.min_sleep_seconds * factor * 0.5
             return 0.0
 
-        # 25-50%: moderate delay (linear scaling)
-        if remaining_pct > 25:
-            factor = (50 - remaining_pct) / 25  # 0.0 to 1.0
+        # 10-25%: moderate delay (linear scaling)
+        if remaining_pct > 10:
+            factor = (25 - remaining_pct) / 15  # 0.0 to 1.0
             base_delay = self.config.min_sleep_seconds * factor
             return base_delay * priority_multiplier
 
-        # 10-25%: significant delay (exponential scaling)
-        if remaining_pct > 10:
-            factor = (25 - remaining_pct) / 15  # 0.0 to 1.0
+        # 5-10%: significant delay (exponential scaling)
+        if remaining_pct > 5:
+            factor = (10 - remaining_pct) / 5  # 0.0 to 1.0
             delay_range = self.config.max_sleep_seconds - self.config.min_sleep_seconds
             base_delay = self.config.min_sleep_seconds + (delay_range * (factor**1.5))
             return float(base_delay * priority_multiplier)
 
-        # < 10%: critical delay (exponential scaling)
+        # < 5%: critical delay (exponential scaling)
         if remaining_pct > 0:
-            factor = (10 - remaining_pct) / 10  # 0.0 to 1.0
+            factor = (5 - remaining_pct) / 5  # 0.0 to 1.0
             base_delay = self.config.max_sleep_seconds * (factor**2)
             return base_delay * priority_multiplier
 

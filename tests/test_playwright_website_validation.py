@@ -20,8 +20,23 @@ Usage:
 """
 
 import re
+
 import pytest
-from playwright.sync_api import Page, expect
+
+# Check if playwright is available
+try:
+    from playwright.sync_api import Page, expect
+    HAS_PLAYWRIGHT = True
+except ImportError:
+    HAS_PLAYWRIGHT = False
+    Page = None  # type: ignore
+    expect = None  # type: ignore
+
+# Skip all tests in this module if playwright is not installed
+pytestmark = pytest.mark.skipif(
+    not HAS_PLAYWRIGHT,
+    reason="Playwright not installed. Run: pip install playwright && playwright install"
+)
 
 
 # Base URL for local testing
@@ -233,7 +248,7 @@ class TestNavigation:
             ("index.html", "Overview"),
         ]
 
-        for page_href, page_keyword in pages_to_test:
+        for page_href, _page_keyword in pages_to_test:
             # Click the link
             page.locator(f"aside.sidebar nav.main-nav a.nav-link[href='{page_href}']").click()
 

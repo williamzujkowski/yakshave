@@ -8,17 +8,18 @@ from __future__ import annotations
 
 import json
 import logging
-from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
-from gh_year_end.config import Config
-from gh_year_end.github.ratelimit import AdaptiveRateLimiter
-from gh_year_end.github.rest import RestClient
-from gh_year_end.storage.paths import PathManager
 from gh_year_end.storage.writer import AsyncJSONLWriter
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
+    from gh_year_end.config import Config
+    from gh_year_end.github.ratelimit import AdaptiveRateLimiter
+    from gh_year_end.github.rest import RestClient
     from gh_year_end.storage.checkpoint import CheckpointManager
+    from gh_year_end.storage.paths import PathManager
 
 logger = logging.getLogger(__name__)
 

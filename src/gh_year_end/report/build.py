@@ -22,6 +22,32 @@ from gh_year_end.storage.paths import PathManager
 logger = logging.getLogger(__name__)
 
 
+def get_available_years(site_base_dir: Path) -> list[int]:
+    """Scan site directory for available year subdirectories.
+
+    Args:
+        site_base_dir: Base directory for site output (e.g., ./site/).
+
+    Returns:
+        Sorted list of years (integers) in descending order.
+    """
+    if not site_base_dir.exists():
+        return []
+
+    years = []
+    for item in site_base_dir.iterdir():
+        if item.is_dir() and item.name.isdigit() and len(item.name) == 4:
+            try:
+                year = int(item.name)
+                # Sanity check: reasonable year range
+                if 2000 <= year <= 2100:
+                    years.append(year)
+            except ValueError:
+                continue
+
+    return sorted(years, reverse=True)
+
+
 def build_site(config: Config, paths: PathManager) -> dict[str, Any]:
     """Build the complete static site from templates and data.
 
@@ -79,6 +105,13 @@ def build_site(config: Config, paths: PathManager) -> dict[str, Any]:
 
         # Create build manifest
         _write_build_manifest(paths.site_root, config, stats)
+
+        # Generate root redirect to most recent year
+        site_base_dir = Path(config.report.output_dir)
+        available_years = get_available_years(site_base_dir)
+        if available_years:
+            most_recent_year = available_years[0]
+            _generate_root_redirect(site_base_dir, most_recent_year)
 
     except Exception as e:
         error_msg = f"Build failed: {e!s}"
@@ -222,6 +255,11 @@ def _render_templates(
         # FIX FOR ISSUE #65: Transform activity timeline from timeseries data
         activity_timeline_data = _transform_activity_timeline(timeseries_data)
 
+        # Get available years for multi-year navigation
+        site_base_dir = Path(config.report.output_dir)
+        available_years = get_available_years(site_base_dir)
+        current_year = config.github.windows.year
+
         # Process awards data
         awards_by_category: dict[str, list[Any]] = {
             "individual": [],
@@ -255,6 +293,8 @@ def _render_templates(
                     },
                 },
             },
+            "current_year": current_year,
+            "available_years": available_years,
             "summary": {
                 "total_contributors": summary_data.get("total_contributors", 0),
                 "total_prs_merged": summary_data.get("total_prs_merged", 0),
@@ -654,3 +694,59 @@ def _write_build_manifest(output_dir: Path, config: Config, stats: dict[str, Any
         json.dump(manifest, f, indent=2)
 
     logger.info("Wrote build manifest to %s", manifest_path)
+
+
+def _generate_root_redirect(site_base_dir: Path, target_year: int) -> None:
+    """Generate root index.html that redirects to the most recent year.
+
+    Args:
+        site_base_dir: Base directory for site output (e.g., ./site/).
+        target_year: Year to redirect to.
+    """
+    redirect_html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=/{target_year}/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <style>
+        body {{
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }}
+        .redirect-container {{
+            text-align: center;
+        }}
+        .redirect-container h1 {{
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }}
+        .redirect-container p {{
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }}
+        .redirect-container a {{
+            color: white;
+            text-decoration: underline;
+        }}
+    </style>
+</head>
+<body>
+    <div class="redirect-container">
+        <h1>Year in Review</h1>
+        <p>Redirecting to {target_year}...</p>
+        <p>If you are not redirected automatically, <a href="/{target_year}/">click here</a>.</p>
+    </div>
+</body>
+</html>"""
+
+    root_index_path = site_base_dir / "index.html"
+    root_index_path.write_text(redirect_html, encoding="utf-8")
+    logger.info("Generated root redirect to %d at %s", target_year, root_index_path)

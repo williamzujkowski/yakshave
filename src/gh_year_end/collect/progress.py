@@ -11,8 +11,7 @@ import time
 from collections import deque
 from dataclasses import dataclass, field
 from datetime import datetime
-from types import TracebackType
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, ClassVar
 
 from rich.console import Console
 from rich.live import Live
@@ -28,6 +27,8 @@ from rich.progress import (
 from rich.table import Table
 
 if TYPE_CHECKING:
+    from types import TracebackType
+
     from gh_year_end.github.ratelimit import AdaptiveRateLimiter
 
 
@@ -67,7 +68,7 @@ class ProgressTracker:
     - ETA based on rolling average request time
     """
 
-    PHASES = [
+    PHASES: ClassVar[list[str]] = [
         "discovery",
         "repo_metadata",
         "pulls",

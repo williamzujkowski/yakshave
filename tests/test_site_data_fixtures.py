@@ -3,9 +3,7 @@
 Validates that the minimal test dataset is well-formed and complete.
 """
 
-from pathlib import Path
 
-import pytest
 
 
 def test_sample_site_data_dir_exists(sample_site_data_dir):

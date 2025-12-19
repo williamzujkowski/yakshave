@@ -10,19 +10,72 @@ import logging
 from datetime import datetime
 from typing import TYPE_CHECKING, Any
 
-from gh_year_end.config import Config
-from gh_year_end.github.rest import RestClient
-from gh_year_end.storage.paths import PathManager
 from gh_year_end.storage.writer import AsyncJSONLWriter
 
 if TYPE_CHECKING:
+    from gh_year_end.config import Config
+    from gh_year_end.github.rest import RestClient
     from gh_year_end.storage.checkpoint import CheckpointManager
+    from gh_year_end.storage.paths import PathManager
 
 logger = logging.getLogger(__name__)
 
 
 class PullsCollectorError(Exception):
     """Raised when pull request collection fails."""
+
+
+async def collect_single_repo_pulls(
+    repo: dict[str, Any],
+    rest_client: RestClient,
+    paths: PathManager,
+    config: Config,
+    checkpoint: CheckpointManager | None = None,
+) -> dict[str, Any]:
+    """Collect pull requests for a single repository.
+
+    This function is designed to be called in parallel for multiple repos.
+
+    Args:
+        repo: Repository metadata dict.
+        rest_client: RestClient for GitHub API access.
+        paths: PathManager for storage locations.
+        config: Application configuration with date filters.
+        checkpoint: Optional CheckpointManager for resume support.
+
+    Returns:
+        Stats dictionary with:
+            - pulls_collected: Number of PRs collected.
+
+    Raises:
+        Exception: If collection fails.
+    """
+    repo_full_name = repo["full_name"]
+    owner, repo_name = repo_full_name.split("/", 1)
+    since = config.github.windows.since
+    until = config.github.windows.until
+
+    logger.debug("Processing pulls for %s", repo_full_name)
+
+    # Mark as in progress
+    if checkpoint:
+        checkpoint.mark_repo_endpoint_in_progress(repo_full_name, "pulls")
+
+    # Collect PRs for this repo
+    pr_count = await _collect_repo_pulls(
+        owner=owner,
+        repo=repo_name,
+        repo_full_name=repo_full_name,
+        rest_client=rest_client,
+        paths=paths,
+        since=since,
+        until=until,
+        checkpoint=checkpoint,
+    )
+
+    logger.debug("Collected %d PRs from %s", pr_count, repo_full_name)
+
+    return {"pulls_collected": pr_count}
 
 
 async def collect_pulls(
@@ -246,8 +299,8 @@ def _filter_prs_by_date(
 
     Args:
         prs: List of PR data dicts.
-        since: Include PRs updated on or after this date.
-        until: Include PRs updated before this date.
+        since: Include PRs updated on or after this date (timezone-aware).
+        until: Include PRs updated before this date (timezone-aware).
 
     Returns:
         Filtered list of PRs.
@@ -261,14 +314,12 @@ def _filter_prs_by_date(
             continue
 
         try:
-            # Parse ISO 8601 timestamp
+            # Parse ISO 8601 timestamp to timezone-aware datetime
             updated_at = datetime.fromisoformat(updated_at_str.replace("Z", "+00:00"))
 
-            # Remove timezone for comparison with config dates
-            updated_at_naive = updated_at.replace(tzinfo=None)
-
             # Check if within range [since, until)
-            if since <= updated_at_naive < until:
+            # Both updated_at and since/until are timezone-aware (UTC)
+            if since <= updated_at < until:
                 filtered.append(pr)
 
         except (ValueError, AttributeError) as e:
@@ -291,7 +342,7 @@ def _all_prs_before_date(prs: list[dict[str, Any]], since: datetime) -> bool:
 
     Args:
         prs: List of PR data dicts.
-        since: Date threshold.
+        since: Date threshold (timezone-aware).
 
     Returns:
         True if all PRs have updated_at before since date.
@@ -302,11 +353,12 @@ def _all_prs_before_date(prs: list[dict[str, Any]], since: datetime) -> bool:
             continue
 
         try:
+            # Parse ISO 8601 timestamp to timezone-aware datetime
             updated_at = datetime.fromisoformat(updated_at_str.replace("Z", "+00:00"))
-            updated_at_naive = updated_at.replace(tzinfo=None)
 
             # If any PR is on or after since date, return False
-            if updated_at_naive >= since:
+            # Both updated_at and since are timezone-aware (UTC)
+            if updated_at >= since:
                 return False
 
         except (ValueError, AttributeError):

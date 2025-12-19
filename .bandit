@@ -1,0 +1,24 @@
+[bandit]
+# Exclude test directories from security scanning
+exclude_dirs = ['/tests', '/.venv', '/.pytest_cache', '/__pycache__']
+
+# Scan only source code
+targets = ['src']
+
+# Test IDs to skip (none by default, but can be customized)
+skips = []
+
+# Set confidence and severity thresholds
+# Confidence: LOW, MEDIUM, HIGH
+# Severity: LOW, MEDIUM, HIGH
+severity = LOW
+confidence = MEDIUM
+
+# Output format
+format = txt
+
+# Generate report
+output_file = bandit-report.txt
+
+# Enable verbose output
+verbose = false

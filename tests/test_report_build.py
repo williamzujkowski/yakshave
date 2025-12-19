@@ -11,11 +11,13 @@ import pytest
 from gh_year_end.config import Config
 from gh_year_end.report.build import (
     _copy_assets,
+    _generate_root_redirect,
     _load_json_data,
     _render_templates,
     _verify_metrics_data_exists,
     _write_build_manifest,
     build_site,
+    get_available_years,
 )
 from gh_year_end.storage.paths import PathManager
 
@@ -281,6 +283,21 @@ class TestBuildSite:
         # Should complete without error
         assert len(stats["errors"]) == 0
         assert stats["assets_copied"] == 0
+
+    def test_generates_root_redirect(
+        self, config: Config, paths: PathManager, sample_metrics_data: None, tmp_path: Path
+    ) -> None:
+        """Test that root redirect is generated."""
+        build_site(config, paths)
+
+        # Check that root redirect was created
+        site_base_dir = Path(config.report.output_dir)
+        redirect_path = site_base_dir / "index.html"
+        assert redirect_path.exists()
+
+        # Verify it redirects to the current year
+        content = redirect_path.read_text()
+        assert f"url=/{config.github.windows.year}/" in content
 
 
 class TestVerifyMetricsDataExists:
@@ -554,3 +571,119 @@ class TestWriteBuildManifest:
 
         assert len(manifest["errors"]) == 2
         assert "Failed to render template" in manifest["errors"]
+
+
+class TestGetAvailableYears:
+    """Tests for get_available_years function."""
+
+    def test_returns_empty_list_if_dir_missing(self, tmp_path: Path) -> None:
+        """Test that empty list is returned if directory doesn't exist."""
+        nonexistent_dir = tmp_path / "nonexistent"
+        years = get_available_years(nonexistent_dir)
+        assert years == []
+
+    def test_finds_year_directories(self, tmp_path: Path) -> None:
+        """Test that year directories are found and sorted."""
+        # Create year directories
+        (tmp_path / "2023").mkdir()
+        (tmp_path / "2024").mkdir()
+        (tmp_path / "2025").mkdir()
+
+        years = get_available_years(tmp_path)
+
+        assert years == [2025, 2024, 2023]
+
+    def test_ignores_non_year_directories(self, tmp_path: Path) -> None:
+        """Test that non-year directories are ignored."""
+        # Create valid year directories
+        (tmp_path / "2023").mkdir()
+        (tmp_path / "2024").mkdir()
+
+        # Create invalid directories
+        (tmp_path / "data").mkdir()
+        (tmp_path / "assets").mkdir()
+        (tmp_path / "123").mkdir()  # Too short
+        (tmp_path / "12345").mkdir()  # Too long
+        (tmp_path / "abcd").mkdir()  # Not a number
+
+        years = get_available_years(tmp_path)
+
+        assert years == [2024, 2023]
+
+    def test_ignores_files(self, tmp_path: Path) -> None:
+        """Test that files are ignored, only directories are checked."""
+        # Create year directories
+        (tmp_path / "2023").mkdir()
+        (tmp_path / "2024").mkdir()
+
+        # Create files that look like years
+        (tmp_path / "2025.txt").write_text("not a directory")
+        (tmp_path / "2026").write_text("file, not directory")
+
+        years = get_available_years(tmp_path)
+
+        # Should only include directories
+        assert 2023 in years
+        assert 2024 in years
+        assert 2025 not in years
+        assert 2026 not in years
+
+    def test_filters_unreasonable_years(self, tmp_path: Path) -> None:
+        """Test that years outside reasonable range are filtered."""
+        # Create valid year directories
+        (tmp_path / "2023").mkdir()
+
+        # Create unreasonable years
+        (tmp_path / "1999").mkdir()  # Too old
+        (tmp_path / "2101").mkdir()  # Too far in future
+
+        years = get_available_years(tmp_path)
+
+        assert years == [2023]
+
+
+class TestGenerateRootRedirect:
+    """Tests for _generate_root_redirect function."""
+
+    def test_creates_redirect_file(self, tmp_path: Path) -> None:
+        """Test that redirect index.html is created."""
+        _generate_root_redirect(tmp_path, 2025)
+
+        redirect_path = tmp_path / "index.html"
+        assert redirect_path.exists()
+
+    def test_redirect_contains_meta_refresh(self, tmp_path: Path) -> None:
+        """Test that redirect file contains meta refresh tag."""
+        _generate_root_redirect(tmp_path, 2025)
+
+        content = (tmp_path / "index.html").read_text()
+        assert 'meta http-equiv="refresh"' in content
+        assert "url=/2025/" in content
+
+    def test_redirect_contains_fallback_link(self, tmp_path: Path) -> None:
+        """Test that redirect file contains fallback link."""
+        _generate_root_redirect(tmp_path, 2025)
+
+        content = (tmp_path / "index.html").read_text()
+        assert 'href="/2025/"' in content
+        assert "click here" in content
+
+    def test_redirect_shows_target_year(self, tmp_path: Path) -> None:
+        """Test that redirect page shows the target year."""
+        _generate_root_redirect(tmp_path, 2024)
+
+        content = (tmp_path / "index.html").read_text()
+        assert "2024" in content
+
+    def test_redirect_is_valid_html(self, tmp_path: Path) -> None:
+        """Test that generated HTML is valid."""
+        _generate_root_redirect(tmp_path, 2025)
+
+        content = (tmp_path / "index.html").read_text()
+        assert "<!DOCTYPE html>" in content
+        assert "<html" in content
+        assert "</html>" in content
+        assert "<head>" in content
+        assert "</head>" in content
+        assert "<body>" in content
+        assert "</body>" in content
