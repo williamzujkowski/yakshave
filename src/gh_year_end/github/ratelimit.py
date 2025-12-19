@@ -493,7 +493,8 @@ class AdaptiveRateLimiter:
         # If we're approaching the limit, slow down with adaptive backoff
         max_per_minute = self.config.secondary.max_requests_per_minute
 
-        if requests_per_minute >= max_per_minute * 0.9:  # 90% threshold
+        threshold = self.config.secondary.threshold
+        if requests_per_minute >= max_per_minute * threshold:
             # Find oldest request in the window
             oldest_in_window = min(
                 (ts for ts in self._request_timestamps if ts > window_start),
@@ -514,9 +515,10 @@ class AdaptiveRateLimiter:
                     self._secondary_backoff_multiplier,
                 )
                 # Increase backoff for next time
+                max_backoff = self.config.secondary.max_backoff_multiplier
                 self._secondary_backoff_multiplier = min(
                     self._secondary_backoff_multiplier * self.config.secondary.backoff_multiplier,
-                    5.0,  # Max 5x backoff
+                    max_backoff,
                 )
                 await asyncio.sleep(sleep_time)
         else:

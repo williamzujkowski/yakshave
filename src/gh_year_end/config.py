@@ -148,6 +148,12 @@ class SecondaryLimitConfig(BaseModel):
     backoff_multiplier: float = Field(
         default=1.5, ge=1.0, description="Backoff multiplier on violations"
     )
+    threshold: float = Field(
+        default=0.8, ge=0.5, le=1.0, description="Percentage of limit to trigger throttling"
+    )
+    max_backoff_multiplier: float = Field(
+        default=2.0, ge=1.0, le=10.0, description="Maximum backoff multiplier cap"
+    )
 
 
 class RateLimitConfig(BaseModel):
