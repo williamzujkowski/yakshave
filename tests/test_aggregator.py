@@ -151,6 +151,51 @@ class TestRepoTracking:
         assert "owner/repo" in agg.repo_health
         assert agg.repo_health["owner/repo"]["pr_count"] == 0
 
+    def test_add_repo_without_full_name(self):
+        """Test adding a repo without full_name is safely ignored."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo = {"name": "repo", "description": "Test repo"}
+        agg.add_repo(repo)
+
+        assert len(agg.repos) == 0
+        assert len(agg.repo_health) == 0
+
+    def test_add_repo_multiple_times(self):
+        """Test that adding the same repo multiple times is idempotent."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo = {"full_name": "owner/repo", "name": "repo"}
+        agg.add_repo(repo)
+        agg.add_repo(repo)
+
+        assert len(agg.repos) == 1
+        assert len(agg.repo_health) == 1
+
+    def test_cache_repo_all_fields(self):
+        """Test that repo caching captures all fields."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo = {
+            "full_name": "owner/repo",
+            "name": "repo",
+            "description": "A test repository",
+            "html_url": "https://github.com/owner/repo",
+            "language": "Python",
+            "stargazers_count": 100,
+            "forks_count": 25,
+            "archived": False,
+            "private": True,
+        }
+        agg.add_repo(repo)
+
+        cached = agg.repos["owner/repo"]
+        assert cached["full_name"] == "owner/repo"
+        assert cached["name"] == "repo"
+        assert cached["description"] == "A test repository"
+        assert cached["language"] == "Python"
+        assert cached["stargazers_count"] == 100
+        assert cached["forks_count"] == 25
+        assert cached["archived"] is False
+        assert cached["private"] is True
+
 
 class TestPRMetrics:
     """Test PR metrics aggregation."""
@@ -223,6 +268,79 @@ class TestPRMetrics:
         assert "2024-01" in agg._monthly_counters["prs_opened"]
         assert agg._monthly_counters["prs_opened"]["2024-01"]["alice"] == 1
 
+    def test_add_pr_without_author(self):
+        """Test adding PR without author is safely ignored."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        pr = {"created_at": "2024-01-15T10:00:00Z"}
+        agg.add_pr(repo_id, pr)
+
+        assert len(agg.leaderboards["prs_opened"]) == 0
+        assert agg.repo_health[repo_id]["pr_count"] == 0
+
+    def test_add_pr_author_without_login(self):
+        """Test adding PR with author but no login is safely ignored."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        pr = {
+            "user": {"avatar_url": "url", "type": "User"},
+            "created_at": "2024-01-15T10:00:00Z",
+        }
+        agg.add_pr(repo_id, pr)
+
+        assert len(agg.leaderboards["prs_opened"]) == 0
+
+    def test_add_pr_wrong_year(self):
+        """Test that PRs from wrong year don't add to time series."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        pr = {
+            "user": {"login": "alice", "avatar_url": "url", "type": "User"},
+            "created_at": "2023-01-15T10:00:00Z",
+        }
+        agg.add_pr(repo_id, pr)
+
+        # Leaderboard should still count it
+        assert agg.leaderboards["prs_opened"]["alice"] == 1
+
+        # But time series should be empty
+        assert len(agg._weekly_counters["prs_opened"]) == 0
+        assert len(agg._monthly_counters["prs_opened"]) == 0
+
+    def test_add_pr_without_created_at(self):
+        """Test adding PR without created_at timestamp."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        pr = {"user": {"login": "alice", "avatar_url": "url", "type": "User"}}
+        agg.add_pr(repo_id, pr)
+
+        # Leaderboard should count it
+        assert agg.leaderboards["prs_opened"]["alice"] == 1
+
+        # But time series should be empty
+        assert len(agg._weekly_counters["prs_opened"]) == 0
+
+    def test_add_pr_repo_not_in_health(self):
+        """Test adding PR for repo not in health tracking."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+
+        pr = {
+            "user": {"login": "alice", "avatar_url": "url", "type": "User"},
+            "created_at": "2024-01-15T10:00:00Z",
+        }
+        agg.add_pr("unknown/repo", pr)
+
+        # Leaderboard should still work
+        assert agg.leaderboards["prs_opened"]["alice"] == 1
+
 
 class TestIssueMetrics:
     """Test issue metrics aggregation."""
@@ -277,6 +395,51 @@ class TestIssueMetrics:
         assert "bob" not in agg.leaderboards["issues_opened"]
         assert agg.repo_health[repo_id]["issue_count"] == 0
 
+    def test_add_issue_bot_filtered(self):
+        """Test that bot issues are filtered out."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        issue = {
+            "user": {"login": "dependabot[bot]", "avatar_url": "url", "type": "Bot"},
+            "created_at": "2024-01-15T10:00:00Z",
+            "state": "open",
+        }
+        agg.add_issue(repo_id, issue)
+
+        assert "dependabot[bot]" not in agg.leaderboards["issues_opened"]
+
+    def test_add_issue_without_author(self):
+        """Test adding issue without author is safely ignored."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        issue = {"created_at": "2024-01-15T10:00:00Z", "state": "open"}
+        agg.add_issue(repo_id, issue)
+
+        assert len(agg.leaderboards["issues_opened"]) == 0
+
+    def test_add_issue_wrong_year(self):
+        """Test that issues from wrong year don't add to time series."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        issue = {
+            "user": {"login": "bob", "avatar_url": "url", "type": "User"},
+            "created_at": "2023-01-15T10:00:00Z",
+            "state": "open",
+        }
+        agg.add_issue(repo_id, issue)
+
+        # Leaderboard should count it
+        assert agg.leaderboards["issues_opened"]["bob"] == 1
+
+        # But time series should be empty
+        assert len(agg._weekly_counters["issues_opened"]) == 0
+
 
 class TestReviewMetrics:
     """Test review metrics aggregation."""
@@ -329,6 +492,51 @@ class TestReviewMetrics:
         assert agg.leaderboards["reviews_submitted"]["charlie"] == 1
         assert agg.leaderboards["changes_requested"]["charlie"] == 1
 
+    def test_add_review_bot_filtered(self):
+        """Test that bot reviews are filtered out."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        review = {
+            "user": {"login": "codecov[bot]", "avatar_url": "url", "type": "Bot"},
+            "submitted_at": "2024-01-15T10:00:00Z",
+            "state": "APPROVED",
+        }
+        agg.add_review(repo_id, 1, review)
+
+        assert "codecov[bot]" not in agg.leaderboards["reviews_submitted"]
+
+    def test_add_review_without_user(self):
+        """Test adding review without user is safely ignored."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        review = {"submitted_at": "2024-01-15T10:00:00Z", "state": "APPROVED"}
+        agg.add_review(repo_id, 1, review)
+
+        assert len(agg.leaderboards["reviews_submitted"]) == 0
+
+    def test_add_review_wrong_year(self):
+        """Test that reviews from wrong year don't add to time series."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        review = {
+            "user": {"login": "charlie", "avatar_url": "url", "type": "User"},
+            "submitted_at": "2023-01-15T10:00:00Z",
+            "state": "APPROVED",
+        }
+        agg.add_review(repo_id, 1, review)
+
+        # Leaderboard should count it
+        assert agg.leaderboards["reviews_submitted"]["charlie"] == 1
+
+        # But time series should be empty
+        assert len(agg._weekly_counters["reviews_submitted"]) == 0
+
 
 class TestCommentMetrics:
     """Test comment metrics aggregation."""
@@ -363,6 +571,64 @@ class TestCommentMetrics:
         assert agg.leaderboards["comments_total"]["dave"] == 1
         assert agg.leaderboards["review_comments_total"]["dave"] == 1
 
+    def test_add_comment_pr(self):
+        """Test adding a PR comment."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        comment = {
+            "user": {"login": "dave", "avatar_url": "url", "type": "User"},
+            "created_at": "2024-01-15T10:00:00Z",
+        }
+        agg.add_comment(repo_id, comment, comment_type="pr")
+
+        assert agg.leaderboards["comments_total"]["dave"] == 1
+        assert agg.leaderboards["review_comments_total"]["dave"] == 1
+
+    def test_add_comment_bot_filtered(self):
+        """Test that bot comments are filtered out."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        comment = {
+            "user": {"login": "github-actions[bot]", "avatar_url": "url", "type": "Bot"},
+            "created_at": "2024-01-15T10:00:00Z",
+        }
+        agg.add_comment(repo_id, comment, comment_type="issue")
+
+        assert "github-actions[bot]" not in agg.leaderboards["comments_total"]
+
+    def test_add_comment_without_user(self):
+        """Test adding comment without user is safely ignored."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        comment = {"created_at": "2024-01-15T10:00:00Z"}
+        agg.add_comment(repo_id, comment, comment_type="issue")
+
+        assert len(agg.leaderboards["comments_total"]) == 0
+
+    def test_add_comment_wrong_year(self):
+        """Test that comments from wrong year don't add to time series."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        comment = {
+            "user": {"login": "dave", "avatar_url": "url", "type": "User"},
+            "created_at": "2023-01-15T10:00:00Z",
+        }
+        agg.add_comment(repo_id, comment, comment_type="issue")
+
+        # Leaderboard should count it
+        assert agg.leaderboards["comments_total"]["dave"] == 1
+
+        # But time series should be empty
+        assert len(agg._weekly_counters["comments_total"]) == 0
+
 
 class TestHygieneTracking:
     """Test hygiene score tracking."""
@@ -385,6 +651,33 @@ class TestHygieneTracking:
 
         assert repo_id in agg.hygiene
         assert agg.hygiene[repo_id]["score"] == 85
+
+
+class TestRepoHealth:
+    """Test repo health computation."""
+
+    def test_compute_repo_health_basic(self):
+        """Test basic repo health computation."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        pr = {
+            "user": {"login": "alice", "avatar_url": "url", "type": "User"},
+            "created_at": "2024-01-15T10:00:00Z",
+        }
+        agg.add_pr(repo_id, pr)
+
+        health = agg.compute_repo_health(repo_id)
+        assert health["repo"] == repo_id
+        assert health["contributor_count"] == 1
+        assert health["pr_count"] == 1
+
+    def test_compute_repo_health_unknown_repo(self):
+        """Test computing health for unknown repo returns empty dict."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        health = agg.compute_repo_health("unknown/repo")
+        assert health == {}
 
 
 class TestExport:
@@ -536,6 +829,128 @@ class TestExport:
         assert awards["top_pr_author"]["user"] == "alice"
         assert awards["top_pr_author"]["count"] == 1
 
+    def test_export_awards_all_types(self):
+        """Test all award types are computed."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        # Add PR
+        pr = {
+            "user": {"login": "alice", "avatar_url": "a.png", "type": "User"},
+            "created_at": "2024-01-15T10:00:00Z",
+        }
+        agg.add_pr(repo_id, pr)
+
+        # Add issue
+        issue = {
+            "user": {"login": "bob", "avatar_url": "b.png", "type": "User"},
+            "created_at": "2024-01-15T10:00:00Z",
+            "state": "open",
+        }
+        agg.add_issue(repo_id, issue)
+
+        # Add review
+        review = {
+            "user": {"login": "charlie", "avatar_url": "c.png", "type": "User"},
+            "submitted_at": "2024-01-15T10:00:00Z",
+            "state": "APPROVED",
+        }
+        agg.add_review(repo_id, 1, review)
+
+        export = agg.export()
+        awards = export["awards"]
+
+        assert "top_pr_author" in awards
+        assert awards["top_pr_author"]["user"] == "alice"
+
+        assert "top_reviewer" in awards
+        assert awards["top_reviewer"]["user"] == "charlie"
+
+        assert "top_issue_opener" in awards
+        assert awards["top_issue_opener"]["user"] == "bob"
+
+    def test_export_empty_data(self):
+        """Test export with no data."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        export = agg.export()
+
+        assert export["summary"]["total_repos"] == 0
+        assert export["summary"]["total_contributors"] == 0
+        assert export["summary"]["total_prs"] == 0
+
+        # Leaderboards should exist but be empty lists
+        assert "prs_opened" in export["leaderboards"]
+        assert len(export["leaderboards"]["prs_opened"]) == 0
+
+        assert len(export["repo_health"]) == 0
+        assert len(export["awards"]) == 0
+
+    def test_export_timeseries_filters_bots(self):
+        """Test that bots are filtered from time series export."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        # Add user PR
+        pr_user = {
+            "user": {"login": "alice", "avatar_url": "url", "type": "User"},
+            "created_at": "2024-01-15T10:00:00Z",
+        }
+        # Add bot PR
+        pr_bot = {
+            "user": {"login": "dependabot[bot]", "avatar_url": "url", "type": "Bot"},
+            "created_at": "2024-01-15T10:00:00Z",
+        }
+        agg.add_pr(repo_id, pr_user)
+        agg.add_pr(repo_id, pr_bot)
+
+        export = agg.export()
+        weekly_prs = export["timeseries"]["weekly"]["prs_opened"]
+
+        # Only alice should be in time series
+        assert len(weekly_prs) == 1
+        assert weekly_prs[0]["user"] == "alice"
+
+    def test_export_repo_health_sorted(self):
+        """Test that repo health is sorted by repo name."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+
+        # Add repos in non-alphabetical order
+        for repo_name in ["owner/zebra", "owner/apple", "owner/middle"]:
+            agg.add_repo({"full_name": repo_name, "name": repo_name.split("/")[1]})
+
+        export = agg.export()
+        repo_health = export["repo_health"]
+
+        assert len(repo_health) == 3
+        assert repo_health[0]["repo"] == "owner/apple"
+        assert repo_health[1]["repo"] == "owner/middle"
+        assert repo_health[2]["repo"] == "owner/zebra"
+
+    def test_export_summary_multiple_repos(self):
+        """Test summary with multiple repos and contributors."""
+        agg = MetricsAggregator(year=2024, target_name="org", target_mode="org")
+
+        # Add multiple repos
+        for i in range(3):
+            repo_id = f"org/repo{i}"
+            agg.add_repo({"full_name": repo_id, "name": f"repo{i}"})
+
+            # Add PR
+            pr = {
+                "user": {"login": f"user{i}", "avatar_url": "url", "type": "User"},
+                "created_at": "2024-01-15T10:00:00Z",
+            }
+            agg.add_pr(repo_id, pr)
+
+        export = agg.export()
+        summary = export["summary"]
+
+        assert summary["total_repos"] == 3
+        assert summary["total_contributors"] == 3
+        assert summary["total_prs"] == 3
+
 
 class TestIntegration:
     """Integration tests combining multiple operations."""
@@ -592,3 +1007,189 @@ class TestIntegration:
 
         assert len(export["leaderboards"]["prs_opened"]) == 2
         assert len(export["repo_health"]) == 2
+
+    def test_single_contributor_across_multiple_metrics(self):
+        """Test single user contributing across all metric types."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        user = {"login": "alice", "avatar_url": "a.png", "type": "User"}
+
+        # Add PR
+        pr = {"user": user, "created_at": "2024-01-15T10:00:00Z"}
+        agg.add_pr(repo_id, pr)
+
+        # Add issue
+        issue = {"user": user, "created_at": "2024-01-15T10:00:00Z", "state": "open"}
+        agg.add_issue(repo_id, issue)
+
+        # Add review
+        review = {"user": user, "submitted_at": "2024-01-15T10:00:00Z", "state": "APPROVED"}
+        agg.add_review(repo_id, 1, review)
+
+        # Add comment
+        comment = {"user": user, "created_at": "2024-01-15T10:00:00Z"}
+        agg.add_comment(repo_id, comment, comment_type="issue")
+
+        export = agg.export()
+
+        # User should appear in multiple leaderboards
+        assert export["leaderboards"]["prs_opened"][0]["user"] == "alice"
+        assert export["leaderboards"]["issues_opened"][0]["user"] == "alice"
+        assert export["leaderboards"]["reviews_submitted"][0]["user"] == "alice"
+        assert export["leaderboards"]["comments_total"][0]["user"] == "alice"
+
+        # Summary should show 1 contributor
+        assert export["summary"]["total_contributors"] == 1
+
+    def test_mixed_bots_and_users(self):
+        """Test aggregation with mix of bots and real users."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        # Add PRs from users and bots
+        for login, is_bot in [
+            ("alice", False),
+            ("bob", False),
+            ("dependabot[bot]", True),
+            ("renovate[bot]", True),
+            ("charlie", False),
+        ]:
+            pr = {
+                "user": {
+                    "login": login,
+                    "avatar_url": f"{login}.png",
+                    "type": "Bot" if is_bot else "User",
+                },
+                "created_at": "2024-01-15T10:00:00Z",
+            }
+            agg.add_pr(repo_id, pr)
+
+        export = agg.export()
+
+        # Only 3 real users should be in leaderboard
+        assert len(export["leaderboards"]["prs_opened"]) == 3
+        usernames = [item["user"] for item in export["leaderboards"]["prs_opened"]]
+        assert "alice" in usernames
+        assert "bob" in usernames
+        assert "charlie" in usernames
+        assert "dependabot[bot]" not in usernames
+        assert "renovate[bot]" not in usernames
+
+    def test_time_series_across_months(self):
+        """Test time series aggregation across multiple months."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        # Add PRs across different months
+        dates = [
+            "2024-01-15T10:00:00Z",
+            "2024-02-10T10:00:00Z",
+            "2024-03-20T10:00:00Z",
+        ]
+
+        for date in dates:
+            pr = {
+                "user": {"login": "alice", "avatar_url": "url", "type": "User"},
+                "created_at": date,
+            }
+            agg.add_pr(repo_id, pr)
+
+        export = agg.export()
+        monthly_prs = export["timeseries"]["monthly"]["prs_opened"]
+
+        # Should have 3 monthly entries
+        assert len(monthly_prs) == 3
+        periods = [item["period"] for item in monthly_prs]
+        assert "2024-01" in periods
+        assert "2024-02" in periods
+        assert "2024-03" in periods
+
+    def test_leaderboard_with_many_contributors(self):
+        """Test leaderboard ranking with many contributors."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        # Add PRs with different counts per user
+        user_pr_counts = {
+            "alice": 10,
+            "bob": 5,
+            "charlie": 8,
+            "dave": 3,
+            "eve": 12,
+        }
+
+        for user, count in user_pr_counts.items():
+            for _ in range(count):
+                pr = {
+                    "user": {"login": user, "avatar_url": f"{user}.png", "type": "User"},
+                    "created_at": "2024-01-15T10:00:00Z",
+                }
+                agg.add_pr(repo_id, pr)
+
+        export = agg.export()
+        leaderboard = export["leaderboards"]["prs_opened"]
+
+        # Verify sorting (descending by count)
+        assert leaderboard[0]["user"] == "eve"
+        assert leaderboard[0]["count"] == 12
+        assert leaderboard[1]["user"] == "alice"
+        assert leaderboard[1]["count"] == 10
+        assert leaderboard[2]["user"] == "charlie"
+        assert leaderboard[2]["count"] == 8
+        assert leaderboard[3]["user"] == "bob"
+        assert leaderboard[3]["count"] == 5
+        assert leaderboard[4]["user"] == "dave"
+        assert leaderboard[4]["count"] == 3
+
+    def test_repo_health_with_all_metrics(self):
+        """Test repo health tracking all metric types."""
+        agg = MetricsAggregator(year=2024, target_name="test", target_mode="user")
+        repo_id = "owner/repo"
+        agg.add_repo({"full_name": repo_id, "name": "repo"})
+
+        # Add various contributions
+        users = ["alice", "bob", "charlie"]
+
+        for user in users:
+            # PR
+            pr = {
+                "user": {"login": user, "avatar_url": "url", "type": "User"},
+                "created_at": "2024-01-15T10:00:00Z",
+            }
+            agg.add_pr(repo_id, pr)
+
+            # Issue
+            issue = {
+                "user": {"login": user, "avatar_url": "url", "type": "User"},
+                "created_at": "2024-01-15T10:00:00Z",
+                "state": "open",
+            }
+            agg.add_issue(repo_id, issue)
+
+            # Review
+            review = {
+                "user": {"login": user, "avatar_url": "url", "type": "User"},
+                "submitted_at": "2024-01-15T10:00:00Z",
+                "state": "APPROVED",
+            }
+            agg.add_review(repo_id, 1, review)
+
+            # Comment
+            comment = {
+                "user": {"login": user, "avatar_url": "url", "type": "User"},
+                "created_at": "2024-01-15T10:00:00Z",
+            }
+            agg.add_comment(repo_id, comment, comment_type="issue")
+
+        health = agg.compute_repo_health(repo_id)
+
+        assert health["contributor_count"] == 3
+        assert health["pr_count"] == 3
+        assert health["issue_count"] == 3
+        assert health["review_count"] == 3
+        assert health["comment_count"] == 3
