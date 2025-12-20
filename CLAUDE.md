@@ -248,40 +248,16 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 ## Quick Commands
 
 ```bash
-# Development
-uv run gh-year-end plan --config config/config.yaml
-
-# Check collection progress
-uv run gh-year-end status --config config/config.yaml
-
-# Build (collect all data and generate report)
+# Complete pipeline (collect + build)
 uv run gh-year-end all --config config/config.yaml
 
 # Individual steps
-uv run gh-year-end collect --config config/config.yaml
-uv run gh-year-end normalize --config config/config.yaml
-uv run gh-year-end metrics --config config/config.yaml
-uv run gh-year-end report --config config/config.yaml
+uv run gh-year-end collect --config config/config.yaml  # Collect data and generate metrics JSON
+uv run gh-year-end build --config config/config.yaml    # Build static site from JSON
 
-# Validate cached data integrity
-uv run gh-year-end validate --config config/config.yaml
-uv run gh-year-end validate --config config/config.yaml --repair
-
-# Collection with checkpoints
-# Resume interrupted collection
-uv run gh-year-end collect --config config/config.yaml --resume
-
-# Retry failed repos only
-uv run gh-year-end collect --config config/config.yaml --retry-failed
-
-# Start from specific repo
-uv run gh-year-end collect --config config/config.yaml --from-repo owner/repo
-
-# Minimal output (no progress display)
-uv run gh-year-end collect --config config/config.yaml --quiet
-
-# Force re-fetch (delete checkpoint and start fresh)
+# Force re-collection
 uv run gh-year-end collect --config config/config.yaml --force
+uv run gh-year-end all --config config/config.yaml --force
 ```
 
 ---

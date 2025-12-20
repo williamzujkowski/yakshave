@@ -6,14 +6,22 @@ Command-line interface for gh-year-end.
 
 | Command | Purpose | Common Flags |
 |---------|---------|--------------|
-| `plan` | Preview collection plan without making changes | `--config` |
-| `collect` | Fetch raw data from GitHub API to JSONL files | `--config`, `--force`, `--resume`, `--retry-failed`, `--quiet` |
-| `status` | Show collection progress from checkpoint | `--config` |
-| `normalize` | Convert raw JSONL to curated Parquet tables | `--config` |
-| `metrics` | Compute analytics from curated data | `--config` |
-| `report` | Generate static HTML site with visualizations | `--config`, `--force` |
-| `validate` | Validate cached collection data integrity | `--config`, `--repair` |
-| `all` | Run complete pipeline (collect → normalize → metrics → report) | `--config`, `--force` |
+| `collect` | Collect GitHub data and generate metrics JSON | `--config`, `--force` |
+| `build` | Build static HTML site from metrics JSON | `--config` |
+| `all` | Run complete pipeline (collect + build) | `--config`, `--force` |
+
+### Deprecated Commands
+
+The following commands are deprecated and will be removed in a future version:
+
+| Command | Status | Migration |
+|---------|--------|-----------|
+| `plan` | Deprecated | Use `collect --help` |
+| `status` | Deprecated | No longer needed (single-pass collection) |
+| `normalize` | Deprecated | Replaced by `collect` (single-pass) |
+| `metrics` | Deprecated | Replaced by `collect` (single-pass) |
+| `report` | Deprecated | Use `build` instead |
+| `validate` | Deprecated | No longer needed (single-pass collection) |
 
 ## Entry Point
 
@@ -74,50 +82,37 @@ gh-year-end plan -c config/config.yaml
 
 ### collect
 
-Collect raw data from GitHub API.
+Collect GitHub data and generate metrics JSON.
 
 ```bash
 gh-year-end collect --config CONFIG [OPTIONS]
 ```
 
-Fetches all configured data types (PRs, issues, reviews, comments, commits, hygiene) from the target org/user and stores as raw JSONL files.
+Performs single-pass collection with in-memory metric aggregation, then writes results to JSON files for the website.
+
+The collection process:
+1. Discovers all repositories in the target org/user
+2. Collects PRs, issues, reviews, comments, commits
+3. Aggregates metrics in-memory (no intermediate files)
+4. Writes final JSON files to site/{year}/data/
 
 **Options:**
 
 | Option | Short | Required | Description |
 |--------|-------|----------|-------------|
 | `--config` | `-c` | Yes | Path to config.yaml file |
-| `--force` | `-f` | No | Delete checkpoint and start fresh (re-fetches all data) |
-| `--resume` | `-r` | No | Require existing checkpoint (fails if none exists) |
-| `--from-repo` | | No | Resume starting from specific repo (e.g., 'owner/repo') |
-| `--retry-failed` | | No | Only retry repos marked as failed in checkpoint |
-| `--quiet` | `-q` | No | Minimal output (no progress display) |
-
-**Checkpoint/Resume Behavior:**
-
-- Default: Creates checkpoint, resumes automatically if interrupted
-- `--force`: Deletes checkpoint, re-fetches everything
-- `--resume`: Requires checkpoint to exist (fails otherwise)
-- `--from-repo`: Skips to specific repository in collection order
-- `--retry-failed`: Only processes failed repositories
+| `--force` | `-f` | No | Force re-collection even if data exists |
 
 **Output:**
 
-Raw JSONL files in `data/raw/year=YYYY/source=github/target=<name>/`:
+JSON files in `site/{year}/data/`:
 
-- `manifest.json` - Collection summary
-- `checkpoint.json` - Resume state
-- `repos.jsonl` - Repository metadata
-- `rate_limit_samples.jsonl` - API rate limit samples
-- `pulls/*.jsonl` - Pull requests per repo
-- `issues/*.jsonl` - Issues per repo
-- `reviews/*.jsonl` - PR reviews per repo
-- `issue_comments/*.jsonl` - Issue comments per repo
-- `review_comments/*.jsonl` - Review comments per repo
-- `commits/*.jsonl` - Commits per repo
-- `repo_tree/*.jsonl` - File tree snapshots per repo
-- `branch_protection/*.jsonl` - Branch protection rules per repo
-- `security_features/*.jsonl` - Security features per repo
+- `summary.json` - Overall statistics
+- `leaderboards.json` - Ranked contributors by metric
+- `timeseries.json` - Weekly/monthly activity trends
+- `repo_health.json` - Per-repository health metrics
+- `hygiene_scores.json` - Repository hygiene/quality scores
+- `awards.json` - Top contributor awards
 
 **Example:**
 
@@ -127,66 +122,25 @@ gh-year-end collect -c config/config.yaml
 
 # Force re-collection
 gh-year-end collect -c config/config.yaml --force
-
-# Resume from checkpoint
-gh-year-end collect -c config/config.yaml --resume
-
-# Resume from specific repo
-gh-year-end collect -c config/config.yaml --from-repo myorg/myrepo
-
-# Retry only failed repos
-gh-year-end collect -c config/config.yaml --retry-failed
-
-# Quiet mode (minimal output, useful for scripts/automation)
-gh-year-end collect -c config/config.yaml --quiet
-```
-
-**Interrupt Handling:**
-
-Press Ctrl+C to interrupt. Checkpoint is saved automatically. Resume with `--resume`.
-
----
-
-### status
-
-Show current collection status from checkpoint.
-
-```bash
-gh-year-end status --config CONFIG
-```
-
-**Options:**
-
-| Option | Short | Required | Description |
-|--------|-------|----------|-------------|
-| `--config` | `-c` | Yes | Path to config.yaml file |
-
-**Output:**
-
-- Run information (target, year, timestamps)
-- Phase progress (current phase, completed phases)
-- Repository progress (complete, in-progress, failed, pending)
-- Failed repositories with error details
-- ETA for completion (if in progress)
-- Next steps hints
-
-**Example:**
-
-```bash
-gh-year-end status -c config/config.yaml
 ```
 
 ---
 
-### normalize
+### build
 
-Normalize raw data to curated Parquet tables.
+Build static HTML site from metrics JSON.
 
 ```bash
-gh-year-end normalize --config CONFIG
+gh-year-end build --config CONFIG
 ```
 
-Converts raw JSONL files to normalized Parquet tables with consistent schemas, bot detection, and identity resolution.
+Reads the JSON files generated by 'collect' and renders HTML templates using Jinja2. Creates a complete static site with:
+
+- Executive summary dashboard
+- Contributor leaderboards
+- Repository health metrics
+- Interactive D3.js visualizations
+- Time series activity charts
 
 **Options:**
 
@@ -196,116 +150,26 @@ Converts raw JSONL files to normalized Parquet tables with consistent schemas, b
 
 **Input:**
 
-Raw JSONL files from `data/raw/year=YYYY/`
+JSON files from `site/{year}/data/`
 
 **Output:**
 
-Curated Parquet tables in `data/curated/year=YYYY/`:
-
-**Dimension Tables:**
-- `dim_user.parquet` - User identities with bot classification
-- `dim_identity_rule.parquet` - Bot detection rules applied
-- `dim_repo.parquet` - Repository metadata
-
-**Fact Tables:**
-- `fact_pull_request.parquet` - Pull requests
-- `fact_issue.parquet` - Issues
-- `fact_review.parquet` - PR reviews
-- `fact_issue_comment.parquet` - Issue comments
-- `fact_review_comment.parquet` - Review comments
-- `fact_commit.parquet` - Commits
-- `fact_commit_file.parquet` - Files changed per commit
-- `fact_repo_files_presence.parquet` - Hygiene file presence
-- `fact_repo_hygiene.parquet` - Branch protection rules
-- `fact_repo_security_features.parquet` - Security features
-
-**Example:**
-
-```bash
-gh-year-end normalize -c config/config.yaml
-```
-
----
-
-### metrics
-
-Compute metrics from curated data.
-
-```bash
-gh-year-end metrics --config CONFIG
-```
-
-Calculates leaderboards, time series, repository health scores, hygiene scores, and awards from normalized Parquet tables.
-
-**Options:**
-
-| Option | Short | Required | Description |
-|--------|-------|----------|-------------|
-| `--config` | `-c` | Yes | Path to config.yaml file |
-
-**Input:**
-
-Curated Parquet tables from `data/curated/year=YYYY/`
-
-**Output:**
-
-Metrics Parquet tables in `data/metrics/year=YYYY/`:
-
-- `metrics_leaderboard.parquet` - User activity rankings
-- `metrics_repo_health.parquet` - Repository health scores
-- `metrics_time_series.parquet` - Weekly/monthly activity trends
-- `metrics_repo_hygiene_score.parquet` - Repository hygiene scores
-- `metrics_awards.parquet` - Special achievement awards
-
-**Example:**
-
-```bash
-gh-year-end metrics -c config/config.yaml
-```
-
----
-
-### report
-
-Generate static HTML report.
-
-```bash
-gh-year-end report --config CONFIG [OPTIONS]
-```
-
-Exports metrics to JSON and builds a static D3-powered site with exec summary and engineer drilldown views.
-
-**Options:**
-
-| Option | Short | Required | Description |
-|--------|-------|----------|-------------|
-| `--config` | `-c` | Yes | Path to config.yaml file |
-| `--force` | `-f` | No | Rebuild site even if it already exists |
-
-**Input:**
-
-Metrics Parquet tables from `data/metrics/year=YYYY/`
-
-**Output:**
-
-Static HTML site in `site/YYYY/`:
+Static HTML site in `site/{year}/`:
 
 - `index.html` - Main landing page
-- `exec.html` - Executive summary view
-- `engineer.html` - Engineer drilldown view
-- `data/*.json` - Exported metrics as JSON
+- `summary.html` - Executive summary view
+- `leaderboards.html` - Contributor leaderboards
+- `repos.html` - Repository health metrics
+- `awards.html` - Top contributor awards
 - `assets/` - CSS, JavaScript, D3 visualizations
 
 **Example:**
 
 ```bash
-gh-year-end report -c config/config.yaml
-
-# Force rebuild
-gh-year-end report -c config/config.yaml --force
+gh-year-end build -c config/config.yaml
 ```
 
-**Viewing the report:**
+**Viewing the site:**
 
 ```bash
 python -m http.server -d site/2025
@@ -316,20 +180,25 @@ python -m http.server -d site/2025
 
 ### all
 
-Run complete pipeline: collect → normalize → metrics → report.
+Run complete pipeline: collect data and build site.
 
 ```bash
 gh-year-end all --config CONFIG [OPTIONS]
 ```
 
-Main command to generate a complete year-end report from scratch.
+This is a convenience command that runs both 'collect' and 'build' in sequence. Equivalent to:
+
+```bash
+gh-year-end collect --config CONFIG
+gh-year-end build --config CONFIG
+```
 
 **Options:**
 
 | Option | Short | Required | Description |
 |--------|-------|----------|-------------|
 | `--config` | `-c` | Yes | Path to config.yaml file |
-| `--force` | `-f` | No | Re-fetch data even if raw files exist |
+| `--force` | `-f` | No | Force re-collection even if data exists |
 
 **Example:**
 
@@ -343,54 +212,43 @@ gh-year-end all -c config/config.yaml --force
 
 ---
 
-### validate
+## Deprecated Commands
 
-Validate cached collection data integrity.
+The following commands are part of the old multi-phase pipeline and are deprecated. They will be removed in a future version.
 
-```bash
-gh-year-end validate --config CONFIG [OPTIONS]
-```
+### plan (DEPRECATED)
 
-Checks JSONL files for JSON validity, required envelope fields, endpoint-specific data fields, and checkpoint consistency.
+Preview collection plan without making changes. **Use `gh-year-end collect --help` instead.**
 
-**Options:**
+---
 
-| Option | Short | Required | Description |
-|--------|-------|----------|-------------|
-| `--config` | `-c` | Yes | Path to config.yaml file |
-| `--repair` | | No | Attempt to repair truncated JSONL files by removing invalid records |
+### status (DEPRECATED)
 
-**Validation Checks:**
+Show collection progress from checkpoint. **No longer needed with single-pass collection.**
 
-- JSON validity (proper JSON per line)
-- Required envelope fields (request_id, timestamp, source, endpoint, data)
-- Endpoint-specific data fields
-- Checkpoint consistency with actual files
+---
 
-**Output:**
+### normalize (DEPRECATED)
 
-- Total records count
-- Valid records count
-- List of errors (if any)
-- List of warnings (if any)
-- Pass/fail status
+Convert raw JSONL to curated Parquet tables. **Replaced by `gh-year-end collect` which performs single-pass collection and aggregation.**
 
-**Example:**
+---
 
-```bash
-# Validate collection data
-gh-year-end validate -c config/config.yaml
+### metrics (DEPRECATED)
 
-# Validate and repair truncated files
-gh-year-end validate -c config/config.yaml --repair
-```
+Compute metrics from curated data. **Replaced by `gh-year-end collect` which performs single-pass collection and aggregation.**
 
-**When to Use:**
+---
 
-- After interrupted collection to check data integrity
-- Before normalization to catch corrupted JSONL files
-- After manual data recovery
-- When seeing unexpected normalization errors
+### report (DEPRECATED)
+
+Generate static HTML report. **Use `gh-year-end build` instead.**
+
+---
+
+### validate (DEPRECATED)
+
+Validate cached collection data integrity. **No longer needed with single-pass collection that eliminates intermediate files.**
 
 ---
 
@@ -402,59 +260,34 @@ gh-year-end validate -c config/config.yaml --repair
 # 1. Set GitHub token
 export GITHUB_TOKEN=ghp_xxxxxxxxxxxxx
 
-# 2. Preview plan
-gh-year-end plan -c config/config.yaml
-
-# 3. Run full pipeline
+# 2. Run full pipeline
 gh-year-end all -c config/config.yaml
 
-# 4. View report
+# 3. View report
 python -m http.server -d site/2025
 ```
 
 ### Incremental Development
 
 ```bash
-# Collect once
+# Collect data once (generates metrics JSON)
 gh-year-end collect -c config/config.yaml
 
-# Iterate on normalization/metrics/report
-gh-year-end normalize -c config/config.yaml
-gh-year-end metrics -c config/config.yaml
-gh-year-end report -c config/config.yaml
+# Iterate on site templates/styling
+gh-year-end build -c config/config.yaml
 
-# Rebuild report after template changes
-gh-year-end report -c config/config.yaml --force
+# Force re-collection if needed
+gh-year-end collect -c config/config.yaml --force
 ```
 
-### Resume Interrupted Collection
+### Force Re-collection
 
 ```bash
-# Collection interrupted (Ctrl+C or error)
-gh-year-end collect -c config/config.yaml
-# ^C
+# Re-collect data (useful if config or time window changed)
+gh-year-end collect -c config/config.yaml --force
 
-# Check status
-gh-year-end status -c config/config.yaml
-
-# Resume from checkpoint
-gh-year-end collect -c config/config.yaml --resume
-
-# Or retry only failed repos
-gh-year-end collect -c config/config.yaml --retry-failed
-```
-
-### Validate and Repair Data
-
-```bash
-# After interrupted collection or errors
-gh-year-end validate -c config/config.yaml
-
-# If validation finds truncated records, repair them
-gh-year-end validate -c config/config.yaml --repair
-
-# Continue pipeline after repair
-gh-year-end normalize -c config/config.yaml
+# Or re-run complete pipeline
+gh-year-end all -c config/config.yaml --force
 ```
 
 ---
@@ -466,46 +299,26 @@ gh-year-end normalize -c config/config.yaml
 │  GitHub API     │
 └────────┬────────┘
          │
-         ▼ collect
+         ▼ collect (single-pass with in-memory aggregation)
 ┌─────────────────┐
-│  Raw JSONL      │  data/raw/year=YYYY/
-│  - repos        │  - checkpoint.json (resume state)
-│  - pulls        │  - manifest.json (summary)
-│  - issues       │  - rate_limit_samples.jsonl
-│  - reviews      │  - repos.jsonl
-│  - comments     │  - pulls/*.jsonl
-│  - commits      │  - issues/*.jsonl
-│  - hygiene      │  - reviews/*.jsonl
-└────────┬────────┘  - [comments|commits|hygiene]/*.jsonl
-         │
-         ▼ normalize
-┌─────────────────┐
-│  Curated        │  data/curated/year=YYYY/
-│  Parquet        │  - dim_user.parquet
-│  - Dimensions   │  - dim_identity_rule.parquet
-│  - Facts        │  - dim_repo.parquet
-│                 │  - fact_pull_request.parquet
-│                 │  - fact_issue.parquet
-└────────┬────────┘  - fact_[review|comment|commit]*.parquet
-         │
-         ▼ metrics
-┌─────────────────┐
-│  Metrics        │  data/metrics/year=YYYY/
-│  Parquet        │  - metrics_leaderboard.parquet
-│  - Leaderboards │  - metrics_repo_health.parquet
-│  - Time series  │  - metrics_time_series.parquet
-│  - Health       │  - metrics_repo_hygiene_score.parquet
-│  - Awards       │  - metrics_awards.parquet
+│  Metrics JSON   │  site/{year}/data/
+│  - summary      │  - summary.json
+│  - leaderboards │  - leaderboards.json
+│  - time series  │  - timeseries.json
+│  - repo health  │  - repo_health.json
+│  - hygiene      │  - hygiene_scores.json
+│  - awards       │  - awards.json
 └────────┬────────┘
          │
-         ▼ report
+         ▼ build
 ┌─────────────────┐
-│  Static Site    │  site/YYYY/
+│  Static Site    │  site/{year}/
 │  - HTML         │  - index.html
-│  - JSON         │  - exec.html
-│  - D3 viz       │  - engineer.html
-│                 │  - data/*.json
-│                 │  - assets/[css|js|images]/
+│  - JSON         │  - summary.html
+│  - D3 viz       │  - leaderboards.html
+│                 │  - repos.html
+│                 │  - awards.html
+│                 │  - assets/[css|js]/
 └─────────────────┘
 ```
 
@@ -519,65 +332,23 @@ gh-year-end normalize -c config/config.yaml
 │   ├── config.yaml          # Main configuration
 │   └── awards.yaml          # Awards definitions
 │
-├── data/                    # Configured via storage.root
-│   ├── raw/
-│   │   └── year=2025/
-│   │       └── source=github/
-│   │           └── target=myorg/
-│   │               ├── checkpoint.json
-│   │               ├── manifest.json
-│   │               ├── rate_limit_samples.jsonl
-│   │               ├── repos.jsonl
-│   │               ├── pulls/
-│   │               │   └── myorg__repo1.jsonl
-│   │               ├── issues/
-│   │               ├── reviews/
-│   │               ├── issue_comments/
-│   │               ├── review_comments/
-│   │               ├── commits/
-│   │               ├── repo_tree/
-│   │               ├── branch_protection/
-│   │               └── security_features/
-│   │
-│   ├── curated/
-│   │   └── year=2025/
-│   │       ├── dim_user.parquet
-│   │       ├── dim_identity_rule.parquet
-│   │       ├── dim_repo.parquet
-│   │       ├── fact_pull_request.parquet
-│   │       ├── fact_issue.parquet
-│   │       ├── fact_review.parquet
-│   │       ├── fact_issue_comment.parquet
-│   │       ├── fact_review_comment.parquet
-│   │       ├── fact_commit.parquet
-│   │       ├── fact_commit_file.parquet
-│   │       ├── fact_repo_files_presence.parquet
-│   │       ├── fact_repo_hygiene.parquet
-│   │       └── fact_repo_security_features.parquet
-│   │
-│   └── metrics/
-│       └── year=2025/
-│           ├── metrics_leaderboard.parquet
-│           ├── metrics_repo_health.parquet
-│           ├── metrics_time_series.parquet
-│           ├── metrics_repo_hygiene_score.parquet
-│           └── metrics_awards.parquet
-│
-└── site/                    # Configured via report.output_dir
-    └── year=2025/
+└── site/
+    └── 2025/
         ├── index.html
-        ├── exec.html
-        ├── engineer.html
+        ├── summary.html
+        ├── leaderboards.html
+        ├── repos.html
+        ├── awards.html
         ├── data/
-        │   ├── leaderboard.json
+        │   ├── summary.json
+        │   ├── leaderboards.json
+        │   ├── timeseries.json
         │   ├── repo_health.json
-        │   ├── time_series.json
         │   ├── hygiene_scores.json
         │   └── awards.json
         └── assets/
             ├── css/
-            ├── js/
-            └── images/
+            └── js/
 ```
 
 ---
@@ -590,78 +361,20 @@ gh-year-end normalize -c config/config.yaml
 | 1 | General error (exception during execution) |
 | 130 | Interrupted by user (Ctrl+C) |
 
-**Note:** When collection is interrupted (exit 130), checkpoint is saved automatically. Resume with `--resume` flag.
-
 ---
 
 ## Troubleshooting
 
-### No checkpoint found
+### No metrics data found
 
 **Error:**
 ```
-No checkpoint found
-```
-
-**Solution:**
-
-Run `collect` command without `--resume` flag to start new collection.
-
----
-
-### Checkpoint config mismatch
-
-**Error:**
-```
-Error: Checkpoint config mismatch. Use --force to restart.
+Error: No metrics data found at site/{year}/data
 ```
 
 **Cause:**
 
-Config file changed since checkpoint was created (different target, year, or enabled collectors).
-
-**Solution:**
-
-```bash
-# Option 1: Use --force to delete checkpoint and start fresh
-gh-year-end collect -c config/config.yaml --force
-
-# Option 2: Restore original config
-# Edit config.yaml to match checkpoint settings
-```
-
----
-
-### Resume requires existing checkpoint
-
-**Error:**
-```
-Error: --resume requires existing checkpoint
-```
-
-**Cause:**
-
-Used `--resume` flag but no checkpoint exists.
-
-**Solution:**
-
-```bash
-# Remove --resume flag
-gh-year-end collect -c config/config.yaml
-```
-
----
-
-### No raw data found
-
-**Error:**
-```
-Error: No raw data found. Run 'collect' command first.
-```
-
-**Cause:**
-
-Attempted to run `normalize` before running `collect`.
+Attempted to run `build` before running `collect`.
 
 **Solution:**
 
@@ -669,54 +382,28 @@ Attempted to run `normalize` before running `collect`.
 # Run collection first
 gh-year-end collect -c config/config.yaml
 
-# Then normalize
-gh-year-end normalize -c config/config.yaml
+# Then build
+gh-year-end build -c config/config.yaml
 ```
 
 ---
 
-### No curated data found
+### Missing required JSON files
 
 **Error:**
 ```
-Error: No curated data found. Run 'normalize' command first.
+Error: Missing required JSON files: summary.json, leaderboards.json
 ```
 
 **Cause:**
 
-Attempted to run `metrics` before running `normalize`.
+Metrics JSON files are incomplete or missing.
 
 **Solution:**
 
 ```bash
-# Run normalization first
-gh-year-end normalize -c config/config.yaml
-
-# Then metrics
-gh-year-end metrics -c config/config.yaml
-```
-
----
-
-### No metrics data found
-
-**Error:**
-```
-Error: No metrics data found. Run 'metrics' command first.
-```
-
-**Cause:**
-
-Attempted to run `report` before running `metrics`.
-
-**Solution:**
-
-```bash
-# Run metrics first
-gh-year-end metrics -c config/config.yaml
-
-# Then report
-gh-year-end report -c config/config.yaml
+# Re-run collection to generate metrics
+gh-year-end collect -c config/config.yaml --force
 ```
 
 ---
@@ -844,44 +531,6 @@ rm -rf site/2024/
 
 ---
 
-### Validation errors (corrupted JSONL)
-
-**Error:**
-```
-Validation failed!
-Errors: [...truncated JSON records...]
-```
-
-**Cause:**
-
-Collection was interrupted mid-write, leaving truncated JSON records in JSONL files.
-
-**Solution:**
-
-```bash
-# Validate and identify corrupted files
-gh-year-end validate -c config/config.yaml
-
-# Attempt automatic repair
-gh-year-end validate -c config/config.yaml --repair
-
-# If repair succeeds, continue pipeline
-gh-year-end normalize -c config/config.yaml
-```
-
-**Manual repair (if automatic repair fails):**
-
-```bash
-# Find the corrupted file from validation output
-# Edit JSONL file to remove truncated line(s)
-# Or delete and re-collect specific endpoint
-
-# Re-validate
-gh-year-end validate -c config/config.yaml
-```
-
----
-
 ### Template or asset errors
 
 **Error:**
@@ -912,5 +561,5 @@ uv sync --refresh
 ## See Also
 
 - [config/schema.json](../config/schema.json) - Configuration schema
-- [IMPLEMENTATION_SUMMARY_PHASE5.md](../IMPLEMENTATION_SUMMARY_PHASE5.md) - Metrics implementation details
+- [CLAUDE.md](../CLAUDE.md) - Project instructions and standards
 - [docs/](../docs/) - Additional documentation
