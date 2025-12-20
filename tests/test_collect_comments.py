@@ -1,13 +1,11 @@
 """Tests for comment collector module."""
 
-import json
 from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
 from gh_year_end.collect.comments import (
-    CommentCollectionError,
     collect_issue_comments,
     collect_review_comments,
     read_issue_numbers,
@@ -66,9 +64,7 @@ def mock_rate_limiter():
 def mock_paths(tmp_path: Path):
     """Create mock PathManager."""
     paths = MagicMock()
-    paths.issue_comments_raw_path.return_value = (
-        tmp_path / "data" / "raw" / "issue_comments.jsonl"
-    )
+    paths.issue_comments_raw_path.return_value = tmp_path / "data" / "raw" / "issue_comments.jsonl"
     paths.review_comments_raw_path.return_value = (
         tmp_path / "data" / "raw" / "review_comments.jsonl"
     )
@@ -202,7 +198,7 @@ class TestCollectIssueComments:
     async def test_collect_issue_comments_error_handling(
         self,
         sample_repos,
-        issue_numbers_by_repo,
+        issue_numbers_by_repo,  # noqa: ARG002
         mock_rest_client,
         mock_rate_limiter,
         mock_paths,
@@ -331,7 +327,7 @@ class TestCollectReviewComments:
     async def test_collect_review_comments_error_handling(
         self,
         sample_repos,
-        pr_numbers_by_repo,
+        pr_numbers_by_repo,  # noqa: ARG002
         mock_rest_client,
         mock_rate_limiter,
         mock_paths,
@@ -411,13 +407,11 @@ class TestReadIssueNumbers:
         # Create sample issue files
         repo1_file = issues_dir / "owner__repo1.jsonl"
         repo1_file.write_text(
-            '{"data": {"number": 1}}\n'
-            '{"data": {"number": 2}}\n'
-            '{"data": {"number": 3}}\n'
+            '{"data": {"number": 1}}\n{"data": {"number": 2}}\n{"data": {"number": 3}}\n'
         )
 
         repo2_file = issues_dir / "owner__repo2.jsonl"
-        repo2_file.write_text('{"data": {"number": 10}}\n' '{"data": {"number": 20}}\n')
+        repo2_file.write_text('{"data": {"number": 10}}\n{"data": {"number": 20}}\n')
 
         result = read_issue_numbers(issues_dir)
 
@@ -446,7 +440,7 @@ class TestReadIssueNumbers:
         issues_dir.mkdir()
 
         file = issues_dir / "owner__repo.jsonl"
-        file.write_text('{"data": {"number": 1}}\n' 'invalid json\n' '{"data": {"number": 2}}\n')
+        file.write_text('{"data": {"number": 1}}\ninvalid json\n{"data": {"number": 2}}\n')
 
         result = read_issue_numbers(issues_dir)
 
@@ -470,9 +464,7 @@ class TestReadPrNumbers:
         # Create sample PR files
         repo1_file = prs_dir / "owner__repo1.jsonl"
         repo1_file.write_text(
-            '{"data": {"number": 1}}\n'
-            '{"data": {"number": 2}}\n'
-            '{"data": {"number": 3}}\n'
+            '{"data": {"number": 1}}\n{"data": {"number": 2}}\n{"data": {"number": 3}}\n'
         )
 
         result = read_pr_numbers(prs_dir)
@@ -515,7 +507,9 @@ class TestReadPrNumbers:
         prs_dir.mkdir()
 
         file = prs_dir / "owner__repo.jsonl"
-        file.write_text('{"data": {"number": 5}}\n' '{"data": {"number": 1}}\n' '{"data": {"number": 3}}\n')
+        file.write_text(
+            '{"data": {"number": 5}}\n{"data": {"number": 1}}\n{"data": {"number": 3}}\n'
+        )
 
         result = read_pr_numbers(prs_dir)
 

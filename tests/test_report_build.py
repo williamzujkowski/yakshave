@@ -867,9 +867,7 @@ class TestTransformActivityTimeline:
     def test_handles_exception_gracefully(self) -> None:
         """Test that exceptions are handled gracefully."""
         # Malformed data that might cause exceptions
-        timeseries_data = {
-            "timeseries": "not a dict"
-        }
+        timeseries_data = {"timeseries": "not a dict"}
 
         result = _transform_activity_timeline(timeseries_data)
 
@@ -1032,8 +1030,18 @@ class TestGetEngineersList:
             "leaderboards": {
                 "prs_merged": {
                     "org": [
-                        {"user_id": "alice", "login": "alice", "avatar_url": "http://alice.png", "value": 10},
-                        {"user_id": "bob", "login": "bob", "avatar_url": "http://bob.png", "value": 5},
+                        {
+                            "user_id": "alice",
+                            "login": "alice",
+                            "avatar_url": "http://alice.png",
+                            "value": 10,
+                        },
+                        {
+                            "user_id": "bob",
+                            "login": "bob",
+                            "avatar_url": "http://bob.png",
+                            "value": 5,
+                        },
                     ]
                 },
                 "reviews_submitted": {
@@ -1146,7 +1154,12 @@ class TestGetEngineersList:
             "leaderboards": {
                 "prs_merged": {
                     "org": [
-                        {"user_id": "alice", "login": "alice", "avatar_url": "http://alice.png", "value": 10},
+                        {
+                            "user_id": "alice",
+                            "login": "alice",
+                            "avatar_url": "http://alice.png",
+                            "value": 10,
+                        },
                     ]
                 },
             }

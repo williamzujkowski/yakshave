@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from gh_year_end.collect.commits import CommitCollectionError, collect_commits
+from gh_year_end.collect.commits import collect_commits
 from gh_year_end.config import Config
 
 

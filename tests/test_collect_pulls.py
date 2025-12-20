@@ -1,13 +1,12 @@
 """Tests for pull request collector module."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
 from gh_year_end.collect.pulls import (
-    PullsCollectorError,
     _all_prs_before_date,
     _filter_prs_by_date,
     collect_pulls,
@@ -110,8 +109,8 @@ class TestFilterPrsByDate:
 
     def test_filter_prs_within_date_range(self, sample_prs):
         """Test filtering PRs within date range."""
-        since = datetime(2024, 1, 1, tzinfo=timezone.utc)
-        until = datetime(2025, 1, 1, tzinfo=timezone.utc)
+        since = datetime(2024, 1, 1, tzinfo=UTC)
+        until = datetime(2025, 1, 1, tzinfo=UTC)
 
         result = _filter_prs_by_date(sample_prs, since, until)
 
@@ -122,8 +121,8 @@ class TestFilterPrsByDate:
 
     def test_filter_prs_empty_list(self):
         """Test filtering empty list."""
-        since = datetime(2024, 1, 1, tzinfo=timezone.utc)
-        until = datetime(2025, 1, 1, tzinfo=timezone.utc)
+        since = datetime(2024, 1, 1, tzinfo=UTC)
+        until = datetime(2025, 1, 1, tzinfo=UTC)
 
         result = _filter_prs_by_date([], since, until)
 
@@ -135,8 +134,8 @@ class TestFilterPrsByDate:
             {"number": 1, "title": "No timestamp"},
             {"number": 2, "title": "Has timestamp", "updated_at": "2024-06-15T10:00:00Z"},
         ]
-        since = datetime(2024, 1, 1, tzinfo=timezone.utc)
-        until = datetime(2025, 1, 1, tzinfo=timezone.utc)
+        since = datetime(2024, 1, 1, tzinfo=UTC)
+        until = datetime(2025, 1, 1, tzinfo=UTC)
 
         result = _filter_prs_by_date(prs, since, until)
 
@@ -150,8 +149,8 @@ class TestFilterPrsByDate:
             {"number": 1, "title": "Invalid", "updated_at": "invalid-date"},
             {"number": 2, "title": "Valid", "updated_at": "2024-06-15T10:00:00Z"},
         ]
-        since = datetime(2024, 1, 1, tzinfo=timezone.utc)
-        until = datetime(2025, 1, 1, tzinfo=timezone.utc)
+        since = datetime(2024, 1, 1, tzinfo=UTC)
+        until = datetime(2025, 1, 1, tzinfo=UTC)
 
         result = _filter_prs_by_date(prs, since, until)
 
@@ -162,8 +161,8 @@ class TestFilterPrsByDate:
     def test_filter_prs_edge_case_exact_since(self):
         """Test PR exactly at since boundary is included."""
         prs = [{"number": 1, "updated_at": "2024-01-01T00:00:00Z"}]
-        since = datetime(2024, 1, 1, tzinfo=timezone.utc)
-        until = datetime(2025, 1, 1, tzinfo=timezone.utc)
+        since = datetime(2024, 1, 1, tzinfo=UTC)
+        until = datetime(2025, 1, 1, tzinfo=UTC)
 
         result = _filter_prs_by_date(prs, since, until)
 
@@ -172,8 +171,8 @@ class TestFilterPrsByDate:
     def test_filter_prs_edge_case_exact_until(self):
         """Test PR exactly at until boundary is excluded."""
         prs = [{"number": 1, "updated_at": "2025-01-01T00:00:00Z"}]
-        since = datetime(2024, 1, 1, tzinfo=timezone.utc)
-        until = datetime(2025, 1, 1, tzinfo=timezone.utc)
+        since = datetime(2024, 1, 1, tzinfo=UTC)
+        until = datetime(2025, 1, 1, tzinfo=UTC)
 
         result = _filter_prs_by_date(prs, since, until)
 
@@ -190,7 +189,7 @@ class TestAllPrsBeforeDate:
             {"updated_at": "2023-07-20T14:30:00Z"},
             {"updated_at": "2023-12-15T08:00:00Z"},
         ]
-        since = datetime(2024, 1, 1, tzinfo=timezone.utc)
+        since = datetime(2024, 1, 1, tzinfo=UTC)
 
         result = _all_prs_before_date(prs, since)
 
@@ -202,7 +201,7 @@ class TestAllPrsBeforeDate:
             {"updated_at": "2023-12-15T08:00:00Z"},
             {"updated_at": "2024-01-01T00:00:00Z"},  # On boundary
         ]
-        since = datetime(2024, 1, 1, tzinfo=timezone.utc)
+        since = datetime(2024, 1, 1, tzinfo=UTC)
 
         result = _all_prs_before_date(prs, since)
 
@@ -210,7 +209,7 @@ class TestAllPrsBeforeDate:
 
     def test_all_prs_before_date_empty(self):
         """Test with empty list."""
-        result = _all_prs_before_date([], datetime(2024, 1, 1, tzinfo=timezone.utc))
+        result = _all_prs_before_date([], datetime(2024, 1, 1, tzinfo=UTC))
 
         assert result is True
 
@@ -220,7 +219,7 @@ class TestAllPrsBeforeDate:
             {"number": 1},
             {"updated_at": "2023-12-15T08:00:00Z"},
         ]
-        since = datetime(2024, 1, 1, tzinfo=timezone.utc)
+        since = datetime(2024, 1, 1, tzinfo=UTC)
 
         result = _all_prs_before_date(prs, since)
 
@@ -262,9 +261,7 @@ class TestCollectPulls:
             assert result["repos_resumed"] == 0
             assert result["errors"] == []
 
-    async def test_collect_pulls_empty_repos(
-        self, mock_rest_client, mock_paths, sample_config
-    ):
+    async def test_collect_pulls_empty_repos(self, mock_rest_client, mock_paths, sample_config):
         """Test collection with no repos."""
         result = await collect_pulls(
             repos=[],

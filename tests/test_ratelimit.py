@@ -2,7 +2,6 @@
 
 import asyncio
 import time
-from unittest.mock import AsyncMock, patch
 
 import pytest
 
@@ -834,7 +833,7 @@ class TestAdaptiveRateLimiterPriorityCalculations:
         )
 
         delay_critical = limiter._calculate_adaptive_delay(state, RequestPriority.CRITICAL)
-        delay_high = limiter._calculate_adaptive_delay(state, RequestPriority.HIGH)
+        limiter._calculate_adaptive_delay(state, RequestPriority.HIGH)
         delay_medium = limiter._calculate_adaptive_delay(state, RequestPriority.MEDIUM)
         delay_low = limiter._calculate_adaptive_delay(state, RequestPriority.LOW)
 
@@ -867,7 +866,7 @@ class TestAdaptiveRateLimiterSecondaryLimit:
         # Next request should trigger secondary limit protection
         start = time.time()
         await limiter.acquire()
-        elapsed = time.time() - start
+        time.time() - start
 
         # Should have introduced some delay
         # Note: This is hard to test precisely due to timing
@@ -952,7 +951,7 @@ class TestProgressStateEdgeCases:
         state.completed_items = 50
         state.start_time = time.time()  # No time elapsed
 
-        seconds, eta_str = state.calculate_eta()
+        _seconds, eta_str = state.calculate_eta()
 
         # With zero elapsed time, rate would be infinite, so we handle this
         assert eta_str in ["unknown", "0s"] or "m" in eta_str or "s" in eta_str
@@ -987,7 +986,7 @@ class TestAdaptiveRateLimiterStrategyBehavior:
 
         start = time.time()
         await limiter.acquire()
-        elapsed = time.time() - start
+        time.time() - start
 
         # Should have some delay (not testing exact amount due to timing)
         limiter.release(success=True)

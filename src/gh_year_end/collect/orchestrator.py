@@ -826,6 +826,7 @@ async def _extract_pr_numbers_from_raw(
 
 async def collect_and_aggregate(
     config: Config,
+    force: bool = False,
     verbose: bool = False,
     quiet: bool = False,
 ) -> dict[str, Any]:
@@ -837,6 +838,7 @@ async def collect_and_aggregate(
 
     Args:
         config: Application configuration.
+        force: Force re-collection even if cached data exists.
         verbose: Enable detailed logging output.
         quiet: Minimal output mode (no progress display).
 

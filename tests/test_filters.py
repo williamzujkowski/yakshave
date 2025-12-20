@@ -1669,17 +1669,13 @@ class TestFilterEdgeCases:
         )()
 
         # Just inside threshold (29 days ago) - should pass
-        recent_date = (datetime.now(UTC) - timedelta(days=29)).isoformat().replace(
-            "+00:00", "Z"
-        )
+        recent_date = (datetime.now(UTC) - timedelta(days=29)).isoformat().replace("+00:00", "Z")
         repo_pass = {**base_repo, "pushed_at": recent_date}
         result_pass = filter_obj.evaluate(repo_pass, config)
         assert result_pass.passed is True
 
         # Just outside threshold (31 days ago) - should fail
-        old_date = (datetime.now(UTC) - timedelta(days=31)).isoformat().replace(
-            "+00:00", "Z"
-        )
+        old_date = (datetime.now(UTC) - timedelta(days=31)).isoformat().replace("+00:00", "Z")
         repo_fail = {**base_repo, "pushed_at": old_date}
         result_fail = filter_obj.evaluate(repo_fail, config)
         assert result_fail.passed is False

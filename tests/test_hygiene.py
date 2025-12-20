@@ -2,12 +2,11 @@
 
 from pathlib import Path
 from typing import Any
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
 from gh_year_end.collect.hygiene import (
-    HygieneCollectionError,
     _get_branch_protection,
     _get_default_branch,
     _get_security_features,
@@ -993,7 +992,7 @@ class TestEdgeCases:
         sample_repos: list[dict[str, Any]],
         mock_rest_client: RestClient,
         mock_paths: PathManager,
-        tmp_path: Path,
+        tmp_path: Path,  # noqa: ARG002
     ) -> None:
         """Test security features collection with checkpoint."""
         # Create config
@@ -1025,7 +1024,7 @@ class TestEdgeCases:
         sample_repos: list[dict[str, Any]],
         mock_rest_client: RestClient,
         mock_paths: PathManager,
-        tmp_path: Path,
+        tmp_path: Path,  # noqa: ARG002
     ) -> None:
         """Test security features collection error handling with checkpoint."""
         # Create config
@@ -1119,9 +1118,7 @@ class TestEdgeCases:
         checkpoint.mark_repo_endpoint_failed = MagicMock()
 
         # Mock REST client to raise exception
-        mock_rest_client.get_branch_protection = AsyncMock(
-            side_effect=Exception("Network error")
-        )
+        mock_rest_client.get_branch_protection = AsyncMock(side_effect=Exception("Network error"))
 
         # Mock paths
         mock_paths.branch_protection_raw_path = (

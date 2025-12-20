@@ -259,7 +259,7 @@ class TestCollectReviews:
     async def test_collect_reviews_handles_404(
         self,
         sample_repos,
-        pr_numbers_by_repo,
+        pr_numbers_by_repo,  # noqa: ARG002
         mock_rest_client,
         mock_rate_limiter,
         mock_paths,
@@ -293,7 +293,7 @@ class TestCollectReviews:
     async def test_collect_reviews_handles_other_errors(
         self,
         sample_repos,
-        pr_numbers_by_repo,
+        pr_numbers_by_repo,  # noqa: ARG002
         mock_rest_client,
         mock_rate_limiter,
         mock_paths,
@@ -376,9 +376,7 @@ class TestCollectReviews:
         """Test handling repo-level errors (not PR-level)."""
 
         # Simulate an error at the repo processing level
-        with patch(
-            "gh_year_end.collect.reviews._collect_reviews_for_repo"
-        ) as mock_collect:
+        with patch("gh_year_end.collect.reviews._collect_reviews_for_repo") as mock_collect:
             mock_collect.side_effect = Exception("Repo processing error")
 
             result = await collect_reviews(

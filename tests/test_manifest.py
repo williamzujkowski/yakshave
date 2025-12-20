@@ -219,9 +219,7 @@ class TestManifestGitCommit:
         """Test git commit when subprocess fails."""
         import subprocess
 
-        with patch(
-            "subprocess.run", side_effect=subprocess.CalledProcessError(1, "git")
-        ):
+        with patch("subprocess.run", side_effect=subprocess.CalledProcessError(1, "git")):
             manifest = Manifest()
             assert manifest.git_commit == "unknown"
 

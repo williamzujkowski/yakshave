@@ -44,7 +44,11 @@ def main():
 
     # Add an issue
     issue = {
-        "user": {"login": "charlie", "avatar_url": "https://example.com/charlie.png", "type": "User"},
+        "user": {
+            "login": "charlie",
+            "avatar_url": "https://example.com/charlie.png",
+            "type": "User",
+        },
         "created_at": "2024-01-25T10:00:00Z",
         "state": "closed",
         "closed_at": "2024-01-30T10:00:00Z",
@@ -105,9 +109,13 @@ def main():
     # Print awards
     print("Awards:")
     if "top_pr_author" in metrics["awards"]:
-        print(f"  Top PR Author: {metrics['awards']['top_pr_author']['user']} ({metrics['awards']['top_pr_author']['count']} PRs)")
+        print(
+            f"  Top PR Author: {metrics['awards']['top_pr_author']['user']} ({metrics['awards']['top_pr_author']['count']} PRs)"
+        )
     if "top_reviewer" in metrics["awards"]:
-        print(f"  Top Reviewer: {metrics['awards']['top_reviewer']['user']} ({metrics['awards']['top_reviewer']['count']} reviews)")
+        print(
+            f"  Top Reviewer: {metrics['awards']['top_reviewer']['user']} ({metrics['awards']['top_reviewer']['count']} reviews)"
+        )
     print()
 
     print("Bot filtering: dependabot[bot] was filtered from all metrics")

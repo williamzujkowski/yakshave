@@ -5,7 +5,7 @@ import signal
 import tempfile
 from datetime import UTC, datetime
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 
@@ -756,20 +756,20 @@ class TestCheckpointManager:
         repos = [{"full_name": f"org/repo{i}", "name": f"repo{i}"} for i in range(1, 5)]
         manager.update_repos(repos)
 
-        # repo1: complete
+        # Set repo1 to complete status
         manager.mark_repo_endpoint_in_progress("org/repo1", "pulls")
         manager.mark_repo_endpoint_complete("org/repo1", "pulls")
         repo_progress = RepoProgress.from_dict(manager._data["repos"]["org/repo1"])
         repo_progress.status = CheckpointStatus.COMPLETE
         manager._data["repos"]["org/repo1"] = repo_progress.to_dict()
 
-        # repo2: in progress
+        # Set repo2 to in_progress status
         manager.mark_repo_endpoint_in_progress("org/repo2", "pulls")
 
-        # repo3: failed
+        # Set repo3 to failed status
         manager.mark_repo_endpoint_failed("org/repo3", "pulls", "Error", retryable=False)
 
-        # repo4: pending (no changes)
+        # Leave repo4 in pending status (no changes)
 
         stats = manager.get_stats()
         assert stats["total_repos"] == 4

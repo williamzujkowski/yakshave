@@ -28,6 +28,7 @@ def create_rate_limiter() -> AdaptiveRateLimiter:
     config = RateLimitConfig()
     return AdaptiveRateLimiter(config)
 
+
 TEST_TOKEN = "ghp_test1234567890abcdefghijklmnopqrst"
 
 

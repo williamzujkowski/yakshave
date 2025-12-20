@@ -670,6 +670,7 @@ class TestCollectReposParallel:
         Args:
             mock_repos: Mock repository list.
         """
+
         # Mock collection function
         async def mock_collect_fn(repo: dict, **kwargs: object) -> dict:
             return {"items_collected": 5}
@@ -794,6 +795,7 @@ class TestCollectReposParallel:
     @pytest.mark.asyncio
     async def test_collect_repos_parallel_empty_repos(self) -> None:
         """Test parallel processing with empty repo list."""
+
         # Mock collection function
         async def mock_collect_fn(repo: dict, **kwargs: object) -> dict:
             return {"items_collected": 5}
@@ -912,7 +914,7 @@ class TestRunCollectionCheckpoint:
     async def test_run_collection_existing_manifest_not_forced(
         self,
         test_config: Config,
-        mock_repos: list[dict],
+        mock_repos: list[dict],  # noqa: ARG002
     ) -> None:
         """Test that existing manifest is reused when force=False.
 
@@ -979,12 +981,18 @@ class TestRunCollectionRateLimiting:
             patch("gh_year_end.collect.orchestrator.collect_issues") as mock_issues,
             patch("gh_year_end.collect.orchestrator.collect_reviews") as mock_reviews,
             patch("gh_year_end.collect.orchestrator.collect_issue_comments") as mock_issue_comments,
-            patch("gh_year_end.collect.orchestrator.collect_review_comments") as mock_review_comments,
+            patch(
+                "gh_year_end.collect.orchestrator.collect_review_comments"
+            ) as mock_review_comments,
             patch("gh_year_end.collect.orchestrator.collect_commits") as mock_commits,
             patch("gh_year_end.collect.orchestrator.collect_branch_protection") as mock_branch_prot,
             patch("gh_year_end.collect.orchestrator.collect_security_features") as mock_security,
-            patch("gh_year_end.collect.orchestrator._extract_issue_numbers_from_raw") as mock_extract_issues,
-            patch("gh_year_end.collect.orchestrator._extract_pr_numbers_from_raw") as mock_extract_prs,
+            patch(
+                "gh_year_end.collect.orchestrator._extract_issue_numbers_from_raw"
+            ) as mock_extract_issues,
+            patch(
+                "gh_year_end.collect.orchestrator._extract_pr_numbers_from_raw"
+            ) as mock_extract_prs,
             patch("gh_year_end.collect.orchestrator.GitHubClient") as mock_client,
             patch("gh_year_end.collect.orchestrator.RestClient") as _mock_rest_client,
             patch("gh_year_end.collect.orchestrator.GraphQLClient") as _mock_graphql_client,
