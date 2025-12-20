@@ -350,9 +350,7 @@ class TestVerifyMetricsDataExists:
         with pytest.raises(ValueError, match="Missing required metrics files"):
             _verify_metrics_data_exists(paths)
 
-    def test_succeeds_with_json_files(
-        self, paths: PathManager, sample_metrics_data: None
-    ) -> None:
+    def test_succeeds_with_json_files(self, paths: PathManager, sample_metrics_data: None) -> None:
         """Test that it succeeds when JSON files exist."""
         # Should not raise
         _verify_metrics_data_exists(paths)

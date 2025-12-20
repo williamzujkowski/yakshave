@@ -1,7 +1,7 @@
 """Tests for new CLI commands (collect, build, all)."""
 
 from pathlib import Path
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 from click.testing import CliRunner
@@ -138,7 +138,7 @@ class TestCollectCommand:
         assert result.exit_code != 0
         assert "Missing option" in result.output or "required" in result.output.lower()
 
-    def test_not_implemented_error(self, runner: CliRunner, config_file: Path) -> None:
+    def test_not_implemented_error(self) -> None:
         """Test collect shows not-implemented error when orchestrator missing."""
         # The collect command has a try/except ImportError that shows a message
         # We can't easily mock the import since it's inside the function,
@@ -146,10 +146,9 @@ class TestCollectCommand:
         # For now, skip this test since collect_and_aggregate exists
         pytest.skip("ImportError handling tested via real missing imports")
 
-    def test_successful_collection(
-        self, runner: CliRunner, config_file: Path
-    ) -> None:
+    def test_successful_collection(self, runner: CliRunner, config_file: Path) -> None:
         """Test successful collection and metrics writing."""
+
         # Create an async mock that returns the expected data
         async def mock_collect(*args, **kwargs):
             return {
@@ -161,7 +160,9 @@ class TestCollectCommand:
                 "awards": {"awards": []},
             }
 
-        with patch("gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect):
+        with patch(
+            "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+        ):
             result = runner.invoke(main, ["collect", "--config", str(config_file)])
 
         # Should succeed
@@ -169,9 +170,7 @@ class TestCollectCommand:
         assert "Collection complete!" in result.output
         assert "Files written: 6" in result.output
 
-    def test_force_flag_passed_through(
-        self, runner: CliRunner, config_file: Path
-    ) -> None:
+    def test_force_flag_passed_through(self, runner: CliRunner, config_file: Path) -> None:
         """Test that --force flag is passed to collect_and_aggregate."""
         force_used = {}
 
@@ -179,15 +178,15 @@ class TestCollectCommand:
             force_used["value"] = kwargs.get("force", False)
             return {}
 
-        with patch("gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect):
-            result = runner.invoke(main, ["collect", "--config", str(config_file), "--force"])
+        with patch(
+            "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+        ):
+            runner.invoke(main, ["collect", "--config", str(config_file), "--force"])
 
         # Force flag should have been used
         assert force_used.get("value") is True
 
-    def test_verbose_flag_passed_through(
-        self, runner: CliRunner, config_file: Path
-    ) -> None:
+    def test_verbose_flag_passed_through(self, runner: CliRunner, config_file: Path) -> None:
         """Test that --verbose flag is passed to collect_and_aggregate."""
         verbose_used = {}
 
@@ -195,47 +194,52 @@ class TestCollectCommand:
             verbose_used["value"] = kwargs.get("verbose", False)
             return {}
 
-        with patch("gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect):
-            result = runner.invoke(main, ["--verbose", "collect", "--config", str(config_file)])
+        with patch(
+            "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+        ):
+            runner.invoke(main, ["--verbose", "collect", "--config", str(config_file)])
 
         # Verbose flag should have been used
         assert verbose_used.get("value") is True
 
-    def test_keyboard_interrupt_handling(
-        self, runner: CliRunner, config_file: Path
-    ) -> None:
+    def test_keyboard_interrupt_handling(self, runner: CliRunner, config_file: Path) -> None:
         """Test that keyboard interrupt is handled gracefully."""
+
         async def mock_collect(*args, **kwargs):
             raise KeyboardInterrupt()
 
-        with patch("gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect):
+        with patch(
+            "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+        ):
             result = runner.invoke(main, ["collect", "--config", str(config_file)])
 
         assert result.exit_code == 1
         assert "interrupted by user" in result.output
 
-    def test_exception_handling(
-        self, runner: CliRunner, config_file: Path
-    ) -> None:
+    def test_exception_handling(self, runner: CliRunner, config_file: Path) -> None:
         """Test that exceptions are handled and displayed."""
+
         async def mock_collect(*args, **kwargs):
             raise ValueError("Test error")
 
-        with patch("gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect):
+        with patch(
+            "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+        ):
             result = runner.invoke(main, ["collect", "--config", str(config_file)])
 
         assert result.exit_code == 1
         assert "Error:" in result.output
         assert "Test error" in result.output
 
-    def test_verbose_shows_traceback_on_error(
-        self, runner: CliRunner, config_file: Path
-    ) -> None:
+    def test_verbose_shows_traceback_on_error(self, runner: CliRunner, config_file: Path) -> None:
         """Test that --verbose shows traceback on error."""
+
         async def mock_collect(*args, **kwargs):
             raise RuntimeError("Test error")
 
-        with patch("gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect):
+        with patch(
+            "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+        ):
             result = runner.invoke(main, ["--verbose", "collect", "--config", str(config_file)])
 
         assert result.exit_code == 1
@@ -270,7 +274,9 @@ class TestBuildCommand:
         # The actual error message comes from build_site
         assert "Metrics data not found" in result.output or "No metrics data found" in result.output
 
-    def test_missing_required_files(self, runner: CliRunner, config_file: Path, tmp_path: Path) -> None:
+    def test_missing_required_files(
+        self, runner: CliRunner, config_file: Path, tmp_path: Path
+    ) -> None:
         """Test error when required JSON files are missing."""
         # Create data directory but no files
         data_dir = tmp_path / "site" / "2024" / "data"
@@ -279,7 +285,7 @@ class TestBuildCommand:
         result = runner.invoke(main, ["build", "--config", str(config_file)])
         assert result.exit_code == 1
         # The actual error message comes from build_site
-        assert ("Missing required" in result.output or "missing" in result.output.lower())
+        assert "Missing required" in result.output or "missing" in result.output.lower()
         assert "summary.json" in result.output or "leaderboards.json" in result.output
 
     @patch("gh_year_end.report.build.build_site")
@@ -401,10 +407,9 @@ class TestAllCommand:
         assert result.exit_code != 0
         assert "Missing option" in result.output or "required" in result.output.lower()
 
-    def test_runs_both_commands(
-        self, runner: CliRunner, config_file: Path, tmp_path: Path
-    ) -> None:
+    def test_runs_both_commands(self, runner: CliRunner, config_file: Path) -> None:
         """Test that all command runs both collect and build."""
+
         async def mock_collect(*args, **kwargs):
             return {
                 "summary": {"total_prs": 100},
@@ -424,7 +429,9 @@ class TestAllCommand:
             }
 
         with (
-            patch("gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect),
+            patch(
+                "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+            ),
             patch("gh_year_end.report.build.build_site", side_effect=mock_build),
         ):
             result = runner.invoke(main, ["all", "--config", str(config_file)])
@@ -436,14 +443,15 @@ class TestAllCommand:
         assert "Site built successfully!" in result.output
         assert "Pipeline complete!" in result.output
 
-    def test_collect_failure_stops_pipeline(
-        self, runner: CliRunner, config_file: Path
-    ) -> None:
+    def test_collect_failure_stops_pipeline(self, runner: CliRunner, config_file: Path) -> None:
         """Test that collect failure stops the pipeline."""
+
         async def mock_collect(*args, **kwargs):
             raise ValueError("Collect failed")
 
-        with patch("gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect):
+        with patch(
+            "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+        ):
             result = runner.invoke(main, ["all", "--config", str(config_file)])
 
         # Should fail
@@ -452,9 +460,7 @@ class TestAllCommand:
         # Build should not run
         assert "Site built successfully!" not in result.output
 
-    def test_force_flag_passed_to_collect(
-        self, runner: CliRunner, config_file: Path, tmp_path: Path
-    ) -> None:
+    def test_force_flag_passed_to_collect(self, runner: CliRunner, config_file: Path) -> None:
         """Test that --force flag is passed to collect command."""
         force_used = {}
 
@@ -478,10 +484,12 @@ class TestAllCommand:
             }
 
         with (
-            patch("gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect),
+            patch(
+                "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+            ),
             patch("gh_year_end.report.build.build_site", side_effect=mock_build),
         ):
-            result = runner.invoke(main, ["all", "--config", str(config_file), "--force"])
+            runner.invoke(main, ["all", "--config", str(config_file), "--force"])
 
         # Force flag should have been used in collect
         assert force_used.get("value") is True
@@ -498,7 +506,9 @@ class TestRemovedCommands:
         for cmd in removed_commands:
             result = runner.invoke(main, [cmd, "--help"])
             assert result.exit_code == 2, f"Command '{cmd}' should not exist (exit code 2)"
-            assert "no such command" in result.output.lower(), f"Command '{cmd}' should show 'no such command'"
+            assert "no such command" in result.output.lower(), (
+                f"Command '{cmd}' should show 'no such command'"
+            )
 
     def test_only_collect_build_all_in_help(self, runner: CliRunner) -> None:
         """Test that only collect, build, and all appear in help."""

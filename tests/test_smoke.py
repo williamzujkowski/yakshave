@@ -5,9 +5,10 @@ without deep testing. They are designed to run fast and catch obvious
 breakage early.
 """
 
+from pathlib import Path
+
 import pytest
 from click.testing import CliRunner
-from pathlib import Path
 
 pytestmark = pytest.mark.smoke
 
@@ -210,7 +211,7 @@ class TestConfigSmoke:
         """Loading non-existent config raises error."""
         from gh_year_end.config import load_config
 
-        with pytest.raises(Exception):
+        with pytest.raises((FileNotFoundError, ValueError)):
             load_config(Path("/nonexistent/config.yaml"))
 
 
@@ -219,14 +220,22 @@ class TestPathManagerSmoke:
 
     def test_path_manager_attributes(self):
         """PathManager has expected attributes after init."""
+        from gh_year_end.config import (
+            Config,
+            GitHubConfig,
+            StorageConfig,
+            TargetConfig,
+            WindowsConfig,
+        )
         from gh_year_end.storage.paths import PathManager
-        from gh_year_end.config import Config, GitHubConfig, TargetConfig, WindowsConfig, StorageConfig
 
         # Create minimal config with proper year boundaries
         config = Config(
             github=GitHubConfig(
                 target=TargetConfig(mode="user", name="test"),
-                windows=WindowsConfig(year=2024, since="2024-01-01T00:00:00Z", until="2025-01-01T00:00:00Z"),
+                windows=WindowsConfig(
+                    year=2024, since="2024-01-01T00:00:00Z", until="2025-01-01T00:00:00Z"
+                ),
             ),
             storage=StorageConfig(root="data"),
         )
@@ -275,7 +284,9 @@ class TestRemovedCommandsSmoke:
         for cmd in removed_commands:
             result = runner.invoke(main, [cmd, "--help"])
             assert result.exit_code == 2, f"Command '{cmd}' should not exist"
-            assert "no such command" in result.output.lower(), f"Command '{cmd}' should show 'no such command'"
+            assert "no such command" in result.output.lower(), (
+                f"Command '{cmd}' should show 'no such command'"
+            )
 
     def test_only_collect_build_all_available(self):
         """Only collect, build, and all commands are available."""

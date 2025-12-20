@@ -4,9 +4,6 @@ The 'report' command has been fully removed. Use 'build' instead.
 These tests verify the command no longer exists.
 """
 
-from pathlib import Path
-
-import pytest
 from click.testing import CliRunner
 
 from gh_year_end.cli import main
@@ -35,6 +32,10 @@ class TestReportCommandRemoved:
         # 'report' should not appear as a command
         # Note: The word "report" might appear in descriptions, but not as a command
         output_lines = result.output.lower().split("\n")
-        command_lines = [line for line in output_lines if line.strip().startswith("build") or line.strip().startswith("collect")]
+        command_lines = [
+            line
+            for line in output_lines
+            if line.strip().startswith("build") or line.strip().startswith("collect")
+        ]
         # There should be commands, but 'report' should not be one of them
         assert any("build" in line for line in command_lines)

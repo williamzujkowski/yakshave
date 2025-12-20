@@ -82,17 +82,16 @@ def collect(ctx: click.Context, config: Path, force: bool) -> None:
     - awards.json: Top contributor awards
     """
     try:
-        from gh_year_end.collect.aggregator import MetricsAggregator
         from gh_year_end.collect.orchestrator import collect_and_aggregate
     except ImportError as e:
-        console.print(
-            f"[bold red]Error:[/bold red] collect_and_aggregate not yet implemented: {e}"
-        )
+        console.print(f"[bold red]Error:[/bold red] collect_and_aggregate not yet implemented: {e}")
         raise click.Abort() from e
 
     cfg = load_config(config)
 
-    console.print(f"[bold]Collecting data for {cfg.github.target.name} ({cfg.github.windows.year})[/bold]")
+    console.print(
+        f"[bold]Collecting data for {cfg.github.target.name} ({cfg.github.windows.year})[/bold]"
+    )
     console.print()
     console.print("[cyan]Running single-pass collection with in-memory aggregation...[/cyan]")
 
@@ -170,9 +169,7 @@ def build(ctx: click.Context, config: Path) -> None:
     # Check if metrics data exists
     data_dir = Path(f"site/{cfg.github.windows.year}/data")
     if not data_dir.exists():
-        console.print(
-            f"[bold red]Error:[/bold red] No metrics data found at {data_dir}"
-        )
+        console.print(f"[bold red]Error:[/bold red] No metrics data found at {data_dir}")
         console.print("[yellow]Run 'collect' command first to generate metrics JSON[/yellow]")
         raise click.Abort()
 

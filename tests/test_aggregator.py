@@ -2,8 +2,6 @@
 
 from datetime import datetime
 
-import pytest
-
 from gh_year_end.collect.aggregator import BOT_PATTERNS, MetricsAggregator
 
 
