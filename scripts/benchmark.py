@@ -95,10 +95,10 @@ def run_benchmark(
     Returns:
         BenchmarkResult with timing and stats
     """
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print(f"Running benchmark: {name}")
     print(f"Command: {' '.join(command)}")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
 
     start_time = datetime.now()
 
