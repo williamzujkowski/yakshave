@@ -1477,3 +1477,380 @@ class TestFilterEdgeCases:
 
         # Default implementation should return None
         assert filter_obj.get_search_qualifier(config) is None
+
+    def test_activity_filter_search_qualifier_disabled(self) -> None:
+        """Test ActivityFilter search qualifier returns None when disabled."""
+        filter_obj = ActivityFilter()
+        config = type("Config", (), {})()  # No activity config
+
+        qualifier = filter_obj.get_search_qualifier(config)
+        assert qualifier is None
+
+    def test_language_filter_search_qualifier_disabled(self) -> None:
+        """Test LanguageFilter search qualifier returns None when disabled."""
+        filter_obj = LanguageFilter()
+        config = type("Config", (), {})()  # No language config
+
+        qualifier = filter_obj.get_search_qualifier(config)
+        assert qualifier is None
+
+    def test_size_filter_search_qualifier_disabled(self) -> None:
+        """Test SizeFilter search qualifier returns None when disabled."""
+        filter_obj = SizeFilter()
+        config = type("Config", (), {})()  # No size config
+
+        qualifier = filter_obj.get_search_qualifier(config)
+        assert qualifier is None
+
+    def test_topics_filter_search_qualifier_disabled(self) -> None:
+        """Test TopicsFilter search qualifier returns None when disabled."""
+        filter_obj = TopicsFilter()
+        config = type("Config", (), {})()  # No topics config
+
+        qualifier = filter_obj.get_search_qualifier(config)
+        assert qualifier is None
+
+    def test_name_pattern_filter_no_simple_prefixes(self) -> None:
+        """Test NamePatternFilter search qualifier with no simple prefixes."""
+        filter_obj = NamePatternFilter()
+        config = type(
+            "Config",
+            (),
+            {
+                "name_patterns": type(
+                    "NamePatterns",
+                    (),
+                    {"include_regex": ["test.*prod", "^test$"], "exclude_regex": []},
+                )()
+            },
+        )()
+
+        # No simple prefixes without special chars, should return None
+        qualifier = filter_obj.get_search_qualifier(config)
+        assert qualifier is None
+
+    def test_name_pattern_filter_exclude_only_no_include(self) -> None:
+        """Test NamePatternFilter search qualifier with exclude-only config."""
+        filter_obj = NamePatternFilter()
+        config = type(
+            "Config",
+            (),
+            {
+                "name_patterns": type(
+                    "NamePatterns",
+                    (),
+                    {"include_regex": [], "exclude_regex": ["-deprecated$"]},
+                )()
+            },
+        )()
+
+        # Exclude-only config doesn't generate search qualifiers
+        qualifier = filter_obj.get_search_qualifier(config)
+        assert qualifier is None
+
+    def test_name_pattern_filter_search_qualifier_disabled(self) -> None:
+        """Test NamePatternFilter search qualifier when filter is disabled."""
+        filter_obj = NamePatternFilter()
+        config = type("Config", (), {})()  # No name_patterns config
+
+        # Filter is disabled, should return None
+        qualifier = filter_obj.get_search_qualifier(config)
+        assert qualifier is None
+
+    def test_topics_filter_both_require_any_and_require_all(self) -> None:
+        """Test TopicsFilter with both require_any and require_all."""
+        filter_obj = TopicsFilter()
+        config = type(
+            "Config",
+            (),
+            {
+                "topics": type(
+                    "Topics",
+                    (),
+                    {
+                        "require_any": ["python", "javascript"],
+                        "require_all": ["web"],
+                        "exclude": [],
+                    },
+                )()
+            },
+        )()
+
+        # Should combine require_all and require_any
+        qualifier = filter_obj.get_search_qualifier(config)
+        assert qualifier is not None
+        assert "topic:web" in qualifier  # require_all
+        assert "topic:python OR topic:javascript" in qualifier  # require_any
+
+    def test_language_filter_case_sensitivity(self, base_repo: dict[str, Any]) -> None:
+        """Test LanguageFilter is case-sensitive."""
+        filter_obj = LanguageFilter()
+        config = type(
+            "Config",
+            (),
+            {
+                "language": type(
+                    "Language",
+                    (),
+                    {"include": ["python"], "exclude": []},  # lowercase
+                )()
+            },
+        )()
+
+        repo = {**base_repo, "language": "Python"}  # uppercase
+        result = filter_obj.evaluate(repo, config)
+
+        # Should fail due to case mismatch
+        assert result.passed is False
+        assert "not in include list" in result.reason
+
+    def test_visibility_filter_private_mode(self, base_repo: dict[str, Any]) -> None:
+        """Test VisibilityFilter with private visibility mode."""
+        filter_obj = VisibilityFilter()
+        config = DiscoveryConfig(visibility="private")
+
+        # Private repo should pass
+        repo_private = {**base_repo, "visibility": "private"}
+        result_private = filter_obj.evaluate(repo_private, config)
+        assert result_private.passed is True
+
+        # Public repo should fail
+        repo_public = {**base_repo, "visibility": "public"}
+        result_public = filter_obj.evaluate(repo_public, config)
+        assert result_public.passed is False
+
+    def test_filter_chain_multiple_filter_failures(self, base_repo: dict[str, Any]) -> None:
+        """Test FilterChain records multiple filter rejections correctly."""
+        config = DiscoveryConfig(
+            include_forks=False,
+            include_archived=False,
+        )
+        chain = FilterChain(config)
+
+        # Test first repo - fork rejection
+        repo1 = {**base_repo, "fork": True}
+        result1 = chain.evaluate(repo1)
+        assert result1.passed is False
+        assert result1.filter_name == "fork"
+        chain.record_rejection(result1.filter_name)
+
+        # Test second repo - archive rejection
+        repo2 = {**base_repo, "archived": True}
+        result2 = chain.evaluate(repo2)
+        assert result2.passed is False
+        assert result2.filter_name == "archive"
+        chain.record_rejection(result2.filter_name)
+
+        # Test third repo - another fork rejection
+        repo3 = {**base_repo, "fork": True}
+        result3 = chain.evaluate(repo3)
+        assert result3.passed is False
+        assert result3.filter_name == "fork"
+        chain.record_rejection(result3.filter_name)
+
+        # Check stats
+        stats = chain.get_stats()
+        assert stats["fork"] == 2
+        assert stats["archive"] == 1
+
+    def test_activity_filter_boundary_threshold(self, base_repo: dict[str, Any]) -> None:
+        """Test ActivityFilter at exact threshold boundary."""
+        filter_obj = ActivityFilter()
+        config = type(
+            "Config",
+            (),
+            {
+                "activity": type(
+                    "Activity",
+                    (),
+                    {"enabled": True, "min_pushed_within_days": 30},
+                )()
+            },
+        )()
+
+        # Just inside threshold (29 days ago) - should pass
+        recent_date = (datetime.now(UTC) - timedelta(days=29)).isoformat().replace(
+            "+00:00", "Z"
+        )
+        repo_pass = {**base_repo, "pushed_at": recent_date}
+        result_pass = filter_obj.evaluate(repo_pass, config)
+        assert result_pass.passed is True
+
+        # Just outside threshold (31 days ago) - should fail
+        old_date = (datetime.now(UTC) - timedelta(days=31)).isoformat().replace(
+            "+00:00", "Z"
+        )
+        repo_fail = {**base_repo, "pushed_at": old_date}
+        result_fail = filter_obj.evaluate(repo_fail, config)
+        assert result_fail.passed is False
+        assert "31 days ago" in result_fail.reason
+
+    def test_size_filter_boundary_values(self, base_repo: dict[str, Any]) -> None:
+        """Test SizeFilter at exact boundary values."""
+        filter_obj = SizeFilter()
+        config = type(
+            "Config",
+            (),
+            {
+                "size": type(
+                    "Size",
+                    (),
+                    {"enabled": True, "min_kb": 100, "max_kb": 5000},
+                )()
+            },
+        )()
+
+        # Exactly at min
+        repo_min = {**base_repo, "size": 100}
+        result_min = filter_obj.evaluate(repo_min, config)
+        assert result_min.passed is True
+
+        # Exactly at max
+        repo_max = {**base_repo, "size": 5000}
+        result_max = filter_obj.evaluate(repo_max, config)
+        assert result_max.passed is True
+
+        # Just below min
+        repo_below = {**base_repo, "size": 99}
+        result_below = filter_obj.evaluate(repo_below, config)
+        assert result_below.passed is False
+
+        # Just above max
+        repo_above = {**base_repo, "size": 5001}
+        result_above = filter_obj.evaluate(repo_above, config)
+        assert result_above.passed is False
+
+    def test_topics_filter_missing_topics_field(self, base_repo: dict[str, Any]) -> None:
+        """Test TopicsFilter with missing topics field in repo."""
+        filter_obj = TopicsFilter()
+        config = type(
+            "Config",
+            (),
+            {
+                "topics": type(
+                    "Topics",
+                    (),
+                    {"require_any": ["python"], "require_all": [], "exclude": []},
+                )()
+            },
+        )()
+
+        # Remove topics field
+        repo = {**base_repo}
+        del repo["topics"]
+        result = filter_obj.evaluate(repo, config)
+
+        assert result.passed is False
+        assert "must have at least one of" in result.reason
+
+    def test_name_pattern_filter_empty_repo_name(self) -> None:
+        """Test NamePatternFilter with empty repository name."""
+        filter_obj = NamePatternFilter()
+        config = type(
+            "Config",
+            (),
+            {
+                "name_patterns": type(
+                    "NamePatterns",
+                    (),
+                    {"include_regex": ["^test"], "exclude_regex": []},
+                )()
+            },
+        )()
+
+        repo: dict[str, Any] = {"name": ""}
+        result = filter_obj.evaluate(repo, config)
+
+        assert result.passed is False
+        assert "does not match any include patterns" in result.reason
+
+    def test_name_pattern_filter_both_include_and_exclude(self, base_repo: dict[str, Any]) -> None:
+        """Test NamePatternFilter with both include and exclude patterns."""
+        filter_obj = NamePatternFilter()
+        config = type(
+            "Config",
+            (),
+            {
+                "name_patterns": type(
+                    "NamePatterns",
+                    (),
+                    {"include_regex": ["^test-"], "exclude_regex": ["-deprecated$"]},
+                )()
+            },
+        )()
+
+        # Matches include but also matches exclude - should fail
+        repo_both = {**base_repo, "name": "test-app-deprecated"}
+        result_both = filter_obj.evaluate(repo_both, config)
+        assert result_both.passed is False
+        assert "matches exclude pattern" in result_both.reason
+
+        # Matches include and doesn't match exclude - should pass
+        repo_pass = {**base_repo, "name": "test-app"}
+        result_pass = filter_obj.evaluate(repo_pass, config)
+        assert result_pass.passed is True
+
+    def test_topics_filter_exclude_empty_topics(self, base_repo: dict[str, Any]) -> None:
+        """Test TopicsFilter exclude with empty topics list in repo."""
+        filter_obj = TopicsFilter()
+        config = type(
+            "Config",
+            (),
+            {
+                "topics": type(
+                    "Topics",
+                    (),
+                    {"require_any": [], "require_all": [], "exclude": ["deprecated"]},
+                )()
+            },
+        )()
+
+        # Empty topics should pass (no excluded topics present)
+        repo = {**base_repo, "topics": []}
+        result = filter_obj.evaluate(repo, config)
+        assert result.passed is True
+
+    def test_filter_chain_complex_search_query(self) -> None:
+        """Test FilterChain with complex multi-filter search query."""
+        config = type(
+            "Config",
+            (),
+            {
+                "include_forks": False,
+                "include_archived": False,
+                "visibility": "public",
+                "activity": type(
+                    "Activity",
+                    (),
+                    {"enabled": True, "min_pushed_within_days": 30},
+                )(),
+                "size": type(
+                    "Size",
+                    (),
+                    {"enabled": True, "min_kb": 100, "max_kb": 10000},
+                )(),
+                "language": type(
+                    "Language",
+                    (),
+                    {"include": ["Python", "JavaScript"], "exclude": []},
+                )(),
+                "topics": type(
+                    "Topics",
+                    (),
+                    {"require_any": ["web"], "require_all": [], "exclude": []},
+                )(),
+            },
+        )()
+
+        chain = FilterChain(config)
+        query = chain.get_search_query("test-org", mode="org")
+
+        # Should contain all qualifiers
+        assert "org:test-org" in query
+        assert "fork:false" in query
+        assert "archived:false" in query
+        assert "is:public" in query
+        assert "pushed:" in query
+        assert "size:100..10000" in query
+        assert "language:" in query
+        assert "topic:web" in query
