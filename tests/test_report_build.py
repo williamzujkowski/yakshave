@@ -9,10 +9,14 @@ import pytest
 
 from gh_year_end.config import Config
 from gh_year_end.report.build import (
+    _calculate_highlights,
     _copy_assets,
     _generate_root_redirect,
+    _get_engineers_list,
     _load_json_data,
     _render_templates,
+    _transform_activity_timeline,
+    _transform_leaderboards,
     _verify_metrics_data_exists,
     _write_build_manifest,
     build_site,
@@ -706,3 +710,547 @@ class TestGenerateRootRedirect:
         assert "</head>" in content
         assert "<body>" in content
         assert "</body>" in content
+
+
+class TestTransformLeaderboards:
+    """Tests for _transform_leaderboards function."""
+
+    def test_transforms_nested_leaderboards(self) -> None:
+        """Test that nested leaderboards are transformed to flat format."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 10},
+                        {"user_id": "bob", "login": "bob", "value": 5},
+                    ]
+                },
+                "reviews_submitted": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 15},
+                    ]
+                },
+            }
+        }
+
+        result = _transform_leaderboards(leaderboards_data)
+
+        assert "prs_merged" in result
+        assert "reviews_submitted" in result
+        assert len(result["prs_merged"]) == 2
+        assert len(result["reviews_submitted"]) == 1
+        assert result["prs_merged"][0]["login"] == "alice"
+
+    def test_handles_direct_list_format(self) -> None:
+        """Test that direct list format is preserved."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": [
+                    {"user_id": "alice", "login": "alice", "value": 10},
+                ]
+            }
+        }
+
+        result = _transform_leaderboards(leaderboards_data)
+
+        assert result["prs_merged"][0]["login"] == "alice"
+
+    def test_returns_all_metric_types(self) -> None:
+        """Test that all expected metric types are in result."""
+        result = _transform_leaderboards({})
+
+        expected_metrics = [
+            "prs_merged",
+            "prs_opened",
+            "reviews_submitted",
+            "approvals",
+            "changes_requested",
+            "issues_opened",
+            "issues_closed",
+            "comments_total",
+            "review_comments_total",
+            "overall",
+        ]
+
+        for metric in expected_metrics:
+            assert metric in result
+            assert isinstance(result[metric], list)
+
+    def test_handles_empty_data(self) -> None:
+        """Test that empty data returns empty lists."""
+        result = _transform_leaderboards({})
+
+        assert all(result[metric] == [] for metric in result)
+
+    def test_handles_missing_org_key(self) -> None:
+        """Test that missing org key returns empty list."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": {
+                    # No "org" key
+                }
+            }
+        }
+
+        result = _transform_leaderboards(leaderboards_data)
+
+        assert result["prs_merged"] == []
+
+
+class TestTransformActivityTimeline:
+    """Tests for _transform_activity_timeline function."""
+
+    def test_transforms_timeseries_to_activity_timeline(self) -> None:
+        """Test that timeseries data is transformed to activity timeline format."""
+        timeseries_data = {
+            "timeseries": {
+                "week": {
+                    "prs_merged": {
+                        "org": [
+                            {"period_start": "2025-01-06", "value": 4},
+                            {"period_start": "2025-01-13", "value": 6},
+                        ]
+                    }
+                }
+            }
+        }
+
+        result = _transform_activity_timeline(timeseries_data)
+
+        assert len(result) == 2
+        assert result[0]["date"] == "2025-01-06"
+        assert result[0]["value"] == 4
+        assert result[1]["date"] == "2025-01-13"
+        assert result[1]["value"] == 6
+
+    def test_handles_empty_timeseries(self) -> None:
+        """Test that empty timeseries returns empty list."""
+        result = _transform_activity_timeline({})
+
+        assert result == []
+
+    def test_handles_missing_org_data(self) -> None:
+        """Test that missing org data returns empty list."""
+        timeseries_data = {
+            "timeseries": {
+                "week": {
+                    "prs_merged": {
+                        # No "org" key
+                    }
+                }
+            }
+        }
+
+        result = _transform_activity_timeline(timeseries_data)
+
+        assert result == []
+
+    def test_skips_entries_without_period_start(self) -> None:
+        """Test that entries without period_start are skipped."""
+        timeseries_data = {
+            "timeseries": {
+                "week": {
+                    "prs_merged": {
+                        "org": [
+                            {"period_start": "2025-01-06", "value": 4},
+                            {"value": 6},  # Missing period_start
+                        ]
+                    }
+                }
+            }
+        }
+
+        result = _transform_activity_timeline(timeseries_data)
+
+        assert len(result) == 1
+
+    def test_handles_exception_gracefully(self) -> None:
+        """Test that exceptions are handled gracefully."""
+        # Malformed data that might cause exceptions
+        timeseries_data = {
+            "timeseries": "not a dict"
+        }
+
+        result = _transform_activity_timeline(timeseries_data)
+
+        assert result == []
+
+
+class TestCalculateHighlights:
+    """Tests for _calculate_highlights function."""
+
+    def test_calculates_most_active_month(self) -> None:
+        """Test that most active month is calculated correctly."""
+        summary_data = {}
+        timeseries_data = {
+            "timeseries": {
+                "week": {
+                    "prs_merged": {
+                        "org": [
+                            {"period_start": "2025-01-06", "value": 4},
+                            {"period_start": "2025-01-13", "value": 6},
+                            {"period_start": "2025-01-20", "value": 2},
+                            {"period_start": "2025-02-03", "value": 3},
+                        ]
+                    }
+                }
+            }
+        }
+        repo_health_list = []
+
+        highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
+
+        assert "most_active_month" in highlights
+        assert highlights["most_active_month"] == "January 2025"
+        assert highlights["most_active_month_prs"] == 12  # 4 + 6 + 2
+
+    def test_calculates_review_coverage(self) -> None:
+        """Test that review coverage is calculated correctly."""
+        summary_data = {}
+        timeseries_data = {}
+        repo_health_list = [
+            {"review_coverage": 80.0},
+            {"review_coverage": 60.0},
+            {"review_coverage": 90.0},
+        ]
+
+        highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
+
+        assert "review_coverage" in highlights
+        assert highlights["review_coverage"] == 76.7  # (80 + 60 + 90) / 3 rounded
+
+    def test_calculates_avg_review_time_in_hours(self) -> None:
+        """Test that average review time is calculated correctly in hours."""
+        summary_data = {}
+        timeseries_data = {}
+        repo_health_list = [
+            {"median_time_to_first_review": 3600 * 5},  # 5 hours
+            {"median_time_to_first_review": 3600 * 3},  # 3 hours
+        ]
+
+        highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
+
+        assert "avg_review_time" in highlights
+        assert "hours" in highlights["avg_review_time"]
+
+    def test_calculates_avg_review_time_in_minutes(self) -> None:
+        """Test that average review time is calculated correctly in minutes."""
+        summary_data = {}
+        timeseries_data = {}
+        repo_health_list = [
+            {"median_time_to_first_review": 60 * 30},  # 30 minutes
+            {"median_time_to_first_review": 60 * 20},  # 20 minutes
+        ]
+
+        highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
+
+        assert "avg_review_time" in highlights
+        assert "minutes" in highlights["avg_review_time"]
+
+    def test_calculates_avg_review_time_in_days(self) -> None:
+        """Test that average review time is calculated correctly in days."""
+        summary_data = {}
+        timeseries_data = {}
+        repo_health_list = [
+            {"median_time_to_first_review": 3600 * 24 * 2},  # 2 days
+            {"median_time_to_first_review": 3600 * 24 * 3},  # 3 days
+        ]
+
+        highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
+
+        assert "avg_review_time" in highlights
+        assert "days" in highlights["avg_review_time"]
+
+    def test_handles_empty_data(self) -> None:
+        """Test that empty data returns default values."""
+        highlights = _calculate_highlights({}, {}, [])
+
+        assert highlights["most_active_month"] == "N/A"
+        assert highlights["most_active_month_prs"] == 0
+        assert highlights["avg_review_time"] == "N/A"
+        assert highlights["review_coverage"] == 0
+        assert highlights["new_contributors"] == 0
+
+    def test_handles_missing_review_coverage(self) -> None:
+        """Test that None review coverage values are skipped."""
+        summary_data = {}
+        timeseries_data = {}
+        repo_health_list = [
+            {"review_coverage": 80.0},
+            {"review_coverage": None},
+            {"review_coverage": 60.0},
+        ]
+
+        highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
+
+        assert highlights["review_coverage"] == 70.0  # (80 + 60) / 2
+
+    def test_handles_missing_review_time(self) -> None:
+        """Test that None review time values are skipped."""
+        summary_data = {}
+        timeseries_data = {}
+        repo_health_list = [
+            {"median_time_to_first_review": 3600},
+            {"median_time_to_first_review": None},
+            {"median_time_to_first_review": 7200},
+        ]
+
+        highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
+
+        assert "avg_review_time" in highlights
+        assert highlights["avg_review_time"] != "N/A"
+
+    def test_handles_malformed_dates(self) -> None:
+        """Test that malformed dates are skipped."""
+        summary_data = {}
+        timeseries_data = {
+            "timeseries": {
+                "week": {
+                    "prs_merged": {
+                        "org": [
+                            {"period_start": "invalid-date", "value": 4},
+                            {"period_start": "2025-01-06", "value": 6},
+                        ]
+                    }
+                }
+            }
+        }
+        repo_health_list = []
+
+        highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
+
+        # Should still work, just skip invalid date
+        assert "most_active_month" in highlights
+
+
+class TestGetEngineersList:
+    """Tests for _get_engineers_list function."""
+
+    def test_builds_engineers_list_from_leaderboards(self) -> None:
+        """Test that engineers list is built from leaderboard data."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "avatar_url": "http://alice.png", "value": 10},
+                        {"user_id": "bob", "login": "bob", "avatar_url": "http://bob.png", "value": 5},
+                    ]
+                },
+                "reviews_submitted": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 15},
+                    ]
+                },
+            }
+        }
+
+        result = _get_engineers_list(leaderboards_data)
+
+        assert len(result) == 2
+        assert result[0]["user_id"] == "alice"  # Should be ranked first
+        assert result[0]["prs_merged"] == 10
+        assert result[0]["reviews_submitted"] == 15
+        assert result[1]["user_id"] == "bob"
+
+    def test_merges_multiple_metrics_per_contributor(self) -> None:
+        """Test that multiple metrics are merged for each contributor."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 10},
+                    ]
+                },
+                "reviews_submitted": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 15},
+                    ]
+                },
+                "issues_opened": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 5},
+                    ]
+                },
+            }
+        }
+
+        result = _get_engineers_list(leaderboards_data)
+
+        assert len(result) == 1
+        contributor = result[0]
+        assert contributor["prs_merged"] == 10
+        assert contributor["reviews_submitted"] == 15
+        assert contributor["issues_opened"] == 5
+
+    def test_assigns_ranks_by_total_contributions(self) -> None:
+        """Test that ranks are assigned based on total contributions."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 10},
+                        {"user_id": "bob", "login": "bob", "value": 20},
+                    ]
+                },
+                "reviews_submitted": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 30},
+                        {"user_id": "bob", "login": "bob", "value": 5},
+                    ]
+                },
+            }
+        }
+
+        result = _get_engineers_list(leaderboards_data)
+
+        # Alice has 40 total (10 + 30), Bob has 25 total (20 + 5)
+        assert result[0]["user_id"] == "alice"
+        assert result[0]["rank"] == 1
+        assert result[1]["user_id"] == "bob"
+        assert result[1]["rank"] == 2
+
+    def test_includes_all_expected_metrics(self) -> None:
+        """Test that all expected metrics are initialized."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 10},
+                    ]
+                },
+            }
+        }
+
+        result = _get_engineers_list(leaderboards_data)
+
+        contributor = result[0]
+        expected_metrics = [
+            "prs_merged",
+            "prs_opened",
+            "reviews_submitted",
+            "approvals",
+            "changes_requested",
+            "issues_opened",
+            "issues_closed",
+            "comments_total",
+            "review_comments_total",
+        ]
+
+        for metric in expected_metrics:
+            assert metric in contributor
+            assert isinstance(contributor[metric], int)
+
+    def test_preserves_avatar_url(self) -> None:
+        """Test that avatar URL is preserved."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "avatar_url": "http://alice.png", "value": 10},
+                    ]
+                },
+            }
+        }
+
+        result = _get_engineers_list(leaderboards_data)
+
+        assert result[0]["avatar_url"] == "http://alice.png"
+
+    def test_handles_empty_leaderboards(self) -> None:
+        """Test that empty leaderboards returns empty list."""
+        result = _get_engineers_list({})
+
+        assert result == []
+
+    def test_skips_entries_without_user_id(self) -> None:
+        """Test that entries without user_id are skipped."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 10},
+                        {"login": "bob", "value": 5},  # Missing user_id
+                    ]
+                },
+            }
+        }
+
+        result = _get_engineers_list(leaderboards_data)
+
+        assert len(result) == 1
+        assert result[0]["user_id"] == "alice"
+
+    def test_handles_list_format_metrics(self) -> None:
+        """Test that metrics in list format (not dict) are handled."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": [
+                    {"user_id": "alice", "login": "alice", "value": 10},
+                ],
+            }
+        }
+
+        result = _get_engineers_list(leaderboards_data)
+
+        assert len(result) == 1
+        assert result[0]["prs_merged"] == 10
+
+    def test_calculates_contributions_total(self) -> None:
+        """Test that contributions_total is calculated."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 10},
+                    ]
+                },
+                "reviews_submitted": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 15},
+                    ]
+                },
+            }
+        }
+
+        result = _get_engineers_list(leaderboards_data)
+
+        assert "contributions_total" in result[0]
+        assert result[0]["contributions_total"] == 25
+
+    def test_includes_display_name(self) -> None:
+        """Test that display_name is included if present."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": {
+                    "org": [
+                        {
+                            "user_id": "alice",
+                            "login": "alice",
+                            "display_name": "Alice Smith",
+                            "value": 10,
+                        },
+                    ]
+                },
+            }
+        }
+
+        result = _get_engineers_list(leaderboards_data)
+
+        assert result[0]["display_name"] == "Alice Smith"
+
+    def test_includes_activity_timeline_field(self) -> None:
+        """Test that activity_timeline field is initialized."""
+        leaderboards_data = {
+            "leaderboards": {
+                "prs_merged": {
+                    "org": [
+                        {"user_id": "alice", "login": "alice", "value": 10},
+                    ]
+                },
+            }
+        }
+
+        result = _get_engineers_list(leaderboards_data)
+
+        assert "activity_timeline" in result[0]
+        assert isinstance(result[0]["activity_timeline"], list)
