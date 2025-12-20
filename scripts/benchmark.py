@@ -7,11 +7,9 @@ and generates a report with timing, memory, and API usage statistics.
 
 import argparse
 import json
-import os
 import resource
 import subprocess
 import sys
-import time
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -120,7 +118,7 @@ def run_benchmark(
     manifest_path = Path(data_dir) / "manifest.json"
     if manifest_path.exists():
         try:
-            with open(manifest_path) as f:
+            with manifest_path.open() as f:
                 manifest = json.load(f)
             stats = manifest.get("stats", {})
             repos = stats.get("repos_collected", 0)
@@ -195,7 +193,8 @@ def generate_report(results: list[BenchmarkResult], output_path: str) -> None:
         "summary": generate_summary(results),
     }
 
-    with open(output_path, "w") as f:
+    output_file = Path(output_path)
+    with output_file.open("w") as f:
         json.dump(report, f, indent=2)
 
     print(f"\nReport written to: {output_path}")
@@ -237,7 +236,7 @@ def print_results_table(results: list[BenchmarkResult]) -> None:
     widths = [30, 12, 12, 8, 8, 6]
 
     # Print header
-    header_line = " | ".join(h.ljust(w) for h, w in zip(headers, widths))
+    header_line = " | ".join(h.ljust(w) for h, w in zip(headers, widths, strict=True))
     print(header_line)
     print("-" * len(header_line))
 
@@ -286,7 +285,8 @@ def main():
 
     args = parser.parse_args()
 
-    if not os.path.exists(args.config):
+    config_path = Path(args.config)
+    if not config_path.exists():
         print(f"Error: Config file not found: {args.config}")
         sys.exit(1)
 
