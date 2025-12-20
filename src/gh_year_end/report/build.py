@@ -1,6 +1,6 @@
 """Site build system for generating static HTML reports.
 
-Converts metrics data (Parquet) to JSON and generates a complete static site
+Reads metrics data from JSON files and generates a complete static site
 using Jinja2 templates and D3.js visualizations.
 """
 
@@ -12,7 +12,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-import polars as pl
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 
 from gh_year_end.config import Config
@@ -81,9 +80,9 @@ def build_site(config: Config, paths: PathManager) -> dict[str, Any]:
     }
 
     try:
-        # Load JSON data from metrics
-        logger.info("Loading and exporting metrics data to JSON")
-        data_context = _load_json_data(paths.metrics_root, paths.site_data_path)
+        # Load JSON data from site data directory
+        logger.info("Loading metrics data from JSON files")
+        data_context = _load_json_data(paths.site_data_path)
         stats["data_files_written"] = len(data_context)
 
         # Copy static assets
@@ -135,123 +134,60 @@ def build_site(config: Config, paths: PathManager) -> dict[str, Any]:
 
 
 def _verify_metrics_data_exists(paths: PathManager) -> None:
-    """Verify that metrics data exists."""
-    if not paths.metrics_root.exists():
-        msg = f"Metrics data not found at {paths.metrics_root}. Run 'metrics' command first."
+    """Verify that metrics data exists in JSON format."""
+    if not paths.site_data_path.exists():
+        msg = f"Metrics data not found at {paths.site_data_path}. Run 'metrics' and 'export' commands first."
         raise ValueError(msg)
 
-    metrics_files = list(paths.metrics_root.glob("*.parquet"))
-    if not metrics_files:
-        msg = f"No metrics tables found in {paths.metrics_root}. Run 'metrics' command first."
+    # Check for required JSON files
+    required_files = [
+        "summary.json",
+        "leaderboards.json",
+    ]
+
+    missing_files = [f for f in required_files if not (paths.site_data_path / f).exists()]
+    if missing_files:
+        msg = f"Missing required metrics files: {missing_files}. Run 'metrics' and 'export' commands first."
         raise ValueError(msg)
 
-    logger.info("Found %d metrics tables", len(metrics_files))
+    json_files = list(paths.site_data_path.glob("*.json"))
+    logger.info("Found %d JSON metrics files", len(json_files))
 
 
-def _flatten_leaderboards(leaderboards_data: dict[str, Any]) -> list[dict[str, Any]]:
-    """Convert nested leaderboards structure to flat array for metrics_leaderboard.json.
+def _load_json_data(data_dir: Path) -> dict[str, Any]:
+    """Load all JSON data files for report generation.
 
     Args:
-        leaderboards_data: Nested structure from leaderboards.json with
-            {"leaderboards": {"metric_key": {"org": [...], "repos": {...}}}}
+        data_dir: Directory containing JSON metrics files.
 
     Returns:
-        Flat array matching metrics_leaderboard.parquet schema:
-        [{year, metric_key, scope, repo_id, user_id, value, rank}, ...]
+        Dictionary mapping data keys to their content.
     """
-    flat_data = []
+    data = {}
 
-    leaderboards = leaderboards_data.get("leaderboards", {})
+    json_files = [
+        "summary.json",
+        "leaderboards.json",
+        "timeseries.json",
+        "repo_health.json",
+        "hygiene_scores.json",
+        "awards.json",
+    ]
 
-    for metric_key, metric_data in leaderboards.items():
-        # Process org-level leaderboard
-        org_entries = metric_data.get("org", [])
-        for entry in org_entries:
-            flat_data.append(
-                {
-                    "year": entry.get("year"),  # May not be present
-                    "metric_key": metric_key,
-                    "scope": "org",
-                    "repo_id": None,
-                    "user_id": entry.get("user_id"),
-                    "value": entry.get("value"),
-                    "rank": entry.get("rank"),
-                }
-            )
+    for filename in json_files:
+        filepath = data_dir / filename
+        if filepath.exists():
+            try:
+                with filepath.open() as f:
+                    content = json.load(f)
+                data[filename.replace(".json", "")] = content
+                logger.info("Loaded %s", filename)
+            except Exception as e:
+                logger.warning("Failed to load %s: %s", filename, e)
+        else:
+            logger.debug("Optional file not found: %s", filename)
 
-        # Process repo-level leaderboards
-        repos = metric_data.get("repos", {})
-        for repo_id, repo_entries in repos.items():
-            for entry in repo_entries:
-                flat_data.append(
-                    {
-                        "year": entry.get("year"),
-                        "metric_key": metric_key,
-                        "scope": "repo",
-                        "repo_id": repo_id,
-                        "user_id": entry.get("user_id"),
-                        "value": entry.get("value"),
-                        "rank": entry.get("rank"),
-                    }
-                )
-
-    return flat_data
-
-
-def _load_json_data(metrics_dir: Path, output_dir: Path) -> dict[str, Any]:
-    """Load Parquet metrics data and export to JSON files.
-
-    For metrics_leaderboard, if the parquet is empty, attempts to use the
-    fallback leaderboards.json generated by export_metrics.
-    """
-    data_context: dict[str, Any] = {}
-
-    parquet_files = sorted(metrics_dir.glob("*.parquet"))
-
-    for parquet_file in parquet_files:
-        try:
-            df = pl.read_parquet(parquet_file)
-            data = df.to_dicts()
-
-            table_name = parquet_file.stem
-            key = table_name.replace("metrics_", "")
-
-            # Special handling for empty metrics_leaderboard
-            if table_name == "metrics_leaderboard" and len(data) == 0:
-                # Try to use fallback from export_metrics leaderboards.json
-                fallback_path = output_dir / "leaderboards.json"
-                if fallback_path.exists():
-                    logger.info(
-                        "metrics_leaderboard is empty, attempting to convert leaderboards.json fallback"
-                    )
-                    try:
-                        with fallback_path.open() as f:
-                            fallback_data = json.load(f)
-                        # Convert nested leaderboards structure to flat array
-                        data = _flatten_leaderboards(fallback_data)
-                        if data:
-                            logger.info(
-                                "Converted %d leaderboard entries from fallback", len(data)
-                            )
-                    except Exception as e:
-                        logger.warning("Failed to convert fallback leaderboards: %s", e)
-
-            json_path = output_dir / f"{table_name}.json"
-            with json_path.open("w") as f:
-                json.dump(data, f, indent=2, default=str)
-
-            data_context[key] = {
-                "file": f"data/{table_name}.json",
-                "row_count": len(data),
-            }
-
-            logger.info("Exported %s: %d rows", table_name, len(data))
-
-        except Exception as e:
-            logger.warning("Failed to export %s: %s", parquet_file.name, e)
-            continue
-
-    return data_context
+    return data
 
 
 def _render_templates(
@@ -293,23 +229,36 @@ def _render_templates(
         env.filters["format_date"] = format_date
         env.filters["format_number"] = format_number
 
-        # Load data files
-        data_dir = output_dir / "data"
+        # Extract data from data_context (already loaded by _load_json_data)
+        summary_data = data_context.get("summary", {})
+        leaderboards_data = data_context.get("leaderboards", {})
+        awards_data = data_context.get("awards", {})
+        timeseries_data = data_context.get("timeseries", {})
 
-        summary_data = _load_json_file(data_dir / "summary.json")
-        leaderboards_data = _load_json_file(data_dir / "leaderboards.json")
-        repo_health_json = _load_json_file(data_dir / "metrics_repo_health.json")
-        hygiene_scores_json = _load_json_file(data_dir / "metrics_repo_hygiene_score.json")
-        awards_data = _load_json_file(data_dir / "awards.json")
-        timeseries_data = _load_json_file(data_dir / "timeseries.json")
+        # Extract repo health and hygiene scores
+        # These have a different structure from export.py
+        repo_health_data = data_context.get("repo_health", {})
+        hygiene_scores_data = data_context.get("hygiene_scores", {})
 
-        # The JSON files are already lists, not dicts with "repos" key
-        repo_health_list: list[dict[str, Any]] = (
-            repo_health_json if isinstance(repo_health_json, list) else []
-        )
-        hygiene_scores_list: list[dict[str, Any]] = (
-            hygiene_scores_json if isinstance(hygiene_scores_json, list) else []
-        )
+        # Convert repo health from dict to list format expected by templates
+        repo_health_list: list[dict[str, Any]] = []
+        if isinstance(repo_health_data, dict) and "repos" in repo_health_data:
+            # Format from export.py: {"repos": {repo_id: {...}}}
+            for repo_id, repo_data in repo_health_data["repos"].items():
+                repo_health_list.append({"repo_id": repo_id, **repo_data})
+        elif isinstance(repo_health_data, list):
+            # Already a list
+            repo_health_list = repo_health_data
+
+        # Convert hygiene scores from dict to list format
+        hygiene_scores_list: list[dict[str, Any]] = []
+        if isinstance(hygiene_scores_data, dict) and "repos" in hygiene_scores_data:
+            # Format from export.py: {"repos": {repo_id: {...}}}
+            for repo_id, repo_data in hygiene_scores_data["repos"].items():
+                hygiene_scores_list.append({"repo_id": repo_id, **repo_data})
+        elif isinstance(hygiene_scores_data, list):
+            # Already a list
+            hygiene_scores_list = hygiene_scores_data
 
         # Merge repo data for repos.html template
         repos_merged = repos_view.merge_repo_data(repo_health_list, hygiene_scores_list)
@@ -340,10 +289,17 @@ def _render_templates(
             "repository": [],
             "risk": [],
         }
+        # Awards data from export.py has structure: {"awards": {category: [...]}}
         if isinstance(awards_data, dict):
-            for category in ["individual", "repository", "risk"]:
-                if category in awards_data:
-                    awards_by_category[category] = awards_data[category]
+            if "awards" in awards_data:
+                for category in ["individual", "repository", "risk"]:
+                    if category in awards_data["awards"]:
+                        awards_by_category[category] = awards_data["awards"][category]
+            else:
+                # Direct category mapping
+                for category in ["individual", "repository", "risk"]:
+                    if category in awards_data:
+                        awards_by_category[category] = awards_data[category]
 
         # Build template context
         context = {
@@ -386,7 +342,6 @@ def _render_templates(
             },
             "generation_date": datetime.now(UTC).strftime("%Y-%m-%d"),
             "version": "1.0.0",
-            "data": data_context,
             "build_time": datetime.now(UTC).isoformat(),
             # FIX FOR ISSUE #63: Transform leaderboards to expected format
             "leaderboards": _transform_leaderboards(leaderboards_data),
@@ -491,18 +446,6 @@ def _render_templates(
         logger.warning("Template rendering failed: %s", e)
 
     return rendered_templates
-
-
-def _load_json_file(file_path: Path) -> Any:
-    """Load JSON file safely. Returns dict, list, or empty dict on error."""
-    if not file_path.exists():
-        return {}
-    try:
-        with file_path.open() as f:
-            return json.load(f)
-    except Exception as e:
-        logger.warning("Failed to load %s: %s", file_path, e)
-        return {}
 
 
 def _transform_leaderboards(leaderboards_data: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:

@@ -5,7 +5,6 @@
 import json
 from pathlib import Path
 
-import polars as pl
 import pytest
 
 from gh_year_end.config import Config
@@ -43,32 +42,67 @@ def paths(config: Config, tmp_path: Path) -> PathManager:
 
 @pytest.fixture
 def sample_metrics_data(paths: PathManager) -> None:
-    """Create sample metrics data for testing."""
-    paths.metrics_root.mkdir(parents=True, exist_ok=True)
+    """Create sample metrics data for testing (in JSON format)."""
+    paths.site_data_path.mkdir(parents=True, exist_ok=True)
+
+    # Create sample summary data
+    summary_data = {
+        "year": 2025,
+        "target": {"mode": "user", "name": "test-user"},
+        "total_contributors": 3,
+        "total_repos": 5,
+        "total_prs_opened": 18,
+        "total_prs_merged": 14,
+        "total_issues_opened": 9,
+        "total_reviews_submitted": 30,
+    }
+    with (paths.site_data_path / "summary.json").open("w") as f:
+        json.dump(summary_data, f, indent=2)
 
     # Create sample leaderboard data
-    leaderboard_data = pl.DataFrame(
-        {
-            "user_id": [1, 2, 3],
-            "user_login": ["alice", "bob", "charlie"],
-            "prs_opened": [10, 5, 3],
-            "prs_merged": [8, 4, 2],
-            "issues_opened": [5, 3, 1],
-            "reviews_submitted": [15, 10, 5],
-        }
-    )
-    leaderboard_data.write_parquet(paths.metrics_leaderboard_path)
+    leaderboard_data = {
+        "leaderboards": {
+            "prs_opened": {
+                "org": [
+                    {"rank": 1, "user_id": "alice", "login": "alice", "value": 10},
+                    {"rank": 2, "user_id": "bob", "login": "bob", "value": 5},
+                    {"rank": 3, "user_id": "charlie", "login": "charlie", "value": 3},
+                ],
+                "repos": {},
+            },
+            "prs_merged": {
+                "org": [
+                    {"rank": 1, "user_id": "alice", "login": "alice", "value": 8},
+                    {"rank": 2, "user_id": "bob", "login": "bob", "value": 4},
+                    {"rank": 3, "user_id": "charlie", "login": "charlie", "value": 2},
+                ],
+                "repos": {},
+            },
+        },
+        "metrics_available": ["prs_opened", "prs_merged"],
+    }
+    with (paths.site_data_path / "leaderboards.json").open("w") as f:
+        json.dump(leaderboard_data, f, indent=2)
 
     # Create sample time series data
-    time_series_data = pl.DataFrame(
-        {
-            "week": ["2025-W01", "2025-W02", "2025-W03"],
-            "prs_opened": [5, 8, 3],
-            "prs_merged": [4, 6, 2],
-            "issues_opened": [2, 3, 1],
-        }
-    )
-    time_series_data.write_parquet(paths.metrics_time_series_path)
+    timeseries_data = {
+        "timeseries": {
+            "week": {
+                "prs_merged": {
+                    "org": [
+                        {"period_start": "2025-01-06", "period_end": "2025-01-12", "value": 4},
+                        {"period_start": "2025-01-13", "period_end": "2025-01-19", "value": 6},
+                        {"period_start": "2025-01-20", "period_end": "2025-01-26", "value": 2},
+                    ],
+                    "repos": {},
+                }
+            }
+        },
+        "period_types": ["week"],
+        "metrics_available": ["prs_merged"],
+    }
+    with (paths.site_data_path / "timeseries.json").open("w") as f:
+        json.dump(timeseries_data, f, indent=2)
 
 
 @pytest.fixture
@@ -99,8 +133,8 @@ def sample_templates(config: Config, tmp_path: Path) -> Path:
 </head>
 <body>
     <h1>Dashboard</h1>
-    {% if data.leaderboard %}
-    <p>Leaderboard: {{ data.leaderboard.row_count }} rows</p>
+    {% if summary %}
+    <p>Summary: {{ summary.total_contributors }} contributors</p>
     {% endif %}
 </body>
 </html>"""
@@ -147,10 +181,10 @@ class TestBuildSite:
             build_site(config, paths)
 
     def test_fails_if_no_metrics_tables(self, config: Config, paths: PathManager) -> None:
-        """Test that build_site fails if no metrics tables exist."""
-        paths.metrics_root.mkdir(parents=True, exist_ok=True)
+        """Test that build_site fails if no metrics JSON files exist."""
+        paths.site_data_path.mkdir(parents=True, exist_ok=True)
 
-        with pytest.raises(ValueError, match="No metrics tables found"):
+        with pytest.raises(ValueError, match="Missing required metrics files"):
             build_site(config, paths)
 
     def test_creates_site_directories(
@@ -189,18 +223,19 @@ class TestBuildSite:
         # Verify duration is positive
         assert stats["duration_seconds"] >= 0
 
-    def test_exports_data_files(
+    def test_loads_data_files(
         self, config: Config, paths: PathManager, sample_metrics_data: None
     ) -> None:
-        """Test that build_site exports JSON data files."""
+        """Test that build_site loads JSON data files."""
         stats = build_site(config, paths)
 
-        # Should have exported 2 files (leaderboard + time_series)
-        assert stats["data_files_written"] == 2
+        # Should have loaded 3 files (summary, leaderboards, timeseries)
+        assert stats["data_files_written"] == 3
 
-        # Verify files exist
-        assert (paths.site_data_path / "metrics_leaderboard.json").exists()
-        assert (paths.site_data_path / "metrics_time_series.json").exists()
+        # Verify the JSON files that were created by the fixture still exist
+        assert (paths.site_data_path / "summary.json").exists()
+        assert (paths.site_data_path / "leaderboards.json").exists()
+        assert (paths.site_data_path / "timeseries.json").exists()
 
     def test_renders_templates(
         self,
@@ -308,17 +343,17 @@ class TestVerifyMetricsDataExists:
         with pytest.raises(ValueError, match="Metrics data not found"):
             _verify_metrics_data_exists(paths)
 
-    def test_raises_if_no_parquet_files(self, paths: PathManager) -> None:
-        """Test that it raises ValueError if no parquet files exist."""
-        paths.metrics_root.mkdir(parents=True, exist_ok=True)
+    def test_raises_if_no_json_files(self, paths: PathManager) -> None:
+        """Test that it raises ValueError if required JSON files don't exist."""
+        paths.site_data_path.mkdir(parents=True, exist_ok=True)
 
-        with pytest.raises(ValueError, match="No metrics tables found"):
+        with pytest.raises(ValueError, match="Missing required metrics files"):
             _verify_metrics_data_exists(paths)
 
-    def test_succeeds_with_parquet_files(
+    def test_succeeds_with_json_files(
         self, paths: PathManager, sample_metrics_data: None
     ) -> None:
-        """Test that it succeeds when parquet files exist."""
+        """Test that it succeeds when JSON files exist."""
         # Should not raise
         _verify_metrics_data_exists(paths)
 
@@ -326,79 +361,67 @@ class TestVerifyMetricsDataExists:
 class TestLoadJsonData:
     """Tests for _load_json_data function."""
 
-    def test_exports_parquet_to_json(self, paths: PathManager, sample_metrics_data: None) -> None:
-        """Test that parquet files are exported to JSON."""
-        paths.site_data_path.mkdir(parents=True, exist_ok=True)
+    def test_loads_json_files(self, paths: PathManager, sample_metrics_data: None) -> None:
+        """Test that JSON files are loaded."""
+        data_context = _load_json_data(paths.site_data_path)
 
-        data_context = _load_json_data(paths.metrics_root, paths.site_data_path)
-
-        # Should have 2 entries (leaderboard + time_series)
-        assert len(data_context) == 2
-        assert "leaderboard" in data_context
-        assert "time_series" in data_context
-
-    def test_json_files_created(self, paths: PathManager, sample_metrics_data: None) -> None:
-        """Test that JSON files are created on disk."""
-        paths.site_data_path.mkdir(parents=True, exist_ok=True)
-
-        _load_json_data(paths.metrics_root, paths.site_data_path)
-
-        # Verify files exist
-        assert (paths.site_data_path / "metrics_leaderboard.json").exists()
-        assert (paths.site_data_path / "metrics_time_series.json").exists()
+        # Should have loaded summary and leaderboards at minimum
+        assert "summary" in data_context
+        assert "leaderboards" in data_context
+        assert "timeseries" in data_context
 
     def test_json_content_valid(self, paths: PathManager, sample_metrics_data: None) -> None:
-        """Test that JSON content is valid and correct."""
+        """Test that JSON content is loaded correctly."""
+        data_context = _load_json_data(paths.site_data_path)
+
+        # Verify summary data
+        summary = data_context["summary"]
+        assert summary["year"] == 2025
+        assert summary["total_contributors"] == 3
+
+        # Verify leaderboard structure
+        leaderboards = data_context["leaderboards"]
+        assert "leaderboards" in leaderboards
+        assert "prs_opened" in leaderboards["leaderboards"]
+
+    def test_handles_missing_files_gracefully(self, paths: PathManager) -> None:
+        """Test that missing JSON files are handled gracefully."""
         paths.site_data_path.mkdir(parents=True, exist_ok=True)
 
-        _load_json_data(paths.metrics_root, paths.site_data_path)
+        # Create only summary.json
+        summary_data = {"year": 2025}
+        with (paths.site_data_path / "summary.json").open("w") as f:
+            json.dump(summary_data, f)
 
-        # Load and verify leaderboard data
-        with (paths.site_data_path / "metrics_leaderboard.json").open() as f:
-            leaderboard = json.load(f)
+        # Should not raise, just load what's available
+        data_context = _load_json_data(paths.site_data_path)
 
-        assert len(leaderboard) == 3
-        assert leaderboard[0]["user_login"] == "alice"
-        assert leaderboard[0]["prs_opened"] == 10
+        assert "summary" in data_context
+        assert "leaderboards" not in data_context
 
-    def test_data_context_structure(self, paths: PathManager, sample_metrics_data: None) -> None:
-        """Test that data context has correct structure."""
+    def test_handles_invalid_json_gracefully(self, paths: PathManager) -> None:
+        """Test that invalid JSON files are skipped."""
         paths.site_data_path.mkdir(parents=True, exist_ok=True)
 
-        data_context = _load_json_data(paths.metrics_root, paths.site_data_path)
-
-        # Verify structure
-        assert "file" in data_context["leaderboard"]
-        assert "row_count" in data_context["leaderboard"]
-        assert data_context["leaderboard"]["file"] == "data/metrics_leaderboard.json"
-        assert data_context["leaderboard"]["row_count"] == 3
-
-    def test_handles_invalid_parquet_gracefully(self, paths: PathManager, tmp_path: Path) -> None:
-        """Test that invalid parquet files are skipped."""
-        paths.metrics_root.mkdir(parents=True, exist_ok=True)
-        paths.site_data_path.mkdir(parents=True, exist_ok=True)
-
-        # Create invalid parquet file
-        invalid_file = paths.metrics_root / "invalid.parquet"
-        invalid_file.write_text("not a parquet file")
+        # Create invalid JSON file
+        invalid_file = paths.site_data_path / "summary.json"
+        invalid_file.write_text("not valid json{")
 
         # Should not raise, just skip the file
-        data_context = _load_json_data(paths.metrics_root, paths.site_data_path)
+        data_context = _load_json_data(paths.site_data_path)
 
-        # Should be empty
-        assert len(data_context) == 0
+        # Should not have summary since it failed to load
+        assert "summary" not in data_context
 
 
 class TestRenderTemplates:
     """Tests for _render_templates function."""
 
     def test_renders_all_templates(
-        self, config: Config, paths: PathManager, sample_templates: Path
+        self, config: Config, paths: PathManager, sample_templates: Path, sample_metrics_data: None
     ) -> None:
         """Test that all templates are rendered."""
-        data_context = {
-            "leaderboard": {"file": "data/leaderboard.json", "row_count": 3},
-        }
+        data_context = _load_json_data(paths.site_data_path)
 
         rendered = _render_templates(sample_templates, paths.site_root, data_context, config)
 
@@ -407,12 +430,10 @@ class TestRenderTemplates:
         assert "dashboard.html" in rendered
 
     def test_rendered_html_contains_data(
-        self, config: Config, paths: PathManager, sample_templates: Path
+        self, config: Config, paths: PathManager, sample_templates: Path, sample_metrics_data: None
     ) -> None:
         """Test that rendered HTML contains template variables."""
-        data_context = {
-            "leaderboard": {"file": "data/leaderboard.json", "row_count": 3},
-        }
+        data_context = _load_json_data(paths.site_data_path)
 
         _render_templates(sample_templates, paths.site_root, data_context, config)
 

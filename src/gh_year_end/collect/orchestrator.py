@@ -13,6 +13,7 @@ from collections.abc import Callable
 from datetime import datetime
 from typing import Any, cast
 
+from gh_year_end.collect.aggregator import MetricsAggregator
 from gh_year_end.collect.comments import collect_issue_comments, collect_review_comments
 from gh_year_end.collect.commits import collect_commits
 from gh_year_end.collect.discovery import discover_repos
@@ -821,3 +822,245 @@ async def _extract_pr_numbers_from_raw(
             continue
 
     return pr_numbers_by_repo
+
+
+async def collect_and_aggregate(
+    config: Config,
+    verbose: bool = False,
+    quiet: bool = False,
+) -> dict[str, Any]:
+    """Single-pass collection with inline metric aggregation.
+
+    This function replaces the separate collect, normalize, and metrics phases
+    with a single pass that aggregates metrics during collection. No raw JSONL
+    files are written - metrics are computed in-memory and returned directly.
+
+    Args:
+        config: Application configuration.
+        verbose: Enable detailed logging output.
+        quiet: Minimal output mode (no progress display).
+
+    Returns:
+        Dictionary containing all metrics in the format expected by the website:
+        {
+            'summary': {...},
+            'leaderboards': {...},
+            'timeseries': {...},
+            'repo_health': [...],
+            'hygiene_scores': {...},
+            'awards': {...}
+        }
+
+    Raises:
+        CollectionError: If critical collection failure occurs.
+    """
+    start_time = datetime.now()
+
+    logger.info(
+        "Starting single-pass collection with metric aggregation for %s", config.github.target.name
+    )
+    logger.info(
+        "Year: %d, Date range: %s to %s",
+        config.github.windows.year,
+        config.github.windows.since.isoformat(),
+        config.github.windows.until.isoformat(),
+    )
+
+    # Initialize MetricsAggregator
+    aggregator = MetricsAggregator(
+        year=config.github.windows.year,
+        target_name=config.github.target.name,
+        target_mode=config.github.target.mode,
+    )
+
+    # Initialize auth and clients
+    token = os.getenv(config.github.auth.token_env)
+    if not token:
+        msg = f"GitHub token not found in environment variable {config.github.auth.token_env}"
+        raise CollectionError(msg)
+
+    auth = GitHubAuth(token=token)
+    http_client = GitHubClient(auth=auth)
+    rate_limiter = AdaptiveRateLimiter(config.rate_limit)
+    rest_client = RestClient(http_client, rate_limiter)
+
+    # Initialize progress tracker (simplified - no checkpoint tracking)
+    progress = ProgressTracker(
+        verbose=verbose,
+        quiet=quiet,
+        rate_limiter=rate_limiter,
+    )
+
+    try:
+        # Start progress display
+        progress.start()
+
+        # Step 1: Discovery
+        logger.info("=" * 80)
+        logger.info("STEP 1: Repository Discovery")
+        logger.info("=" * 80)
+        progress.set_phase("discovery")
+
+        # Discover repos using existing discovery module
+        # Note: We still need PathManager for discovery, but we won't write JSONL
+        paths = PathManager(config)
+        paths.ensure_directories()
+
+        repos = await discover_repos(config, http_client, paths)
+        progress.set_total_repos(len(repos))
+        progress.mark_phase_complete("discovery")
+
+        logger.info("Discovery complete: %d repos discovered", len(repos))
+
+        if not repos:
+            logger.warning("No repositories discovered. Check target configuration.")
+            return aggregator.export()
+
+        # Step 2: Collect PRs, Issues, Reviews with inline aggregation
+        logger.info("=" * 80)
+        logger.info("STEP 2: Data Collection with Metric Aggregation")
+        logger.info("=" * 80)
+        progress.set_phase("collection")
+
+        total_prs = 0
+        total_issues = 0
+        total_reviews = 0
+
+        for idx, repo in enumerate(repos, 1):
+            repo_full_name = repo["full_name"]
+            owner, repo_name = repo_full_name.split("/", 1)
+
+            logger.info("[%d/%d] Processing %s", idx, len(repos), repo_full_name)
+
+            # Add repo to aggregator
+            aggregator.add_repo(repo)
+
+            try:
+                # Collect PRs
+                if config.collection.enable.pulls:
+                    logger.debug("  Collecting PRs...")
+                    async for prs_page, _metadata in rest_client.list_pulls(
+                        owner=owner,
+                        repo=repo_name,
+                        state="all",
+                    ):
+                        for pr in prs_page:
+                            # Apply date filter
+                            created_at = pr.get("created_at")
+                            if created_at:
+                                created_dt = datetime.fromisoformat(
+                                    created_at.replace("Z", "+00:00")
+                                )
+                                if (
+                                    config.github.windows.since
+                                    <= created_dt
+                                    < config.github.windows.until
+                                ):
+                                    aggregator.add_pr(repo_full_name, pr)
+                                    total_prs += 1
+
+                                    # Collect reviews for this PR
+                                    if config.collection.enable.reviews:
+                                        async for (
+                                            reviews_page,
+                                            _review_meta,
+                                        ) in rest_client.list_reviews(
+                                            owner=owner,
+                                            repo=repo_name,
+                                            pull_number=pr["number"],
+                                        ):
+                                            for review in reviews_page:
+                                                aggregator.add_review(
+                                                    repo_full_name, pr["number"], review
+                                                )
+                                                total_reviews += 1
+
+                # Collect issues
+                if config.collection.enable.issues:
+                    logger.debug("  Collecting issues...")
+                    async for issues_page, _metadata in rest_client.list_issues(
+                        owner=owner,
+                        repo=repo_name,
+                        state="all",
+                    ):
+                        for issue in issues_page:
+                            # Skip PRs (GitHub issues API includes PRs)
+                            if "pull_request" in issue:
+                                continue
+
+                            # Apply date filter
+                            created_at = issue.get("created_at")
+                            if created_at:
+                                created_dt = datetime.fromisoformat(
+                                    created_at.replace("Z", "+00:00")
+                                )
+                                if (
+                                    config.github.windows.since
+                                    <= created_dt
+                                    < config.github.windows.until
+                                ):
+                                    aggregator.add_issue(repo_full_name, issue)
+                                    total_issues += 1
+
+                # Collect hygiene data
+                if config.collection.enable.hygiene:
+                    logger.debug("  Collecting hygiene data...")
+                    # Simplified hygiene collection - just check branch protection
+                    try:
+                        default_branch = repo.get("default_branch", "main")
+                        protection = await rest_client.get_branch_protection(
+                            owner=owner,
+                            repo=repo_name,
+                            branch=default_branch,
+                        )
+                        hygiene_data = {
+                            "repo": repo_full_name,
+                            "default_branch": default_branch,
+                            "protected": True,
+                            "protection": protection,
+                        }
+                    except Exception:
+                        # Branch protection not enabled or not accessible
+                        hygiene_data = {
+                            "repo": repo_full_name,
+                            "default_branch": repo.get("default_branch", "main"),
+                            "protected": False,
+                        }
+
+                    aggregator.set_hygiene(repo_full_name, hygiene_data)
+
+                logger.info(
+                    "  Processed: %d PRs, %d issues, %d reviews",
+                    total_prs,
+                    total_issues,
+                    total_reviews,
+                )
+
+            except Exception as e:
+                logger.error("Error processing %s: %s", repo_full_name, e)
+                continue
+
+        progress.mark_phase_complete("collection")
+
+        logger.info("=" * 80)
+        logger.info("COLLECTION COMPLETE")
+        logger.info("=" * 80)
+        logger.info("Total PRs: %d", total_prs)
+        logger.info("Total issues: %d", total_issues)
+        logger.info("Total reviews: %d", total_reviews)
+
+        # Export aggregated metrics
+        metrics = aggregator.export()
+
+        # Calculate duration
+        end_time = datetime.now()
+        duration = (end_time - start_time).total_seconds()
+        logger.info("Total duration: %.2f seconds (%.2f minutes)", duration, duration / 60)
+
+        return metrics
+
+    finally:
+        # Stop progress display
+        progress.stop()
+        # Cleanup clients
+        await http_client.close()
