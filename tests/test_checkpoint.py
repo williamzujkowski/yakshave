@@ -1,8 +1,11 @@
 """Tests for checkpoint management system."""
 
 import json
+import signal
+import tempfile
 from datetime import UTC, datetime
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -502,6 +505,479 @@ class TestCheckpointManager:
 
         # Installing again should be no-op
         manager.install_signal_handlers()
+
+    def test_load_nonexistent_checkpoint(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+    ) -> None:
+        """Test loading checkpoint that doesn't exist."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        with pytest.raises(FileNotFoundError, match="Checkpoint not found"):
+            manager.load()
+
+    def test_save_with_io_error(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test save handles IO errors gracefully."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        # Make parent directory read-only to trigger error
+        checkpoint_path.parent.chmod(0o444)
+
+        try:
+            manager._data["test"] = "value"
+            with pytest.raises(PermissionError):
+                manager.save()
+        finally:
+            # Restore permissions
+            checkpoint_path.parent.chmod(0o755)
+
+    def test_get_repos_to_process_with_failed(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+        sample_repos: list[dict[str, str]],
+    ) -> None:
+        """Test getting repos to process including failed ones."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+        manager.update_repos(sample_repos)
+
+        # Mark one repo as failed
+        manager.mark_repo_endpoint_failed("org/repo1", "pulls", "Error", retryable=False)
+
+        # Without retry_failed, should exclude failed repo
+        repos = manager.get_repos_to_process(retry_failed=False)
+        assert "org/repo1" not in repos
+        assert len(repos) == 2
+
+        # With retry_failed, should include failed repo
+        repos = manager.get_repos_to_process(retry_failed=True)
+        assert "org/repo1" in repos
+        assert len(repos) == 3
+
+    def test_get_repos_to_process_from_nonexistent_repo(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+        sample_repos: list[dict[str, str]],
+    ) -> None:
+        """Test from_repo with nonexistent repo name."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+        manager.update_repos(sample_repos)
+
+        # Nonexistent repo should log warning and return all repos
+        repos = manager.get_repos_to_process(from_repo="org/nonexistent")
+        assert len(repos) == 3  # Returns all pending repos since from_repo not found
+
+    def test_mark_repo_endpoint_complete_all_endpoints(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+        sample_repos: list[dict[str, str]],
+    ) -> None:
+        """Test that repo is marked complete when all endpoints are complete."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+        manager.update_repos(sample_repos)
+
+        repo = "org/repo1"
+        endpoints = ["pulls", "issues", "reviews"]
+
+        # Mark all endpoints in progress and complete
+        for endpoint in endpoints:
+            manager.mark_repo_endpoint_in_progress(repo, endpoint)
+            manager.mark_repo_endpoint_complete(repo, endpoint)
+
+        # Repo should be marked complete
+        repo_data = manager._data["repos"][repo]
+        assert repo_data["status"] == "complete"
+        assert repo_data["completed_at"] is not None
+
+    def test_mark_repo_endpoint_complete_nonexistent_repo(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test marking nonexistent repo endpoint as complete."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        # Should not crash
+        manager.mark_repo_endpoint_complete("org/nonexistent", "pulls")
+        assert "org/nonexistent" not in manager._data["repos"]
+
+    def test_is_repo_endpoint_complete_nonexistent_repo(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test checking endpoint complete for nonexistent repo."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        # Should return False
+        assert not manager.is_repo_endpoint_complete("org/nonexistent", "pulls")
+
+    def test_is_repo_endpoint_complete_nonexistent_endpoint(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+        sample_repos: list[dict[str, str]],
+    ) -> None:
+        """Test checking nonexistent endpoint."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+        manager.update_repos(sample_repos)
+
+        # Should return False
+        assert not manager.is_repo_endpoint_complete("org/repo1", "nonexistent")
+
+    def test_get_resume_page_nonexistent_repo(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test getting resume page for nonexistent repo."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        # Should return 1 (start from beginning)
+        assert manager.get_resume_page("org/nonexistent", "pulls") == 1
+
+    def test_get_resume_page_nonexistent_endpoint(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+        sample_repos: list[dict[str, str]],
+    ) -> None:
+        """Test getting resume page for nonexistent endpoint."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+        manager.update_repos(sample_repos)
+
+        # Should return 1 (start from beginning)
+        assert manager.get_resume_page("org/repo1", "nonexistent") == 1
+
+    def test_update_progress_creates_repo_if_missing(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test that update_progress creates repo if it doesn't exist."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        # Update progress for nonexistent repo
+        manager.update_progress("org/newrepo", "pulls", page=1, records=50)
+
+        # Repo should be created
+        assert "org/newrepo" in manager._data["repos"]
+        repo_data = manager._data["repos"]["org/newrepo"]
+        assert repo_data["endpoints"]["pulls"]["pages_collected"] == 1
+        assert repo_data["endpoints"]["pulls"]["records_collected"] == 50
+
+    def test_update_progress_creates_endpoint_if_missing(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+        sample_repos: list[dict[str, str]],
+    ) -> None:
+        """Test that update_progress creates endpoint if it doesn't exist."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+        manager.update_repos(sample_repos)
+
+        # Update progress for nonexistent endpoint
+        manager.update_progress("org/repo1", "new_endpoint", page=1, records=50)
+
+        # Endpoint should be created
+        repo_data = manager._data["repos"]["org/repo1"]
+        assert "new_endpoint" in repo_data["endpoints"]
+        assert repo_data["endpoints"]["new_endpoint"]["pages_collected"] == 1
+
+    def test_update_progress_periodic_save(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+        sample_repos: list[dict[str, str]],
+    ) -> None:
+        """Test that update_progress saves periodically."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+        manager.update_repos(sample_repos)
+
+        repo = "org/repo1"
+        endpoint = "pulls"
+
+        manager.mark_repo_endpoint_in_progress(repo, endpoint)
+
+        # Modify checkpoint path time to verify it was saved
+        initial_mtime = checkpoint_path.stat().st_mtime if checkpoint_path.exists() else 0
+
+        # Update progress 9 times (shouldn't save)
+        for i in range(1, 10):
+            manager.update_progress(repo, endpoint, page=i, records=5)
+
+        # 10th page should trigger save
+        manager.update_progress(repo, endpoint, page=10, records=5)
+
+        # Verify checkpoint was saved (mtime changed)
+        final_mtime = checkpoint_path.stat().st_mtime
+        assert final_mtime > initial_mtime
+
+    def test_get_stats_with_all_statuses(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test get_stats with repos in all different statuses."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        repos = [{"full_name": f"org/repo{i}", "name": f"repo{i}"} for i in range(1, 5)]
+        manager.update_repos(repos)
+
+        # repo1: complete
+        manager.mark_repo_endpoint_in_progress("org/repo1", "pulls")
+        manager.mark_repo_endpoint_complete("org/repo1", "pulls")
+        repo_progress = RepoProgress.from_dict(manager._data["repos"]["org/repo1"])
+        repo_progress.status = CheckpointStatus.COMPLETE
+        manager._data["repos"]["org/repo1"] = repo_progress.to_dict()
+
+        # repo2: in progress
+        manager.mark_repo_endpoint_in_progress("org/repo2", "pulls")
+
+        # repo3: failed
+        manager.mark_repo_endpoint_failed("org/repo3", "pulls", "Error", retryable=False)
+
+        # repo4: pending (no changes)
+
+        stats = manager.get_stats()
+        assert stats["total_repos"] == 4
+        assert stats["repos_complete"] == 1
+        assert stats["repos_in_progress"] == 1
+        assert stats["repos_failed"] == 1
+        assert stats["repos_pending"] == 1
+
+    def test_context_manager_with_exception(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test context manager saves on exception."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        try:
+            with manager:
+                manager._data["test"] = "value"
+                raise ValueError("Test error")
+        except ValueError:
+            pass
+
+        # Should have saved despite exception
+        with checkpoint_path.open() as f:
+            data = json.load(f)
+        assert data["test"] == "value"
+
+    def test_mark_phase_complete_creates_phase(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test marking phase complete creates it if it doesn't exist."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        # Mark phase complete without setting it current first
+        manager.mark_phase_complete("new_phase")
+
+        assert "new_phase" in manager._data["phases"]
+        assert manager._data["phases"]["new_phase"]["status"] == "complete"
+
+    def test_is_phase_complete_nonexistent_phase(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test checking nonexistent phase."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        # Should return False
+        assert not manager.is_phase_complete("nonexistent")
+
+    def test_mark_repo_endpoint_in_progress_updates_repo_status(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+        sample_repos: list[dict[str, str]],
+    ) -> None:
+        """Test marking endpoint in progress updates repo status from pending."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+        manager.update_repos(sample_repos)
+
+        repo = "org/repo1"
+        # Verify repo starts as pending
+        repo_data = manager._data["repos"][repo]
+        assert repo_data["status"] == "pending"
+
+        # Mark endpoint in progress
+        manager.mark_repo_endpoint_in_progress(repo, "pulls")
+
+        # Repo should now be in progress
+        repo_data = manager._data["repos"][repo]
+        assert repo_data["status"] == "in_progress"
+        assert repo_data["started_at"] is not None
+
+    def test_mark_repo_endpoint_in_progress_creates_repo(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test marking endpoint in progress creates repo if it doesn't exist."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        # Mark endpoint in progress for nonexistent repo
+        manager.mark_repo_endpoint_in_progress("org/newrepo", "pulls")
+
+        # Repo should be created
+        assert "org/newrepo" in manager._data["repos"]
+        repo_data = manager._data["repos"]["org/newrepo"]
+        assert repo_data["status"] == "in_progress"
+        assert "pulls" in repo_data["endpoints"]
+
+    def test_mark_repo_endpoint_failed_creates_repo(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test marking endpoint failed creates repo if it doesn't exist."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        # Mark endpoint failed for nonexistent repo
+        manager.mark_repo_endpoint_failed("org/newrepo", "pulls", "Error", retryable=True)
+
+        # Repo should be created
+        assert "org/newrepo" in manager._data["repos"]
+        repo_data = manager._data["repos"]["org/newrepo"]
+        assert "pulls" in repo_data["endpoints"]
+        assert repo_data["error"]["message"] == "Error"
+
+    def test_save_cleanup_on_error(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test that temp file is cleaned up on save error."""
+        import os
+
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+
+        # Create a real temp file that we'll close to cause write to fail
+        fd, temp_path = tempfile.mkstemp(
+            dir=checkpoint_path.parent,
+            prefix=".checkpoint_",
+            suffix=".tmp",
+        )
+        os.close(fd)  # Close the file descriptor to cause failure
+
+        # Mock tempfile.mkstemp to return the closed file descriptor
+        with patch("tempfile.mkstemp") as mock_mkstemp:
+            mock_mkstemp.return_value = (fd, temp_path)
+
+            # Should raise error and clean up temp file
+            with pytest.raises(OSError):
+                manager._data["test"] = "value"
+                manager.save()
+
+            # Temp file should be cleaned up
+            assert not Path(temp_path).exists()
+
+    def test_signal_handler_saves_checkpoint(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+    ) -> None:
+        """Test that signal handler saves checkpoint before raising."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+        manager.install_signal_handlers()
+
+        # Modify data
+        manager._data["test"] = "value"
+
+        # Get the installed signal handler
+        handler = signal.getsignal(signal.SIGINT)
+
+        # Call the handler and expect KeyboardInterrupt
+        with pytest.raises(KeyboardInterrupt):
+            handler(signal.SIGINT, None)
+
+        # Checkpoint should have been saved
+        with checkpoint_path.open() as f:
+            data = json.load(f)
+        assert data["test"] == "value"
+
+    def test_update_progress_with_100_records_triggers_save(
+        self,
+        checkpoint_path: Path,
+        lock_path: Path,
+        sample_config: Config,
+        sample_repos: list[dict[str, str]],
+    ) -> None:
+        """Test that update_progress saves when 100 records threshold is hit."""
+        manager = CheckpointManager(checkpoint_path, lock_path)
+        manager.create_new(sample_config)
+        manager.update_repos(sample_repos)
+
+        repo = "org/repo1"
+        endpoint = "pulls"
+
+        manager.mark_repo_endpoint_in_progress(repo, endpoint)
+
+        initial_mtime = checkpoint_path.stat().st_mtime if checkpoint_path.exists() else 0
+
+        # Update with 99 records (shouldn't save)
+        manager.update_progress(repo, endpoint, page=1, records=99)
+
+        # Update with 1 more record (total 100, should trigger save)
+        manager.update_progress(repo, endpoint, page=2, records=1)
+
+        # Verify checkpoint was saved
+        final_mtime = checkpoint_path.stat().st_mtime
+        assert final_mtime > initial_mtime
 
 
 class TestCheckpointIntegration:
