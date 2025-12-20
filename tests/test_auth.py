@@ -109,6 +109,30 @@ class TestGitHubAuthInvalidTokens:
         with pytest.raises(AuthenticationError, match="Token appears too short"):
             GitHubAuth(token=token)
 
+    def test_classic_token_uppercase_hex(self) -> None:
+        """Test that uppercase hex chars in classic token are rejected."""
+        # Classic tokens must be lowercase hex only
+        token = "A" * 40
+        with pytest.raises(AuthenticationError, match="Invalid token format"):
+            GitHubAuth(token=token)
+
+    def test_classic_token_with_special_chars(self) -> None:
+        """Test that special characters in classic token are rejected."""
+        token = "abc123-def456-abc789-def012-abc345def67"  # 40 chars but has dashes
+        with pytest.raises(AuthenticationError, match="Invalid token format"):
+            GitHubAuth(token=token)
+
+    def test_valid_prefix_token_at_minimum_length(self) -> None:
+        """Test token with valid prefix at exactly minimum length (20 chars)."""
+        token = "ghp_" + "a" * 16  # Exactly 20 characters
+        auth = GitHubAuth(token=token)
+        assert auth.token == token
+
+    def test_whitespace_only_token(self) -> None:
+        """Test that whitespace-only token is rejected."""
+        with pytest.raises(AuthenticationError, match="Invalid token format"):
+            GitHubAuth(token="   ")
+
 
 class TestGitHubAuthEnvironmentVariable:
     """Tests for token loading from environment variable."""
@@ -152,6 +176,19 @@ class TestGitHubAuthHeaders:
 
         assert header1 == header2
 
+    def test_token_property(self) -> None:
+        """Test token property returns the correct token."""
+        token = "ghp_" + "z" * 36
+        auth = GitHubAuth(token=token)
+        assert auth.token == token
+
+    def test_header_format_with_classic_token(self) -> None:
+        """Test authorization header format with classic token."""
+        token = "a" * 40
+        auth = GitHubAuth(token=token)
+        header = auth.get_authorization_header()
+        assert header["Authorization"] == f"token {token}"
+
 
 class TestLoadGitHubToken:
     """Tests for load_github_token convenience function."""
@@ -192,6 +229,11 @@ class TestGetAuthHeaders:
         with patch.dict(os.environ, {"GITHUB_TOKEN": token}):
             headers = get_auth_headers(token=None)
             assert headers["Authorization"] == f"token {token}"
+
+    def test_get_auth_headers_invalid_token(self) -> None:
+        """Test get_auth_headers raises error for invalid token."""
+        with pytest.raises(AuthenticationError):
+            get_auth_headers(token="invalid")
 
 
 class TestGhCliTokenLoading:
@@ -245,6 +287,27 @@ class TestGhCliTokenLoading:
         with patch("gh_year_end.github.auth.subprocess.run", return_value=mock_result):
             result = _get_gh_cli_token()
             assert result is None
+
+    def test_get_gh_cli_token_whitespace_only(self) -> None:
+        """Test _get_gh_cli_token returns None when output is whitespace only."""
+        mock_result = MagicMock()
+        mock_result.returncode = 0
+        mock_result.stdout = "   \n\t  "
+
+        with patch("gh_year_end.github.auth.subprocess.run", return_value=mock_result):
+            result = _get_gh_cli_token()
+            assert result is None
+
+    def test_get_gh_cli_token_strips_whitespace(self) -> None:
+        """Test _get_gh_cli_token strips leading/trailing whitespace."""
+        token = "ghp_" + "u" * 36
+        mock_result = MagicMock()
+        mock_result.returncode = 0
+        mock_result.stdout = f"  {token}\n\t"
+
+        with patch("gh_year_end.github.auth.subprocess.run", return_value=mock_result):
+            result = _get_gh_cli_token()
+            assert result == token
 
     def test_auth_falls_back_to_gh_cli(self) -> None:
         """Test GitHubAuth falls back to gh CLI when no env var is set."""
