@@ -159,3 +159,51 @@ class TestBotDetector:
         for human in humans:
             result = detector.detect(human, "User")
             assert result.is_bot is False, f"{human} should not be detected as bot"
+
+    def test_empty_login(self) -> None:
+        """Test that empty login is handled correctly."""
+        detector = BotDetector(
+            exclude_patterns=[r".*\[bot\]$"],
+            include_overrides=[],
+        )
+
+        result = detector.detect("", "User")
+        assert result.is_bot is False
+        assert result.reason is None
+
+    def test_special_characters_in_login(self) -> None:
+        """Test logins with special characters."""
+        detector = BotDetector(
+            exclude_patterns=[r".*\[bot\]$"],
+            include_overrides=[],
+        )
+
+        # Hyphens and numbers are common in usernames
+        result = detector.detect("user-name-123", "User")
+        assert result.is_bot is False
+        assert result.reason is None
+
+        # Bot with special characters
+        result = detector.detect("auto-deploy[bot]", "User")
+        assert result.is_bot is True
+        assert "matches pattern" in result.reason
+
+    def test_pattern_matching_order(self) -> None:
+        """Test that first matching pattern is reported in reason."""
+        detector = BotDetector(
+            exclude_patterns=[
+                r"^dependabot$",
+                r".*\[bot\]$",
+            ],
+            include_overrides=[],
+        )
+
+        # Should match first pattern
+        result = detector.detect("dependabot", "User")
+        assert result.is_bot is True
+        assert "^dependabot$" in result.reason
+
+        # Should match second pattern
+        result = detector.detect("other[bot]", "User")
+        assert result.is_bot is True
+        assert r".*\[bot\]$" in result.reason
