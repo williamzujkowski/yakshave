@@ -51,35 +51,6 @@ Required scopes: `repo`, `read:org`, `read:user`
 
 ## Commands
 
-### plan
-
-Preview collection plan without making changes.
-
-```bash
-gh-year-end plan --config CONFIG
-```
-
-**Options:**
-
-| Option | Short | Required | Description |
-|--------|-------|----------|-------------|
-| `--config` | `-c` | Yes | Path to config.yaml file |
-
-**Output:**
-
-- Target org/user
-- Year and time window
-- Enabled data collectors
-- Storage root path
-
-**Example:**
-
-```bash
-gh-year-end plan -c config/config.yaml
-```
-
----
-
 ### collect
 
 Collect GitHub data and generate metrics JSON.
@@ -489,7 +460,7 @@ For repository-specific errors:
 
 **Symptoms:**
 
-- Process killed during normalization or metrics
+- Process killed during collection
 - `MemoryError` exception
 
 **Solution:**
@@ -517,16 +488,13 @@ OSError: [Errno 28] No space left on device
 # Check disk usage
 df -h
 
-# Check data directory size
-du -sh data/
+# Check site directory size
+du -sh site/
 
 # Clean up old data
-rm -rf data/raw/year=2024/
-rm -rf data/curated/year=2024/
-rm -rf data/metrics/year=2024/
 rm -rf site/2024/
 
-# Or change storage.root in config to different volume
+# JSON files are small, main concern is assets/visualizations
 ```
 
 ---

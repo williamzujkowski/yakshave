@@ -3,8 +3,8 @@
 ```
 STATUS: AUTHORITATIVE
 VERSION: 1.0.0
-LAST_AUDIT: 2025-12-18
-NEXT_REVIEW: 2026-03-17
+LAST_AUDIT: 2025-12-20
+NEXT_REVIEW: 2026-03-20
 SCOPE: gh-year-end development standards
 ```
 
@@ -44,7 +44,7 @@ infrastructure:
   container: N/A
   ci_cd: GitHub Actions
 
-database: DuckDB + Parquet (local analytics)
+database: N/A (in-memory aggregation, JSON output)
 package_manager: uv
 ```
 
@@ -165,7 +165,7 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 `type(scope): description`
 
 **Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
-**Scopes**: `collector`, `normalize`, `metrics`, `report`, `hygiene`, `identity`, `cli`, `config`
+**Scopes**: `collect`, `report`, `build`, `hygiene`, `identity`, `cli`, `config`
 
 ### PR Requirements
 
@@ -202,10 +202,10 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 ### Key Patterns
 
 * **Config-first**: Single `config.yaml` validated against JSON schema
-* **Immutable snapshots**: Raw data in JSONL with request/response envelope
-* **Layered data**: raw -> curated (Parquet) -> metrics (Parquet) -> report (JSON/HTML)
+* **Simplified pipeline**: collect (fetch + aggregate) -> build (generate site)
+* **In-memory aggregation**: Metrics computed during collection, exported to JSON
 * **Deterministic**: Stable ordering, stable IDs, repeatable outputs
-* **Report generation**: Phase 6 report module with exec/engineer views, Jinja2 template rendering, and D3.js visualizations
+* **Report generation**: Jinja2 template rendering with D3.js visualizations
 
 ### Important Files
 
@@ -224,13 +224,14 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 ## Project-Specific Rules
 
 ### Data Collection Rules
-- Do not re-fetch data if `data/raw/year=YYYY/...` exists unless `--force`
+- Do not re-fetch data if cached data exists unless `--force`
 - Always write `manifest.json` with counts/errors
 - Always store headers relevant to rate limiting
-- Always keep identity/bot filtering explainable (`dim_identity_rule`, `bot_reason`)
-- Always ensure deterministic ordering and stable IDs in normalized outputs
+- Always keep identity/bot filtering explainable
+- Always ensure deterministic ordering and stable IDs in outputs
 - Checkpoint support: collection can be interrupted and resumed using `--resume`, `--retry-failed`, or `--from-repo` flags
 - Checkpoints track per-repo progress and errors, enabling granular retry strategies
+- Metrics are computed in-memory during collection and exported to JSON files
 
 ### Module Size Limits
 - Modules <= 300-400 lines (some modules like checkpoint.py exceed this due to complexity, which is acceptable for cohesive functionality)
