@@ -1,6 +1,6 @@
 """Tests for bot detection and identity resolution."""
 
-from gh_year_end.normalize.identity import BotDetector
+from gh_year_end.collect.identity import BotDetector
 
 
 class TestBotDetector:

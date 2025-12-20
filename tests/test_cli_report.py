@@ -1,7 +1,7 @@
-"""Tests for deprecated report CLI command.
+"""Tests for removed report CLI command.
 
-The 'report' command has been deprecated in favor of 'build'.
-These tests verify the deprecation behavior.
+The 'report' command has been fully removed. Use 'build' instead.
+These tests verify the command no longer exists.
 """
 
 from pathlib import Path
@@ -12,59 +12,29 @@ from click.testing import CliRunner
 from gh_year_end.cli import main
 
 
-@pytest.fixture
-def config_file(tmp_path: Path) -> Path:
-    """Create a temporary config file."""
-    config_content = """
-github:
-  target:
-    mode: org
-    name: test-org
-  windows:
-    year: 2025
-    since: "2025-01-01T00:00:00Z"
-    until: "2026-01-01T00:00:00Z"
+class TestReportCommandRemoved:
+    """Tests for removed report command."""
 
-storage:
-  root: {storage_root}
-
-report:
-  output_dir: {site_root}
-"""
-    config_path = tmp_path / "config.yaml"
-    config_path.write_text(
-        config_content.format(storage_root=str(tmp_path), site_root=str(tmp_path / "site"))
-    )
-    return config_path
-
-
-class TestReportCommandDeprecated:
-    """Tests for deprecated report command."""
-
-    def test_report_shows_deprecation_warning(self, config_file: Path) -> None:
-        """Test that report command shows deprecation warning."""
+    def test_report_command_not_available(self) -> None:
+        """Test that report command returns 'No such command' error."""
         runner = CliRunner()
-        result = runner.invoke(main, ["report", "--config", str(config_file)])
+        result = runner.invoke(main, ["report", "--help"])
 
-        # Command should abort with deprecation message
-        assert result.exit_code != 0
-        assert "deprecated" in result.output.lower()
-        assert "build" in result.output
-
-    def test_report_suggests_build_command(self, config_file: Path) -> None:
-        """Test that report command suggests using build instead."""
-        runner = CliRunner()
-        result = runner.invoke(main, ["report", "--config", str(config_file)])
-
-        assert "gh-year-end build" in result.output
+        # Command should not exist
+        assert result.exit_code == 2
+        assert "no such command" in result.output.lower()
 
     def test_report_not_in_main_help(self) -> None:
-        """Test that report command is hidden from main help."""
+        """Test that report command does not appear in main help."""
         runner = CliRunner()
         result = runner.invoke(main, ["--help"])
 
-        # The deprecated 'report' command should not appear in help
-        # (it's hidden but still accessible)
         assert result.exit_code == 0
-        # 'build' should be there, 'report' should not be prominently listed
+        # 'build' replaces 'report' - build should be there
         assert "build" in result.output
+        # 'report' should not appear as a command
+        # Note: The word "report" might appear in descriptions, but not as a command
+        output_lines = result.output.lower().split("\n")
+        command_lines = [line for line in output_lines if line.strip().startswith("build") or line.strip().startswith("collect")]
+        # There should be commands, but 'report' should not be one of them
+        assert any("build" in line for line in command_lines)

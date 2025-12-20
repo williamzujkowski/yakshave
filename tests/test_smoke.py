@@ -260,101 +260,54 @@ class TestBuildSmoke:
         assert hasattr(build, "build_site")
 
 
-class TestDeprecatedCommandsSmoke:
-    """Verify deprecated commands show appropriate warnings."""
+class TestRemovedCommandsSmoke:
+    """Verify removed commands are not available."""
 
-    def test_plan_shows_deprecation(self):
-        """Plan command shows deprecation warning."""
+    def test_removed_commands_not_available(self):
+        """Removed commands return 'No such command' error."""
         from gh_year_end.cli import main
 
         runner = CliRunner()
-        result = runner.invoke(main, ["plan", "--help"])
-        # Command should be hidden but still work with --help
+
+        # These commands were fully removed (not just deprecated)
+        removed_commands = ["plan", "normalize", "metrics", "report", "validate", "status"]
+
+        for cmd in removed_commands:
+            result = runner.invoke(main, [cmd, "--help"])
+            assert result.exit_code == 2, f"Command '{cmd}' should not exist"
+            assert "no such command" in result.output.lower(), f"Command '{cmd}' should show 'no such command'"
+
+    def test_only_collect_build_all_available(self):
+        """Only collect, build, and all commands are available."""
+        from gh_year_end.cli import main
+
+        runner = CliRunner()
+        result = runner.invoke(main, ["--help"])
+
         assert result.exit_code == 0
 
-    def test_normalize_aborts(self):
-        """Normalize command aborts with deprecation message."""
-        from gh_year_end.cli import main
-        from click.testing import CliRunner
-        from tempfile import NamedTemporaryFile
+        # Parse the Commands section to get actual command names
+        lines = result.output.split("\n")
+        in_commands = False
+        command_names = []
+        for line in lines:
+            if line.strip() == "Commands:":
+                in_commands = True
+                continue
+            if in_commands and line.strip():
+                parts = line.split()
+                if parts:
+                    command_names.append(parts[0])
 
-        runner = CliRunner()
-        # Create a dummy config file
-        with NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
-            f.write("github:\n  target:\n    mode: user\n    name: test\n")
-            config_path = f.name
+        # Only these commands should exist
+        assert "collect" in command_names
+        assert "build" in command_names
+        assert "all" in command_names
 
-        try:
-            result = runner.invoke(main, ["normalize", "--config", config_path])
-            assert result.exit_code != 0
-            assert "deprecated" in result.output.lower()
-        finally:
-            Path(config_path).unlink()
-
-    def test_metrics_aborts(self):
-        """Metrics command aborts with deprecation message."""
-        from gh_year_end.cli import main
-        from tempfile import NamedTemporaryFile
-
-        runner = CliRunner()
-        with NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
-            f.write("github:\n  target:\n    mode: user\n    name: test\n")
-            config_path = f.name
-
-        try:
-            result = runner.invoke(main, ["metrics", "--config", config_path])
-            assert result.exit_code != 0
-            assert "deprecated" in result.output.lower()
-        finally:
-            Path(config_path).unlink()
-
-    def test_report_aborts(self):
-        """Report command aborts with deprecation message."""
-        from gh_year_end.cli import main
-        from tempfile import NamedTemporaryFile
-
-        runner = CliRunner()
-        with NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
-            f.write("github:\n  target:\n    mode: user\n    name: test\n")
-            config_path = f.name
-
-        try:
-            result = runner.invoke(main, ["report", "--config", config_path])
-            assert result.exit_code != 0
-            assert "deprecated" in result.output.lower()
-        finally:
-            Path(config_path).unlink()
-
-    def test_validate_aborts(self):
-        """Validate command aborts with deprecation message."""
-        from gh_year_end.cli import main
-        from tempfile import NamedTemporaryFile
-
-        runner = CliRunner()
-        with NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
-            f.write("github:\n  target:\n    mode: user\n    name: test\n")
-            config_path = f.name
-
-        try:
-            result = runner.invoke(main, ["validate", "--config", config_path])
-            assert result.exit_code != 0
-            assert "deprecated" in result.output.lower()
-        finally:
-            Path(config_path).unlink()
-
-    def test_status_aborts(self):
-        """Status command aborts with deprecation message."""
-        from gh_year_end.cli import main
-        from tempfile import NamedTemporaryFile
-
-        runner = CliRunner()
-        with NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
-            f.write("github:\n  target:\n    mode: user\n    name: test\n")
-            config_path = f.name
-
-        try:
-            result = runner.invoke(main, ["status", "--config", config_path])
-            assert result.exit_code != 0
-            assert "deprecated" in result.output.lower()
-        finally:
-            Path(config_path).unlink()
+        # Removed commands should NOT exist
+        assert "normalize" not in command_names
+        assert "metrics" not in command_names
+        assert "report" not in command_names
+        assert "validate" not in command_names
+        assert "status" not in command_names
+        assert "plan" not in command_names

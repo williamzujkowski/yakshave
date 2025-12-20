@@ -487,52 +487,47 @@ class TestAllCommand:
         assert force_used.get("value") is True
 
 
-class TestDeprecatedCommands:
-    """Tests for deprecated commands."""
+class TestRemovedCommands:
+    """Tests for commands that were fully removed."""
 
-    def test_plan_shows_deprecation_warning(self, runner: CliRunner, config_file: Path) -> None:
-        """Test that plan command shows deprecation warning."""
-        result = runner.invoke(main, ["plan", "--config", str(config_file)])
-        assert result.exit_code == 0
-        assert "deprecated" in result.output.lower()
+    def test_removed_commands_return_no_such_command(self, runner: CliRunner) -> None:
+        """Test that removed commands return 'No such command' error."""
+        # These commands were fully removed (not just deprecated)
+        removed_commands = ["plan", "normalize", "metrics", "report", "validate", "status"]
 
-    def test_normalize_is_deprecated(self, runner: CliRunner, config_file: Path) -> None:
-        """Test that normalize command is deprecated."""
-        result = runner.invoke(main, ["normalize", "--config", str(config_file)])
-        assert result.exit_code == 1
-        assert "deprecated" in result.output.lower()
+        for cmd in removed_commands:
+            result = runner.invoke(main, [cmd, "--help"])
+            assert result.exit_code == 2, f"Command '{cmd}' should not exist (exit code 2)"
+            assert "no such command" in result.output.lower(), f"Command '{cmd}' should show 'no such command'"
 
-    def test_metrics_is_deprecated(self, runner: CliRunner, config_file: Path) -> None:
-        """Test that metrics command is deprecated."""
-        result = runner.invoke(main, ["metrics", "--config", str(config_file)])
-        assert result.exit_code == 1
-        assert "deprecated" in result.output.lower()
-
-    def test_report_is_deprecated(self, runner: CliRunner, config_file: Path) -> None:
-        """Test that report command is deprecated."""
-        result = runner.invoke(main, ["report", "--config", str(config_file)])
-        assert result.exit_code == 1
-        assert "deprecated" in result.output.lower()
-
-    def test_validate_is_deprecated(self, runner: CliRunner, config_file: Path) -> None:
-        """Test that validate command is deprecated."""
-        result = runner.invoke(main, ["validate", "--config", str(config_file)])
-        assert result.exit_code == 1
-        assert "deprecated" in result.output.lower()
-
-    def test_status_is_deprecated(self, runner: CliRunner, config_file: Path) -> None:
-        """Test that status command is deprecated."""
-        result = runner.invoke(main, ["status", "--config", str(config_file)])
-        assert result.exit_code == 1
-        assert "deprecated" in result.output.lower()
-
-    def test_deprecated_commands_hidden_from_help(self, runner: CliRunner) -> None:
-        """Test that deprecated commands don't appear in main help."""
+    def test_only_collect_build_all_in_help(self, runner: CliRunner) -> None:
+        """Test that only collect, build, and all appear in help."""
         result = runner.invoke(main, ["--help"])
         assert result.exit_code == 0
-        # Main commands should be visible
-        assert "collect" in result.output
-        assert "build" in result.output
-        assert "all" in result.output
-        # Deprecated commands should not be visible (hidden=True)
-        # Note: they might still appear in the commands list but marked as hidden
+
+        # Parse the Commands section
+        lines = result.output.split("\n")
+        in_commands = False
+        command_names = []
+        for line in lines:
+            if line.strip() == "Commands:":
+                in_commands = True
+                continue
+            if in_commands and line.strip():
+                # Command lines start with 2 spaces then the command name
+                parts = line.split()
+                if parts:
+                    command_names.append(parts[0])
+
+        # Only these commands should exist
+        assert "collect" in command_names
+        assert "build" in command_names
+        assert "all" in command_names
+
+        # Removed commands should NOT exist
+        assert "normalize" not in command_names
+        assert "metrics" not in command_names
+        assert "validate" not in command_names
+        assert "status" not in command_names
+        assert "report" not in command_names
+        assert "plan" not in command_names
