@@ -1,13 +1,11 @@
 """Live end-to-end pipeline tests for gh-year-end.
 
 Tests the complete pipeline against live GitHub API:
-- Plan command shows collection plan
-- Collect command fetches data from GitHub
-- Normalize command creates Parquet tables
-- Metrics command calculates leaderboards and scores
-- Report command generates static site
-- All command runs full pipeline
-- Data integrity chain across phases
+- Collect command fetches data from GitHub and generates metrics JSON
+- Build command generates static site from metrics JSON
+- All command runs full pipeline (collect + build)
+- Data integrity verification
+- Deprecated command warnings
 
 These tests use live API and are marked with @pytest.mark.live_api.
 Run with: pytest -m live_api
@@ -19,7 +17,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-import polars as pl
 import pytest
 from click.testing import CliRunner
 
@@ -103,10 +100,10 @@ def live_data_root(live_config_file: Path) -> Path:
 def collected_data(
     cli_runner: CliRunner, live_config_file: Path, live_data_root: Path
 ) -> dict[str, Any]:
-    """Collect data from GitHub API once for all tests.
+    """Collect data from GitHub API and generate metrics JSON once for all tests.
 
-    This fixture runs the collect command once and caches the result
-    for all tests in the session.
+    This fixture runs the new collect command (single-pass collection with
+    in-memory aggregation) once and caches the result for all tests in the session.
 
     Args:
         cli_runner: Click CLI runner.
@@ -125,10 +122,13 @@ def collected_data(
 
 
 @pytest.fixture(scope="session")
-def normalized_data(
+def built_site(
     cli_runner: CliRunner, live_config_file: Path, collected_data: dict[str, Any]
 ) -> dict[str, Any]:
-    """Normalize collected data once for all tests.
+    """Build static site from metrics JSON once for all tests.
+
+    This fixture runs the build command once and caches the result
+    for all tests in the session.
 
     Args:
         cli_runner: Click CLI runner.
@@ -136,34 +136,12 @@ def normalized_data(
         collected_data: Collection results (ensures collect runs first).
 
     Returns:
-        Dictionary with normalization stats.
+        Dictionary with build stats.
     """
-    result = cli_runner.invoke(main, ["normalize", "--config", str(live_config_file)])
+    result = cli_runner.invoke(main, ["build", "--config", str(live_config_file)])
 
     if result.exit_code != 0:
-        pytest.fail(f"Normalization failed: {result.output}")
-
-    return {"exit_code": result.exit_code, "output": result.output}
-
-
-@pytest.fixture(scope="session")
-def metrics_data(
-    cli_runner: CliRunner, live_config_file: Path, normalized_data: dict[str, Any]
-) -> dict[str, Any]:
-    """Calculate metrics once for all tests.
-
-    Args:
-        cli_runner: Click CLI runner.
-        live_config_file: Path to config file.
-        normalized_data: Normalization results (ensures normalize runs first).
-
-    Returns:
-        Dictionary with metrics stats.
-    """
-    result = cli_runner.invoke(main, ["metrics", "--config", str(live_config_file)])
-
-    if result.exit_code != 0:
-        pytest.fail(f"Metrics calculation failed: {result.output}")
+        pytest.fail(f"Build failed: {result.output}")
 
     return {"exit_code": result.exit_code, "output": result.output}
 
@@ -172,33 +150,20 @@ def metrics_data(
 class TestLivePipelineCLI:
     """Live end-to-end pipeline tests using real GitHub API."""
 
-    def test_live_cli_plan_command(self, cli_runner: CliRunner, live_config_file: Path) -> None:
-        """Test that 'gh-year-end plan' shows collection plan without making API calls."""
+    def test_live_cli_deprecated_plan_shows_warning(
+        self, cli_runner: CliRunner, live_config_file: Path
+    ) -> None:
+        """Test that deprecated 'plan' command shows deprecation warning."""
         result = cli_runner.invoke(main, ["plan", "--config", str(live_config_file)])
 
         assert result.exit_code == 0, f"Plan command failed: {result.output}"
 
-        # Verify plan output contains expected sections
-        assert "Collection Plan" in result.output
-        assert "Target:" in result.output
-        assert "Year:" in result.output
-        assert "Since:" in result.output
-        assert "Until:" in result.output
-        assert "Storage root:" in result.output
-        assert "Enabled collectors:" in result.output
+        # Verify deprecation warning is shown
+        assert "Warning: 'plan' command is deprecated" in result.output
+        assert "Use 'gh-year-end collect --help' instead" in result.output
 
-        # Verify individual collector flags
-        assert "PRs:" in result.output
-        assert "Issues:" in result.output
-        assert "Reviews:" in result.output
-        assert "Comments:" in result.output
-        assert "Commits:" in result.output
-        assert "Hygiene:" in result.output
-
-    def test_live_cli_collect_command(
-        self, cli_runner: CliRunner, live_config_file: Path, live_data_root: Path
-    ) -> None:
-        """Test that 'gh-year-end collect' creates raw data files."""
+    def test_live_cli_collect_command(self, cli_runner: CliRunner, live_config_file: Path) -> None:
+        """Test that 'gh-year-end collect' fetches data and generates metrics JSON."""
         result = cli_runner.invoke(main, ["collect", "--config", str(live_config_file)])
 
         assert result.exit_code == 0, f"Collect command failed: {result.output}"
@@ -207,168 +172,105 @@ class TestLivePipelineCLI:
         assert "Collecting data for" in result.output
         assert "Collection complete!" in result.output
 
-        # Verify summary statistics are shown
-        assert "Duration:" in result.output
-        assert "Repos discovered:" in result.output
-        assert "Repos processed:" in result.output
+        # Verify collection messages
+        assert "Running single-pass collection with in-memory aggregation" in result.output
+        assert "Writing metrics to JSON" in result.output
 
-        # Verify raw data directory was created
+        # Verify metrics JSON files were created
         config = load_config(live_config_file)
         year = config.github.windows.year
-        target_name = config.github.target.name
 
-        raw_root = (
-            live_data_root / "raw" / f"year={year}" / "source=github" / f"target={target_name}"
-        )
-        assert raw_root.exists(), f"Raw data directory should exist: {raw_root}"
+        data_dir = Path(f"site/{year}/data")
+        assert data_dir.exists(), f"Data directory should exist: {data_dir}"
 
-        # Verify repos.jsonl was created
-        repos_file = raw_root / "repos.jsonl"
-        assert repos_file.exists(), "repos.jsonl should be created"
+        # Verify required JSON files exist
+        required_files = ["summary.json", "leaderboards.json"]
+        for filename in required_files:
+            json_file = data_dir / filename
+            assert json_file.exists(), f"{filename} should be created"
 
-        # Verify manifest.json was created
-        manifest_file = live_data_root / "raw" / f"year={year}" / "manifest.json"
-        assert manifest_file.exists(), "manifest.json should be created"
+            # Verify JSON is valid
+            data = json.loads(json_file.read_text())
+            assert isinstance(data, (dict, list)), f"{filename} should contain valid JSON"
 
-        # Verify manifest contains expected fields
-        manifest = json.loads(manifest_file.read_text())
-        assert "start_time" in manifest
-        assert "end_time" in manifest
-        assert "stats" in manifest
+    def test_live_cli_deprecated_normalize_fails(
+        self, cli_runner: CliRunner, live_config_file: Path
+    ) -> None:
+        """Test that deprecated 'normalize' command shows deprecation warning and fails."""
+        result = cli_runner.invoke(main, ["normalize", "--config", str(live_config_file)])
 
-    def test_live_cli_normalize_command(
+        assert result.exit_code != 0, "Deprecated normalize command should fail"
+
+        # Verify deprecation warning is shown
+        assert "Warning: 'normalize' command is deprecated" in result.output
+        assert "Use 'gh-year-end collect' instead" in result.output
+        assert "This command is part of the old multi-phase pipeline" in result.output
+
+    def test_live_cli_deprecated_metrics_fails(
+        self, cli_runner: CliRunner, live_config_file: Path
+    ) -> None:
+        """Test that deprecated 'metrics' command shows deprecation warning and fails."""
+        result = cli_runner.invoke(main, ["metrics", "--config", str(live_config_file)])
+
+        assert result.exit_code != 0, "Deprecated metrics command should fail"
+
+        # Verify deprecation warning is shown
+        assert "Warning: 'metrics' command is deprecated" in result.output
+        assert "Use 'gh-year-end collect' instead" in result.output
+        assert "This command is part of the old multi-phase pipeline" in result.output
+
+    def test_live_cli_deprecated_report_fails(
+        self, cli_runner: CliRunner, live_config_file: Path
+    ) -> None:
+        """Test that deprecated 'report' command shows deprecation warning and fails."""
+        result = cli_runner.invoke(main, ["report", "--config", str(live_config_file)])
+
+        assert result.exit_code != 0, "Deprecated report command should fail"
+
+        # Verify deprecation warning is shown
+        assert "Warning: 'report' command is deprecated" in result.output
+        assert "Use 'gh-year-end build' instead" in result.output
+        assert "This command is part of the old multi-phase pipeline" in result.output
+
+    def test_live_cli_build_command(
         self,
         cli_runner: CliRunner,
         live_config_file: Path,
         collected_data: dict[str, Any],  # noqa: ARG002 - ensures collect runs first
-        live_data_root: Path,
     ) -> None:
-        """Test that 'gh-year-end normalize' creates Parquet files."""
-        result = cli_runner.invoke(main, ["normalize", "--config", str(live_config_file)])
+        """Test that 'gh-year-end build' generates static site from metrics JSON."""
+        result = cli_runner.invoke(main, ["build", "--config", str(live_config_file)])
 
-        assert result.exit_code == 0, f"Normalize command failed: {result.output}"
+        assert result.exit_code == 0, f"Build command failed: {result.output}"
 
         # Verify output messages
-        assert "Normalizing data for year" in result.output
-        assert "Normalization complete!" in result.output
+        assert "Building site for" in result.output
+        assert "Site built successfully!" in result.output
+
+        # Verify build messages
+        assert "Building static site" in result.output
 
         # Verify summary statistics
-        assert "Duration:" in result.output
-        assert "Tables written:" in result.output
-        assert "Total rows:" in result.output
-
-        # Verify curated directory was created
-        config = load_config(live_config_file)
-        year = config.github.windows.year
-        target_name = config.github.target.name
-
-        curated_root = (
-            live_data_root / "curated" / f"year={year}" / "source=github" / f"target={target_name}"
-        )
-        assert curated_root.exists(), f"Curated directory should exist: {curated_root}"
-
-        # Verify dimension tables exist
-        assert (curated_root / "dim_user.parquet").exists(), "dim_user.parquet should exist"
-        assert (curated_root / "dim_repo.parquet").exists(), "dim_repo.parquet should exist"
-        assert (curated_root / "dim_identity_rule.parquet").exists(), (
-            "dim_identity_rule.parquet should exist"
-        )
-
-        # Verify at least some fact tables exist (not all may be present depending on data)
-        fact_tables = list(curated_root.glob("fact_*.parquet"))
-        assert len(fact_tables) > 0, "At least one fact table should be created"
-
-    def test_live_cli_metrics_command(
-        self,
-        cli_runner: CliRunner,
-        live_config_file: Path,
-        normalized_data: dict[str, Any],  # noqa: ARG002 - ensures normalize runs first
-        live_data_root: Path,
-    ) -> None:
-        """Test that 'gh-year-end metrics' creates metrics files."""
-        result = cli_runner.invoke(main, ["metrics", "--config", str(live_config_file)])
-
-        assert result.exit_code == 0, f"Metrics command failed: {result.output}"
-
-        # Verify output messages
-        assert "Computing metrics for year" in result.output
-        assert "Metrics calculation complete!" in result.output
-
-        # Verify summary statistics
-        assert "Duration:" in result.output
-        assert "Metrics calculated:" in result.output
-        assert "Total rows:" in result.output
-
-        # Verify metrics directory was created
-        config = load_config(live_config_file)
-        year = config.github.windows.year
-
-        metrics_root = live_data_root / "metrics" / f"year={year}"
-        assert metrics_root.exists(), f"Metrics directory should exist: {metrics_root}"
-
-        # Verify at least leaderboard metrics exist (other metrics may not be implemented yet)
-        metrics_files = list(metrics_root.glob("*.parquet"))
-        assert len(metrics_files) > 0, "At least one metrics file should be created"
-
-        # Verify leaderboard file specifically
-        leaderboard_file = metrics_root / "metrics_leaderboard.parquet"
-        if leaderboard_file.exists():
-            df = pl.read_parquet(leaderboard_file)
-            assert len(df) > 0, "Leaderboard should have entries"
-            assert "year" in df.columns
-            assert "metric_key" in df.columns
-            assert "user_id" in df.columns
-            assert "value" in df.columns
-            assert "rank" in df.columns
-
-    def test_live_cli_report_command(
-        self,
-        cli_runner: CliRunner,
-        live_config_file: Path,
-        metrics_data: dict[str, Any],  # noqa: ARG002 - ensures metrics runs first
-    ) -> None:
-        """Test that 'gh-year-end report' generates static site."""
-        result = cli_runner.invoke(main, ["report", "--config", str(live_config_file)])
-
-        assert result.exit_code == 0, f"Report command failed: {result.output}"
-
-        # Verify output messages
-        assert "Generating report for year" in result.output
-        assert "Report generation complete!" in result.output
-
-        # Verify export and build sections
-        assert "Exporting metrics to JSON..." in result.output
-        assert "Building static site..." in result.output
-
-        # Verify summary statistics
-        assert "Duration:" in result.output
-        assert "Tables exported:" in result.output
+        assert "Templates rendered:" in result.output or "Data files:" in result.output
 
         # Verify serve hint is shown
-        assert "To view the report:" in result.output
+        assert "To view the site:" in result.output
         assert "python -m http.server" in result.output
 
         # Verify site directory was created
         config = load_config(live_config_file)
-        site_root = Path(config.report.output_dir)
+        year = config.github.windows.year
+        site_root = Path(f"site/{year}")
         assert site_root.exists(), f"Site directory should exist: {site_root}"
 
-        # Verify data directory exists with JSON files
-        site_data_path = site_root / "data"
-        assert site_data_path.exists(), "Site data directory should exist"
-
-        json_files = list(site_data_path.glob("*.json"))
-        assert len(json_files) > 0, "At least one JSON data file should be created"
-
-        # Verify JSON files are valid
-        for json_file in json_files:
-            data = json.loads(json_file.read_text())
-            assert isinstance(data, (dict, list)), f"{json_file.name} should contain valid JSON"
+        # Verify HTML files were created
+        html_files = list(site_root.glob("*.html"))
+        assert len(html_files) > 0, "At least one HTML file should be created"
 
     def test_live_cli_all_command(
         self, cli_runner: CliRunner, tmp_path_factory: pytest.TempPathFactory
     ) -> None:
-        """Test that 'gh-year-end all' runs full pipeline from scratch."""
+        """Test that 'gh-year-end all' runs full simplified pipeline from scratch."""
         if not LIVE_CONFIG_FILE.exists():
             pytest.skip(f"Live config not found: {LIVE_CONFIG_FILE}")
 
@@ -378,7 +280,6 @@ class TestLivePipelineCLI:
         # Create config with temp directory
         config = load_config(LIVE_CONFIG_FILE)
         config.storage.root = str(temp_dir / "data")
-        config.report.output_dir = str(temp_dir / "site")
 
         temp_config_file = temp_dir / "config.yaml"
         import yaml
@@ -390,168 +291,113 @@ class TestLivePipelineCLI:
 
         assert result.exit_code == 0, f"All command failed: {result.output}"
 
-        # Verify all phases are present in output
+        # Verify simplified pipeline phases are present in output
         assert "Running complete pipeline" in result.output
         assert "Collecting data for" in result.output
         assert "Collection complete!" in result.output
-        assert "Normalizing data for year" in result.output
-        assert "Normalization complete!" in result.output
-        assert "Computing metrics for year" in result.output
-        assert "Metrics calculation complete!" in result.output
-        assert "Generating report for year" in result.output
-        assert "Report generation complete!" in result.output
+        assert "Building site for" in result.output
+        assert "Site built successfully!" in result.output
         assert "Pipeline complete!" in result.output
 
-        # Verify all output directories exist
-        data_root = Path(config.storage.root)
-        site_root = Path(config.report.output_dir)
+        # Verify output directories exist
+        year = config.github.windows.year
+        site_root = Path(f"site/{year}")
+        data_dir = Path(f"site/{year}/data")
 
-        assert data_root.exists(), "Data directory should exist"
-        assert (data_root / "raw").exists(), "Raw data directory should exist"
-        assert (data_root / "curated").exists(), "Curated data directory should exist"
-        assert (data_root / "metrics").exists(), "Metrics directory should exist"
         assert site_root.exists(), "Site directory should exist"
+        assert data_dir.exists(), "Data directory should exist"
+
+        # Verify JSON files were created
+        json_files = list(data_dir.glob("*.json"))
+        assert len(json_files) > 0, "At least one JSON file should be created"
+
+        # Verify HTML files were created
+        html_files = list(site_root.glob("*.html"))
+        assert len(html_files) > 0, "At least one HTML file should be created"
 
     def test_live_full_pipeline(
         self,
         collected_data: dict[str, Any],
-        normalized_data: dict[str, Any],
-        metrics_data: dict[str, Any],
+        built_site: dict[str, Any],
         live_config_file: Path,
-        cli_runner: CliRunner,
     ) -> None:
-        """Test complete collect → normalize → metrics → report flow.
+        """Test complete collect → build flow.
 
-        This test verifies the full pipeline execution by checking that
+        This test verifies the simplified pipeline execution by checking that
         all fixtures run successfully and produce expected outputs.
         """
         # All fixtures should have run successfully (verified by their own asserts)
         assert collected_data["exit_code"] == 0
-        assert normalized_data["exit_code"] == 0
-        assert metrics_data["exit_code"] == 0
-
-        # Run report command to complete the pipeline
-        result = cli_runner.invoke(main, ["report", "--config", str(live_config_file)])
-        assert result.exit_code == 0, f"Report generation failed: {result.output}"
+        assert built_site["exit_code"] == 0
 
         # Verify full pipeline output structure
         config = load_config(live_config_file)
-        data_root = Path(config.storage.root)
-        site_root = Path(config.report.output_dir)
+        year = config.github.windows.year
+        site_root = Path(f"site/{year}")
+        data_dir = Path(f"site/{year}/data")
 
         # Verify complete directory structure
-        assert (data_root / "raw").exists()
-        assert (data_root / "curated").exists()
-        assert (data_root / "metrics").exists()
         assert site_root.exists()
-        assert (site_root / "data").exists()
+        assert data_dir.exists()
+
+        # Verify JSON files exist
+        json_files = list(data_dir.glob("*.json"))
+        assert len(json_files) > 0, "JSON files should be created"
+
+        # Verify HTML files exist
+        html_files = list(site_root.glob("*.html"))
+        assert len(html_files) > 0, "HTML files should be created"
 
     def test_live_data_integrity_chain(
         self,
         live_config_file: Path,
-        collected_data: dict[str, Any],  # noqa: ARG002 - ensures pipeline runs
-        normalized_data: dict[str, Any],  # noqa: ARG002 - ensures pipeline runs
-        metrics_data: dict[str, Any],  # noqa: ARG002 - ensures pipeline runs
+        collected_data: dict[str, Any],  # noqa: ARG002 - ensures collection runs
     ) -> None:
-        """Test that row counts are consistent across pipeline phases.
+        """Test that generated JSON metrics contain valid data.
 
         Verifies data integrity by checking:
-        1. Repos count matches between raw and normalized
-        2. Users extracted from normalized data
-        3. Fact tables reference valid dimension keys
-        4. Metrics reference valid users
-        5. No unexpected data loss between phases
+        1. All required JSON files are created
+        2. JSON files contain valid data structures
+        3. Leaderboards have expected fields
+        4. Summary contains expected metrics
         """
         config = load_config(live_config_file)
-        data_root = Path(config.storage.root)
         year = config.github.windows.year
-        target_name = config.github.target.name
+        data_dir = Path(f"site/{year}/data")
 
-        # Get paths
-        raw_root = data_root / "raw" / f"year={year}" / "source=github" / f"target={target_name}"
-        curated_root = (
-            data_root / "curated" / f"year={year}" / "source=github" / f"target={target_name}"
-        )
-        metrics_root = data_root / "metrics" / f"year={year}"
+        # Verify required JSON files exist
+        required_files = ["summary.json", "leaderboards.json"]
+        for filename in required_files:
+            json_file = data_dir / filename
+            assert json_file.exists(), f"{filename} should exist"
 
-        # Count raw repos
-        repos_file = raw_root / "repos.jsonl"
-        with repos_file.open() as f:
-            raw_repos_count = sum(1 for _ in f)
+            # Verify JSON is valid
+            data = json.loads(json_file.read_text())
+            assert isinstance(data, (dict, list)), f"{filename} should contain valid JSON"
 
-        # Count normalized repos
-        dim_repo = pl.read_parquet(curated_root / "dim_repo.parquet")
-        normalized_repos_count = len(dim_repo)
+        # Verify summary.json structure
+        summary = json.loads((data_dir / "summary.json").read_text())
+        assert isinstance(summary, dict), "summary.json should be a dict"
 
-        # Verify repo counts match
-        assert raw_repos_count == normalized_repos_count, (
-            f"Repo count mismatch: raw={raw_repos_count}, normalized={normalized_repos_count}"
-        )
-
-        # Verify users were extracted
-        dim_user = pl.read_parquet(curated_root / "dim_user.parquet")
-        assert len(dim_user) > 0, "Should have extracted users"
-
-        # Verify bot detection worked
-        assert "is_bot" in dim_user.columns
-        bots = dim_user.filter(pl.col("is_bot") == True)  # noqa: E712
-        humans = dim_user.filter(pl.col("is_bot") == False)  # noqa: E712
-        assert len(humans) > 0, "Should have human users"
-
-        # Verify fact tables if they exist
-        fact_pr_path = curated_root / "fact_pull_request.parquet"
-        if fact_pr_path.exists():
-            fact_pr = pl.read_parquet(fact_pr_path)
-            assert len(fact_pr) > 0, "Should have pull requests"
-
-            # Verify foreign keys are valid
-            if "repo_id" in fact_pr.columns:
-                pr_repo_ids = set(fact_pr["repo_id"].unique().to_list())
-                repo_ids = set(dim_repo["repo_id"].to_list())
-                invalid_repo_ids = pr_repo_ids - repo_ids
-                assert len(invalid_repo_ids) == 0, f"Invalid repo_ids in PRs: {invalid_repo_ids}"
-
-            if "author_id" in fact_pr.columns:
-                pr_author_ids = set(fact_pr["author_id"].unique().to_list())
-                user_ids = set(dim_user["user_id"].to_list())
-                invalid_author_ids = pr_author_ids - user_ids
-                assert len(invalid_author_ids) == 0, (
-                    f"Invalid author_ids in PRs: {invalid_author_ids}"
-                )
-
-        # Verify metrics reference valid users
-        leaderboard_path = metrics_root / "metrics_leaderboard.parquet"
-        if leaderboard_path.exists():
-            leaderboard = pl.read_parquet(leaderboard_path)
-            assert len(leaderboard) > 0, "Should have leaderboard entries"
-
-            if "user_id" in leaderboard.columns:
-                leaderboard_user_ids = set(leaderboard["user_id"].unique().to_list())
-                user_ids = set(dim_user["user_id"].to_list())
-                invalid_user_ids = leaderboard_user_ids - user_ids
-                assert len(invalid_user_ids) == 0, (
-                    f"Invalid user_ids in leaderboard: {invalid_user_ids}"
-                )
-
-                # Verify bots are filtered from leaderboard if humans_only is enabled
-                if config.identity.humans_only:
-                    bot_ids = set(bots["user_id"].to_list())
-                    bots_in_leaderboard = leaderboard_user_ids & bot_ids
-                    assert len(bots_in_leaderboard) == 0, (
-                        f"Bots should not appear in leaderboard: {bots_in_leaderboard}"
+        # Verify leaderboards.json structure
+        leaderboards = json.loads((data_dir / "leaderboards.json").read_text())
+        if isinstance(leaderboards, dict):
+            # Check if leaderboards have entries
+            for _metric_key, entries in leaderboards.items():
+                if isinstance(entries, list) and len(entries) > 0:
+                    # Each entry should have expected fields
+                    entry = entries[0]
+                    assert "rank" in entry or "login" in entry or "name" in entry, (
+                        f"Leaderboard entries should have expected fields: {entry}"
                     )
 
         # Print summary for debugging
         print("\nData Integrity Summary:")
-        print(f"  Repos (raw): {raw_repos_count}")
-        print(f"  Repos (normalized): {normalized_repos_count}")
-        print(f"  Users (total): {len(dim_user)}")
-        print(f"  Users (humans): {len(humans)}")
-        print(f"  Users (bots): {len(bots)}")
-        if fact_pr_path.exists():
-            print(f"  Pull Requests: {len(fact_pr)}")
-        if leaderboard_path.exists():
-            print(f"  Leaderboard Entries: {len(leaderboard)}")
+        print(f"  JSON files created: {len(list(data_dir.glob('*.json')))}")
+        print(f"  Summary metrics: {len(summary) if isinstance(summary, dict) else 'N/A'}")
+        print(
+            f"  Leaderboard categories: {len(leaderboards) if isinstance(leaderboards, dict) else 'N/A'}"
+        )
 
     def test_live_force_flag_recollects(
         self, cli_runner: CliRunner, live_config_file: Path, collected_data: dict[str, Any]
@@ -581,10 +427,10 @@ class TestLivePipelineCLI:
         # Verbose mode should show the same plan output (no additional verbose output for plan)
         assert "Collection Plan" in result.output
 
-    def test_live_normalize_fails_without_raw_data(
+    def test_live_build_fails_without_metrics_data(
         self, cli_runner: CliRunner, tmp_path: Path
     ) -> None:
-        """Test that normalize fails gracefully if raw data is missing."""
+        """Test that build fails gracefully if metrics data is missing."""
         # Create config with empty temp directory
         config_content = f"""
 github:
@@ -598,72 +444,14 @@ github:
 
 storage:
   root: {tmp_path / "empty_data"}
-
-report:
-  output_dir: {tmp_path / "site"}
 """
         config_file = tmp_path / "config.yaml"
         config_file.write_text(config_content)
 
-        result = cli_runner.invoke(main, ["normalize", "--config", str(config_file)])
+        result = cli_runner.invoke(main, ["build", "--config", str(config_file)])
 
         assert result.exit_code != 0
-        assert "No raw data found" in result.output
-
-    def test_live_metrics_fails_without_curated_data(
-        self, cli_runner: CliRunner, tmp_path: Path
-    ) -> None:
-        """Test that metrics fails gracefully if curated data is missing."""
-        # Create config with empty temp directory
-        config_content = f"""
-github:
-  target:
-    mode: org
-    name: test-org
-  windows:
-    year: 2099
-    since: "2099-01-01T00:00:00Z"
-    until: "2100-01-01T00:00:00Z"
-
-storage:
-  root: {tmp_path / "empty_data"}
-
-report:
-  output_dir: {tmp_path / "site"}
-"""
-        config_file = tmp_path / "config.yaml"
-        config_file.write_text(config_content)
-
-        result = cli_runner.invoke(main, ["metrics", "--config", str(config_file)])
-
-        assert result.exit_code != 0
-        assert "No curated data found" in result.output
-
-    def test_live_report_fails_without_metrics_data(
-        self, cli_runner: CliRunner, tmp_path: Path
-    ) -> None:
-        """Test that report fails gracefully if metrics data is missing."""
-        # Create config with empty temp directory
-        config_content = f"""
-github:
-  target:
-    mode: org
-    name: test-org
-  windows:
-    year: 2099
-    since: "2099-01-01T00:00:00Z"
-    until: "2100-01-01T00:00:00Z"
-
-storage:
-  root: {tmp_path / "empty_data"}
-
-report:
-  output_dir: {tmp_path / "site"}
-"""
-        config_file = tmp_path / "config.yaml"
-        config_file.write_text(config_content)
-
-        result = cli_runner.invoke(main, ["report", "--config", str(config_file)])
-
-        assert result.exit_code != 0
-        assert "No metrics data found" in result.output
+        assert (
+            "No metrics data found" in result.output
+            or "Missing required JSON files" in result.output
+        )
