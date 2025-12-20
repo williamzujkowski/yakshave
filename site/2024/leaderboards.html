@@ -27,14 +27,14 @@
                         <div class="year-dropdown" id="yearDropdown" aria-hidden="true">
                             <ul class="year-list">
                                 <li>
-                                    <a href="../2025/"
+                                    <a href="/2025/"
                                        class="year-option"
 >
                                         2025
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../2024/"
+                                    <a href="/2024/"
                                        class="year-option active"
 aria-current="true">
                                         2024
@@ -124,7 +124,7 @@ aria-current="true">
 
             <div class="sidebar-footer">
                 <div class="generation-info">
-                    <small>Generated: 2025-12-19</small>
+                    <small>Generated: 2025-12-20</small>
                     <small>Version: 1.0.0</small>
                 </div>
             </div>
@@ -275,10 +275,12 @@ aria-current="true">
         <div class="comparison-select">
             <select id="compare-contributor-1" class="filter-select">
                 <option value="">Select contributor 1...</option>
+                <option value="MDM6Qm90ODU1NzUwMjU=">allstar-app[bot]</option>
             </select>
             <span class="vs-label">vs</span>
             <select id="compare-contributor-2" class="filter-select">
                 <option value="">Select contributor 2...</option>
+                <option value="MDM6Qm90ODU1NzUwMjU=">allstar-app[bot]</option>
             </select>
             <button id="compare-btn" class="btn btn-primary">Compare</button>
         </div>
@@ -301,10 +303,10 @@ aria-current="true">
                 <div class="footer-section">
                     <h3>Data Sources</h3>
                     <ul>
-                        <li>Pull Requests: 450</li>
-                        <li>Issues: 174</li>
+                        <li>Pull Requests: 0</li>
+                        <li>Issues: 0</li>
                         <li>Reviews: 0</li>
-                        <li>Repositories: 5</li>
+                        <li>Repositories: 34</li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -328,7 +330,7 @@ aria-current="true">
 <script>
     // Load leaderboard data
     const leaderboardsData = {"approvals": [], "changes_requested": [], "comments_total": [{"display_name": null, "login": "allstar-app[bot]", "rank": 1, "user_id": "MDM6Qm90ODU1NzUwMjU=", "value": 232}], "issues_closed": [], "issues_opened": [{"display_name": null, "login": "allstar-app[bot]", "rank": 1, "user_id": "MDM6Qm90ODU1NzUwMjU=", "value": 4}], "overall": [], "prs_merged": [], "prs_opened": [], "review_comments_total": [], "reviews_submitted": []};
-    const allContributorsData = [];
+    const allContributorsData = [{"activity_timeline": [], "approvals": 0, "avatar_url": "", "changes_requested": 0, "comments_total": 232, "contributions_total": 236, "display_name": null, "issues_closed": 0, "issues_opened": 4, "login": "allstar-app[bot]", "prs_merged": 0, "prs_opened": 0, "rank": 1, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "MDM6Qm90ODU1NzUwMjU="}];
 
     // Initialize leaderboard tabs
     if (typeof initLeaderboardTabs === 'function') {

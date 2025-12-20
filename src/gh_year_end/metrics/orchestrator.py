@@ -8,7 +8,11 @@ from datetime import UTC, datetime
 from typing import Any
 
 from gh_year_end.config import Config
+from gh_year_end.metrics.awards import generate_awards
+from gh_year_end.metrics.hygiene_score import calculate_hygiene_scores
 from gh_year_end.metrics.leaderboards import calculate_leaderboards
+from gh_year_end.metrics.repo_health import calculate_repo_health
+from gh_year_end.metrics.timeseries import calculate_time_series
 from gh_year_end.storage.paths import PathManager
 
 logger = logging.getLogger(__name__)
@@ -176,7 +180,7 @@ def _run_leaderboards(config: Config, paths: PathManager) -> dict[str, Any]:
 def _run_time_series(config: Config, paths: PathManager) -> dict[str, Any]:
     """Run time series calculator.
 
-    When implemented, this will calculate weekly/monthly time series for activity metrics.
+    Calculate weekly/monthly time series for activity metrics.
 
     Args:
         config: Application configuration.
@@ -185,18 +189,39 @@ def _run_time_series(config: Config, paths: PathManager) -> dict[str, Any]:
     Returns:
         Result dictionary with success status, table_name, row_count, and optional error.
     """
-    logger.warning("Time series calculator not yet implemented")
-    return {
-        "success": False,
-        "table_name": "metrics_time_series",
-        "error": "Not implemented",
-    }
+    try:
+        df = calculate_time_series(paths.curated_root, config)
+        row_count = len(df)
+
+        # Write to parquet (pandas DataFrame)
+        output_path = paths.metrics_path("metrics_time_series")
+        df.to_parquet(output_path)
+
+        return {
+            "success": True,
+            "table_name": "metrics_time_series",
+            "row_count": row_count,
+        }
+    except FileNotFoundError as e:
+        logger.warning("Time series calculator skipped: %s", e)
+        return {
+            "success": False,
+            "table_name": "metrics_time_series",
+            "error": str(e),
+        }
+    except Exception as e:
+        logger.exception("Time series calculator failed")
+        return {
+            "success": False,
+            "table_name": "metrics_time_series",
+            "error": str(e),
+        }
 
 
 def _run_repo_health(config: Config, paths: PathManager) -> dict[str, Any]:
     """Run repository health calculator.
 
-    When implemented, this will calculate health metrics per repository.
+    Calculate health metrics per repository.
 
     Args:
         config: Application configuration.
@@ -205,18 +230,39 @@ def _run_repo_health(config: Config, paths: PathManager) -> dict[str, Any]:
     Returns:
         Result dictionary with success status, table_name, row_count, and optional error.
     """
-    logger.warning("Repository health calculator not yet implemented")
-    return {
-        "success": False,
-        "table_name": "metrics_repo_health",
-        "error": "Not implemented",
-    }
+    try:
+        df = calculate_repo_health(paths.curated_root, config)
+        row_count = len(df)
+
+        # Write to parquet (pandas DataFrame)
+        output_path = paths.metrics_path("metrics_repo_health")
+        df.to_parquet(output_path)
+
+        return {
+            "success": True,
+            "table_name": "metrics_repo_health",
+            "row_count": row_count,
+        }
+    except FileNotFoundError as e:
+        logger.warning("Repository health calculator skipped: %s", e)
+        return {
+            "success": False,
+            "table_name": "metrics_repo_health",
+            "error": str(e),
+        }
+    except Exception as e:
+        logger.exception("Repository health calculator failed")
+        return {
+            "success": False,
+            "table_name": "metrics_repo_health",
+            "error": str(e),
+        }
 
 
 def _run_hygiene_scores(config: Config, paths: PathManager) -> dict[str, Any]:
     """Run hygiene scores calculator.
 
-    When implemented, this will calculate hygiene scores (0-100) for each repository.
+    Calculate hygiene scores (0-100) for each repository.
 
     Args:
         config: Application configuration.
@@ -225,18 +271,39 @@ def _run_hygiene_scores(config: Config, paths: PathManager) -> dict[str, Any]:
     Returns:
         Result dictionary with success status, table_name, row_count, and optional error.
     """
-    logger.warning("Hygiene scores calculator not yet implemented")
-    return {
-        "success": False,
-        "table_name": "metrics_repo_hygiene_score",
-        "error": "Not implemented",
-    }
+    try:
+        df = calculate_hygiene_scores(paths.curated_root, config)
+        row_count = len(df)
+
+        # Write to parquet (pandas DataFrame)
+        output_path = paths.metrics_path("metrics_repo_hygiene_score")
+        df.to_parquet(output_path)
+
+        return {
+            "success": True,
+            "table_name": "metrics_repo_hygiene_score",
+            "row_count": row_count,
+        }
+    except FileNotFoundError as e:
+        logger.warning("Hygiene scores calculator skipped: %s", e)
+        return {
+            "success": False,
+            "table_name": "metrics_repo_hygiene_score",
+            "error": str(e),
+        }
+    except Exception as e:
+        logger.exception("Hygiene scores calculator failed")
+        return {
+            "success": False,
+            "table_name": "metrics_repo_hygiene_score",
+            "error": str(e),
+        }
 
 
 def _run_awards(config: Config, paths: PathManager) -> dict[str, Any]:
     """Run awards calculator.
 
-    When implemented, this will generate awards from the awards.yaml config.
+    Generate awards from the awards.yaml config.
 
     Args:
         config: Application configuration.
@@ -245,9 +312,44 @@ def _run_awards(config: Config, paths: PathManager) -> dict[str, Any]:
     Returns:
         Result dictionary with success status, table_name, row_count, and optional error.
     """
-    logger.warning("Awards calculator not yet implemented")
-    return {
-        "success": False,
-        "table_name": "metrics_awards",
-        "error": "Not implemented",
-    }
+    try:
+        # Look for awards.yaml in config directory
+        from pathlib import Path
+
+        awards_config_path = Path("config/awards.yaml")
+        if not awards_config_path.exists():
+            logger.warning("Awards config not found at %s", awards_config_path)
+            return {
+                "success": False,
+                "table_name": "metrics_awards",
+                "error": "Awards config not found",
+            }
+
+        df = generate_awards(
+            paths.metrics_root, awards_config_path, config.github.windows.year
+        )
+        row_count = len(df)
+
+        # Write to parquet (polars DataFrame)
+        output_path = paths.metrics_path("metrics_awards")
+        df.write_parquet(output_path)
+
+        return {
+            "success": True,
+            "table_name": "metrics_awards",
+            "row_count": row_count,
+        }
+    except FileNotFoundError as e:
+        logger.warning("Awards calculator skipped: %s", e)
+        return {
+            "success": False,
+            "table_name": "metrics_awards",
+            "error": str(e),
+        }
+    except Exception as e:
+        logger.exception("Awards calculator failed")
+        return {
+            "success": False,
+            "table_name": "metrics_awards",
+            "error": str(e),
+        }

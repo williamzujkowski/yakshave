@@ -374,6 +374,30 @@ def _compute_leaderboards_from_facts(paths: PathManager) -> pl.DataFrame | None:
 
     combined = pl.concat(leaderboards, how="vertical")
 
+    # Filter out bot users
+    dim_user_path = paths.dim_user_path
+    if dim_user_path.exists():
+        try:
+            dim_user = pl.read_parquet(dim_user_path)
+            human_users = dim_user.filter(pl.col("is_bot") == False).select("user_id")
+            before_count = len(combined)
+            combined = combined.join(human_users, on="user_id", how="inner")
+            logger.info(
+                "Filtered bot users: %d -> %d entries", before_count, len(combined)
+            )
+        except Exception as e:
+            logger.warning("Failed to filter bot users: %s", e)
+
+    # Re-rank after bot filtering
+    if len(combined) > 0:
+        combined = combined.with_columns(
+            pl.col("value")
+            .rank(method="dense", descending=True)
+            .over(["metric_key", "scope", "repo_id"])
+            .cast(pl.Int32)
+            .alias("rank")
+        )
+
     # Sort for determinism
     combined = combined.sort(["year", "metric_key", "scope", "repo_id", "rank"])
 

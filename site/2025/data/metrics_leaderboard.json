@@ -22,15 +22,6 @@
     "metric_key": "comments_total",
     "scope": "org",
     "repo_id": null,
-    "user_id": "MDQ6VXNlcjg1ODAzODk2",
-    "value": 1,
-    "rank": 3
-  },
-  {
-    "year": 2025,
-    "metric_key": "comments_total",
-    "scope": "org",
-    "repo_id": null,
     "user_id": "MDQ6VXNlcjU0ODM4OTc1",
     "value": 1,
     "rank": 3
@@ -41,6 +32,15 @@
     "scope": "org",
     "repo_id": null,
     "user_id": "MDQ6VXNlcjEyMTQ0NDA0",
+    "value": 1,
+    "rank": 3
+  },
+  {
+    "year": 2025,
+    "metric_key": "comments_total",
+    "scope": "org",
+    "repo_id": null,
+    "user_id": "MDQ6VXNlcjg1ODAzODk2",
     "value": 1,
     "rank": 3
   },
@@ -1084,16 +1084,7 @@
     "metric_key": "issues_closed",
     "scope": "org",
     "repo_id": null,
-    "user_id": "MDQ6VXNlcjg1ODAzODk2",
-    "value": 1,
-    "rank": 3
-  },
-  {
-    "year": 2025,
-    "metric_key": "issues_closed",
-    "scope": "org",
-    "repo_id": null,
-    "user_id": "MDQ6VXNlcjU0ODM4OTc1",
+    "user_id": "MDQ6VXNlcjUxODkwMjM2",
     "value": 1,
     "rank": 3
   },
@@ -1111,7 +1102,7 @@
     "metric_key": "issues_closed",
     "scope": "org",
     "repo_id": null,
-    "user_id": "MDQ6VXNlcjEyMTQ0NDA0",
+    "user_id": "MDQ6VXNlcjU0ODM4OTc1",
     "value": 1,
     "rank": 3
   },
@@ -1120,7 +1111,16 @@
     "metric_key": "issues_closed",
     "scope": "org",
     "repo_id": null,
-    "user_id": "MDQ6VXNlcjUxODkwMjM2",
+    "user_id": "MDQ6VXNlcjg1ODAzODk2",
+    "value": 1,
+    "rank": 3
+  },
+  {
+    "year": 2025,
+    "metric_key": "issues_closed",
+    "scope": "org",
+    "repo_id": null,
+    "user_id": "MDQ6VXNlcjEyMTQ0NDA0",
     "value": 1,
     "rank": 3
   },
@@ -1147,7 +1147,7 @@
     "metric_key": "issues_opened",
     "scope": "org",
     "repo_id": null,
-    "user_id": "MDQ6VXNlcjEyMTQ0NDA0",
+    "user_id": "MDQ6VXNlcjUxODkwMjM2",
     "value": 1,
     "rank": 3
   },
@@ -1156,7 +1156,7 @@
     "metric_key": "issues_opened",
     "scope": "org",
     "repo_id": null,
-    "user_id": "MDQ6VXNlcjUxODkwMjM2",
+    "user_id": "MDQ6VXNlcjg1ODAzODk2",
     "value": 1,
     "rank": 3
   },
@@ -1174,7 +1174,7 @@
     "metric_key": "issues_opened",
     "scope": "org",
     "repo_id": null,
-    "user_id": "MDQ6VXNlcjU0ODM4OTc1",
+    "user_id": "MDQ6VXNlcjEyMTQ0NDA0",
     "value": 1,
     "rank": 3
   },
@@ -1183,7 +1183,7 @@
     "metric_key": "issues_opened",
     "scope": "org",
     "repo_id": null,
-    "user_id": "MDQ6VXNlcjg1ODAzODk2",
+    "user_id": "MDQ6VXNlcjU0ODM4OTc1",
     "value": 1,
     "rank": 3
   }

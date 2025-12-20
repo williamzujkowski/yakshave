@@ -27,14 +27,14 @@
                         <div class="year-dropdown" id="yearDropdown" aria-hidden="true">
                             <ul class="year-list">
                                 <li>
-                                    <a href="../2025/"
+                                    <a href="/2025/"
                                        class="year-option"
 >
                                         2025
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../2024/"
+                                    <a href="/2024/"
                                        class="year-option active"
 aria-current="true">
                                         2024
@@ -124,7 +124,7 @@ aria-current="true">
 
             <div class="sidebar-footer">
                 <div class="generation-info">
-                    <small>Generated: 2025-12-19</small>
+                    <small>Generated: 2025-12-20</small>
                     <small>Version: 1.0.0</small>
                 </div>
             </div>
@@ -160,6 +160,44 @@ aria-current="true">
 <section class="top-contributors-section">
     <h2>Top Contributors</h2>
     <div class="contributors-grid">
+        <div class="contributor-card" data-user-id="MDM6Qm90ODU1NzUwMjU=">
+            <div class="contributor-header">
+                <div class="contributor-avatar">
+                    <img src=""
+                         alt="allstar-app[bot]"
+                         loading="lazy">
+                </div>
+                <div class="contributor-info">
+                    <h3 class="contributor-name">
+                        <a href="https://github.com/allstar-app[bot]" target="_blank" rel="noopener noreferrer">
+                            allstar-app[bot]
+                        </a>
+                    </h3>
+                    <p class="contributor-rank">Rank #1</p>
+                </div>
+            </div>
+            <div class="contributor-stats">
+                <div class="stat-item">
+                    <span class="stat-label">PRs Merged</span>
+                    <span class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Reviews</span>
+                    <span class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Issues Closed</span>
+                    <span class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Comments</span>
+                    <span class="stat-value">232</span>
+                </div>
+            </div>
+            <button class="contributor-expand" onclick="showContributorDetails('MDM6Qm90ODU1NzUwMjU=')">
+                View Details
+            </button>
+        </div>
     </div>
 </section>
 
@@ -187,6 +225,32 @@ aria-current="true">
                 </tr>
             </thead>
             <tbody>
+                <tr data-user-id="MDM6Qm90ODU1NzUwMjU=">
+                    <td class="rank-cell">1</td>
+                    <td class="contributor-cell">
+                        <div class="contributor-mini">
+                            <img src=""
+                                 alt="allstar-app[bot]"
+                                 class="mini-avatar"
+                                 loading="lazy">
+                            <a href="https://github.com/allstar-app[bot]"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                allstar-app[bot]
+                            </a>
+                        </div>
+                    </td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>232</td>
+                    <td>
+                        <div class="sparkline" data-values="[]"></div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -241,10 +305,10 @@ aria-current="true">
                 <div class="footer-section">
                     <h3>Data Sources</h3>
                     <ul>
-                        <li>Pull Requests: 450</li>
-                        <li>Issues: 174</li>
+                        <li>Pull Requests: 0</li>
+                        <li>Issues: 0</li>
                         <li>Reviews: 0</li>
-                        <li>Repositories: 5</li>
+                        <li>Repositories: 34</li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -270,7 +334,7 @@ aria-current="true">
     const contributionTimelineData = [];
     const contributionTypesData = [];
     const contributionByRepoData = [];
-    const contributorsData = [];
+    const contributorsData = [{"activity_timeline": [], "approvals": 0, "avatar_url": "", "changes_requested": 0, "comments_total": 232, "contributions_total": 236, "display_name": null, "issues_closed": 0, "issues_opened": 4, "login": "allstar-app[bot]", "prs_merged": 0, "prs_opened": 0, "rank": 1, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "MDM6Qm90ODU1NzUwMjU="}];
 
     // Render charts
     if (typeof renderContributionTimeline === 'function') {
