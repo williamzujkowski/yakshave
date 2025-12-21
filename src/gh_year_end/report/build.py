@@ -634,7 +634,11 @@ def _get_engineers_list(leaderboards_data: dict[str, Any]) -> list[dict[str, Any
     This function merges data from ALL available leaderboard metrics to create
     a complete contributor list.
     """
-    nested = leaderboards_data.get("leaderboards", {})
+    # Handle both nested format (leaderboards: {metrics}) and flat format (metrics at top level)
+    if "leaderboards" in leaderboards_data:
+        metrics_data = leaderboards_data.get("leaderboards", {})
+    else:
+        metrics_data = leaderboards_data
 
     # Build a dictionary of all contributors across all metrics
     contributors: dict[str, dict[str, Any]] = {}
@@ -654,9 +658,9 @@ def _get_engineers_list(leaderboards_data: dict[str, Any]) -> list[dict[str, Any
 
     # Process each metric and merge contributor data
     for metric_name in metric_names:
-        metric_data = nested.get(metric_name, {})
+        metric_data = metrics_data.get(metric_name, [])
 
-        # Get org-level data (list of contributors for this metric)
+        # Handle both list format and dict with org key
         if isinstance(metric_data, dict):
             org_data = metric_data.get("org", [])
         elif isinstance(metric_data, list):
@@ -666,7 +670,8 @@ def _get_engineers_list(leaderboards_data: dict[str, Any]) -> list[dict[str, Any
 
         # Add/update contributor data
         for entry in org_data:
-            user_id = entry.get("user_id")
+            # Handle both formats: user_id or user key
+            user_id = entry.get("user_id") or entry.get("user")
             if not user_id:
                 continue
 
@@ -674,7 +679,7 @@ def _get_engineers_list(leaderboards_data: dict[str, Any]) -> list[dict[str, Any
             if user_id not in contributors:
                 contributors[user_id] = {
                     "user_id": user_id,
-                    "login": entry.get("login", "unknown"),
+                    "login": entry.get("login") or entry.get("user", "unknown"),
                     "avatar_url": entry.get("avatar_url", ""),
                     "display_name": entry.get("display_name"),
                     "prs_merged": 0,
@@ -689,12 +694,12 @@ def _get_engineers_list(leaderboards_data: dict[str, Any]) -> list[dict[str, Any
                     "activity_timeline": [],
                 }
 
-            # Update the specific metric value
-            contributors[user_id][metric_name] = entry.get("value", 0)
+            # Update the specific metric value (handle both value and count keys)
+            contributors[user_id][metric_name] = entry.get("value") or entry.get("count", 0)
 
             # Keep the login/avatar if not already set
-            if entry.get("login"):
-                contributors[user_id]["login"] = entry.get("login")
+            if entry.get("login") or entry.get("user"):
+                contributors[user_id]["login"] = entry.get("login") or entry.get("user")
             if entry.get("avatar_url"):
                 contributors[user_id]["avatar_url"] = entry.get("avatar_url")
 
