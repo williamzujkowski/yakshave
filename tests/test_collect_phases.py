@@ -98,8 +98,12 @@ def mock_paths(tmp_path: Path):
     paths.repos_raw_path = tmp_path / "data" / "raw" / "repos.jsonl"
     paths.raw_root = tmp_path / "data" / "raw"
     paths.site_data_path = tmp_path / "data" / "site"
-    paths.pulls_raw_path = MagicMock(return_value=tmp_path / "data" / "raw" / "pulls" / "repo.jsonl")
-    paths.issues_raw_path = MagicMock(return_value=tmp_path / "data" / "raw" / "issues" / "repo.jsonl")
+    paths.pulls_raw_path = MagicMock(
+        return_value=tmp_path / "data" / "raw" / "pulls" / "repo.jsonl"
+    )
+    paths.issues_raw_path = MagicMock(
+        return_value=tmp_path / "data" / "raw" / "issues" / "repo.jsonl"
+    )
     return paths
 
 
@@ -139,7 +143,10 @@ class TestRunDiscoveryPhase:
         sample_repos,
     ):
         """Test running discovery phase for the first time."""
-        with patch("gh_year_end.collect.phases.discovery.discover_repos", new=AsyncMock(return_value=sample_repos)):
+        with patch(
+            "gh_year_end.collect.phases.discovery.discover_repos",
+            new=AsyncMock(return_value=sample_repos),
+        ):
             repos, stats = await run_discovery_phase(
                 config=sample_config,
                 http_client=mock_http_client,
@@ -483,18 +490,23 @@ class TestRunCommentsPhase:
         mock_progress,
     ):
         """Test running comments phase for the first time."""
-        with patch(
-            "gh_year_end.collect.phases.comments._extract_issue_numbers_from_raw",
-            new=AsyncMock(return_value={"test-org/repo1": [1, 2, 3]}),
-        ), patch(
-            "gh_year_end.collect.phases.comments._extract_pr_numbers_from_raw",
-            new=AsyncMock(return_value={"test-org/repo1": [10, 20]}),
-        ), patch(
-            "gh_year_end.collect.phases.comments.collect_issue_comments",
-            new=AsyncMock(return_value={"comments_collected": 50}),
-        ), patch(
-            "gh_year_end.collect.phases.comments.collect_review_comments",
-            new=AsyncMock(return_value={"comments_collected": 30}),
+        with (
+            patch(
+                "gh_year_end.collect.phases.comments._extract_issue_numbers_from_raw",
+                new=AsyncMock(return_value={"test-org/repo1": [1, 2, 3]}),
+            ),
+            patch(
+                "gh_year_end.collect.phases.comments._extract_pr_numbers_from_raw",
+                new=AsyncMock(return_value={"test-org/repo1": [10, 20]}),
+            ),
+            patch(
+                "gh_year_end.collect.phases.comments.collect_issue_comments",
+                new=AsyncMock(return_value={"comments_collected": 50}),
+            ),
+            patch(
+                "gh_year_end.collect.phases.comments.collect_review_comments",
+                new=AsyncMock(return_value={"comments_collected": 30}),
+            ),
         ):
             stats = await run_comments_phase(
                 config=sample_config,
@@ -798,7 +810,9 @@ class TestExtractPRNumbersFromRaw:
         assert result == {}
 
     @pytest.mark.asyncio
-    async def test_extract_pr_numbers_missing_number_field(self, sample_repos, mock_paths, tmp_path):
+    async def test_extract_pr_numbers_missing_number_field(
+        self, sample_repos, mock_paths, tmp_path
+    ):
         """Test handling records without number field."""
         pr_file = tmp_path / "pulls" / "test-org_repo1.jsonl"
         pr_file.parent.mkdir(parents=True, exist_ok=True)

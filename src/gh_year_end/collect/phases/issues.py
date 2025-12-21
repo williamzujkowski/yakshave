@@ -68,6 +68,8 @@ async def run_issues_phase(
     checkpoint.mark_phase_complete("issues")
     progress.update_items_collected("issues", issue_stats.get("issues_collected", 0))
     progress.mark_phase_complete("issues")
-    logger.info("Issue collection complete: %d issues collected", issue_stats.get("issues_collected", 0))
+    logger.info(
+        "Issue collection complete: %d issues collected", issue_stats.get("issues_collected", 0)
+    )
 
     return issue_stats

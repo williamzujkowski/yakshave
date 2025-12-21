@@ -56,7 +56,9 @@ async def _extract_issue_numbers_from_raw(
 
             if issue_numbers:
                 issue_numbers_by_repo[repo_full_name] = sorted(issue_numbers)
-                logger.debug("Extracted %d issue numbers from %s", len(issue_numbers), repo_full_name)
+                logger.debug(
+                    "Extracted %d issue numbers from %s", len(issue_numbers), repo_full_name
+                )
 
         except Exception as e:
             logger.error("Error reading issue file %s: %s", issue_file_path, e)

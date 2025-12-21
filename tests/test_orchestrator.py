@@ -135,12 +135,16 @@ class TestRunCollection:
             patch("gh_year_end.collect.orchestrator._collect_repos_parallel") as mock_parallel,
             patch("gh_year_end.collect.phases.issues.collect_issues") as mock_issues,
             patch("gh_year_end.collect.phases.reviews.collect_reviews") as mock_reviews,
-            patch("gh_year_end.collect.phases.comments.collect_issue_comments") as mock_issue_comments,
+            patch(
+                "gh_year_end.collect.phases.comments.collect_issue_comments"
+            ) as mock_issue_comments,
             patch(
                 "gh_year_end.collect.phases.comments.collect_review_comments"
             ) as mock_review_comments,
             patch("gh_year_end.collect.phases.commits.collect_commits") as mock_commits,
-            patch("gh_year_end.collect.phases.hygiene.collect_branch_protection") as mock_branch_prot,
+            patch(
+                "gh_year_end.collect.phases.hygiene.collect_branch_protection"
+            ) as mock_branch_prot,
             patch("gh_year_end.collect.phases.hygiene.collect_security_features") as mock_security,
             patch(
                 "gh_year_end.collect.phases.comments._extract_issue_numbers_from_raw"
@@ -323,12 +327,16 @@ class TestRunCollection:
             patch("gh_year_end.collect.orchestrator._collect_repos_parallel") as mock_parallel,
             patch("gh_year_end.collect.phases.issues.collect_issues") as mock_issues,
             patch("gh_year_end.collect.phases.reviews.collect_reviews") as mock_reviews,
-            patch("gh_year_end.collect.phases.comments.collect_issue_comments") as mock_issue_comments,
+            patch(
+                "gh_year_end.collect.phases.comments.collect_issue_comments"
+            ) as mock_issue_comments,
             patch(
                 "gh_year_end.collect.phases.comments.collect_review_comments"
             ) as mock_review_comments,
             patch("gh_year_end.collect.phases.commits.collect_commits") as mock_commits,
-            patch("gh_year_end.collect.phases.hygiene.collect_branch_protection") as mock_branch_prot,
+            patch(
+                "gh_year_end.collect.phases.hygiene.collect_branch_protection"
+            ) as mock_branch_prot,
             patch("gh_year_end.collect.phases.hygiene.collect_security_features") as mock_security,
             patch(
                 "gh_year_end.collect.phases.comments._extract_issue_numbers_from_raw"
@@ -423,12 +431,16 @@ class TestRunCollection:
             patch("gh_year_end.collect.orchestrator._collect_repos_parallel") as mock_parallel,
             patch("gh_year_end.collect.phases.issues.collect_issues") as mock_issues,
             patch("gh_year_end.collect.phases.reviews.collect_reviews") as mock_reviews,
-            patch("gh_year_end.collect.phases.comments.collect_issue_comments") as mock_issue_comments,
+            patch(
+                "gh_year_end.collect.phases.comments.collect_issue_comments"
+            ) as mock_issue_comments,
             patch(
                 "gh_year_end.collect.phases.comments.collect_review_comments"
             ) as mock_review_comments,
             patch("gh_year_end.collect.phases.commits.collect_commits") as mock_commits,
-            patch("gh_year_end.collect.phases.hygiene.collect_branch_protection") as mock_branch_prot,
+            patch(
+                "gh_year_end.collect.phases.hygiene.collect_branch_protection"
+            ) as mock_branch_prot,
             patch("gh_year_end.collect.phases.hygiene.collect_security_features") as mock_security,
             patch(
                 "gh_year_end.collect.phases.comments._extract_issue_numbers_from_raw"
@@ -982,12 +994,16 @@ class TestRunCollectionRateLimiting:
             patch("gh_year_end.collect.orchestrator._collect_repos_parallel") as mock_parallel,
             patch("gh_year_end.collect.phases.issues.collect_issues") as mock_issues,
             patch("gh_year_end.collect.phases.reviews.collect_reviews") as mock_reviews,
-            patch("gh_year_end.collect.phases.comments.collect_issue_comments") as mock_issue_comments,
+            patch(
+                "gh_year_end.collect.phases.comments.collect_issue_comments"
+            ) as mock_issue_comments,
             patch(
                 "gh_year_end.collect.phases.comments.collect_review_comments"
             ) as mock_review_comments,
             patch("gh_year_end.collect.phases.commits.collect_commits") as mock_commits,
-            patch("gh_year_end.collect.phases.hygiene.collect_branch_protection") as mock_branch_prot,
+            patch(
+                "gh_year_end.collect.phases.hygiene.collect_branch_protection"
+            ) as mock_branch_prot,
             patch("gh_year_end.collect.phases.hygiene.collect_security_features") as mock_security,
             patch(
                 "gh_year_end.collect.phases.comments._extract_issue_numbers_from_raw"

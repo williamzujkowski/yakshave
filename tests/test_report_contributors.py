@@ -1,6 +1,5 @@
 """Tests for report contributors module."""
 
-
 from gh_year_end.report.contributors import (
     get_engineers_list,
     populate_activity_timelines,
@@ -40,7 +39,12 @@ class TestGetEngineersList:
         """Test extracting engineers from flat leaderboard format."""
         leaderboards_data = {
             "prs_opened": [
-                {"user": "bob", "login": "bob", "avatar_url": "https://example.com/bob.jpg", "count": 30}
+                {
+                    "user": "bob",
+                    "login": "bob",
+                    "avatar_url": "https://example.com/bob.jpg",
+                    "count": 30,
+                }
             ]
         }
 
@@ -152,11 +156,7 @@ class TestGetEngineersList:
 
     def test_initialize_all_metrics(self):
         """Test that all metrics are initialized to 0."""
-        leaderboards_data = {
-            "leaderboards": {
-                "prs_merged": [{"user": "alice", "value": 10}]
-            }
-        }
+        leaderboards_data = {"leaderboards": {"prs_merged": [{"user": "alice", "value": 10}]}}
 
         result = get_engineers_list(leaderboards_data)
 
@@ -173,11 +173,7 @@ class TestGetEngineersList:
 
     def test_activity_timeline_initialized(self):
         """Test that activity_timeline is initialized as empty list."""
-        leaderboards_data = {
-            "leaderboards": {
-                "prs_merged": [{"user": "alice", "value": 10}]
-            }
-        }
+        leaderboards_data = {"leaderboards": {"prs_merged": [{"user": "alice", "value": 10}]}}
 
         result = get_engineers_list(leaderboards_data)
 
@@ -185,11 +181,7 @@ class TestGetEngineersList:
 
     def test_populate_timelines_when_provided(self):
         """Test that activity timelines are populated when timeseries data provided."""
-        leaderboards_data = {
-            "leaderboards": {
-                "prs_merged": [{"user": "alice", "value": 10}]
-            }
-        }
+        leaderboards_data = {"leaderboards": {"prs_merged": [{"user": "alice", "value": 10}]}}
         timeseries_data = {
             "weekly": {
                 "prs_merged": [
@@ -309,9 +301,7 @@ class TestPopulateActivityTimelines:
 
     def test_aggregate_multiple_metrics(self):
         """Test aggregating multiple metric types."""
-        contributors = [
-            {"user_id": "alice", "login": "alice", "activity_timeline": []}
-        ]
+        contributors = [{"user_id": "alice", "login": "alice", "activity_timeline": []}]
         timeseries_data = {
             "weekly": {
                 "prs_merged": [{"period": "2025-W01", "user": "alice", "count": 5}],
@@ -327,9 +317,7 @@ class TestPopulateActivityTimelines:
 
     def test_aggregate_across_weeks(self):
         """Test aggregating activity across multiple weeks."""
-        contributors = [
-            {"user_id": "alice", "login": "alice", "activity_timeline": []}
-        ]
+        contributors = [{"user_id": "alice", "login": "alice", "activity_timeline": []}]
         timeseries_data = {
             "weekly": {
                 "prs_merged": [
@@ -350,9 +338,7 @@ class TestPopulateActivityTimelines:
 
     def test_sorted_by_period(self):
         """Test that timeline is sorted chronologically."""
-        contributors = [
-            {"user_id": "alice", "login": "alice", "activity_timeline": []}
-        ]
+        contributors = [{"user_id": "alice", "login": "alice", "activity_timeline": []}]
         timeseries_data = {
             "weekly": {
                 "prs_merged": [
@@ -390,9 +376,7 @@ class TestPopulateActivityTimelines:
 
     def test_empty_timeseries(self):
         """Test handling empty timeseries data."""
-        contributors = [
-            {"user_id": "alice", "login": "alice", "activity_timeline": []}
-        ]
+        contributors = [{"user_id": "alice", "login": "alice", "activity_timeline": []}]
         timeseries_data = {"weekly": {}}
 
         populate_activity_timelines(contributors, timeseries_data)
@@ -401,9 +385,7 @@ class TestPopulateActivityTimelines:
 
     def test_missing_weekly_key(self):
         """Test handling missing weekly key."""
-        contributors = [
-            {"user_id": "alice", "login": "alice", "activity_timeline": []}
-        ]
+        contributors = [{"user_id": "alice", "login": "alice", "activity_timeline": []}]
         timeseries_data = {}
 
         populate_activity_timelines(contributors, timeseries_data)
@@ -412,9 +394,7 @@ class TestPopulateActivityTimelines:
 
     def test_match_by_login_fallback(self):
         """Test matching users by login when user_id not in timeseries."""
-        contributors = [
-            {"user_id": "123", "login": "alice", "activity_timeline": []}
-        ]
+        contributors = [{"user_id": "123", "login": "alice", "activity_timeline": []}]
         timeseries_data = {
             "weekly": {
                 "prs_merged": [
@@ -430,9 +410,7 @@ class TestPopulateActivityTimelines:
 
     def test_skip_entries_with_missing_fields(self):
         """Test skipping entries with missing required fields."""
-        contributors = [
-            {"user_id": "alice", "login": "alice", "activity_timeline": []}
-        ]
+        contributors = [{"user_id": "alice", "login": "alice", "activity_timeline": []}]
         timeseries_data = {
             "weekly": {
                 "prs_merged": [
@@ -450,9 +428,7 @@ class TestPopulateActivityTimelines:
 
     def test_all_metric_types_aggregated(self):
         """Test that all expected metric types are aggregated."""
-        contributors = [
-            {"user_id": "alice", "login": "alice", "activity_timeline": []}
-        ]
+        contributors = [{"user_id": "alice", "login": "alice", "activity_timeline": []}]
         timeseries_data = {
             "weekly": {
                 "prs_opened": [{"period": "2025-W01", "user": "alice", "count": 1}],
@@ -471,14 +447,10 @@ class TestPopulateActivityTimelines:
 
     def test_in_place_modification(self):
         """Test that contributors list is modified in-place."""
-        contributors = [
-            {"user_id": "alice", "login": "alice", "activity_timeline": []}
-        ]
+        contributors = [{"user_id": "alice", "login": "alice", "activity_timeline": []}]
         original_list = contributors
         timeseries_data = {
-            "weekly": {
-                "prs_merged": [{"period": "2025-W01", "user": "alice", "count": 5}]
-            }
+            "weekly": {"prs_merged": [{"period": "2025-W01", "user": "alice", "count": 5}]}
         }
 
         populate_activity_timelines(contributors, timeseries_data)

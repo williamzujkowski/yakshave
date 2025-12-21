@@ -68,6 +68,8 @@ async def run_commits_phase(
     checkpoint.mark_phase_complete("commits")
     progress.update_items_collected("commits", commit_stats.get("commits_collected", 0))
     progress.mark_phase_complete("commits")
-    logger.info("Commit collection complete: %d commits collected", commit_stats.get("commits_collected", 0))
+    logger.info(
+        "Commit collection complete: %d commits collected", commit_stats.get("commits_collected", 0)
+    )
 
     return commit_stats

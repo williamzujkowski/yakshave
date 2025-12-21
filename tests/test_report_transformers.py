@@ -1,7 +1,5 @@
 """Tests for report transformers module."""
 
-
-
 from gh_year_end.report.transformers import (
     calculate_fun_facts,
     calculate_highlights,
@@ -139,7 +137,11 @@ class TestTransformLeaderboards:
             "leaderboards": {
                 "prs_opened": {
                     "org": [
-                        {"login": "alice", "value": 50, "avatar_url": "https://example.com/alice.jpg"},
+                        {
+                            "login": "alice",
+                            "value": 50,
+                            "avatar_url": "https://example.com/alice.jpg",
+                        },
                     ]
                 }
             }
@@ -287,9 +289,7 @@ class TestTransformActivityTimeline:
     def test_transform_missing_weekly_key(self):
         """Test handling missing weekly key."""
         timeseries_data = {
-            "monthly": {
-                "prs_merged": [{"period": "2025-01", "user": "alice", "count": 100}]
-            }
+            "monthly": {"prs_merged": [{"period": "2025-01", "user": "alice", "count": 100}]}
         }
 
         result = transform_activity_timeline(timeseries_data)
@@ -299,9 +299,7 @@ class TestTransformActivityTimeline:
     def test_transform_missing_prs_merged(self):
         """Test handling missing prs_merged metric."""
         timeseries_data = {
-            "weekly": {
-                "issues_opened": [{"period": "2025-W01", "user": "alice", "count": 5}]
-            }
+            "weekly": {"issues_opened": [{"period": "2025-W01", "user": "alice", "count": 5}]}
         }
 
         result = transform_activity_timeline(timeseries_data)

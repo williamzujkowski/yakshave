@@ -77,8 +77,7 @@ async def run_pulls_phase(
     progress.update_items_collected("pulls", pull_stats.get("pulls_collected", 0))
     progress.mark_phase_complete("pulls")
     logger.info(
-        "Pull request complete: %d repos processed, %d PRs collected, "
-        "%d repos skipped, %d errors",
+        "Pull request complete: %d repos processed, %d PRs collected, %d repos skipped, %d errors",
         pull_stats.get("repos_processed", 0),
         pull_stats.get("pulls_collected", 0),
         pull_stats.get("repos_skipped", 0),

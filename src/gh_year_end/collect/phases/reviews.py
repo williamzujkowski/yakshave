@@ -68,6 +68,8 @@ async def run_reviews_phase(
     checkpoint.mark_phase_complete("reviews")
     progress.update_items_collected("reviews", review_stats.get("reviews_collected", 0))
     progress.mark_phase_complete("reviews")
-    logger.info("Review collection complete: %d reviews collected", review_stats.get("reviews_collected", 0))
+    logger.info(
+        "Review collection complete: %d reviews collected", review_stats.get("reviews_collected", 0)
+    )
 
     return review_stats
