@@ -25,8 +25,8 @@ from gh_year_end.config import Config
 from gh_year_end.storage.paths import PathManager
 
 # Test constants (from conftest.py fixtures)
-TEST_ORG = "github"
-TEST_YEAR = 2024
+TEST_USER = "williamzujkowski"
+TEST_YEAR = 2025
 
 
 # Helper functions for common assertions
@@ -363,7 +363,7 @@ async def test_live_collect_manifest(
     assert "since" in config_section, "Config must have since"
     assert "until" in config_section, "Config must have until"
 
-    assert config_section["target"] == TEST_ORG, "Target should match config"
+    assert config_section["target"] == TEST_USER, "Target should match config"
     assert config_section["year"] == TEST_YEAR, "Year should match config"
 
     # Validate stats section

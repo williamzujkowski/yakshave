@@ -37,10 +37,10 @@ def github_token() -> str:
 
 @pytest.fixture(scope="session")
 def live_config(tmp_path_factory: pytest.TempPathFactory) -> Config:
-    """Create config targeting stable public repo (github/hotkey).
+    """Create config targeting a single small user account for fast testing.
 
-    Uses year 2024 for stable, historical data.
-    Conservative rate limiting to avoid secondary limits.
+    Uses williamzujkowski user (small account) with 2025 data.
+    Fast settings to complete quickly in CI.
 
     Args:
         tmp_path_factory: Pytest temp path factory for session scope.
@@ -54,7 +54,8 @@ def live_config(tmp_path_factory: pytest.TempPathFactory) -> Config:
     return Config.model_validate(
         {
             "github": {
-                "target": {"mode": "org", "name": "github"},
+                # Use a small user account instead of large org for fast CI
+                "target": {"mode": "user", "name": "williamzujkowski"},
                 "auth": {"token_env": "GITHUB_TOKEN"},
                 "discovery": {
                     "include_forks": False,
@@ -62,17 +63,17 @@ def live_config(tmp_path_factory: pytest.TempPathFactory) -> Config:
                     "visibility": "public",
                 },
                 "windows": {
-                    "year": 2024,
-                    "since": "2024-01-01T00:00:00Z",
-                    "until": "2025-01-01T00:00:00Z",
+                    "year": 2025,
+                    "since": "2025-01-01T00:00:00Z",
+                    "until": "2026-01-01T00:00:00Z",
                 },
             },
             "rate_limit": {
                 "strategy": "adaptive",
-                "max_concurrency": 1,
-                "min_sleep_seconds": 2.0,
-                "max_sleep_seconds": 60.0,
-                "sample_rate_limit_endpoint_every_n_requests": 50,
+                "max_concurrency": 2,  # Faster with 2 concurrent requests
+                "min_sleep_seconds": 0.5,  # Faster sleep
+                "max_sleep_seconds": 30.0,
+                "sample_rate_limit_endpoint_every_n_requests": 100,
             },
             "identity": {
                 "bots": {
@@ -90,7 +91,11 @@ def live_config(tmp_path_factory: pytest.TempPathFactory) -> Config:
                     "commits": True,
                     "hygiene": True,
                 },
-                "commits": {"include_files": True, "classify_files": True},
+                "commits": {
+                    "include_files": True,
+                    "classify_files": True,
+                    "max_per_repo": 50,  # Limit commits for speed
+                },
                 "hygiene": {
                     "paths": [
                         "SECURITY.md",
@@ -103,11 +108,11 @@ def live_config(tmp_path_factory: pytest.TempPathFactory) -> Config:
                     ],
                     "workflow_prefixes": [".github/workflows/"],
                     "branch_protection": {
-                        "mode": "sample",
+                        "mode": "skip",  # Skip for speed
                         "sample_top_repos_by": "prs_merged",
-                        "sample_count": 5,
+                        "sample_count": 1,
                     },
-                    "security_features": {"best_effort": True},
+                    "security_features": {"best_effort": False},  # Skip for speed
                 },
             },
             "storage": {
@@ -117,7 +122,7 @@ def live_config(tmp_path_factory: pytest.TempPathFactory) -> Config:
                 "dataset_version": "v1",
             },
             "report": {
-                "title": "GitHub Organization 2024 Year in Review",
+                "title": "Live Test 2025 Year in Review",
                 "output_dir": str(temp_dir / "site"),
                 "theme": "engineer_exec_toggle",
             },
@@ -189,8 +194,8 @@ def live_test_config_path(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
     config_content = """github:
   target:
-    mode: org
-    name: github
+    mode: user
+    name: williamzujkowski
   auth:
     token_env: GITHUB_TOKEN
   discovery:
@@ -198,16 +203,16 @@ def live_test_config_path(tmp_path_factory: pytest.TempPathFactory) -> Path:
     include_archived: false
     visibility: public
   windows:
-    year: 2024
-    since: "2024-01-01T00:00:00Z"
-    until: "2025-01-01T00:00:00Z"
+    year: 2025
+    since: "2025-01-01T00:00:00Z"
+    until: "2026-01-01T00:00:00Z"
 
 rate_limit:
   strategy: adaptive
-  max_concurrency: 1
-  min_sleep_seconds: 2.0
-  max_sleep_seconds: 60.0
-  sample_rate_limit_endpoint_every_n_requests: 50
+  max_concurrency: 2
+  min_sleep_seconds: 0.5
+  max_sleep_seconds: 30.0
+  sample_rate_limit_endpoint_every_n_requests: 100
 
 identity:
   bots:
@@ -229,6 +234,7 @@ collection:
   commits:
     include_files: true
     classify_files: true
+    max_per_repo: 50
   hygiene:
     paths:
       - SECURITY.md
@@ -241,11 +247,11 @@ collection:
     workflow_prefixes:
       - .github/workflows/
     branch_protection:
-      mode: sample
+      mode: skip
       sample_top_repos_by: prs_merged
-      sample_count: 5
+      sample_count: 1
     security_features:
-      best_effort: true
+      best_effort: false
 
 storage:
   root: "./data"
@@ -254,7 +260,7 @@ storage:
   dataset_version: v1
 
 report:
-  title: "GitHub Organization 2024 Year in Review"
+  title: "Live Test 2025 Year in Review"
   output_dir: "./site"
   theme: engineer_exec_toggle
 """

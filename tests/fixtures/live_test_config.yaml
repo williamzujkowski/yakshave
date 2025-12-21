@@ -1,7 +1,7 @@
 github:
   target:
-    mode: org
-    name: github
+    mode: user
+    name: williamzujkowski
   auth:
     token_env: GITHUB_TOKEN
   discovery:
@@ -9,16 +9,16 @@ github:
     include_archived: false
     visibility: public
   windows:
-    year: 2024
-    since: "2024-01-01T00:00:00Z"
-    until: "2025-01-01T00:00:00Z"
+    year: 2025
+    since: "2025-01-01T00:00:00Z"
+    until: "2026-01-01T00:00:00Z"
 
 rate_limit:
   strategy: adaptive
-  max_concurrency: 1
-  min_sleep_seconds: 2.0
-  max_sleep_seconds: 60.0
-  sample_rate_limit_endpoint_every_n_requests: 50
+  max_concurrency: 2
+  min_sleep_seconds: 0.5
+  max_sleep_seconds: 30.0
+  sample_rate_limit_endpoint_every_n_requests: 100
 
 identity:
   bots:
@@ -40,6 +40,7 @@ collection:
   commits:
     include_files: true
     classify_files: true
+    max_per_repo: 50
   hygiene:
     paths:
       - SECURITY.md
@@ -52,11 +53,11 @@ collection:
     workflow_prefixes:
       - .github/workflows/
     branch_protection:
-      mode: sample
+      mode: skip
       sample_top_repos_by: prs_merged
-      sample_count: 5
+      sample_count: 1
     security_features:
-      best_effort: true
+      best_effort: false
 
 storage:
   root: "./data"
@@ -65,6 +66,6 @@ storage:
   dataset_version: v1
 
 report:
-  title: "GitHub Organization 2024 Year in Review"
+  title: "Live Test 2025 Year in Review"
   output_dir: "./site"
   theme: engineer_exec_toggle
