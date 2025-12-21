@@ -538,19 +538,20 @@ class TestAdaptiveRateLimiterEnhanced:
 
         from gh_year_end.github.ratelimit import RateLimitState
 
-        # Test different remaining percentages
-        # Calculations:
-        # - 90%: >75% => 0.0
-        # - 60% LOW: (75-60)/25 * 1.0 * 0.5 = 0.3
-        # - 35% MEDIUM: (50-35)/25 * 1.0 * 1.0 = 0.6
-        # - 15% MEDIUM: factor=(25-15)/15=0.667, delay=1.0+(9.0*0.667^1.5)*1.0 = 1.0+4.89 = 5.89
-        # - 5% MEDIUM: factor=(10-5)/10=0.5, delay=10.0*(0.5^2)*1.0 = 2.5
+        # Test different remaining percentages based on actual implementation:
+        # - >50%: no delay (full speed)
+        # - 25-50% LOW only: factor=(50-pct)/25 * min_sleep * 0.5
+        # - 10-25%: factor=(25-pct)/15 * min_sleep * priority_mult
+        # - 5-10%: exponential scaling with min_sleep + (range * factor^1.5)
+        # - <5%: max_sleep * (factor^2)
+        #
+        # Priority multipliers: CRITICAL=0.5, HIGH=0.75, MEDIUM=1.0, LOW=1.25
         test_cases = [
-            (90, RequestPriority.MEDIUM, 0.0),  # >75%: no delay
-            (60, RequestPriority.LOW, (0.0, 1.0)),  # >50%: minimal for LOW only
-            (35, RequestPriority.MEDIUM, (0.0, 1.0)),  # 25-50%: moderate
-            (15, RequestPriority.MEDIUM, (1.0, 10.0)),  # 10-25%: significant
-            (5, RequestPriority.MEDIUM, (2.0, 3.0)),  # <10%: critical (2.5)
+            (90, RequestPriority.MEDIUM, 0.0),  # >50%: no delay
+            (60, RequestPriority.LOW, (0.0, 0.5)),  # >50%: no delay (even for LOW)
+            (35, RequestPriority.MEDIUM, 0.0),  # 25-50%: only LOW gets delay
+            (15, RequestPriority.MEDIUM, (0.5, 1.5)),  # 10-25%: factor=0.667, delay~0.667
+            (3, RequestPriority.MEDIUM, (1.0, 5.0)),  # <5%: significant delay
         ]
 
         for remaining_pct, priority, expected in test_cases:

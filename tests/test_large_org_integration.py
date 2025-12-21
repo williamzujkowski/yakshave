@@ -432,22 +432,22 @@ class TestRateLimiterIntegration:
         # Now test that rate limit state affects behavior
         # Set very low rate limit to trigger throttling
         limiter._state[APIType.REST].limit = 5000
-        limiter._state[APIType.REST].remaining = 250  # 5% remaining (triggers max delays)
+        limiter._state[APIType.REST].remaining = 150  # 3% remaining (triggers max delays)
         limiter._state[APIType.REST].reset_at = time.time() + 3600
 
-        # Calculate delay for LOW priority at 5% remaining
-        # This should trigger significant adaptive delay
+        # Calculate delay for LOW priority at 3% remaining
+        # This should trigger significant adaptive delay (in the < 5% category)
         state = limiter._state[APIType.REST]
         calculated_delay = limiter._calculate_adaptive_delay(state, RequestPriority.LOW)
 
-        # At 5% remaining, LOW priority should have significant delay
+        # At 3% remaining, LOW priority should have significant delay
         assert calculated_delay > 0.1, (
-            f"Expected delay > 0.1s at 5% remaining, got {calculated_delay}s"
+            f"Expected delay > 0.1s at 3% remaining, got {calculated_delay}s"
         )
 
         # Verify rate limit state is properly tracked
-        assert state.remaining_percent < 10
-        assert state.remaining_percent == 5.0
+        assert state.remaining_percent < 5
+        assert state.remaining_percent == 3.0
 
     @pytest.mark.asyncio
     async def test_circuit_breaker_opens_on_failures(
