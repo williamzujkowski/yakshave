@@ -729,9 +729,6 @@ class TestCheckpointManager:
 
         manager.mark_repo_endpoint_in_progress(repo, endpoint)
 
-        # Modify checkpoint path time to verify it was saved
-        initial_mtime = checkpoint_path.stat().st_mtime if checkpoint_path.exists() else 0
-
         # Update progress 9 times (shouldn't save)
         for i in range(1, 10):
             manager.update_progress(repo, endpoint, page=i, records=5)
@@ -739,9 +736,18 @@ class TestCheckpointManager:
         # 10th page should trigger save
         manager.update_progress(repo, endpoint, page=10, records=5)
 
-        # Verify checkpoint was saved (mtime changed)
-        final_mtime = checkpoint_path.stat().st_mtime
-        assert final_mtime > initial_mtime
+        # Verify checkpoint was saved by checking the file content
+        # Reading the file confirms save was called (mtime check unreliable on fast systems)
+        import json
+        with checkpoint_path.open() as f:
+            saved_data = json.load(f)
+
+        # Verify the progress was actually recorded
+        assert "repos" in saved_data
+        repo_data = saved_data["repos"].get(repo, {})
+        endpoint_data = repo_data.get("endpoints", {}).get(endpoint, {})
+        assert endpoint_data.get("pages_collected") == 10
+        assert endpoint_data.get("records_collected") == 50  # 10 pages * 5 records
 
     def test_get_stats_with_all_statuses(
         self,
