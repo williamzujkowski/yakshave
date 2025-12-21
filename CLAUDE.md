@@ -2,9 +2,9 @@
 
 ```
 STATUS: AUTHORITATIVE
-VERSION: 1.0.0
-LAST_AUDIT: 2025-12-20
-NEXT_REVIEW: 2026-03-20
+VERSION: 1.1.0
+LAST_AUDIT: 2025-12-21
+NEXT_REVIEW: 2026-03-21
 SCOPE: gh-year-end development standards
 ```
 
@@ -16,6 +16,7 @@ This file defines **project-specific rules** for AI assistants. It enforces:
 * Deterministic: stable ordering, stable IDs, repeatable outputs
 * Pull once: never re-fetch if raw snapshot exists unless explicitly requested
 * Safe file operations and quality gates
+* **Commit changes and verify CI passes before considering work complete**
 
 If any rule conflicts with other documentation, **this file wins**.
 
@@ -23,7 +24,7 @@ If any rule conflicts with other documentation, **this file wins**.
 
 ## Project Overview
 
-**Name**: gh-year-end
+**Name**: gh-year-end (repo: yakshave)
 **Type**: CLI tool + static site generator
 **Status**: active development (MVP)
 
@@ -46,17 +47,67 @@ infrastructure:
 
 database: JSON files (site data)
 package_manager: uv
+cli_tools: gh (GitHub CLI preferred)
 ```
 
 ### Key Directories
 
 ```
-gh-year-end/
+yakshave/
 ├── src/gh_year_end/      # Main Python package
 ├── tests/                # pytest test suite
 ├── config/               # Config schema and examples
 ├── site/                 # Static site templates and assets
 └── data/                 # Generated data (gitignored)
+```
+
+---
+
+## GitHub CLI (gh) — Preferred Tool
+
+**Prefer `gh` CLI for all GitHub operations.** The GitHub CLI is pre-installed in CI and integrates seamlessly with the project.
+
+### Setup
+
+```bash
+# Authenticate (one-time)
+gh auth login
+
+# Verify
+gh auth status
+```
+
+### Common Operations
+
+```bash
+# Issues
+gh issue list
+gh issue create --title "Bug: X" --body "Description"
+gh issue close 123
+
+# Pull Requests
+gh pr create --title "feat: Add X" --body "Description"
+gh pr list
+gh pr view 123
+gh pr merge 123
+
+# Workflow runs
+gh run list
+gh run view 12345
+gh run watch 12345  # Live follow
+
+# Download artifacts
+gh run download 12345 -n artifact-name
+```
+
+### Token Management
+
+```bash
+# Get token for API use
+gh auth token
+
+# Set as environment variable
+export GITHUB_TOKEN=$(gh auth token)
 ```
 
 ---
@@ -109,6 +160,7 @@ uv run gh-year-end --help
 
 ```bash
 GITHUB_TOKEN=ghp_xxxxx  # Required for GitHub API access
+# Or use: export GITHUB_TOKEN=$(gh auth token)
 ```
 
 ---
@@ -147,7 +199,7 @@ uv run pytest -m live_api
 | Type check | `mypy src/` | pyproject.toml |
 
 ```bash
-# Pre-commit
+# Pre-commit (run before every commit)
 ruff check . && ruff format --check . && mypy src/ && pytest
 ```
 
@@ -169,6 +221,85 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 
 **Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`
 **Scopes**: `collect`, `collector`, `report`, `build`, `hygiene`, `identity`, `cli`, `config`, `tests`, `ci`
+
+### Committing Changes — Required Workflow
+
+**Every commit must follow this workflow:**
+
+1. **Run local checks before committing:**
+   ```bash
+   uv run ruff check . && uv run ruff format --check . && uv run mypy src/ && uv run pytest -x
+   ```
+
+2. **Commit with proper message format:**
+   ```bash
+   git add -A
+   git commit -m "type(scope): description"
+   ```
+
+3. **Push and monitor CI:**
+   ```bash
+   git push
+   gh run watch  # Watch the workflow run live
+   ```
+
+4. **If CI fails — fix immediately:**
+   ```bash
+   gh run view --log-failed  # See what failed
+   # Fix the issue locally
+   git add -A && git commit -m "fix(scope): address CI failure"
+   git push
+   gh run watch
+   ```
+
+5. **Work is not complete until CI passes.**
+
+### Monitoring GitHub CI Workflows
+
+**Always verify CI status after pushing:**
+
+```bash
+# List recent workflow runs
+gh run list
+
+# Watch current run in real-time
+gh run watch
+
+# View specific run details
+gh run view 12345
+
+# View failed logs only
+gh run view 12345 --log-failed
+
+# Download artifacts for inspection
+gh run download 12345
+```
+
+### CI Jobs and Gates
+
+| Job | Priority | Description |
+|-----|----------|-------------|
+| lint | P0 | Ruff check |
+| typecheck | P0 | Mypy type checking |
+| test-fast | P0 | Unit tests (parallel) |
+| security | P1 | Bandit security scan |
+| dependency-check | P1 | Safety vulnerability check |
+| site-validation | P1 | Template and HTML validation |
+| quality-gate | — | Aggregates P0/P1 status |
+
+**P0 gates must pass** — they block merge.
+**P1 gates warn** — fix before next release.
+
+### Fixing CI Issues
+
+| Issue | Command to Debug | Fix |
+|-------|------------------|-----|
+| Lint failure | `uv run ruff check .` | `uv run ruff check . --fix` |
+| Format failure | `uv run ruff format --check .` | `uv run ruff format .` |
+| Type error | `uv run mypy src/` | Fix type annotations |
+| Test failure | `uv run pytest -x --tb=short` | Fix failing test |
+| Security issue | `uv run bandit -r src/` | Address vulnerability |
+| Site validation | `uv run pytest tests/test_templates.py -v` | Fix template issue |
 
 ### PR Requirements
 
@@ -261,6 +392,9 @@ uv run gh-year-end build --config config/config.yaml    # Build static site from
 # Force re-collection
 uv run gh-year-end collect --config config/config.yaml --force
 uv run gh-year-end all --config config/config.yaml --force
+
+# Monitor CI after push
+git push && gh run watch
 ```
 
 ---
@@ -273,5 +407,6 @@ uv run gh-year-end all --config config/config.yaml --force
 | Testing | pytest best practices | https://docs.pytest.org/ |
 | Security | OWASP Top 10 | https://owasp.org/Top10/ |
 | Metrics | CHAOSS | https://chaoss.community/ |
+| GitHub CLI | Official docs | https://cli.github.com/manual/ |
 
 Full standards: https://github.com/williamzujkowski/standards

@@ -268,7 +268,7 @@ class ReportConfig(BaseModel):
 
     title: str = "Year in Review"
     output_dir: Path = Field(default=Path("./site"))
-    theme: str = Field(default="engineer_exec_toggle")
+    theme: str = Field(default="default")
     awards_config: Path | None = None
     base_path: str = Field(
         default="",
