@@ -739,6 +739,7 @@ class TestCheckpointManager:
         # Verify checkpoint was saved by checking the file content
         # Reading the file confirms save was called (mtime check unreliable on fast systems)
         import json
+
         with checkpoint_path.open() as f:
             saved_data = json.load(f)
 
@@ -982,6 +983,7 @@ class TestCheckpointManager:
         # Verify checkpoint was saved by checking file content
         # (mtime check unreliable on fast systems)
         import json
+
         with checkpoint_path.open() as f:
             saved_data = json.load(f)
 
