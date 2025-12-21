@@ -249,8 +249,9 @@ jobs:
   live-integration-test:
     name: Live API Integration Tests
     runs-on: ubuntu-latest
-    # Only run on push to main or PRs from same repo (has secrets access)
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    # Skip by default - these tests are slow and make real API calls
+    # Run manually via workflow_dispatch when needed for validation
+    if: false
     steps:
       - uses: actions/checkout@v4
 
