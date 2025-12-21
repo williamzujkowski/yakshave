@@ -27,7 +27,6 @@ from gh_year_end.collect.phases import (
     run_security_features_phase,
 )
 from gh_year_end.collect.progress import ProgressTracker
-from gh_year_end.collect.pulls import collect_single_repo_pulls
 from gh_year_end.config import Config
 from gh_year_end.github.auth import GitHubAuth
 from gh_year_end.github.graphql import GraphQLClient

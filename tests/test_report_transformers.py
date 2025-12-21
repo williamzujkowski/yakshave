@@ -1,8 +1,6 @@
 """Tests for report transformers module."""
 
-from datetime import datetime
 
-import pytest
 
 from gh_year_end.report.transformers import (
     calculate_fun_facts,

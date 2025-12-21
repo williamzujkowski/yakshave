@@ -1,6 +1,5 @@
 """Tests for report contributors module."""
 
-import pytest
 
 from gh_year_end.report.contributors import (
     get_engineers_list,
@@ -467,7 +466,7 @@ class TestPopulateActivityTimelines:
 
         populate_activity_timelines(contributors, timeseries_data)
 
-        # Sum: 1+2+3+4+5+6 = 21
+        # All metrics aggregated: total should be 21
         assert contributors[0]["activity_timeline"] == [21]
 
     def test_in_place_modification(self):
