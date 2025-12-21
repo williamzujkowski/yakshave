@@ -828,11 +828,7 @@ class TestTransformActivityTimeline:
 
     def test_handles_missing_org_data(self) -> None:
         """Test that missing weekly data returns empty list."""
-        timeseries_data = {
-            "weekly": {
-                "prs_merged": []
-            }
-        }
+        timeseries_data = {"weekly": {"prs_merged": []}}
 
         result = _transform_activity_timeline(timeseries_data)
 

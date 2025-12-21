@@ -110,9 +110,7 @@ def build_site(config: Config, paths: PathManager) -> dict[str, Any]:
         available_years = get_available_years(site_base_dir)
         if available_years:
             most_recent_year = available_years[0]
-            _generate_root_redirect(
-                site_base_dir, most_recent_year, config.report.base_path
-            )
+            _generate_root_redirect(site_base_dir, most_recent_year, config.report.base_path)
 
     except Exception as e:
         error_msg = f"Build failed: {e!s}"
@@ -252,15 +250,17 @@ def _render_templates(
             # List format from metrics - transform to expected structure
             for item in repo_health_data:
                 repo_name = item.get("repo", "")
-                repo_health_list.append({
-                    "repo_id": repo_name,
-                    "repo_full_name": repo_name,
-                    "prs_merged": item.get("pr_count", 0),
-                    "active_contributors_365d": item.get("contributor_count", 0),
-                    "review_coverage": 0,  # Not in this data format
-                    "median_time_to_merge": "N/A",
-                    **item,
-                })
+                repo_health_list.append(
+                    {
+                        "repo_id": repo_name,
+                        "repo_full_name": repo_name,
+                        "prs_merged": item.get("pr_count", 0),
+                        "active_contributors_365d": item.get("contributor_count", 0),
+                        "review_coverage": 0,  # Not in this data format
+                        "median_time_to_merge": "N/A",
+                        **item,
+                    }
+                )
 
         # Convert hygiene scores from dict to list format
         hygiene_scores_list: list[dict[str, Any]] = []
@@ -271,20 +271,24 @@ def _render_templates(
         elif isinstance(hygiene_scores_data, dict):
             # Dict format with repo names as keys: {"repo_name": {...}}
             for repo_name, repo_data in hygiene_scores_data.items():
-                hygiene_scores_list.append({
-                    "repo_id": repo_name,
-                    "score": repo_data.get("score", 0),
-                    **repo_data,
-                })
+                hygiene_scores_list.append(
+                    {
+                        "repo_id": repo_name,
+                        "score": repo_data.get("score", 0),
+                        **repo_data,
+                    }
+                )
         elif isinstance(hygiene_scores_data, list):
             # List format from metrics - transform to expected structure
             for item in hygiene_scores_data:
                 repo_name = item.get("repo", "")
-                hygiene_scores_list.append({
-                    "repo_id": repo_name,
-                    "score": item.get("score", 0),
-                    **item,
-                })
+                hygiene_scores_list.append(
+                    {
+                        "repo_id": repo_name,
+                        "score": item.get("score", 0),
+                        **item,
+                    }
+                )
 
         # Merge repo data for repos.html template
         repos_merged = repos_view.merge_repo_data(repo_health_list, hygiene_scores_list)
@@ -616,10 +620,12 @@ def _transform_activity_timeline(timeseries_data: dict[str, Any]) -> list[dict[s
                     week1_monday = jan4 - timedelta(days=jan4.weekday())
                     target_monday = week1_monday + timedelta(weeks=week_int - 1)
 
-                    activity_timeline.append({
-                        "date": target_monday.strftime("%Y-%m-%d"),
-                        "value": total_count,
-                    })
+                    activity_timeline.append(
+                        {
+                            "date": target_monday.strftime("%Y-%m-%d"),
+                            "value": total_count,
+                        }
+                    )
                 except (ValueError, AttributeError) as e:
                     logger.warning("Failed to parse period %s: %s", period, e)
                     continue
@@ -891,9 +897,7 @@ def _write_build_manifest(output_dir: Path, config: Config, stats: dict[str, Any
     logger.info("Wrote build manifest to %s", manifest_path)
 
 
-def _generate_root_redirect(
-    site_base_dir: Path, target_year: int, base_path: str = ""
-) -> None:
+def _generate_root_redirect(site_base_dir: Path, target_year: int, base_path: str = "") -> None:
     """Generate root index.html that redirects to the most recent year.
 
     Args:

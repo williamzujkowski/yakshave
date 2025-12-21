@@ -132,8 +132,7 @@ def calculate_hygiene_aggregate(hygiene_data: list[dict[str, Any]]) -> dict[str,
 
     # For branch protection, check both has_branch_protection and protected fields
     branch_protection = sum(
-        1 for r in hygiene_data
-        if r.get("branch_protection_enabled") or r.get("protected")
+        1 for r in hygiene_data if r.get("branch_protection_enabled") or r.get("protected")
     )
 
     ci_workflows = sum(1 for r in hygiene_data if r.get("has_ci_workflows"))
