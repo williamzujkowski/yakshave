@@ -9,6 +9,7 @@ import pytest
 
 from gh_year_end.config import Config
 from gh_year_end.report.build import (
+    _calculate_fun_facts,
     _calculate_highlights,
     _copy_assets,
     _generate_root_redirect,
@@ -797,6 +798,45 @@ class TestTransformLeaderboards:
 
         assert result["prs_merged"] == []
 
+    def test_transforms_user_count_format_to_login_value(self) -> None:
+        """Test that export format (user/count) is transformed to template format (login/value)."""
+        leaderboards_data = {
+            "prs_merged": [
+                {
+                    "user": "williamzujkowski",
+                    "count": 109,
+                    "avatar_url": "https://example.com/avatar1.png",
+                },
+                {
+                    "user": "jukkatupamaki",
+                    "count": 1,
+                    "avatar_url": "https://example.com/avatar2.png",
+                },
+            ],
+            "prs_opened": [
+                {
+                    "user": "williamzujkowski",
+                    "count": 114,
+                    "avatar_url": "https://example.com/avatar1.png",
+                },
+            ],
+        }
+
+        result = _transform_leaderboards(leaderboards_data)
+
+        # Check prs_merged transformation
+        assert len(result["prs_merged"]) == 2
+        assert result["prs_merged"][0]["login"] == "williamzujkowski"
+        assert result["prs_merged"][0]["value"] == 109
+        assert result["prs_merged"][0]["avatar_url"] == "https://example.com/avatar1.png"
+        assert result["prs_merged"][1]["login"] == "jukkatupamaki"
+        assert result["prs_merged"][1]["value"] == 1
+
+        # Check prs_opened transformation
+        assert len(result["prs_opened"]) == 1
+        assert result["prs_opened"][0]["login"] == "williamzujkowski"
+        assert result["prs_opened"][0]["value"] == 114
+
 
 class TestTransformActivityTimeline:
     """Tests for _transform_activity_timeline function."""
@@ -1334,3 +1374,77 @@ class TestTransformAwardsData:
 
         assert len(result["individual"]) == 1
         assert result["individual"][0]["award_key"] == "top_pr_author"
+
+
+class TestCalculateFunFacts:
+    """Tests for _calculate_fun_facts function."""
+
+    def test_calculates_busiest_day_from_timeseries(self) -> None:
+        """Test that busiest day is calculated correctly from weekly PR data."""
+        summary_data = {"total_comments": 5}
+        timeseries_data = {
+            "weekly": {
+                "prs_opened": [
+                    {"period": "2025-W10", "user": "alice", "count": 5},
+                    {"period": "2025-W10", "user": "bob", "count": 3},
+                    {"period": "2025-W11", "user": "alice", "count": 2},
+                ]
+            }
+        }
+        leaderboards_data = {}
+
+        result = _calculate_fun_facts(summary_data, timeseries_data, leaderboards_data)
+
+        assert result["busiest_day"] is not None
+        assert result["busiest_day_count"] == 8  # 5 + 3 from week 10
+
+    def test_returns_total_comments_from_summary(self) -> None:
+        """Test that total comments comes from summary data."""
+        summary_data = {"total_comments": 42}
+        timeseries_data = {"weekly": {}}
+        leaderboards_data = {}
+
+        result = _calculate_fun_facts(summary_data, timeseries_data, leaderboards_data)
+
+        assert result["total_comments"] == 42
+
+    def test_returns_none_for_unavailable_metrics(self) -> None:
+        """Test that unavailable metrics return None."""
+        summary_data = {"total_comments": 0}
+        timeseries_data = {"weekly": {}}
+        leaderboards_data = {}
+
+        result = _calculate_fun_facts(summary_data, timeseries_data, leaderboards_data)
+
+        assert result["most_active_hour"] is None
+        assert result["total_lines_changed"] is None
+        assert result["avg_pr_size"] is None
+        assert result["most_used_emoji"] is None
+
+    def test_handles_empty_timeseries_data(self) -> None:
+        """Test that function handles empty timeseries gracefully."""
+        summary_data = {"total_comments": 0}
+        timeseries_data = {}
+        leaderboards_data = {}
+
+        result = _calculate_fun_facts(summary_data, timeseries_data, leaderboards_data)
+
+        assert result["busiest_day"] is None
+        assert result["busiest_day_count"] is None
+
+    def test_handles_malformed_period_format(self) -> None:
+        """Test that function handles malformed period format gracefully."""
+        summary_data = {"total_comments": 0}
+        timeseries_data = {
+            "weekly": {
+                "prs_opened": [
+                    {"period": "invalid-format", "user": "alice", "count": 5},
+                ]
+            }
+        }
+        leaderboards_data = {}
+
+        result = _calculate_fun_facts(summary_data, timeseries_data, leaderboards_data)
+
+        # Should not crash, but busiest_day will be None
+        assert result["busiest_day"] is None

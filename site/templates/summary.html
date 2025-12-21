@@ -211,10 +211,10 @@
                 {% for repo in top_repos %}
                 <tr>
                     <td class="repo-name">
-                        <a href="#" class="repo-link">{{ repo.name }}</a>
+                        <a href="https://github.com/{{ repo.full_name }}" target="_blank" rel="noopener" class="repo-link">{{ repo.name }}</a>
                     </td>
                     <td>{{ repo.prs_merged | default(0) }}</td>
-                    <td>{{ repo.contributors | default(0) }}</td>
+                    <td>{{ repo.active_contributors_365d | default(0) }}</td>
                     <td>
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: {{ repo.review_coverage | default(0) }}%"></div>

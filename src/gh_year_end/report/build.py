@@ -404,20 +404,15 @@ def _render_templates(
                 "largest_prs": [],
                 "fastest_merges": [],
             },
-            "fun_facts": {
-                "total_lines_changed": 0,
-                "busiest_day": "N/A",
-                "most_active_hour": "N/A",
-                "total_comments": 0,
-                "avg_pr_size": 0,
-                "most_used_emoji": "N/A",
-            },
+            # FIX FOR ISSUE #156: Calculate fun facts from actual data
+            "fun_facts": _calculate_fun_facts(summary_data, timeseries_data, leaderboards_data),
             # FIX FOR ISSUE #60: Add engineers with proper structure
-            "engineers": _get_engineers_list(leaderboards_data),
+            "engineers": _get_engineers_list(leaderboards_data, timeseries_data),
             # FIX FOR ISSUE #60: Add top_contributors for engineers.html
-            "top_contributors": _get_engineers_list(leaderboards_data)[:10],
+            "top_contributors": _get_engineers_list(leaderboards_data, timeseries_data)[:10],
             # FIX FOR ISSUE #60: Add missing context for engineers.html
-            "all_contributors": _get_engineers_list(leaderboards_data),
+            # FIX FOR ISSUE #155: Add activity_timeline data from timeseries
+            "all_contributors": _get_engineers_list(leaderboards_data, timeseries_data),
             "contribution_timeline": [],
             "contribution_types": [],
             "contribution_by_repo": [],
@@ -550,6 +545,9 @@ def _transform_leaderboards(leaderboards_data: dict[str, Any]) -> dict[str, list
 
     Templates expect: leaderboards.prs_merged, leaderboards.reviews_submitted, etc.
     as direct lists of {login, avatar_url, value} dicts.
+
+    Transforms from export.py format: {"user": "...", "count": 123, "avatar_url": "..."}
+    To template format: {"login": "...", "value": 123, "avatar_url": "..."}
     """
     result: dict[str, list[dict[str, Any]]] = {
         "prs_merged": [],
@@ -564,15 +562,49 @@ def _transform_leaderboards(leaderboards_data: dict[str, Any]) -> dict[str, list
         "overall": [],
     }
 
-    nested = leaderboards_data.get("leaderboards", {})
+    # Handle both nested format (leaderboards: {metrics}) and flat format (metrics at top level)
+    nested = leaderboards_data.get("leaderboards", leaderboards_data)
 
     for metric_name in result:
-        metric_data = nested.get(metric_name, {})
+        metric_data = nested.get(metric_name, [])
+
         # Data may be nested under "org" key or direct list
         if isinstance(metric_data, dict):
-            result[metric_name] = metric_data.get("org", [])
+            raw_list = metric_data.get("org", [])
         elif isinstance(metric_data, list):
-            result[metric_name] = metric_data
+            raw_list = metric_data
+        else:
+            raw_list = []
+
+        # Transform each entry to match template expectations
+        transformed_list = []
+        for entry in raw_list:
+            # Handle different field name formats
+            # Export format: {"user": "...", "count": 123}
+            # Template expects: {"login": "...", "value": 123}
+            transformed_entry = {
+                "login": entry.get("login") or entry.get("user", ""),
+                "avatar_url": entry.get("avatar_url", ""),
+                "value": entry.get("value") or entry.get("count", 0),
+            }
+
+            # For overall leaderboard, include additional metrics
+            if metric_name == "overall":
+                transformed_entry.update(
+                    {
+                        "prs_merged": entry.get("prs_merged", 0),
+                        "reviews_submitted": entry.get("reviews_submitted", 0),
+                        "issues_closed": entry.get("issues_closed", 0),
+                        "comments_total": entry.get("comments_total", 0),
+                        "overall_score": entry.get("overall_score")
+                        or entry.get("value")
+                        or entry.get("count", 0),
+                    }
+                )
+
+            transformed_list.append(transformed_entry)
+
+        result[metric_name] = transformed_list
 
     return result
 
@@ -740,7 +772,89 @@ def _calculate_highlights(
     return highlights
 
 
-def _get_engineers_list(leaderboards_data: dict[str, Any]) -> list[dict[str, Any]]:
+def _calculate_fun_facts(
+    summary_data: dict[str, Any],
+    timeseries_data: dict[str, Any],
+    leaderboards_data: dict[str, Any],
+) -> dict[str, Any]:
+    """Calculate fun facts from available metrics data.
+
+    Args:
+        summary_data: Summary statistics from summary.json.
+        timeseries_data: Time series data from timeseries.json.
+        leaderboards_data: Leaderboard data from leaderboards.json.
+
+    Returns:
+        Dictionary with fun fact values or None for unavailable metrics.
+    """
+    fun_facts: dict[str, Any] = {}
+
+    # Total comments from summary data (actual data available)
+    fun_facts["total_comments"] = summary_data.get("total_comments", 0)
+
+    # Calculate busiest day from timeseries weekly data
+    busiest_day = None
+    most_active_day_count = 0
+
+    try:
+        weekly_data = timeseries_data.get("weekly", {})
+        # Use prs_opened as activity indicator
+        prs_opened = weekly_data.get("prs_opened", [])
+
+        if prs_opened:
+            # Group by period and sum counts
+            period_totals: dict[str, int] = defaultdict(int)
+
+            for entry in prs_opened:
+                period = entry.get("period", "")
+                count = entry.get("count", 0)
+                if period:
+                    period_totals[period] += count
+
+            if period_totals:
+                # Find busiest week
+                busiest_period, max_count = max(period_totals.items(), key=lambda x: x[1])
+                most_active_day_count = max_count
+
+                # Convert period to readable date
+                try:
+                    year, week = busiest_period.split("-W")
+                    year_int = int(year)
+                    week_int = int(week)
+
+                    # Calculate ISO date for Monday of this week
+                    jan4 = datetime(year_int, 1, 4)
+                    week1_monday = jan4 - timedelta(days=jan4.weekday())
+                    target_monday = week1_monday + timedelta(weeks=week_int - 1)
+
+                    busiest_day = target_monday.strftime("%B %d, %Y")
+                except (ValueError, AttributeError) as e:
+                    logger.warning("Failed to parse busiest period %s: %s", busiest_period, e)
+                    busiest_day = None
+
+    except Exception as e:
+        logger.warning("Failed to calculate busiest day: %s", e)
+
+    fun_facts["busiest_day"] = busiest_day
+    fun_facts["busiest_day_count"] = most_active_day_count if busiest_day else None
+
+    # Most active hour - not available from current data
+    fun_facts["most_active_hour"] = None
+
+    # Total lines changed and average PR size - not available from current data
+    # Would require PR details with additions/deletions
+    fun_facts["total_lines_changed"] = None
+    fun_facts["avg_pr_size"] = None
+
+    # Most used emoji - not available (requires comment text analysis)
+    fun_facts["most_used_emoji"] = None
+
+    return fun_facts
+
+
+def _get_engineers_list(
+    leaderboards_data: dict[str, Any], timeseries_data: dict[str, Any] | None = None
+) -> list[dict[str, Any]]:
     """Extract engineers list with activity_timeline from leaderboards data.
 
     Templates expect each engineer to have:
@@ -751,6 +865,10 @@ def _get_engineers_list(leaderboards_data: dict[str, Any]) -> list[dict[str, Any
 
     This function merges data from ALL available leaderboard metrics to create
     a complete contributor list.
+
+    Args:
+        leaderboards_data: Leaderboard metrics data.
+        timeseries_data: Optional timeseries data for activity sparklines.
     """
     # Handle both nested format (leaderboards: {metrics}) and flat format (metrics at top level)
     if "leaderboards" in leaderboards_data:
@@ -843,9 +961,72 @@ def _get_engineers_list(leaderboards_data: dict[str, Any]) -> list[dict[str, Any
     for idx, contributor in enumerate(result):
         contributor["rank"] = idx + 1
 
+    # Populate activity_timeline from timeseries data if available
+    if timeseries_data:
+        _populate_activity_timelines(result, timeseries_data)
+
     logger.info("Built engineers list with %d contributors", len(result))
 
     return result
+
+
+def _populate_activity_timelines(
+    contributors: list[dict[str, Any]], timeseries_data: dict[str, Any]
+) -> None:
+    """Populate activity_timeline field for each contributor from timeseries data.
+
+    Creates a weekly activity sparkline by aggregating all contribution types
+    (PRs opened, PRs merged, reviews, issues, etc.) for each week.
+
+    Args:
+        contributors: List of contributor dictionaries to update in-place.
+        timeseries_data: Timeseries data from timeseries.json.
+    """
+    # Build a mapping of user -> week -> total activity count
+    user_weekly_activity: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+
+    weekly_data = timeseries_data.get("weekly", {})
+
+    # Aggregate activity across all metric types
+    metric_types = [
+        "prs_opened",
+        "prs_merged",
+        "reviews_submitted",
+        "issues_opened",
+        "issues_closed",
+        "comments_total",
+    ]
+
+    for metric_type in metric_types:
+        metric_data = weekly_data.get(metric_type, [])
+
+        for entry in metric_data:
+            user = entry.get("user", "")
+            period = entry.get("period", "")
+            count = entry.get("count", 0)
+
+            if user and period:
+                user_weekly_activity[user][period] += count
+
+    # Now populate activity_timeline for each contributor
+    for contributor in contributors:
+        # Try both login and user_id as keys
+        user_key = contributor.get("login") or contributor.get("user_id", "")
+
+        if user_key in user_weekly_activity:
+            weekly_counts = user_weekly_activity[user_key]
+
+            # Sort by period and convert to simple array of counts for sparkline
+            # Sparklines typically just need the values in chronological order
+            sorted_periods = sorted(weekly_counts.keys())
+            activity_values = [weekly_counts[period] for period in sorted_periods]
+
+            contributor["activity_timeline"] = activity_values
+        else:
+            # No activity data for this user
+            contributor["activity_timeline"] = []
+
+    logger.info("Populated activity timelines for %d contributors", len(contributors))
 
 
 def _copy_assets(src: Path, dest: Path) -> int:

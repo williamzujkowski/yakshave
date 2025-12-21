@@ -32,9 +32,22 @@ def merge_repo_data(
         # If score field exists and is non-zero, use it; otherwise compute from available data
         hygiene_score = hygiene.get("score", 0)
 
+        # Check if we have meaningful hygiene data
+        meaningful_hygiene_fields = [
+            "has_readme",
+            "has_security_md",
+            "has_codeowners",
+            "has_ci_workflows",
+            "has_contributing",
+            "dependabot_enabled",
+            "secret_scanning_enabled",
+        ]
+
+        has_meaningful_hygiene = any(hygiene.get(field) for field in meaningful_hygiene_fields)
+
         # Compute score from available hygiene fields if not already set
         # This handles cases where score is 0 or None but we have hygiene data
-        if not hygiene_score and hygiene:
+        if not hygiene_score and hygiene and has_meaningful_hygiene:
             # Compute basic score from available fields
             score_components = []
 
@@ -62,21 +75,40 @@ def merge_repo_data(
 
             hygiene_score = sum(score_components)
 
-        # Determine health status based on metrics
-        if hygiene_score >= 80:
-            health_status = "healthy"
-        elif hygiene_score >= 60:
-            health_status = "warning"
-        else:
-            health_status = "critical"
+        # Determine health status based on available metrics
+        # If we don't have meaningful hygiene data, use activity-based health
+        if not has_meaningful_hygiene:
+            # Use activity metrics for health status
+            prs_merged = health.get("prs_merged", 0)
+            active_contributors = health.get("active_contributors_365d", 0)
 
-        # Determine hygiene score category
-        if hygiene_score >= 80:
-            hygiene_score_category = "high"
-        elif hygiene_score >= 60:
-            hygiene_score_category = "medium"
+            # Activity-based health scoring
+            # Healthy: PRs merged OR active contributors
+            # Warning: Some activity but low
+            # Critical: No activity
+            if prs_merged >= 5 or active_contributors >= 3:
+                health_status = "healthy"
+                hygiene_score_category = "high"
+            elif prs_merged >= 1 or active_contributors >= 1:
+                health_status = "warning"
+                hygiene_score_category = "medium"
+            else:
+                health_status = "critical"
+                hygiene_score_category = "low"
+
+            # Set hygiene_score to None to indicate it's not based on hygiene data
+            hygiene_score = None
         else:
-            hygiene_score_category = "low"
+            # Use hygiene-based health status
+            if hygiene_score >= 80:
+                health_status = "healthy"
+                hygiene_score_category = "high"
+            elif hygiene_score >= 60:
+                health_status = "warning"
+                hygiene_score_category = "medium"
+            else:
+                health_status = "critical"
+                hygiene_score_category = "low"
 
         merged_repos.append(
             {
@@ -100,30 +132,51 @@ def merge_repo_data(
     return merged_repos
 
 
-def calculate_hygiene_aggregate(hygiene_data: list[dict[str, Any]]) -> dict[str, Any]:
+def calculate_hygiene_aggregate(hygiene_data: list[dict[str, Any]]) -> dict[str, Any] | None:
     """Calculate aggregate hygiene statistics from hygiene data.
 
     Args:
         hygiene_data: List of repository hygiene scores.
 
     Returns:
-        Dictionary with aggregate counts for template rendering.
+        Dictionary with aggregate counts for template rendering, or None if data is unavailable.
     """
     if not hygiene_data:
-        return {
-            "security_md_count": 0,
-            "security_features_count": 0,
-            "codeowners_count": 0,
-            "branch_protection_count": 0,
-            "ci_workflows_count": 0,
-            "avg_workflows": 0,
-            "readme_count": 0,
-            "contributing_count": 0,
-        }
+        return None
 
     total_repos = len(hygiene_data)
 
-    # Handle both full hygiene data and minimal branch protection data
+    # Check if we have meaningful hygiene data (not just branch protection status)
+    # Meaningful fields: has_readme, has_security_md, has_codeowners, has_ci_workflows, etc.
+    meaningful_fields = [
+        "has_readme",
+        "has_security_md",
+        "has_codeowners",
+        "has_ci_workflows",
+        "has_contributing",
+        "dependabot_enabled",
+        "secret_scanning_enabled",
+    ]
+
+    # Check if ANY repo has ANY meaningful field set to True
+    has_meaningful_data = any(r.get(field) for r in hygiene_data for field in meaningful_fields)
+
+    # If we only have minimal data (just branch protection or all False), return None
+    if not has_meaningful_data:
+        # Check if we at least have branch protection data
+        has_branch_protection_data = any(
+            r.get("branch_protection_enabled") is not None or r.get("protected") is not None
+            for r in hygiene_data
+        )
+
+        if not has_branch_protection_data:
+            return None
+
+        # We have minimal data - return None to hide the hygiene breakdown
+        # Branch protection will still be visible in the repo list
+        return None
+
+    # We have full hygiene data - calculate aggregates
     security_md = sum(1 for r in hygiene_data if r.get("has_security_md"))
     security_features = sum(
         1 for r in hygiene_data if r.get("dependabot_enabled") or r.get("secret_scanning_enabled")
@@ -173,7 +226,11 @@ def calculate_repo_summary(merged_repos: list[dict[str, Any]]) -> dict[str, Any]
     warning = sum(1 for r in merged_repos if r.get("health_status") == "warning")
     critical = sum(1 for r in merged_repos if r.get("health_status") == "critical")
 
-    total_hygiene = sum(r.get("hygiene_score", 0) for r in merged_repos)
+    # Filter out None values when calculating hygiene score average
+    hygiene_scores = [
+        r.get("hygiene_score", 0) for r in merged_repos if r.get("hygiene_score") is not None
+    ]
+    total_hygiene = sum(hygiene_scores)
     total_contributors = sum(r.get("active_contributors_365d", 0) for r in merged_repos)
     total_repos = len(merged_repos)
 
@@ -181,7 +238,7 @@ def calculate_repo_summary(merged_repos: list[dict[str, Any]]) -> dict[str, Any]
         "healthy_count": healthy,
         "warning_count": warning,
         "critical_count": critical,
-        "avg_hygiene_score": total_hygiene / total_repos if total_repos > 0 else 0,
+        "avg_hygiene_score": total_hygiene / len(hygiene_scores) if hygiene_scores else 0,
         "avg_contributors": total_contributors / total_repos if total_repos > 0 else 0,
     }
 

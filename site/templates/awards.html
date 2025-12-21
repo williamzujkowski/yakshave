@@ -222,18 +222,7 @@
 <section class="fun-facts-section">
     <h2>Fun Facts</h2>
     <div class="fun-facts-grid">
-        <div class="fun-fact-card">
-            <div class="fun-fact-icon">
-                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-                </svg>
-            </div>
-            <div class="fun-fact-content">
-                <div class="fun-fact-value">{{ fun_facts.total_lines_changed | default(0) | format_number }}</div>
-                <div class="fun-fact-label">Lines of code changed</div>
-            </div>
-        </div>
-
+        {% if fun_facts.busiest_day %}
         <div class="fun-fact-card">
             <div class="fun-fact-icon">
                 <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
@@ -241,24 +230,16 @@
                 </svg>
             </div>
             <div class="fun-fact-content">
-                <div class="fun-fact-value">{{ fun_facts.busiest_day | default('N/A') }}</div>
-                <div class="fun-fact-label">Busiest day of the year</div>
+                <div class="fun-fact-value">{{ fun_facts.busiest_day }}</div>
+                <div class="fun-fact-label">Busiest week of the year</div>
+                {% if fun_facts.busiest_day_count %}
+                <div class="fun-fact-detail">{{ fun_facts.busiest_day_count }} PRs opened</div>
+                {% endif %}
             </div>
         </div>
+        {% endif %}
 
-        <div class="fun-fact-card">
-            <div class="fun-fact-icon">
-                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                </svg>
-            </div>
-            <div class="fun-fact-content">
-                <div class="fun-fact-value">{{ fun_facts.most_active_hour | default('N/A') }}</div>
-                <div class="fun-fact-label">Most active hour</div>
-            </div>
-        </div>
-
+        {% if fun_facts.total_comments is defined and fun_facts.total_comments > 0 %}
         <div class="fun-fact-card">
             <div class="fun-fact-icon">
                 <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
@@ -267,34 +248,24 @@
                 </svg>
             </div>
             <div class="fun-fact-content">
-                <div class="fun-fact-value">{{ fun_facts.total_comments | default(0) | format_number }}</div>
+                <div class="fun-fact-value">{{ fun_facts.total_comments | format_number }}</div>
                 <div class="fun-fact-label">Comments posted</div>
             </div>
         </div>
+        {% endif %}
 
-        <div class="fun-fact-card">
-            <div class="fun-fact-icon">
-                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-                </svg>
-            </div>
+        {% if not fun_facts.busiest_day and (not fun_facts.total_comments or fun_facts.total_comments == 0) %}
+        <div class="fun-fact-card" style="grid-column: 1 / -1; text-align: center;">
             <div class="fun-fact-content">
-                <div class="fun-fact-value">{{ fun_facts.avg_pr_size | default(0) | round(0) }}</div>
-                <div class="fun-fact-label">Average PR size (lines)</div>
+                <div class="fun-fact-value" style="font-size: 1.2rem; color: var(--text-secondary);">
+                    Limited statistics available
+                </div>
+                <div class="fun-fact-label">
+                    Some activity metrics require additional data collection to display
+                </div>
             </div>
         </div>
-
-        <div class="fun-fact-card">
-            <div class="fun-fact-icon">
-                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                </svg>
-            </div>
-            <div class="fun-fact-content">
-                <div class="fun-fact-value">{{ fun_facts.most_used_emoji | default('N/A') }}</div>
-                <div class="fun-fact-label">Most used emoji in comments</div>
-            </div>
-        </div>
+        {% endif %}
     </div>
 </section>
 

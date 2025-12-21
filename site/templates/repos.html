@@ -159,6 +159,7 @@
     </div>
 </section>
 
+{% if hygiene %}
 <section class="hygiene-breakdown-section">
     <h2>Hygiene Breakdown</h2>
     <div class="hygiene-grid">
@@ -239,6 +240,15 @@
         </div>
     </div>
 </section>
+{% else %}
+<section class="hygiene-breakdown-section">
+    <h2>Hygiene Breakdown</h2>
+    <div class="hygiene-unavailable">
+        <p>Detailed hygiene metrics are not available for this year's data collection.</p>
+        <p>Repository health status is based on activity metrics (PRs merged and active contributors).</p>
+    </div>
+</section>
+{% endif %}
 
 <section class="repo-activity-section">
     <h2>Repository Activity Trends</h2>
@@ -273,19 +283,22 @@
     const hygieneData = {{ hygiene | tojson }};
     const repoActivityData = {{ repo_activity | tojson }};
 
-    // Render charts
-    if (typeof renderSecurityPoliciesChart === 'function') {
+    // Render charts only if hygiene data is available
+    {% if hygiene %}
+    if (typeof renderSecurityPoliciesChart === 'function' && hygieneData) {
         renderSecurityPoliciesChart('#chart-security-policies', hygieneData);
     }
-    if (typeof renderCodeownersChart === 'function') {
+    if (typeof renderCodeownersChart === 'function' && hygieneData) {
         renderCodeownersChart('#chart-codeowners', hygieneData);
     }
-    if (typeof renderCIWorkflowsChart === 'function') {
+    if (typeof renderCIWorkflowsChart === 'function' && hygieneData) {
         renderCIWorkflowsChart('#chart-ci-workflows', hygieneData);
     }
-    if (typeof renderDocumentationChart === 'function') {
+    if (typeof renderDocumentationChart === 'function' && hygieneData) {
         renderDocumentationChart('#chart-documentation', hygieneData);
     }
+    {% endif %}
+
     if (typeof renderRepoActivity === 'function') {
         renderRepoActivity('#chart-repo-activity', repoActivityData);
     }

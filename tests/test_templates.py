@@ -464,14 +464,14 @@ def test_theme_toggle_in_base(template_env, base_context):
     assert "moon-icon" in html
 
 
-def test_view_toggle_in_base(template_env, base_context):
-    """Test that base template includes exec/engineer view toggle."""
+def test_theme_toggle_in_base(template_env, base_context):
+    """Test that base template includes dark mode toggle."""
     template = template_env.get_template("base.html")
     html = template.render(**base_context, content="")
 
-    assert 'class="view-toggle"' in html
-    assert 'data-view="exec"' in html
-    assert 'data-view="engineer"' in html
+    # View toggle was removed in issue #150, but theme toggle should remain
+    assert 'class="theme-toggle"' in html
+    assert "Toggle dark mode" in html
 
 
 def test_navigation_links_in_base(template_env, base_context):
