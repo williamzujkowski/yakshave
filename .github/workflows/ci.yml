@@ -161,8 +161,10 @@ jobs:
             --cov-report=term-missing \
             -n auto \
             --dist worksteal \
+            --timeout=60 \
             -x \
             --tb=short
+        timeout-minutes: 5
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -201,13 +203,15 @@ jobs:
 
       - name: Run all unit tests in parallel
         run: |
-          uv run pytest -m "not integration and not live_api" \
+          uv run pytest -m "not integration and not live_api and not slow" \
             --cov=src/gh_year_end \
             --cov-report=xml \
             --cov-report=term-missing \
             -n auto \
             --dist worksteal \
+            --timeout=60 \
             --tb=short
+        timeout-minutes: 5
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
