@@ -8,6 +8,9 @@ github:
     include_forks: false
     include_archived: false
     visibility: public
+    activity_filter:
+      enabled: true
+      min_pushed_within_days: 30
   windows:
     year: 2025
     since: "2025-01-01T00:00:00Z"

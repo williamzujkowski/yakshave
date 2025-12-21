@@ -61,6 +61,11 @@ def live_config(tmp_path_factory: pytest.TempPathFactory) -> Config:
                     "include_forks": False,
                     "include_archived": False,
                     "visibility": "public",
+                    # Only include repos with recent activity for fast testing
+                    "activity_filter": {
+                        "enabled": True,
+                        "min_pushed_within_days": 30,  # Only repos pushed in last 30 days
+                    },
                 },
                 "windows": {
                     "year": 2025,
@@ -202,6 +207,9 @@ def live_test_config_path(tmp_path_factory: pytest.TempPathFactory) -> Path:
     include_forks: false
     include_archived: false
     visibility: public
+    activity_filter:
+      enabled: true
+      min_pushed_within_days: 30
   windows:
     year: 2025
     since: "2025-01-01T00:00:00Z"
