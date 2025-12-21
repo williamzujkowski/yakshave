@@ -318,8 +318,9 @@ class GitHubClient:
                 logger.warning("Server error %d for %s %s", response.status_code, method, path)
                 return await self._retry_request(method, path, retry_count, **kwargs)
 
-            # Raise for other client errors (4xx except 404, which is often expected)
-            if 400 <= response.status_code < 500 and response.status_code != 404:
+            # Raise for other client errors (4xx except 403/404, which are often expected)
+            # 403 = permission denied, 404 = not found - both handled by caller
+            if 400 <= response.status_code < 500 and response.status_code not in (403, 404):
                 logger.error(
                     "Client error %d for %s %s: %s",
                     response.status_code,

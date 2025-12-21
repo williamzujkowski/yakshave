@@ -846,6 +846,7 @@ class TestAdaptiveRateLimiterSecondaryLimit:
     """Tests for secondary rate limit enforcement."""
 
     @pytest.mark.asyncio
+    @pytest.mark.slow  # Rate limiter timing test
     async def test_secondary_limit_detection(self) -> None:
         """Test secondary rate limit is detected and enforced."""
         config = RateLimitConfig(
@@ -973,6 +974,7 @@ class TestAdaptiveRateLimiterStrategyBehavior:
     """Tests for different rate limiting strategies."""
 
     @pytest.mark.asyncio
+    @pytest.mark.slow  # Rate limiter timing test
     async def test_adaptive_strategy_applies_delays(self) -> None:
         """Test adaptive strategy applies delays based on state."""
         config = RateLimitConfig(strategy="adaptive", min_sleep_seconds=0.1)

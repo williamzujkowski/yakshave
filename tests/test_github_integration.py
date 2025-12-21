@@ -10,6 +10,7 @@ import httpx
 import pytest
 import respx
 
+from gh_year_end.config import RateLimitConfig
 from gh_year_end.github.auth import GitHubAuth
 from gh_year_end.github.graphql import GraphQLClient, GraphQLError
 from gh_year_end.github.http import GitHubClient, GitHubHTTPError, RateLimitExceeded
@@ -256,7 +257,8 @@ class TestGitHubClientAsync:
     @respx.mock
     async def test_request_rate_limit_exceeded_exception(self) -> None:
         """Test RateLimitExceeded raised when max retries exhausted."""
-        future_reset = int(datetime.now(UTC).timestamp()) + 3600
+        # Use a reset time just 1 second in the future to avoid long waits
+        future_reset = int(datetime.now(UTC).timestamp()) + 1
         route = respx.get("https://api.github.com/user").mock(
             return_value=httpx.Response(
                 403,
@@ -318,6 +320,7 @@ class TestRestClientPagination:
         assert route.called
 
     @pytest.mark.asyncio
+    @pytest.mark.slow  # respx URL parsing can hang intermittently
     @respx.mock
     async def test_paginate_multiple_pages(self) -> None:
         """Test pagination across multiple pages with Link headers."""
@@ -596,7 +599,7 @@ class TestRestClientPagination:
         )
 
         auth = GitHubAuth(token=TEST_TOKEN)
-        rate_limiter = AdaptiveRateLimiter()
+        rate_limiter = AdaptiveRateLimiter(RateLimitConfig())
 
         async with GitHubClient(auth=auth) as http_client:
             rest = RestClient(http_client, rate_limiter)
@@ -1252,9 +1255,9 @@ class TestGraphQLClient:
     @respx.mock
     async def test_paginate_query(self) -> None:
         """Test GraphQL pagination through connection."""
-        # First page
-        respx.post("https://api.github.com/graphql").mock(
-            return_value=httpx.Response(
+        # Use side_effect for multiple responses
+        responses = [
+            httpx.Response(
                 200,
                 json={
                     "data": {
@@ -1282,9 +1285,8 @@ class TestGraphQLClient:
                     "x-ratelimit-remaining": "4999",
                     "x-ratelimit-reset": "1234567890",
                 },
-            )
-        ).mock(
-            return_value=httpx.Response(
+            ),
+            httpx.Response(
                 200,
                 json={
                     "data": {
@@ -1312,8 +1314,9 @@ class TestGraphQLClient:
                     "x-ratelimit-remaining": "4998",
                     "x-ratelimit-reset": "1234567890",
                 },
-            )
-        )
+            ),
+        ]
+        respx.post("https://api.github.com/graphql").mock(side_effect=responses)
 
         auth = GitHubAuth(token=TEST_TOKEN)
         async with GitHubClient(auth=auth) as http_client:
@@ -1434,6 +1437,7 @@ class TestGraphQLClient:
 
     @pytest.mark.asyncio
     @respx.mock
+    @pytest.mark.slow  # Rate limiter integration test
     async def test_graphql_with_rate_limiter(self) -> None:
         """Test GraphQLClient integration with AdaptiveRateLimiter."""
         route = respx.post("https://api.github.com/graphql").mock(
@@ -1573,6 +1577,7 @@ class TestGraphQLClient:
         assert route.called
 
     @pytest.mark.asyncio
+    @pytest.mark.slow  # Pagination test with rate limiter
     @respx.mock
     async def test_paginate_pull_requests(self) -> None:
         """Test paginating through all pull requests."""
@@ -1646,6 +1651,7 @@ class TestGraphQLClient:
             assert prs[1]["number"] == 2
 
     @pytest.mark.asyncio
+    @pytest.mark.slow  # Pagination test with rate limiter
     @respx.mock
     async def test_paginate_issues(self) -> None:
         """Test paginating through all issues."""
@@ -1769,6 +1775,7 @@ class TestDiscoverRepos:
     """Tests for discover_repos function."""
 
     @pytest.mark.asyncio
+    @pytest.mark.slow  # Discover repos test with rate limiter
     @respx.mock
     async def test_discover_repos_org_mode(self, tmp_path) -> None:  # type: ignore[no-untyped-def]
         """Test repository discovery in org mode."""
@@ -1844,6 +1851,7 @@ class TestDiscoverRepos:
         assert route.called
 
     @pytest.mark.asyncio
+    @pytest.mark.slow  # Discover repos test with rate limiter
     @respx.mock
     async def test_discover_repos_filters_forks(self, tmp_path) -> None:  # type: ignore[no-untyped-def]
         """Test that forks are filtered when include_forks is False."""

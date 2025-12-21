@@ -8,6 +8,8 @@ import logging
 from collections.abc import AsyncIterator
 from typing import Any, cast
 
+import httpx
+
 from gh_year_end.github.http import GitHubClient
 from gh_year_end.github.ratelimit import AdaptiveRateLimiter, APIType
 
@@ -375,7 +377,11 @@ class GraphQLClient:
                 payload["variables"] = variables
 
             # Execute POST request
-            response = await self._http.post(self.GRAPHQL_ENDPOINT, json=payload)
+            try:
+                response = await self._http.post(self.GRAPHQL_ENDPOINT, json=payload)
+            except httpx.HTTPStatusError as e:
+                # Wrap HTTP errors as GraphQL errors
+                raise GraphQLError([{"message": f"HTTP {e.response.status_code}"}]) from e
 
             # Update rate limiter with response headers
             if self._rate_limiter:
