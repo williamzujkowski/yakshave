@@ -497,7 +497,7 @@ def test_css_link_in_base(template_env, base_context):
     template = template_env.get_template("base.html")
     html = template.render(**base_context, content="")
 
-    assert 'href="../assets/css/style.css"' in html
+    assert 'href="assets/css/style.css"' in html
 
 
 def test_d3_script_in_chart_pages(template_env, base_context):
