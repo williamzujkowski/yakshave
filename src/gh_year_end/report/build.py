@@ -7,14 +7,24 @@ using Jinja2 templates and D3.js visualizations.
 import json
 import logging
 import shutil
-from collections import defaultdict
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 
 from gh_year_end.config import Config
+from gh_year_end.report.contributors import (
+    get_engineers_list,
+    populate_activity_timelines,
+)
+from gh_year_end.report.transformers import (
+    calculate_fun_facts,
+    calculate_highlights,
+    transform_activity_timeline,
+    transform_awards_data,
+    transform_leaderboards,
+)
 from gh_year_end.report.views import repos_view
 from gh_year_end.storage.paths import PathManager
 
@@ -470,193 +480,18 @@ def _render_templates(
 
 
 def _transform_awards_data(awards_data: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
-    """Transform awards from simple key-value format to categorized format.
-
-    Transforms from:
-        {"top_pr_author": {"user": "...", "count": 10, "avatar_url": "..."}}
-    To:
-        {"individual": [{"award_key": "top_pr_author", "title": "...", ...}]}
-    """
-    awards_by_category: dict[str, list[Any]] = {
-        "individual": [],
-        "repository": [],
-        "risk": [],
-    }
-
-    # Map award keys to display info
-    award_definitions = {
-        "top_pr_author": {
-            "category": "individual",
-            "title": "Top PR Author",
-            "description": "Most pull requests opened",
-            "stat_label": "PRs opened",
-        },
-        "top_reviewer": {
-            "category": "individual",
-            "title": "Top Reviewer",
-            "description": "Most reviews submitted",
-            "stat_label": "reviews",
-        },
-        "top_issue_opener": {
-            "category": "individual",
-            "title": "Top Issue Opener",
-            "description": "Most issues opened",
-            "stat_label": "issues",
-        },
-    }
-
-    # Transform each award
-    for award_key, award_data in awards_data.items():
-        if award_key not in award_definitions:
-            continue
-
-        definition = award_definitions[award_key]
-        category = definition["category"]
-
-        transformed_award = {
-            "award_key": award_key,
-            "title": definition["title"],
-            "description": definition["description"],
-            "winner_name": award_data.get("user", ""),
-            "winner_avatar_url": award_data.get("avatar_url", ""),
-            "supporting_stats": f"{award_data.get('count', 0)} {definition['stat_label']}",
-        }
-
-        awards_by_category[category].append(transformed_award)
-
-    return awards_by_category
+    """Backward-compatible wrapper for transform_awards_data."""
+    return transform_awards_data(awards_data)
 
 
 def _transform_leaderboards(leaderboards_data: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
-    """Transform leaderboards data to flat format expected by templates.
-
-    Templates expect: leaderboards.prs_merged, leaderboards.reviews_submitted, etc.
-    as direct lists of {login, avatar_url, value} dicts.
-
-    Transforms from export.py format: {"user": "...", "count": 123, "avatar_url": "..."}
-    To template format: {"login": "...", "value": 123, "avatar_url": "..."}
-    """
-    result: dict[str, list[dict[str, Any]]] = {
-        "prs_merged": [],
-        "prs_opened": [],
-        "reviews_submitted": [],
-        "approvals": [],
-        "changes_requested": [],
-        "issues_opened": [],
-        "issues_closed": [],
-        "comments_total": [],
-        "review_comments_total": [],
-        "overall": [],
-    }
-
-    # Handle both nested format (leaderboards: {metrics}) and flat format (metrics at top level)
-    nested = leaderboards_data.get("leaderboards", leaderboards_data)
-
-    for metric_name in result:
-        metric_data = nested.get(metric_name, [])
-
-        # Data may be nested under "org" key or direct list
-        if isinstance(metric_data, dict):
-            raw_list = metric_data.get("org", [])
-        elif isinstance(metric_data, list):
-            raw_list = metric_data
-        else:
-            raw_list = []
-
-        # Transform each entry to match template expectations
-        transformed_list = []
-        for entry in raw_list:
-            # Handle different field name formats
-            # Export format: {"user": "...", "count": 123}
-            # Template expects: {"login": "...", "value": 123}
-            transformed_entry = {
-                "login": entry.get("login") or entry.get("user", ""),
-                "avatar_url": entry.get("avatar_url", ""),
-                "value": entry.get("value") or entry.get("count", 0),
-            }
-
-            # For overall leaderboard, include additional metrics
-            if metric_name == "overall":
-                transformed_entry.update(
-                    {
-                        "prs_merged": entry.get("prs_merged", 0),
-                        "reviews_submitted": entry.get("reviews_submitted", 0),
-                        "issues_closed": entry.get("issues_closed", 0),
-                        "comments_total": entry.get("comments_total", 0),
-                        "overall_score": entry.get("overall_score")
-                        or entry.get("value")
-                        or entry.get("count", 0),
-                    }
-                )
-
-            transformed_list.append(transformed_entry)
-
-        result[metric_name] = transformed_list
-
-    return result
+    """Backward-compatible wrapper for transform_leaderboards."""
+    return transform_leaderboards(leaderboards_data)
 
 
 def _transform_activity_timeline(timeseries_data: dict[str, Any]) -> list[dict[str, Any]]:
-    """Transform timeseries data to activity timeline format for D3.js charts.
-
-    Args:
-        timeseries_data: Time series data from timeseries.json.
-
-    Returns:
-        List of {date: str, value: int} dicts for the activity chart.
-        Uses prs_merged metric as the primary activity indicator.
-    """
-    activity_timeline = []
-
-    try:
-        # Timeseries data structure: {"weekly": {"prs_merged": [{period, user, count}]}}
-        weekly_data = timeseries_data.get("weekly", {})
-        prs_merged = weekly_data.get("prs_merged", [])
-
-        if prs_merged:
-            # Group by period and sum counts across all users
-            period_totals: dict[str, int] = defaultdict(int)
-
-            for entry in prs_merged:
-                period = entry.get("period", "")
-                count = entry.get("count", 0)
-
-                if period:
-                    period_totals[period] += count
-
-            # Convert to D3.js format: {date: ISO string, value: number}
-            # Period format is "YYYY-WXX", convert to ISO date (first day of week)
-            for period, total_count in sorted(period_totals.items()):
-                try:
-                    # Parse week format: "2025-W07" -> ISO date of Monday of that week
-                    year, week = period.split("-W")
-                    year_int = int(year)
-                    week_int = int(week)
-
-                    # Calculate ISO date for Monday of this week
-                    # ISO week 1 is the first week with a Thursday in the new year
-                    jan4 = datetime(year_int, 1, 4)
-                    week1_monday = jan4 - timedelta(days=jan4.weekday())
-                    target_monday = week1_monday + timedelta(weeks=week_int - 1)
-
-                    activity_timeline.append(
-                        {
-                            "date": target_monday.strftime("%Y-%m-%d"),
-                            "value": total_count,
-                        }
-                    )
-                except (ValueError, AttributeError) as e:
-                    logger.warning("Failed to parse period %s: %s", period, e)
-                    continue
-
-            logger.info("Transformed %d activity timeline entries", len(activity_timeline))
-        else:
-            logger.warning("No weekly prs_merged data found in timeseries")
-
-    except Exception as e:
-        logger.warning("Failed to transform activity timeline: %s", e)
-
-    return activity_timeline
+    """Backward-compatible wrapper for transform_activity_timeline."""
+    return transform_activity_timeline(timeseries_data)
 
 
 def _calculate_highlights(
@@ -664,99 +499,8 @@ def _calculate_highlights(
     timeseries_data: dict[str, Any],
     repo_health_list: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    """Calculate highlights section from metrics data.
-
-    Args:
-        summary_data: Summary statistics from summary.json.
-        timeseries_data: Time series data from timeseries.json.
-        repo_health_list: Repository health metrics.
-
-    Returns:
-        Dictionary with highlight values.
-    """
-    highlights: dict[str, Any] = {
-        "most_active_month": "N/A",
-        "most_active_month_prs": 0,
-        "avg_review_time": "N/A",
-        "review_coverage": 0,
-        "new_contributors": 0,
-    }
-
-    # Calculate most active month from timeseries data
-    try:
-        # Timeseries data structure: {"monthly": {"prs_merged": [{period, user, count}]}}
-        monthly_data = timeseries_data.get("monthly", {})
-        prs_merged = monthly_data.get("prs_merged", [])
-
-        if prs_merged:
-            # Group by month and sum PRs across all users
-            monthly_prs: dict[str, int] = defaultdict(int)
-
-            for entry in prs_merged:
-                period = entry.get("period", "")  # Format: "2025-11"
-                count = entry.get("count", 0)
-
-                if period:
-                    try:
-                        # Parse period format: "2025-11" -> "November 2025"
-                        dt = datetime.strptime(period, "%Y-%m")
-                        month_key = dt.strftime("%B %Y")
-                        monthly_prs[month_key] += count
-                    except (ValueError, AttributeError):
-                        continue
-
-            if monthly_prs:
-                most_active = max(monthly_prs.items(), key=lambda x: x[1])
-                highlights["most_active_month"] = most_active[0]
-                highlights["most_active_month_prs"] = most_active[1]
-
-    except Exception as e:
-        logger.warning("Failed to calculate most active month: %s", e)
-
-    # Calculate average review coverage from repo health data
-    try:
-        if repo_health_list:
-            review_coverages = [
-                r.get("review_coverage", 0)
-                for r in repo_health_list
-                if r.get("review_coverage") is not None
-            ]
-            if review_coverages:
-                avg_coverage = sum(review_coverages) / len(review_coverages)
-                highlights["review_coverage"] = round(avg_coverage, 1)
-
-    except Exception as e:
-        logger.warning("Failed to calculate review coverage: %s", e)
-
-    # Calculate average review time from repo health data
-    try:
-        if repo_health_list:
-            review_times: list[float] = [
-                float(r.get("median_time_to_first_review", 0))
-                for r in repo_health_list
-                if r.get("median_time_to_first_review") is not None
-            ]
-            if review_times:
-                avg_review_time_seconds = sum(review_times) / len(review_times)
-                # Convert to hours
-                hours = avg_review_time_seconds / 3600
-                if hours < 1:
-                    minutes = avg_review_time_seconds / 60
-                    highlights["avg_review_time"] = f"{minutes:.0f} minutes"
-                elif hours < 24:
-                    highlights["avg_review_time"] = f"{hours:.1f} hours"
-                else:
-                    days = hours / 24
-                    highlights["avg_review_time"] = f"{days:.1f} days"
-
-    except Exception as e:
-        logger.warning("Failed to calculate average review time: %s", e)
-
-    # New contributors - would need contributor data from metrics
-    # For now, keep as 0 since we don't have first-contribution tracking
-    highlights["new_contributors"] = 0
-
-    return highlights
+    """Backward-compatible wrapper for calculate_highlights."""
+    return calculate_highlights(summary_data, timeseries_data, repo_health_list)
 
 
 def _calculate_fun_facts(
@@ -764,256 +508,22 @@ def _calculate_fun_facts(
     timeseries_data: dict[str, Any],
     leaderboards_data: dict[str, Any],
 ) -> dict[str, Any]:
-    """Calculate fun facts from available metrics data.
-
-    Args:
-        summary_data: Summary statistics from summary.json.
-        timeseries_data: Time series data from timeseries.json.
-        leaderboards_data: Leaderboard data from leaderboards.json.
-
-    Returns:
-        Dictionary with fun fact values or None for unavailable metrics.
-    """
-    fun_facts: dict[str, Any] = {}
-
-    # Total comments from summary data (actual data available)
-    fun_facts["total_comments"] = summary_data.get("total_comments", 0)
-
-    # Calculate busiest day from timeseries weekly data
-    busiest_day = None
-    most_active_day_count = 0
-
-    try:
-        weekly_data = timeseries_data.get("weekly", {})
-        # Use prs_opened as activity indicator
-        prs_opened = weekly_data.get("prs_opened", [])
-
-        if prs_opened:
-            # Group by period and sum counts
-            period_totals: dict[str, int] = defaultdict(int)
-
-            for entry in prs_opened:
-                period = entry.get("period", "")
-                count = entry.get("count", 0)
-                if period:
-                    period_totals[period] += count
-
-            if period_totals:
-                # Find busiest week
-                busiest_period, max_count = max(period_totals.items(), key=lambda x: x[1])
-                most_active_day_count = max_count
-
-                # Convert period to readable date
-                try:
-                    year, week = busiest_period.split("-W")
-                    year_int = int(year)
-                    week_int = int(week)
-
-                    # Calculate ISO date for Monday of this week
-                    jan4 = datetime(year_int, 1, 4)
-                    week1_monday = jan4 - timedelta(days=jan4.weekday())
-                    target_monday = week1_monday + timedelta(weeks=week_int - 1)
-
-                    busiest_day = target_monday.strftime("%B %d, %Y")
-                except (ValueError, AttributeError) as e:
-                    logger.warning("Failed to parse busiest period %s: %s", busiest_period, e)
-                    busiest_day = None
-
-    except Exception as e:
-        logger.warning("Failed to calculate busiest day: %s", e)
-
-    fun_facts["busiest_day"] = busiest_day
-    fun_facts["busiest_day_count"] = most_active_day_count if busiest_day else None
-
-    # Most active hour - not available from current data
-    fun_facts["most_active_hour"] = None
-
-    # Total lines changed and average PR size - not available from current data
-    # Would require PR details with additions/deletions
-    fun_facts["total_lines_changed"] = None
-    fun_facts["avg_pr_size"] = None
-
-    # Most used emoji - not available (requires comment text analysis)
-    fun_facts["most_used_emoji"] = None
-
-    return fun_facts
+    """Backward-compatible wrapper for calculate_fun_facts."""
+    return calculate_fun_facts(summary_data, timeseries_data, leaderboards_data)
 
 
 def _get_engineers_list(
     leaderboards_data: dict[str, Any], timeseries_data: dict[str, Any] | None = None
 ) -> list[dict[str, Any]]:
-    """Extract engineers list with activity_timeline from leaderboards data.
-
-    Templates expect each engineer to have:
-    - user_id, login, avatar_url, rank
-    - prs_merged, prs_opened, reviews_submitted, approvals
-    - issues_opened, issues_closed, comments_total
-    - activity_timeline (array for sparkline chart)
-
-    This function merges data from ALL available leaderboard metrics to create
-    a complete contributor list.
-
-    Args:
-        leaderboards_data: Leaderboard metrics data.
-        timeseries_data: Optional timeseries data for activity sparklines.
-    """
-    # Handle both nested format (leaderboards: {metrics}) and flat format (metrics at top level)
-    if "leaderboards" in leaderboards_data:
-        metrics_data = leaderboards_data.get("leaderboards", {})
-    else:
-        metrics_data = leaderboards_data
-
-    # Build a dictionary of all contributors across all metrics
-    contributors: dict[str, dict[str, Any]] = {}
-
-    # Metrics we want to include in the contributor data
-    metric_names = [
-        "prs_merged",
-        "prs_opened",
-        "reviews_submitted",
-        "approvals",
-        "changes_requested",
-        "issues_opened",
-        "issues_closed",
-        "comments_total",
-        "review_comments_total",
-    ]
-
-    # Process each metric and merge contributor data
-    for metric_name in metric_names:
-        metric_data = metrics_data.get(metric_name, [])
-
-        # Handle both list format and dict with org key
-        if isinstance(metric_data, dict):
-            org_data = metric_data.get("org", [])
-        elif isinstance(metric_data, list):
-            org_data = metric_data
-        else:
-            org_data = []
-
-        # Add/update contributor data
-        for entry in org_data:
-            # Handle both formats: user_id or user key
-            user_id = entry.get("user_id") or entry.get("user")
-            if not user_id:
-                continue
-
-            # Initialize contributor if not seen before
-            if user_id not in contributors:
-                contributors[user_id] = {
-                    "user_id": user_id,
-                    "login": entry.get("login") or entry.get("user", "unknown"),
-                    "avatar_url": entry.get("avatar_url", ""),
-                    "display_name": entry.get("display_name"),
-                    "prs_merged": 0,
-                    "prs_opened": 0,
-                    "reviews_submitted": 0,
-                    "approvals": 0,
-                    "changes_requested": 0,
-                    "issues_opened": 0,
-                    "issues_closed": 0,
-                    "comments_total": 0,
-                    "review_comments_total": 0,
-                    "activity_timeline": [],
-                }
-
-            # Update the specific metric value (handle both value and count keys)
-            contributors[user_id][metric_name] = entry.get("value") or entry.get("count", 0)
-
-            # Keep the login/avatar if not already set
-            if entry.get("login") or entry.get("user"):
-                contributors[user_id]["login"] = entry.get("login") or entry.get("user")
-            if entry.get("avatar_url"):
-                contributors[user_id]["avatar_url"] = entry.get("avatar_url")
-
-    # Convert to list and sort by total activity (descending)
-    result = list(contributors.values())
-
-    # Calculate total contributions for sorting
-    for contributor in result:
-        total = (
-            contributor["prs_merged"]
-            + contributor["prs_opened"]
-            + contributor["reviews_submitted"]
-            + contributor["issues_opened"]
-            + contributor["issues_closed"]
-            + contributor["comments_total"]
-        )
-        contributor["contributions_total"] = total
-
-    # Sort by total contributions (descending)
-    result.sort(key=lambda x: x["contributions_total"], reverse=True)
-
-    # Assign ranks based on sorted order
-    for idx, contributor in enumerate(result):
-        contributor["rank"] = idx + 1
-
-    # Populate activity_timeline from timeseries data if available
-    if timeseries_data:
-        _populate_activity_timelines(result, timeseries_data)
-
-    logger.info("Built engineers list with %d contributors", len(result))
-
-    return result
+    """Backward-compatible wrapper for get_engineers_list."""
+    return get_engineers_list(leaderboards_data, timeseries_data)
 
 
 def _populate_activity_timelines(
     contributors: list[dict[str, Any]], timeseries_data: dict[str, Any]
 ) -> None:
-    """Populate activity_timeline field for each contributor from timeseries data.
-
-    Creates a weekly activity sparkline by aggregating all contribution types
-    (PRs opened, PRs merged, reviews, issues, etc.) for each week.
-
-    Args:
-        contributors: List of contributor dictionaries to update in-place.
-        timeseries_data: Timeseries data from timeseries.json.
-    """
-    # Build a mapping of user -> week -> total activity count
-    user_weekly_activity: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
-
-    weekly_data = timeseries_data.get("weekly", {})
-
-    # Aggregate activity across all metric types
-    metric_types = [
-        "prs_opened",
-        "prs_merged",
-        "reviews_submitted",
-        "issues_opened",
-        "issues_closed",
-        "comments_total",
-    ]
-
-    for metric_type in metric_types:
-        metric_data = weekly_data.get(metric_type, [])
-
-        for entry in metric_data:
-            user = entry.get("user", "")
-            period = entry.get("period", "")
-            count = entry.get("count", 0)
-
-            if user and period:
-                user_weekly_activity[user][period] += count
-
-    # Now populate activity_timeline for each contributor
-    for contributor in contributors:
-        # Try both login and user_id as keys
-        user_key = contributor.get("login") or contributor.get("user_id", "")
-
-        if user_key in user_weekly_activity:
-            weekly_counts = user_weekly_activity[user_key]
-
-            # Sort by period and convert to simple array of counts for sparkline
-            # Sparklines typically just need the values in chronological order
-            sorted_periods = sorted(weekly_counts.keys())
-            activity_values = [weekly_counts[period] for period in sorted_periods]
-
-            contributor["activity_timeline"] = activity_values
-        else:
-            # No activity data for this user
-            contributor["activity_timeline"] = []
-
-    logger.info("Populated activity timelines for %d contributors", len(contributors))
+    """Backward-compatible wrapper for populate_activity_timelines."""
+    return populate_activity_timelines(contributors, timeseries_data)
 
 
 def _copy_assets(src: Path, dest: Path) -> int:
