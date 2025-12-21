@@ -249,8 +249,18 @@ def _render_templates(
             for repo_id, repo_data in repo_health_data["repos"].items():
                 repo_health_list.append({"repo_id": repo_id, **repo_data})
         elif isinstance(repo_health_data, list):
-            # Already a list
-            repo_health_list = repo_health_data
+            # List format from metrics - transform to expected structure
+            for item in repo_health_data:
+                repo_name = item.get("repo", "")
+                repo_health_list.append({
+                    "repo_id": repo_name,
+                    "repo_full_name": repo_name,
+                    "prs_merged": item.get("pr_count", 0),
+                    "active_contributors_365d": item.get("contributor_count", 0),
+                    "review_coverage": 0,  # Not in this data format
+                    "median_time_to_merge": "N/A",
+                    **item,
+                })
 
         # Convert hygiene scores from dict to list format
         hygiene_scores_list: list[dict[str, Any]] = []
@@ -258,9 +268,23 @@ def _render_templates(
             # Format from export.py: {"repos": {repo_id: {...}}}
             for repo_id, repo_data in hygiene_scores_data["repos"].items():
                 hygiene_scores_list.append({"repo_id": repo_id, **repo_data})
+        elif isinstance(hygiene_scores_data, dict):
+            # Dict format with repo names as keys: {"repo_name": {...}}
+            for repo_name, repo_data in hygiene_scores_data.items():
+                hygiene_scores_list.append({
+                    "repo_id": repo_name,
+                    "score": repo_data.get("score", 0),
+                    **repo_data,
+                })
         elif isinstance(hygiene_scores_data, list):
-            # Already a list
-            hygiene_scores_list = hygiene_scores_data
+            # List format from metrics - transform to expected structure
+            for item in hygiene_scores_data:
+                repo_name = item.get("repo", "")
+                hygiene_scores_list.append({
+                    "repo_id": repo_name,
+                    "score": item.get("score", 0),
+                    **item,
+                })
 
         # Merge repo data for repos.html template
         repos_merged = repos_view.merge_repo_data(repo_health_list, hygiene_scores_list)
