@@ -277,7 +277,6 @@ def test_repos_template_renders(template_env, base_context):
             "readme_count": 50,
             "contributing_count": 28,
         },
-        "repo_activity": {},
     }
 
     html = template.render(**context)
@@ -423,7 +422,6 @@ def test_templates_have_page_headers(template_env, base_context):
             "repo_summary": {},
             "repos": [],
             "hygiene": {},
-            "repo_activity": {},
             "awards": {"individual": [], "repository": [], "risk": []},
             "special_mentions": {
                 "first_contributions": [],
@@ -527,7 +525,6 @@ def test_d3_script_in_chart_pages(template_env, base_context):
         "repo_summary": {},
         "repos": [],
         "hygiene": {},
-        "repo_activity": {},
         "collaboration_data": {},
         "velocity_data": {},
         "quality_data": {},

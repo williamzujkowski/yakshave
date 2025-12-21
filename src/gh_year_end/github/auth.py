@@ -33,10 +33,21 @@ def _get_gh_cli_token() -> str | None:
         if result.returncode == 0:
             token = result.stdout.strip()
             if token:
-                logger.debug("Loaded token from GitHub CLI")
+                logger.info("Using GitHub token from gh CLI")
                 return token
-    except (FileNotFoundError, subprocess.TimeoutExpired) as e:
-        logger.debug("Could not get token from GitHub CLI: %s", e)
+        else:
+            logger.debug(
+                "gh CLI returned non-zero exit code (%d). "
+                "Ensure you are authenticated with 'gh auth login'",
+                result.returncode,
+            )
+    except FileNotFoundError:
+        logger.debug(
+            "gh CLI not found. Install from https://cli.github.com/ "
+            "or set GITHUB_TOKEN environment variable"
+        )
+    except subprocess.TimeoutExpired:
+        logger.debug("gh CLI command timed out after 5 seconds")
     return None
 
 
@@ -73,13 +84,29 @@ class GitHubAuth:
             AuthenticationError: If token is missing or invalid.
         """
         # Try sources in order: explicit token, env var, gh CLI
-        loaded_token = token or os.environ.get("GITHUB_TOKEN") or _get_gh_cli_token()
+        loaded_token = None
+        token_source = None
+
+        if token:
+            loaded_token = token
+            token_source = "explicit parameter"
+        elif "GITHUB_TOKEN" in os.environ:
+            loaded_token = os.environ["GITHUB_TOKEN"]
+            token_source = "GITHUB_TOKEN environment variable"
+        else:
+            loaded_token = _get_gh_cli_token()
+            if loaded_token:
+                token_source = "gh CLI"
 
         if not loaded_token:
             raise AuthenticationError(
                 "GitHub token not found. Set GITHUB_TOKEN environment variable, "
                 "pass token explicitly, or authenticate with `gh auth login`."
             )
+
+        if token_source and token_source != "gh CLI":
+            # gh CLI logs its own success message
+            logger.info("Using GitHub token from %s", token_source)
 
         self._token: str = loaded_token
         self._validate_token()

@@ -299,13 +299,9 @@ def _render_templates(
         # Calculate repo summary for repos.html template
         repo_summary_stats = repos_view.calculate_repo_summary(repos_merged)
 
-        # Prepare repo activity data
-        repo_activity = repos_view.prepare_repo_activity_data(repo_health_list)
-
         # Calculate highlights from metrics data
         highlights_data = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
 
-        # FIX FOR ISSUE #65: Transform activity timeline from timeseries data
         activity_timeline_data = _transform_activity_timeline(timeseries_data)
 
         # Get available years for multi-year navigation
@@ -339,6 +335,9 @@ def _render_templates(
         # Get base path for GitHub Pages subpath deployment
         base_path = config.report.base_path.rstrip("/") if config.report.base_path else ""
 
+        # Pre-compute engineers list (used in multiple context keys)
+        engineers_list = _get_engineers_list(leaderboards_data, timeseries_data)
+
         # Build template context
         context = {
             "config": {
@@ -371,7 +370,6 @@ def _render_templates(
                 "total_repos": summary_data.get("total_repos", 0),
             },
             "highlights": highlights_data,
-            # FIX FOR ISSUE #65: Use actual timeseries data instead of hardcoded empty array
             "activity_timeline": activity_timeline_data,
             "stats": {
                 "total_prs": summary_data.get("total_prs", 0),
@@ -382,21 +380,15 @@ def _render_templates(
             "generation_date": datetime.now(UTC).strftime("%Y-%m-%d"),
             "version": "1.0.0",
             "build_time": datetime.now(UTC).isoformat(),
-            # FIX FOR ISSUE #63: Transform leaderboards to expected format
             "leaderboards": _transform_leaderboards(leaderboards_data),
-            # FIX FOR ISSUE #59: Provide hygiene as direct variable, not nested
             "hygiene": hygiene_aggregate,
             # Also provide for backwards compatibility
             "health": {
                 "repos": repo_health_list,
                 "hygiene": hygiene_scores_list,
             },
-            # FIX FOR ISSUE #59: Provide repos as merged list
             "repos": repos_merged,
-            # FIX FOR ISSUE #59: Provide repo_summary with stats
             "repo_summary": repo_summary_stats,
-            # FIX FOR ISSUE #59: Provide repo_activity for charts
-            "repo_activity": repo_activity,
             "awards": awards_by_category,
             "special_mentions": {
                 "first_contributions": [],
@@ -404,19 +396,15 @@ def _render_templates(
                 "largest_prs": [],
                 "fastest_merges": [],
             },
-            # FIX FOR ISSUE #156: Calculate fun facts from actual data
+            # Fun facts calculates available metrics; some return None due to missing PR detail data
             "fun_facts": _calculate_fun_facts(summary_data, timeseries_data, leaderboards_data),
-            # FIX FOR ISSUE #60: Add engineers with proper structure
-            "engineers": _get_engineers_list(leaderboards_data, timeseries_data),
-            # FIX FOR ISSUE #60: Add top_contributors for engineers.html
-            "top_contributors": _get_engineers_list(leaderboards_data, timeseries_data)[:10],
-            # FIX FOR ISSUE #60: Add missing context for engineers.html
-            # FIX FOR ISSUE #155: Add activity_timeline data from timeseries
-            "all_contributors": _get_engineers_list(leaderboards_data, timeseries_data),
+            "engineers": engineers_list,
+            "top_contributors": engineers_list[:10],
+            "all_contributors": engineers_list,
             "contribution_timeline": [],
             "contribution_types": [],
             "contribution_by_repo": [],
-            # FIX FOR ISSUE #61: Add insights for summary.html
+            # TODO: Insights are currently placeholder values; implement calculation from metrics
             "insights": {
                 "avg_reviewers_per_pr": 1.8,
                 "review_participation_rate": 75,
@@ -431,9 +419,9 @@ def _render_templates(
                 "contributor_retention": 80,
                 "bus_factor": 5,
             },
-            # FIX FOR ISSUE #61: Add risks for summary.html
+            # TODO: Implement risk detection from health metrics
             "risks": [],
-            # FIX FOR ISSUE #61: Add recommendations for summary.html
+            # Static recommendation - implement dynamic recommendations based on metrics
             "recommendations": [
                 {
                     "priority": "low",
@@ -446,9 +434,8 @@ def _render_templates(
                     ],
                 }
             ],
-            # FIX FOR ISSUE #61: Add top_repos for summary.html
             "top_repos": repos_merged[:10] if repos_merged else [],
-            # FIX FOR ISSUE #61: Add chart data for summary.html
+            # TODO: Implement chart data generation from timeseries/health metrics
             "collaboration_data": [],
             "velocity_data": [],
             "quality_data": [],

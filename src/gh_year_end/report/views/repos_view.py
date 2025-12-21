@@ -241,18 +241,3 @@ def calculate_repo_summary(merged_repos: list[dict[str, Any]]) -> dict[str, Any]
         "avg_hygiene_score": total_hygiene / len(hygiene_scores) if hygiene_scores else 0,
         "avg_contributors": total_contributors / total_repos if total_repos > 0 else 0,
     }
-
-
-def prepare_repo_activity_data(
-    repo_health_data: list[dict[str, Any]],
-) -> list[dict[str, Any]]:
-    """Prepare repository activity data for charting.
-
-    Args:
-        repo_health_data: List of repository health metrics.
-
-    Returns:
-        List of activity data points for D3.js.
-    """
-    # Placeholder - would need time series data for real implementation
-    return []

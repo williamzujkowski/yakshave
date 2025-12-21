@@ -250,13 +250,6 @@
 </section>
 {% endif %}
 
-<section class="repo-activity-section">
-    <h2>Repository Activity Trends</h2>
-    <div class="chart-container">
-        <div id="chart-repo-activity" class="chart"></div>
-    </div>
-</section>
-
 <!-- Repository Detail Modal -->
 <div id="repo-modal" class="modal" style="display: none;">
     <div class="modal-overlay" onclick="closeRepoModal()"></div>
@@ -281,7 +274,6 @@
     // Load data
     const reposData = {{ repos | tojson }};
     const hygieneData = {{ hygiene | tojson }};
-    const repoActivityData = {{ repo_activity | tojson }};
 
     // Render charts only if hygiene data is available
     {% if hygiene %}
@@ -298,10 +290,6 @@
         renderDocumentationChart('#chart-documentation', hygieneData);
     }
     {% endif %}
-
-    if (typeof renderRepoActivity === 'function') {
-        renderRepoActivity('#chart-repo-activity', repoActivityData);
-    }
 
     // Initialize repo table features
     if (typeof initRepoTable === 'function') {
