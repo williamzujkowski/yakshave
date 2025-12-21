@@ -973,17 +973,21 @@ class TestCheckpointManager:
 
         manager.mark_repo_endpoint_in_progress(repo, endpoint)
 
-        initial_mtime = checkpoint_path.stat().st_mtime if checkpoint_path.exists() else 0
-
         # Update with 99 records (shouldn't save)
         manager.update_progress(repo, endpoint, page=1, records=99)
 
         # Update with 1 more record (total 100, should trigger save)
         manager.update_progress(repo, endpoint, page=2, records=1)
 
-        # Verify checkpoint was saved
-        final_mtime = checkpoint_path.stat().st_mtime
-        assert final_mtime > initial_mtime
+        # Verify checkpoint was saved by checking file content
+        # (mtime check unreliable on fast systems)
+        import json
+        with checkpoint_path.open() as f:
+            saved_data = json.load(f)
+
+        repo_data = saved_data["repos"].get(repo, {})
+        endpoint_data = repo_data.get("endpoints", {}).get(endpoint, {})
+        assert endpoint_data.get("records_collected") == 100
 
 
 class TestCheckpointIntegration:
