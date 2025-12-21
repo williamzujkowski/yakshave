@@ -8,7 +8,7 @@ import json
 import logging
 import shutil
 from collections import defaultdict
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -309,23 +309,28 @@ def _render_templates(
         available_years = get_available_years(site_base_dir)
         current_year = config.github.windows.year
 
-        # Process awards data
+        # Process awards data - transform from simple key-value to categorized format
         awards_by_category: dict[str, list[Any]] = {
             "individual": [],
             "repository": [],
             "risk": [],
         }
-        # Awards data from export.py has structure: {"awards": {category: [...]}}
+
+        # Handle different award data formats
         if isinstance(awards_data, dict):
+            # Check if already in categorized format
             if "awards" in awards_data:
                 for category in ["individual", "repository", "risk"]:
                     if category in awards_data["awards"]:
                         awards_by_category[category] = awards_data["awards"][category]
-            else:
+            elif any(k in awards_data for k in ["individual", "repository", "risk"]):
                 # Direct category mapping
                 for category in ["individual", "repository", "risk"]:
                     if category in awards_data:
                         awards_by_category[category] = awards_data[category]
+            else:
+                # Transform from simple format (top_pr_author, top_reviewer, etc.)
+                awards_by_category = _transform_awards_data(awards_data)
 
         # Get base path for GitHub Pages subpath deployment
         base_path = config.report.base_path.rstrip("/") if config.report.base_path else ""
@@ -478,6 +483,64 @@ def _render_templates(
     return rendered_templates
 
 
+def _transform_awards_data(awards_data: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+    """Transform awards from simple key-value format to categorized format.
+
+    Transforms from:
+        {"top_pr_author": {"user": "...", "count": 10, "avatar_url": "..."}}
+    To:
+        {"individual": [{"award_key": "top_pr_author", "title": "...", ...}]}
+    """
+    awards_by_category: dict[str, list[Any]] = {
+        "individual": [],
+        "repository": [],
+        "risk": [],
+    }
+
+    # Map award keys to display info
+    award_definitions = {
+        "top_pr_author": {
+            "category": "individual",
+            "title": "Top PR Author",
+            "description": "Most pull requests opened",
+            "stat_label": "PRs opened",
+        },
+        "top_reviewer": {
+            "category": "individual",
+            "title": "Top Reviewer",
+            "description": "Most reviews submitted",
+            "stat_label": "reviews",
+        },
+        "top_issue_opener": {
+            "category": "individual",
+            "title": "Top Issue Opener",
+            "description": "Most issues opened",
+            "stat_label": "issues",
+        },
+    }
+
+    # Transform each award
+    for award_key, award_data in awards_data.items():
+        if award_key not in award_definitions:
+            continue
+
+        definition = award_definitions[award_key]
+        category = definition["category"]
+
+        transformed_award = {
+            "award_key": award_key,
+            "title": definition["title"],
+            "description": definition["description"],
+            "winner_name": award_data.get("user", ""),
+            "winner_avatar_url": award_data.get("avatar_url", ""),
+            "supporting_stats": f"{award_data.get('count', 0)} {definition['stat_label']}",
+        }
+
+        awards_by_category[category].append(transformed_award)
+
+    return awards_by_category
+
+
 def _transform_leaderboards(leaderboards_data: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
     """Transform leaderboards data to flat format expected by templates.
 
@@ -523,28 +586,47 @@ def _transform_activity_timeline(timeseries_data: dict[str, Any]) -> list[dict[s
     activity_timeline = []
 
     try:
-        timeseries = timeseries_data.get("timeseries", {})
-        week_data = timeseries.get("week", {})
-        prs_merged_data = week_data.get("prs_merged", {})
-        org_data = prs_merged_data.get("org", [])
+        # Timeseries data structure: {"weekly": {"prs_merged": [{period, user, count}]}}
+        weekly_data = timeseries_data.get("weekly", {})
+        prs_merged = weekly_data.get("prs_merged", [])
 
-        if org_data:
-            # Transform to D3.js format: {date: ISO string, value: number}
-            for entry in org_data:
-                period_start = entry.get("period_start", "")
-                value = entry.get("value", 0)
+        if prs_merged:
+            # Group by period and sum counts across all users
+            period_totals: dict[str, int] = defaultdict(int)
 
-                if period_start:
-                    activity_timeline.append(
-                        {
-                            "date": period_start,
-                            "value": value,
-                        }
-                    )
+            for entry in prs_merged:
+                period = entry.get("period", "")
+                count = entry.get("count", 0)
+
+                if period:
+                    period_totals[period] += count
+
+            # Convert to D3.js format: {date: ISO string, value: number}
+            # Period format is "YYYY-WXX", convert to ISO date (first day of week)
+            for period, total_count in sorted(period_totals.items()):
+                try:
+                    # Parse week format: "2025-W07" -> ISO date of Monday of that week
+                    year, week = period.split("-W")
+                    year_int = int(year)
+                    week_int = int(week)
+
+                    # Calculate ISO date for Monday of this week
+                    # ISO week 1 is the first week with a Thursday in the new year
+                    jan4 = datetime(year_int, 1, 4)
+                    week1_monday = jan4 - timedelta(days=jan4.weekday())
+                    target_monday = week1_monday + timedelta(weeks=week_int - 1)
+
+                    activity_timeline.append({
+                        "date": target_monday.strftime("%Y-%m-%d"),
+                        "value": total_count,
+                    })
+                except (ValueError, AttributeError) as e:
+                    logger.warning("Failed to parse period %s: %s", period, e)
+                    continue
 
             logger.info("Transformed %d activity timeline entries", len(activity_timeline))
         else:
-            logger.warning("No org-level prs_merged data found in timeseries")
+            logger.warning("No weekly prs_merged data found in timeseries")
 
     except Exception as e:
         logger.warning("Failed to transform activity timeline: %s", e)
@@ -577,24 +659,24 @@ def _calculate_highlights(
 
     # Calculate most active month from timeseries data
     try:
-        timeseries = timeseries_data.get("timeseries", {})
-        week_data = timeseries.get("week", {})
-        prs_merged_data = week_data.get("prs_merged", {})
-        org_data = prs_merged_data.get("org", [])
+        # Timeseries data structure: {"monthly": {"prs_merged": [{period, user, count}]}}
+        monthly_data = timeseries_data.get("monthly", {})
+        prs_merged = monthly_data.get("prs_merged", [])
 
-        if org_data:
-            # Group by month and sum PRs
+        if prs_merged:
+            # Group by month and sum PRs across all users
             monthly_prs: dict[str, int] = defaultdict(int)
 
-            for entry in org_data:
-                period_start = entry.get("period_start", "")
-                value = entry.get("value", 0)
+            for entry in prs_merged:
+                period = entry.get("period", "")  # Format: "2025-11"
+                count = entry.get("count", 0)
 
-                if period_start:
+                if period:
                     try:
-                        dt = datetime.fromisoformat(period_start.replace("Z", "+00:00"))
+                        # Parse period format: "2025-11" -> "November 2025"
+                        dt = datetime.strptime(period, "%Y-%m")
                         month_key = dt.strftime("%B %Y")
-                        monthly_prs[month_key] += value
+                        monthly_prs[month_key] += count
                     except (ValueError, AttributeError):
                         continue
 

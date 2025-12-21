@@ -16,6 +16,7 @@ from gh_year_end.report.build import (
     _load_json_data,
     _render_templates,
     _transform_activity_timeline,
+    _transform_awards_data,
     _transform_leaderboards,
     _verify_metrics_data_exists,
     _write_build_manifest,
@@ -803,15 +804,11 @@ class TestTransformActivityTimeline:
     def test_transforms_timeseries_to_activity_timeline(self) -> None:
         """Test that timeseries data is transformed to activity timeline format."""
         timeseries_data = {
-            "timeseries": {
-                "week": {
-                    "prs_merged": {
-                        "org": [
-                            {"period_start": "2025-01-06", "value": 4},
-                            {"period_start": "2025-01-13", "value": 6},
-                        ]
-                    }
-                }
+            "weekly": {
+                "prs_merged": [
+                    {"period": "2025-W02", "user": "user1", "count": 4},
+                    {"period": "2025-W03", "user": "user1", "count": 6},
+                ]
             }
         }
 
@@ -830,14 +827,10 @@ class TestTransformActivityTimeline:
         assert result == []
 
     def test_handles_missing_org_data(self) -> None:
-        """Test that missing org data returns empty list."""
+        """Test that missing weekly data returns empty list."""
         timeseries_data = {
-            "timeseries": {
-                "week": {
-                    "prs_merged": {
-                        # No "org" key
-                    }
-                }
+            "weekly": {
+                "prs_merged": []
             }
         }
 
@@ -846,17 +839,13 @@ class TestTransformActivityTimeline:
         assert result == []
 
     def test_skips_entries_without_period_start(self) -> None:
-        """Test that entries without period_start are skipped."""
+        """Test that entries without period are skipped."""
         timeseries_data = {
-            "timeseries": {
-                "week": {
-                    "prs_merged": {
-                        "org": [
-                            {"period_start": "2025-01-06", "value": 4},
-                            {"value": 6},  # Missing period_start
-                        ]
-                    }
-                }
+            "weekly": {
+                "prs_merged": [
+                    {"period": "2025-W02", "user": "user1", "count": 4},
+                    {"user": "user1", "count": 6},  # Missing period
+                ]
             }
         }
 
@@ -867,7 +856,7 @@ class TestTransformActivityTimeline:
     def test_handles_exception_gracefully(self) -> None:
         """Test that exceptions are handled gracefully."""
         # Malformed data that might cause exceptions
-        timeseries_data = {"timeseries": "not a dict"}
+        timeseries_data = {"weekly": "not a dict"}
 
         result = _transform_activity_timeline(timeseries_data)
 
@@ -881,17 +870,12 @@ class TestCalculateHighlights:
         """Test that most active month is calculated correctly."""
         summary_data = {}
         timeseries_data = {
-            "timeseries": {
-                "week": {
-                    "prs_merged": {
-                        "org": [
-                            {"period_start": "2025-01-06", "value": 4},
-                            {"period_start": "2025-01-13", "value": 6},
-                            {"period_start": "2025-01-20", "value": 2},
-                            {"period_start": "2025-02-03", "value": 3},
-                        ]
-                    }
-                }
+            "monthly": {
+                "prs_merged": [
+                    {"period": "2025-01", "user": "user1", "count": 10},
+                    {"period": "2025-01", "user": "user2", "count": 2},
+                    {"period": "2025-02", "user": "user1", "count": 3},
+                ]
             }
         }
         repo_health_list = []
@@ -900,7 +884,7 @@ class TestCalculateHighlights:
 
         assert "most_active_month" in highlights
         assert highlights["most_active_month"] == "January 2025"
-        assert highlights["most_active_month_prs"] == 12  # 4 + 6 + 2
+        assert highlights["most_active_month_prs"] == 12  # 10 + 2
 
     def test_calculates_review_coverage(self) -> None:
         """Test that review coverage is calculated correctly."""
@@ -1267,3 +1251,90 @@ class TestGetEngineersList:
 
         assert "activity_timeline" in result[0]
         assert isinstance(result[0]["activity_timeline"], list)
+
+
+class TestTransformAwardsData:
+    """Tests for _transform_awards_data function."""
+
+    def test_transforms_simple_awards_to_categorized_format(self) -> None:
+        """Test that awards are transformed from simple to categorized format."""
+        awards_data = {
+            "top_pr_author": {
+                "user": "alice",
+                "count": 50,
+                "avatar_url": "https://example.com/alice.png",
+            },
+            "top_reviewer": {
+                "user": "bob",
+                "count": 25,
+                "avatar_url": "https://example.com/bob.png",
+            },
+        }
+
+        result = _transform_awards_data(awards_data)
+
+        assert "individual" in result
+        assert "repository" in result
+        assert "risk" in result
+        assert len(result["individual"]) == 2
+        assert len(result["repository"]) == 0
+        assert len(result["risk"]) == 0
+
+    def test_transforms_award_fields_correctly(self) -> None:
+        """Test that award fields are transformed correctly."""
+        awards_data = {
+            "top_pr_author": {
+                "user": "alice",
+                "count": 50,
+                "avatar_url": "https://example.com/alice.png",
+            }
+        }
+
+        result = _transform_awards_data(awards_data)
+
+        award = result["individual"][0]
+        assert award["award_key"] == "top_pr_author"
+        assert award["title"] == "Top PR Author"
+        assert award["description"] == "Most pull requests opened"
+        assert award["winner_name"] == "alice"
+        assert award["winner_avatar_url"] == "https://example.com/alice.png"
+        assert award["supporting_stats"] == "50 PRs opened"
+
+    def test_transforms_all_award_types(self) -> None:
+        """Test that all award types are transformed."""
+        awards_data = {
+            "top_pr_author": {"user": "alice", "count": 50, "avatar_url": ""},
+            "top_reviewer": {"user": "bob", "count": 25, "avatar_url": ""},
+            "top_issue_opener": {"user": "charlie", "count": 75, "avatar_url": ""},
+        }
+
+        result = _transform_awards_data(awards_data)
+
+        assert len(result["individual"]) == 3
+
+        titles = {award["title"] for award in result["individual"]}
+        assert "Top PR Author" in titles
+        assert "Top Reviewer" in titles
+        assert "Top Issue Opener" in titles
+
+    def test_handles_empty_awards_data(self) -> None:
+        """Test that empty awards data returns empty categories."""
+        awards_data = {}
+
+        result = _transform_awards_data(awards_data)
+
+        assert len(result["individual"]) == 0
+        assert len(result["repository"]) == 0
+        assert len(result["risk"]) == 0
+
+    def test_ignores_unknown_award_keys(self) -> None:
+        """Test that unknown award keys are ignored."""
+        awards_data = {
+            "top_pr_author": {"user": "alice", "count": 50, "avatar_url": ""},
+            "unknown_award": {"user": "bob", "count": 10, "avatar_url": ""},
+        }
+
+        result = _transform_awards_data(awards_data)
+
+        assert len(result["individual"]) == 1
+        assert result["individual"][0]["award_key"] == "top_pr_author"
