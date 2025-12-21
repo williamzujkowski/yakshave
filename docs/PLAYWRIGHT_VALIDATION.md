@@ -304,7 +304,7 @@ uv run pytest tests/test_playwright_website_validation.py -v --timeout=60
 - [Playwright Python Documentation](https://playwright.dev/python/)
 - [pytest-playwright Plugin](https://github.com/microsoft/playwright-pytest)
 - [gh-year-end Project Documentation](../README.md)
-- [Test Data Setup](TEST_DATA_QUICK_START.md)
+- [Test Data Setup](archive/TEST_DATA_QUICK_START.md)
 
 ## Changelog
 

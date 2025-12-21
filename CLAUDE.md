@@ -44,7 +44,7 @@ infrastructure:
   container: N/A
   ci_cd: GitHub Actions
 
-database: N/A (in-memory aggregation, JSON output)
+database: JSON files (site data)
 package_manager: uv
 ```
 
@@ -127,9 +127,12 @@ uv run pytest tests/test_config.py
 
 # Integration tests (requires GITHUB_TOKEN)
 uv run pytest -m integration
+
+# Live API tests (requires GITHUB_TOKEN, makes real API calls)
+uv run pytest -m live_api
 ```
 
-**Coverage threshold**: 80%
+**Coverage threshold**: 45% (enforced), 80% (goal)
 
 ---
 
@@ -164,8 +167,8 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 
 `type(scope): description`
 
-**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
-**Scopes**: `collect`, `report`, `build`, `hygiene`, `identity`, `cli`, `config`
+**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`
+**Scopes**: `collect`, `collector`, `report`, `build`, `hygiene`, `identity`, `cli`, `config`, `tests`, `ci`
 
 ### PR Requirements
 
@@ -201,8 +204,8 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 
 ### Key Patterns
 
-* **Config-first**: Single `config.yaml` validated against JSON schema
-* **Simplified pipeline**: collect (fetch + aggregate) -> build (generate site)
+* **Config-first**: Single `config.yaml` validated via Pydantic models
+* **Simplified pipeline**: raw (JSONL) -> metrics (JSON) -> site (HTML/JS)
 * **In-memory aggregation**: Metrics computed during collection, exported to JSON
 * **Deterministic**: Stable ordering, stable IDs, repeatable outputs
 * **Report generation**: Jinja2 template rendering with D3.js visualizations
@@ -212,12 +215,11 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 | File | Purpose |
 |------|---------|
 | src/gh_year_end/cli.py | CLI entrypoint and commands |
-| src/gh_year_end/config.py | Config loading and validation |
+| src/gh_year_end/config.py | Config loading and Pydantic validation |
 | src/gh_year_end/github/ratelimit.py | Adaptive rate limiting |
 | src/gh_year_end/storage/checkpoint.py | Checkpoint/resume functionality for collection |
 | src/gh_year_end/report/build.py | Report generation and site building |
 | src/gh_year_end/report/export.py | Metrics export to JSON |
-| config/schema.json | Config schema for validation |
 
 ---
 
@@ -234,8 +236,8 @@ ruff check . && ruff format --check . && mypy src/ && pytest
 - Metrics are computed in-memory during collection and exported to JSON files
 
 ### Module Size Limits
-- Modules <= 300-400 lines (some modules like checkpoint.py exceed this due to complexity, which is acceptable for cohesive functionality)
-- Functions <= 50 lines
+- Modules: prefer <= 400 lines. Complex collectors/orchestrators may exceed this.
+- Functions: prefer <= 50 lines
 - DRY/KISS principles
 
 ### Rate Limiting Requirements
