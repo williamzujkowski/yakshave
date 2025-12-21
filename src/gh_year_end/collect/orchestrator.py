@@ -14,15 +14,20 @@ from datetime import datetime
 from typing import Any, cast
 
 from gh_year_end.collect.aggregator import MetricsAggregator
-from gh_year_end.collect.comments import collect_issue_comments, collect_review_comments
-from gh_year_end.collect.commits import collect_commits
 from gh_year_end.collect.discovery import discover_repos
-from gh_year_end.collect.hygiene import collect_branch_protection, collect_security_features
-from gh_year_end.collect.issues import collect_issues
+from gh_year_end.collect.phases import (
+    run_branch_protection_phase,
+    run_comments_phase,
+    run_commits_phase,
+    run_discovery_phase,
+    run_issues_phase,
+    run_pulls_phase,
+    run_repo_metadata_phase,
+    run_reviews_phase,
+    run_security_features_phase,
+)
 from gh_year_end.collect.progress import ProgressTracker
 from gh_year_end.collect.pulls import collect_single_repo_pulls
-from gh_year_end.collect.repos import collect_repo_metadata
-from gh_year_end.collect.reviews import collect_reviews
 from gh_year_end.config import Config
 from gh_year_end.github.auth import GitHubAuth
 from gh_year_end.github.graphql import GraphQLClient
@@ -293,36 +298,13 @@ async def run_collection(
         progress.start()
 
         # Step 1: Discovery
-        logger.info("=" * 80)
-        logger.info("STEP 1: Repository Discovery")
-        logger.info("=" * 80)
-        progress.set_phase("discovery")
-
-        if checkpoint.is_phase_complete("discovery"):
-            logger.info("Discovery phase already complete, loading repos from checkpoint")
-            # Load repo metadata from existing discovery file
-            repos = []
-            if paths.repos_raw_path.exists():
-                with paths.repos_raw_path.open() as f:
-                    for line in f:
-                        record = json.loads(line)
-                        repos.append(record.get("data", {}))
-            stats["discovery"] = {"repos_discovered": len(repos), "skipped": True}
-            logger.info("Loaded %d repos from checkpoint", len(repos))
-            progress.set_total_repos(len(repos))
-            progress.mark_phase_complete("discovery")
-        else:
-            checkpoint.set_current_phase("discovery")
-            repos = await discover_repos(config, http_client, paths)
-            stats["discovery"] = {
-                "repos_discovered": len(repos),
-            }
-            # Register all repos with checkpoint
-            checkpoint.update_repos(repos)
-            checkpoint.mark_phase_complete("discovery")
-            progress.set_total_repos(len(repos))
-            progress.mark_phase_complete("discovery")
-            logger.info("Discovery complete: %d repos discovered", len(repos))
+        repos, stats["discovery"] = await run_discovery_phase(
+            config=config,
+            http_client=http_client,
+            paths=paths,
+            checkpoint=checkpoint,
+            progress=progress,
+        )
 
         if not repos:
             logger.warning("No repositories discovered. Check target configuration.")
@@ -340,326 +322,90 @@ async def run_collection(
         )
 
         # Step 2: Repo Metadata
-        if config.collection.enable.hygiene:
-            progress.set_phase("repo_metadata")
-            if checkpoint.is_phase_complete("repo_metadata"):
-                logger.info("Repo metadata phase already complete, skipping")
-                stats["repos"] = {"repos_processed": len(repos), "skipped": True}
-                progress.mark_phase_complete("repo_metadata")
-            else:
-                logger.info("=" * 80)
-                logger.info("STEP 2: Repository Metadata Collection")
-                logger.info("=" * 80)
-                checkpoint.set_current_phase("repo_metadata")
-
-                # Open writer for repo metadata
-                repo_metadata_path = paths.raw_root / "repo_metadata.jsonl"
-                async with AsyncJSONLWriter(repo_metadata_path) as writer:
-                    repo_stats = await collect_repo_metadata(
-                        repos=repos,
-                        graphql_client=graphql_client,
-                        writer=writer,
-                        rate_limiter=rate_limiter,
-                        config=config,
-                    )
-                stats["repos"] = repo_stats
-                checkpoint.mark_phase_complete("repo_metadata")
-                progress.mark_phase_complete("repo_metadata")
-                logger.info(
-                    "Repo metadata complete: %d repos processed",
-                    repo_stats.get("repos_processed", 0),
-                )
-        else:
-            logger.info("Skipping repo metadata collection (hygiene collection disabled)")
-            stats["repos"] = {"repos_processed": 0, "skipped": True}
-            progress.mark_phase_complete("repo_metadata")
+        stats["repos"] = await run_repo_metadata_phase(
+            config=config,
+            repos=repos,
+            graphql_client=graphql_client,
+            rate_limiter=rate_limiter,
+            paths=paths,
+            checkpoint=checkpoint,
+            progress=progress,
+        )
 
         # Step 3: Pull Requests
-        if config.collection.enable.pulls:
-            progress.set_phase("pulls")
-            if checkpoint.is_phase_complete("pulls"):
-                logger.info("Pull requests phase already complete, skipping")
-                stats["pulls"] = {"pulls_collected": 0, "skipped": True}
-                progress.mark_phase_complete("pulls")
-            else:
-                logger.info("=" * 80)
-                logger.info("STEP 3: Pull Request Collection (Parallel)")
-                logger.info("=" * 80)
-                checkpoint.set_current_phase("pulls")
-
-                # Use parallel processing for faster collection
-                logger.info(
-                    "Processing %d repos in parallel (max_concurrency=%d)",
-                    len(repos),
-                    config.rate_limit.max_concurrency,
-                )
-
-                pull_stats = await _collect_repos_parallel(
-                    repos=repos,
-                    collect_fn=collect_single_repo_pulls,
-                    endpoint_name="pulls",
-                    checkpoint=checkpoint,
-                    max_concurrency=config.rate_limit.max_concurrency,
-                    rest_client=rest_client,
-                    paths=paths,
-                    config=config,
-                )
-
-                stats["pulls"] = pull_stats
-                checkpoint.mark_phase_complete("pulls")
-                progress.update_items_collected("pulls", pull_stats.get("pulls_collected", 0))
-                progress.mark_phase_complete("pulls")
-                logger.info(
-                    "Pull request complete: %d repos processed, %d PRs collected, "
-                    "%d repos skipped, %d errors",
-                    pull_stats.get("repos_processed", 0),
-                    pull_stats.get("pulls_collected", 0),
-                    pull_stats.get("repos_skipped", 0),
-                    pull_stats.get("repos_errored", 0),
-                )
-        else:
-            logger.info("Skipping pull request collection (disabled in config)")
-            stats["pulls"] = {"pulls_collected": 0, "skipped": True}
-            progress.mark_phase_complete("pulls")
+        stats["pulls"] = await run_pulls_phase(
+            config=config,
+            repos=repos,
+            rest_client=rest_client,
+            paths=paths,
+            checkpoint=checkpoint,
+            progress=progress,
+            collect_repos_parallel=_collect_repos_parallel,
+        )
 
         # Step 4: Issues
-        if config.collection.enable.issues:
-            progress.set_phase("issues")
-            if checkpoint.is_phase_complete("issues"):
-                logger.info("Issues phase already complete, skipping")
-                stats["issues"] = {"issues_collected": 0, "skipped": True}
-                progress.mark_phase_complete("issues")
-            else:
-                logger.info("=" * 80)
-                logger.info("STEP 4: Issue Collection")
-                logger.info("=" * 80)
-                checkpoint.set_current_phase("issues")
-
-                issue_stats = await collect_issues(
-                    repos=repos,
-                    rest_client=rest_client,
-                    paths=paths,
-                    rate_limiter=rate_limiter,
-                    config=config,
-                    checkpoint=checkpoint,
-                )
-                stats["issues"] = issue_stats
-                checkpoint.mark_phase_complete("issues")
-                progress.update_items_collected("issues", issue_stats.get("issues_collected", 0))
-                progress.mark_phase_complete("issues")
-                logger.info(
-                    "Issue collection complete: %d issues collected",
-                    issue_stats.get("issues_collected", 0),
-                )
-        else:
-            logger.info("Skipping issue collection (disabled in config)")
-            stats["issues"] = {"issues_collected": 0, "skipped": True}
-            progress.mark_phase_complete("issues")
+        stats["issues"] = await run_issues_phase(
+            config=config,
+            repos=repos,
+            rest_client=rest_client,
+            rate_limiter=rate_limiter,
+            paths=paths,
+            checkpoint=checkpoint,
+            progress=progress,
+        )
 
         # Step 5: Reviews
-        if config.collection.enable.reviews:
-            progress.set_phase("reviews")
-            if checkpoint.is_phase_complete("reviews"):
-                logger.info("Reviews phase already complete, skipping")
-                stats["reviews"] = {"reviews_collected": 0, "skipped": True}
-                progress.mark_phase_complete("reviews")
-            else:
-                logger.info("=" * 80)
-                logger.info("STEP 5: Review Collection")
-                logger.info("=" * 80)
-                checkpoint.set_current_phase("reviews")
+        stats["reviews"] = await run_reviews_phase(
+            config=config,
+            repos=repos,
+            rest_client=rest_client,
+            rate_limiter=rate_limiter,
+            paths=paths,
+            checkpoint=checkpoint,
+            progress=progress,
+        )
 
-                review_stats = await collect_reviews(
-                    repos=repos,
-                    rest_client=rest_client,
-                    paths=paths,
-                    rate_limiter=rate_limiter,
-                    config=config,
-                    checkpoint=checkpoint,
-                )
-                stats["reviews"] = review_stats
-                checkpoint.mark_phase_complete("reviews")
-                progress.update_items_collected("reviews", review_stats.get("reviews_collected", 0))
-                progress.mark_phase_complete("reviews")
-                logger.info(
-                    "Review collection complete: %d reviews collected",
-                    review_stats.get("reviews_collected", 0),
-                )
-        else:
-            logger.info("Skipping review collection (disabled in config)")
-            stats["reviews"] = {"reviews_collected": 0, "skipped": True}
-            progress.mark_phase_complete("reviews")
-
-        # Step 6: Comments (both issue and review comments)
-        if config.collection.enable.comments:
-            progress.set_phase("comments")
-            if checkpoint.is_phase_complete("comments"):
-                logger.info("Comments phase already complete, skipping")
-                stats["comments"] = {"total_comments": 0, "skipped": True}
-                progress.mark_phase_complete("comments")
-            else:
-                logger.info("=" * 80)
-                logger.info("STEP 6: Comment Collection")
-                logger.info("=" * 80)
-                checkpoint.set_current_phase("comments")
-
-                # Extract issue numbers from collected issues
-                logger.info("Extracting issue numbers from collected issues...")
-                issue_numbers_by_repo = await _extract_issue_numbers_from_raw(repos, paths)
-                logger.info("Found issues in %d repositories", len(issue_numbers_by_repo))
-
-                # Extract PR numbers from collected PRs
-                logger.info("Extracting PR numbers from collected PRs...")
-                pr_numbers_by_repo = await _extract_pr_numbers_from_raw(repos, paths)
-                logger.info("Found PRs in %d repositories", len(pr_numbers_by_repo))
-
-                # Collect issue comments
-                logger.info("Collecting issue comments...")
-                issue_comment_stats = await collect_issue_comments(
-                    repos=repos,
-                    rest_client=rest_client,
-                    paths=paths,
-                    rate_limiter=rate_limiter,
-                    config=config,
-                    issue_numbers_by_repo=issue_numbers_by_repo,
-                    checkpoint=checkpoint,
-                )
-
-                # Collect review comments
-                logger.info("Collecting review comments...")
-                review_comment_stats = await collect_review_comments(
-                    repos=repos,
-                    rest_client=rest_client,
-                    paths=paths,
-                    rate_limiter=rate_limiter,
-                    config=config,
-                    pr_numbers_by_repo=pr_numbers_by_repo,
-                    checkpoint=checkpoint,
-                )
-
-                stats["comments"] = {
-                    "issue_comments": issue_comment_stats,
-                    "review_comments": review_comment_stats,
-                    "total_comments": (
-                        issue_comment_stats.get("comments_collected", 0)
-                        + review_comment_stats.get("comments_collected", 0)
-                    ),
-                }
-                checkpoint.mark_phase_complete("comments")
-                progress.update_items_collected("comments", stats["comments"]["total_comments"])
-                progress.mark_phase_complete("comments")
-                logger.info(
-                    "Comment collection complete: %d total comments collected",
-                    stats["comments"]["total_comments"],
-                )
-        else:
-            logger.info("Skipping comment collection (disabled in config)")
-            stats["comments"] = {"total_comments": 0, "skipped": True}
-            progress.mark_phase_complete("comments")
+        # Step 6: Comments
+        stats["comments"] = await run_comments_phase(
+            config=config,
+            repos=repos,
+            rest_client=rest_client,
+            rate_limiter=rate_limiter,
+            paths=paths,
+            checkpoint=checkpoint,
+            progress=progress,
+        )
 
         # Step 7: Commits
-        if config.collection.enable.commits:
-            progress.set_phase("commits")
-            if checkpoint.is_phase_complete("commits"):
-                logger.info("Commits phase already complete, skipping")
-                stats["commits"] = {"commits_collected": 0, "skipped": True}
-                progress.mark_phase_complete("commits")
-            else:
-                logger.info("=" * 80)
-                logger.info("STEP 7: Commit Collection")
-                logger.info("=" * 80)
-                checkpoint.set_current_phase("commits")
-
-                commit_stats = await collect_commits(
-                    repos=repos,
-                    rest_client=rest_client,
-                    paths=paths,
-                    rate_limiter=rate_limiter,
-                    config=config,
-                    checkpoint=checkpoint,
-                )
-                stats["commits"] = commit_stats
-                checkpoint.mark_phase_complete("commits")
-                progress.update_items_collected("commits", commit_stats.get("commits_collected", 0))
-                progress.mark_phase_complete("commits")
-                logger.info(
-                    "Commit collection complete: %d commits collected",
-                    commit_stats.get("commits_collected", 0),
-                )
-        else:
-            logger.info("Skipping commit collection (disabled in config)")
-            stats["commits"] = {"commits_collected": 0, "skipped": True}
-            progress.mark_phase_complete("commits")
+        stats["commits"] = await run_commits_phase(
+            config=config,
+            repos=repos,
+            rest_client=rest_client,
+            rate_limiter=rate_limiter,
+            paths=paths,
+            checkpoint=checkpoint,
+            progress=progress,
+        )
 
         # Step 8: Hygiene - Branch Protection
-        if config.collection.enable.hygiene:
-            progress.set_phase("branch_protection")
-            if checkpoint.is_phase_complete("branch_protection"):
-                logger.info("Branch protection phase already complete, skipping")
-                stats["hygiene"] = {"repos_processed": 0, "skipped": True}
-                progress.mark_phase_complete("branch_protection")
-            else:
-                logger.info("=" * 80)
-                logger.info("STEP 8: Branch Protection Collection")
-                logger.info("=" * 80)
-                checkpoint.set_current_phase("branch_protection")
-
-                hygiene_stats = await collect_branch_protection(
-                    repos=repos,
-                    rest_client=rest_client,
-                    path_manager=paths,
-                    config=config,
-                    checkpoint=checkpoint,
-                )
-                stats["hygiene"] = hygiene_stats
-                checkpoint.mark_phase_complete("branch_protection")
-                progress.mark_phase_complete("branch_protection")
-                logger.info(
-                    "Branch protection collection complete: %d repos processed, "
-                    "%d with protection enabled",
-                    hygiene_stats.get("repos_processed", 0),
-                    hygiene_stats.get("protection_enabled", 0),
-                )
-        else:
-            logger.info("Skipping branch protection collection (hygiene disabled in config)")
-            stats["hygiene"] = {"repos_processed": 0, "skipped": True}
-            progress.mark_phase_complete("branch_protection")
+        stats["hygiene"] = await run_branch_protection_phase(
+            config=config,
+            repos=repos,
+            rest_client=rest_client,
+            paths=paths,
+            checkpoint=checkpoint,
+            progress=progress,
+        )
 
         # Step 9: Security Features
-        if config.collection.enable.hygiene:
-            progress.set_phase("security_features")
-            if checkpoint.is_phase_complete("security_features"):
-                logger.info("Security features phase already complete, skipping")
-                stats["security_features"] = {"repos_processed": 0, "skipped": True}
-                progress.mark_phase_complete("security_features")
-            else:
-                logger.info("=" * 80)
-                logger.info("STEP 9: Security Features Collection")
-                logger.info("=" * 80)
-                checkpoint.set_current_phase("security_features")
-
-                security_features_stats = await collect_security_features(
-                    repos=repos,
-                    rest_client=rest_client,
-                    paths=paths,
-                    config=config,
-                    checkpoint=checkpoint,
-                )
-                stats["security_features"] = security_features_stats
-                checkpoint.mark_phase_complete("security_features")
-                progress.mark_phase_complete("security_features")
-                logger.info(
-                    "Security features collection complete: %d repos processed, "
-                    "%d with all features, %d with partial features, %d with no access",
-                    security_features_stats.get("repos_processed", 0),
-                    security_features_stats.get("repos_with_all_features", 0),
-                    security_features_stats.get("repos_with_partial_features", 0),
-                    security_features_stats.get("repos_with_no_access", 0),
-                )
-        else:
-            logger.info("Skipping security features collection (hygiene disabled in config)")
-            stats["security_features"] = {"repos_processed": 0, "skipped": True}
-            progress.mark_phase_complete("security_features")
+        stats["security_features"] = await run_security_features_phase(
+            config=config,
+            repos=repos,
+            rest_client=rest_client,
+            paths=paths,
+            checkpoint=checkpoint,
+            progress=progress,
+        )
 
         # Collect rate limit samples
         stats["rate_limit_samples"] = rate_limiter.get_samples()
@@ -726,102 +472,6 @@ async def run_collection(
         json.dump(manifest, f, indent=2)
 
     return stats
-
-
-async def _extract_issue_numbers_from_raw(
-    repos: list[dict[str, Any]],
-    paths: PathManager,
-) -> dict[str, list[int]]:
-    """Extract issue numbers from raw issue JSONL files.
-
-    Args:
-        repos: List of repository metadata.
-        paths: Path manager for storage.
-
-    Returns:
-        Dictionary mapping repo full_name to list of issue numbers.
-    """
-    issue_numbers_by_repo: dict[str, list[int]] = {}
-
-    for repo in repos:
-        repo_full_name = repo["full_name"]
-        issue_file_path = paths.issues_raw_path(repo_full_name)
-
-        if not issue_file_path.exists():
-            continue
-
-        issue_numbers = set()
-        try:
-            with issue_file_path.open() as f:
-                for line in f:
-                    try:
-                        record = json.loads(line)
-                        data = record.get("data", {})
-                        number = data.get("number")
-                        if number is not None:
-                            issue_numbers.add(int(number))
-                    except (json.JSONDecodeError, ValueError, KeyError) as e:
-                        logger.warning("Failed to parse issue record: %s", e)
-                        continue
-
-            if issue_numbers:
-                issue_numbers_by_repo[repo_full_name] = sorted(issue_numbers)
-                logger.debug(
-                    "Extracted %d issue numbers from %s", len(issue_numbers), repo_full_name
-                )
-
-        except Exception as e:
-            logger.error("Error reading issue file %s: %s", issue_file_path, e)
-            continue
-
-    return issue_numbers_by_repo
-
-
-async def _extract_pr_numbers_from_raw(
-    repos: list[dict[str, Any]],
-    paths: PathManager,
-) -> dict[str, list[int]]:
-    """Extract PR numbers from raw PR JSONL files.
-
-    Args:
-        repos: List of repository metadata.
-        paths: Path manager for storage.
-
-    Returns:
-        Dictionary mapping repo full_name to list of PR numbers.
-    """
-    pr_numbers_by_repo: dict[str, list[int]] = {}
-
-    for repo in repos:
-        repo_full_name = repo["full_name"]
-        pr_file_path = paths.pulls_raw_path(repo_full_name)
-
-        if not pr_file_path.exists():
-            continue
-
-        pr_numbers = set()
-        try:
-            with pr_file_path.open() as f:
-                for line in f:
-                    try:
-                        record = json.loads(line)
-                        data = record.get("data", {})
-                        number = data.get("number")
-                        if number is not None:
-                            pr_numbers.add(int(number))
-                    except (json.JSONDecodeError, ValueError, KeyError) as e:
-                        logger.warning("Failed to parse PR record: %s", e)
-                        continue
-
-            if pr_numbers:
-                pr_numbers_by_repo[repo_full_name] = sorted(pr_numbers)
-                logger.debug("Extracted %d PR numbers from %s", len(pr_numbers), repo_full_name)
-
-        except Exception as e:
-            logger.error("Error reading PR file %s: %s", pr_file_path, e)
-            continue
-
-    return pr_numbers_by_repo
 
 
 async def collect_and_aggregate(

@@ -14,10 +14,12 @@ import pytest
 from gh_year_end.collect.orchestrator import (
     CollectionError,
     _collect_repos_parallel,
-    _extract_issue_numbers_from_raw,
-    _extract_pr_numbers_from_raw,
     collect_and_aggregate,
     run_collection,
+)
+from gh_year_end.collect.phases.comments import (
+    _extract_issue_numbers_from_raw,
+    _extract_pr_numbers_from_raw,
 )
 from gh_year_end.config import Config
 from gh_year_end.storage.paths import PathManager
@@ -128,29 +130,29 @@ class TestRunCollection:
             mock_repos: Mock repository list.
         """
         with (
-            patch("gh_year_end.collect.orchestrator.discover_repos") as mock_discover,
-            patch("gh_year_end.collect.orchestrator.collect_repo_metadata") as mock_repo_meta,
+            patch("gh_year_end.collect.phases.discovery.discover_repos") as mock_discover,
+            patch("gh_year_end.collect.phases.repos.collect_repo_metadata") as mock_repo_meta,
             patch("gh_year_end.collect.orchestrator._collect_repos_parallel") as mock_parallel,
-            patch("gh_year_end.collect.orchestrator.collect_issues") as mock_issues,
-            patch("gh_year_end.collect.orchestrator.collect_reviews") as mock_reviews,
-            patch("gh_year_end.collect.orchestrator.collect_issue_comments") as mock_issue_comments,
+            patch("gh_year_end.collect.phases.issues.collect_issues") as mock_issues,
+            patch("gh_year_end.collect.phases.reviews.collect_reviews") as mock_reviews,
+            patch("gh_year_end.collect.phases.comments.collect_issue_comments") as mock_issue_comments,
             patch(
-                "gh_year_end.collect.orchestrator.collect_review_comments"
+                "gh_year_end.collect.phases.comments.collect_review_comments"
             ) as mock_review_comments,
-            patch("gh_year_end.collect.orchestrator.collect_commits") as mock_commits,
-            patch("gh_year_end.collect.orchestrator.collect_branch_protection") as mock_branch_prot,
-            patch("gh_year_end.collect.orchestrator.collect_security_features") as mock_security,
+            patch("gh_year_end.collect.phases.commits.collect_commits") as mock_commits,
+            patch("gh_year_end.collect.phases.hygiene.collect_branch_protection") as mock_branch_prot,
+            patch("gh_year_end.collect.phases.hygiene.collect_security_features") as mock_security,
             patch(
-                "gh_year_end.collect.orchestrator._extract_issue_numbers_from_raw"
+                "gh_year_end.collect.phases.comments._extract_issue_numbers_from_raw"
             ) as mock_extract_issues,
             patch(
-                "gh_year_end.collect.orchestrator._extract_pr_numbers_from_raw"
+                "gh_year_end.collect.phases.comments._extract_pr_numbers_from_raw"
             ) as mock_extract_prs,
             patch("gh_year_end.collect.orchestrator.GitHubClient") as mock_client,
             patch("gh_year_end.collect.orchestrator.RestClient") as _mock_rest_client,
             patch("gh_year_end.collect.orchestrator.GraphQLClient") as _mock_graphql_client,
             patch("gh_year_end.collect.orchestrator.AdaptiveRateLimiter") as mock_rate_limiter,
-            patch("gh_year_end.collect.orchestrator.AsyncJSONLWriter") as _mock_writer,
+            patch("gh_year_end.collect.phases.repos.AsyncJSONLWriter") as _mock_writer,
             patch("os.getenv") as mock_getenv,
             tempfile.TemporaryDirectory() as tmpdir,
         ):
@@ -245,7 +247,7 @@ class TestRunCollection:
             test_config: Test configuration.
         """
         with (
-            patch("gh_year_end.collect.orchestrator.discover_repos") as mock_discover,
+            patch("gh_year_end.collect.phases.discovery.discover_repos") as mock_discover,
             patch("gh_year_end.collect.orchestrator.GitHubClient") as mock_client,
             patch("os.getenv") as mock_getenv,
             tempfile.TemporaryDirectory() as tmpdir,
@@ -316,29 +318,29 @@ class TestRunCollection:
         test_config.collection.enable.commits = False
 
         with (
-            patch("gh_year_end.collect.orchestrator.discover_repos") as mock_discover,
-            patch("gh_year_end.collect.orchestrator.collect_repo_metadata") as mock_repo_meta,
+            patch("gh_year_end.collect.phases.discovery.discover_repos") as mock_discover,
+            patch("gh_year_end.collect.phases.repos.collect_repo_metadata") as mock_repo_meta,
             patch("gh_year_end.collect.orchestrator._collect_repos_parallel") as mock_parallel,
-            patch("gh_year_end.collect.orchestrator.collect_issues") as mock_issues,
-            patch("gh_year_end.collect.orchestrator.collect_reviews") as mock_reviews,
-            patch("gh_year_end.collect.orchestrator.collect_issue_comments") as mock_issue_comments,
+            patch("gh_year_end.collect.phases.issues.collect_issues") as mock_issues,
+            patch("gh_year_end.collect.phases.reviews.collect_reviews") as mock_reviews,
+            patch("gh_year_end.collect.phases.comments.collect_issue_comments") as mock_issue_comments,
             patch(
-                "gh_year_end.collect.orchestrator.collect_review_comments"
+                "gh_year_end.collect.phases.comments.collect_review_comments"
             ) as mock_review_comments,
-            patch("gh_year_end.collect.orchestrator.collect_commits") as mock_commits,
-            patch("gh_year_end.collect.orchestrator.collect_branch_protection") as mock_branch_prot,
-            patch("gh_year_end.collect.orchestrator.collect_security_features") as mock_security,
+            patch("gh_year_end.collect.phases.commits.collect_commits") as mock_commits,
+            patch("gh_year_end.collect.phases.hygiene.collect_branch_protection") as mock_branch_prot,
+            patch("gh_year_end.collect.phases.hygiene.collect_security_features") as mock_security,
             patch(
-                "gh_year_end.collect.orchestrator._extract_issue_numbers_from_raw"
+                "gh_year_end.collect.phases.comments._extract_issue_numbers_from_raw"
             ) as mock_extract_issues,
             patch(
-                "gh_year_end.collect.orchestrator._extract_pr_numbers_from_raw"
+                "gh_year_end.collect.phases.comments._extract_pr_numbers_from_raw"
             ) as mock_extract_prs,
             patch("gh_year_end.collect.orchestrator.GitHubClient") as mock_client,
             patch("gh_year_end.collect.orchestrator.RestClient") as _mock_rest_client,
             patch("gh_year_end.collect.orchestrator.GraphQLClient") as _mock_graphql_client,
             patch("gh_year_end.collect.orchestrator.AdaptiveRateLimiter") as mock_rate_limiter,
-            patch("gh_year_end.collect.orchestrator.AsyncJSONLWriter") as _mock_writer,
+            patch("gh_year_end.collect.phases.repos.AsyncJSONLWriter") as _mock_writer,
             patch("os.getenv") as mock_getenv,
             tempfile.TemporaryDirectory() as tmpdir,
         ):
@@ -416,29 +418,29 @@ class TestRunCollection:
             mock_repos: Mock repository list.
         """
         with (
-            patch("gh_year_end.collect.orchestrator.discover_repos") as mock_discover,
-            patch("gh_year_end.collect.orchestrator.collect_repo_metadata") as mock_repo_meta,
+            patch("gh_year_end.collect.phases.discovery.discover_repos") as mock_discover,
+            patch("gh_year_end.collect.phases.repos.collect_repo_metadata") as mock_repo_meta,
             patch("gh_year_end.collect.orchestrator._collect_repos_parallel") as mock_parallel,
-            patch("gh_year_end.collect.orchestrator.collect_issues") as mock_issues,
-            patch("gh_year_end.collect.orchestrator.collect_reviews") as mock_reviews,
-            patch("gh_year_end.collect.orchestrator.collect_issue_comments") as mock_issue_comments,
+            patch("gh_year_end.collect.phases.issues.collect_issues") as mock_issues,
+            patch("gh_year_end.collect.phases.reviews.collect_reviews") as mock_reviews,
+            patch("gh_year_end.collect.phases.comments.collect_issue_comments") as mock_issue_comments,
             patch(
-                "gh_year_end.collect.orchestrator.collect_review_comments"
+                "gh_year_end.collect.phases.comments.collect_review_comments"
             ) as mock_review_comments,
-            patch("gh_year_end.collect.orchestrator.collect_commits") as mock_commits,
-            patch("gh_year_end.collect.orchestrator.collect_branch_protection") as mock_branch_prot,
-            patch("gh_year_end.collect.orchestrator.collect_security_features") as mock_security,
+            patch("gh_year_end.collect.phases.commits.collect_commits") as mock_commits,
+            patch("gh_year_end.collect.phases.hygiene.collect_branch_protection") as mock_branch_prot,
+            patch("gh_year_end.collect.phases.hygiene.collect_security_features") as mock_security,
             patch(
-                "gh_year_end.collect.orchestrator._extract_issue_numbers_from_raw"
+                "gh_year_end.collect.phases.comments._extract_issue_numbers_from_raw"
             ) as mock_extract_issues,
             patch(
-                "gh_year_end.collect.orchestrator._extract_pr_numbers_from_raw"
+                "gh_year_end.collect.phases.comments._extract_pr_numbers_from_raw"
             ) as mock_extract_prs,
             patch("gh_year_end.collect.orchestrator.GitHubClient") as mock_client,
             patch("gh_year_end.collect.orchestrator.RestClient") as _mock_rest_client,
             patch("gh_year_end.collect.orchestrator.GraphQLClient") as _mock_graphql_client,
             patch("gh_year_end.collect.orchestrator.AdaptiveRateLimiter") as mock_rate_limiter,
-            patch("gh_year_end.collect.orchestrator.AsyncJSONLWriter") as _mock_writer,
+            patch("gh_year_end.collect.phases.repos.AsyncJSONLWriter") as _mock_writer,
             patch("os.getenv") as mock_getenv,
             tempfile.TemporaryDirectory() as tmpdir,
         ):
@@ -975,23 +977,23 @@ class TestRunCollectionRateLimiting:
             mock_repos: Mock repository list.
         """
         with (
-            patch("gh_year_end.collect.orchestrator.discover_repos") as mock_discover,
-            patch("gh_year_end.collect.orchestrator.collect_repo_metadata") as mock_repo_meta,
+            patch("gh_year_end.collect.phases.discovery.discover_repos") as mock_discover,
+            patch("gh_year_end.collect.phases.repos.collect_repo_metadata") as mock_repo_meta,
             patch("gh_year_end.collect.orchestrator._collect_repos_parallel") as mock_parallel,
-            patch("gh_year_end.collect.orchestrator.collect_issues") as mock_issues,
-            patch("gh_year_end.collect.orchestrator.collect_reviews") as mock_reviews,
-            patch("gh_year_end.collect.orchestrator.collect_issue_comments") as mock_issue_comments,
+            patch("gh_year_end.collect.phases.issues.collect_issues") as mock_issues,
+            patch("gh_year_end.collect.phases.reviews.collect_reviews") as mock_reviews,
+            patch("gh_year_end.collect.phases.comments.collect_issue_comments") as mock_issue_comments,
             patch(
-                "gh_year_end.collect.orchestrator.collect_review_comments"
+                "gh_year_end.collect.phases.comments.collect_review_comments"
             ) as mock_review_comments,
-            patch("gh_year_end.collect.orchestrator.collect_commits") as mock_commits,
-            patch("gh_year_end.collect.orchestrator.collect_branch_protection") as mock_branch_prot,
-            patch("gh_year_end.collect.orchestrator.collect_security_features") as mock_security,
+            patch("gh_year_end.collect.phases.commits.collect_commits") as mock_commits,
+            patch("gh_year_end.collect.phases.hygiene.collect_branch_protection") as mock_branch_prot,
+            patch("gh_year_end.collect.phases.hygiene.collect_security_features") as mock_security,
             patch(
-                "gh_year_end.collect.orchestrator._extract_issue_numbers_from_raw"
+                "gh_year_end.collect.phases.comments._extract_issue_numbers_from_raw"
             ) as mock_extract_issues,
             patch(
-                "gh_year_end.collect.orchestrator._extract_pr_numbers_from_raw"
+                "gh_year_end.collect.phases.comments._extract_pr_numbers_from_raw"
             ) as mock_extract_prs,
             patch("gh_year_end.collect.orchestrator.GitHubClient") as mock_client,
             patch("gh_year_end.collect.orchestrator.RestClient") as _mock_rest_client,
@@ -1074,7 +1076,7 @@ class TestRunCollectionErrorHandling:
             test_config: Test configuration.
         """
         with (
-            patch("gh_year_end.collect.orchestrator.discover_repos") as mock_discover,
+            patch("gh_year_end.collect.phases.discovery.discover_repos") as mock_discover,
             patch("gh_year_end.collect.orchestrator.GitHubClient") as mock_client,
             patch("os.getenv") as mock_getenv,
             tempfile.TemporaryDirectory() as tmpdir,
