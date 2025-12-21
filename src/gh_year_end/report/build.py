@@ -21,6 +21,9 @@ from gh_year_end.report.contributors import (
 from gh_year_end.report.transformers import (
     calculate_fun_facts,
     calculate_highlights,
+    calculate_insights,
+    calculate_risks,
+    generate_chart_data,
     transform_activity_timeline,
     transform_awards_data,
     transform_leaderboards,
@@ -414,23 +417,12 @@ def _render_templates(
             "contribution_timeline": [],
             "contribution_types": [],
             "contribution_by_repo": [],
-            # TODO: Insights are currently placeholder values; implement calculation from metrics
-            "insights": {
-                "avg_reviewers_per_pr": 1.8,
-                "review_participation_rate": 75,
-                "cross_team_reviews": 30,
-                "prs_per_week": summary_data.get("prs_merged", 0) / 52,
-                "median_pr_size": 150,
-                "merge_rate": 85,
-                "repos_with_ci": 67,
-                "repos_with_codeowners": 50,
-                "repos_with_security_policy": 33,
-                "new_contributors": 0,
-                "contributor_retention": 80,
-                "bus_factor": 5,
-            },
-            # TODO: Implement risk detection from health metrics
-            "risks": [],
+            # Calculate insights from metrics data
+            "insights": _calculate_insights(
+                summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
+            ),
+            # Calculate risks from health metrics
+            "risks": _calculate_risks(repo_health_list, hygiene_scores_list, summary_data),
             # Static recommendation - implement dynamic recommendations based on metrics
             "recommendations": [
                 {
@@ -445,12 +437,11 @@ def _render_templates(
                 }
             ],
             "top_repos": repos_merged[:10] if repos_merged else [],
-            # TODO: Implement chart data generation from timeseries/health metrics
-            "collaboration_data": [],
-            "velocity_data": [],
-            "quality_data": [],
-            "community_data": [],
         }
+
+        # Generate chart data from metrics
+        chart_data = generate_chart_data(timeseries_data, summary_data, leaderboards_data)
+        context.update(chart_data)
 
         # Render all HTML templates
         template_files = list(templates_dir.glob("*.html"))
@@ -524,6 +515,27 @@ def _populate_activity_timelines(
 ) -> None:
     """Backward-compatible wrapper for populate_activity_timelines."""
     return populate_activity_timelines(contributors, timeseries_data)
+
+
+def _calculate_insights(
+    summary_data: dict[str, Any],
+    leaderboards_data: dict[str, Any],
+    repo_health_list: list[dict[str, Any]],
+    hygiene_scores_list: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Backward-compatible wrapper for calculate_insights."""
+    return calculate_insights(
+        summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
+    )
+
+
+def _calculate_risks(
+    repo_health_list: list[dict[str, Any]],
+    hygiene_scores_list: list[dict[str, Any]],
+    summary_data: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Backward-compatible wrapper for calculate_risks."""
+    return calculate_risks(repo_health_list, hygiene_scores_list, summary_data)
 
 
 def _copy_assets(src: Path, dest: Path) -> int:

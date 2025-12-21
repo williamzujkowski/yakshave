@@ -1448,3 +1448,250 @@ class TestCalculateFunFacts:
 
         # Should not crash, but busiest_day will be None
         assert result["busiest_day"] is None
+
+
+class TestRepoHealthDataConversion:
+    """Tests for repo health and hygiene data conversion logic."""
+
+    def test_repo_health_dict_format_with_repos_key(
+        self, config: Config, paths: PathManager, sample_metrics_data: None, sample_templates: Path
+    ) -> None:
+        """Test conversion of repo health data from dict with repos key."""
+        # Add repo_health.json in dict format
+        repo_health_data = {
+            "repos": {
+                "owner/repo1": {
+                    "repo_full_name": "owner/repo1",
+                    "prs_merged": 10,
+                    "active_contributors_365d": 5,
+                    "review_coverage": 80.0,
+                    "median_time_to_merge": "2 hours",
+                }
+            }
+        }
+        with (paths.site_data_path / "repo_health.json").open("w") as f:
+            json.dump(repo_health_data, f)
+
+        stats = build_site(config, paths)
+
+        # Should complete without error
+        assert len(stats["errors"]) == 0
+
+    def test_repo_health_list_format(
+        self, config: Config, paths: PathManager, sample_metrics_data: None, sample_templates: Path
+    ) -> None:
+        """Test conversion of repo health data from list format."""
+        # Add repo_health.json in list format
+        repo_health_data = [
+            {
+                "repo": "owner/repo1",
+                "pr_count": 10,
+                "contributor_count": 5,
+            }
+        ]
+        with (paths.site_data_path / "repo_health.json").open("w") as f:
+            json.dump(repo_health_data, f)
+
+        stats = build_site(config, paths)
+
+        # Should complete without error
+        assert len(stats["errors"]) == 0
+
+    def test_hygiene_scores_dict_format_with_repos_key(
+        self, config: Config, paths: PathManager, sample_metrics_data: None, sample_templates: Path
+    ) -> None:
+        """Test conversion of hygiene scores from dict with repos key."""
+        # Add hygiene_scores.json in dict format with repos key
+        hygiene_scores_data = {
+            "repos": {
+                "owner/repo1": {
+                    "score": 85.0,
+                }
+            }
+        }
+        with (paths.site_data_path / "hygiene_scores.json").open("w") as f:
+            json.dump(hygiene_scores_data, f)
+
+        stats = build_site(config, paths)
+
+        # Should complete without error
+        assert len(stats["errors"]) == 0
+
+    def test_hygiene_scores_dict_format_without_repos_key(
+        self, config: Config, paths: PathManager, sample_metrics_data: None, sample_templates: Path
+    ) -> None:
+        """Test conversion of hygiene scores from dict without repos key."""
+        # Add hygiene_scores.json in dict format without repos key
+        hygiene_scores_data = {
+            "owner/repo1": {
+                "score": 85.0,
+            }
+        }
+        with (paths.site_data_path / "hygiene_scores.json").open("w") as f:
+            json.dump(hygiene_scores_data, f)
+
+        stats = build_site(config, paths)
+
+        # Should complete without error
+        assert len(stats["errors"]) == 0
+
+    def test_hygiene_scores_list_format(
+        self, config: Config, paths: PathManager, sample_metrics_data: None, sample_templates: Path
+    ) -> None:
+        """Test conversion of hygiene scores from list format."""
+        # Add hygiene_scores.json in list format
+        hygiene_scores_data = [
+            {
+                "repo": "owner/repo1",
+                "score": 85.0,
+            }
+        ]
+        with (paths.site_data_path / "hygiene_scores.json").open("w") as f:
+            json.dump(hygiene_scores_data, f)
+
+        stats = build_site(config, paths)
+
+        # Should complete without error
+        assert len(stats["errors"]) == 0
+
+
+class TestAwardsDataFormatHandling:
+    """Tests for different awards data format handling."""
+
+    def test_awards_with_awards_wrapper(
+        self, config: Config, paths: PathManager, sample_metrics_data: None, sample_templates: Path
+    ) -> None:
+        """Test awards data with awards wrapper and categories."""
+        awards_data = {
+            "awards": {
+                "individual": [
+                    {
+                        "award_key": "top_pr_author",
+                        "title": "Top PR Author",
+                        "description": "Most pull requests opened",
+                        "winner_name": "alice",
+                        "winner_avatar_url": "https://example.com/alice.jpg",
+                        "supporting_stats": "50 PRs opened",
+                    }
+                ],
+                "repository": [],
+                "risk": [],
+            }
+        }
+        with (paths.site_data_path / "awards.json").open("w") as f:
+            json.dump(awards_data, f)
+
+        stats = build_site(config, paths)
+
+        # Should complete without error
+        assert len(stats["errors"]) == 0
+
+    def test_awards_with_direct_categories(
+        self, config: Config, paths: PathManager, sample_metrics_data: None, sample_templates: Path
+    ) -> None:
+        """Test awards data with direct category mapping."""
+        awards_data = {
+            "individual": [
+                {
+                    "award_key": "top_pr_author",
+                    "title": "Top PR Author",
+                    "description": "Most pull requests opened",
+                    "winner_name": "alice",
+                    "winner_avatar_url": "https://example.com/alice.jpg",
+                    "supporting_stats": "50 PRs opened",
+                }
+            ],
+            "repository": [],
+            "risk": [],
+        }
+        with (paths.site_data_path / "awards.json").open("w") as f:
+            json.dump(awards_data, f)
+
+        stats = build_site(config, paths)
+
+        # Should complete without error
+        assert len(stats["errors"]) == 0
+
+    def test_awards_in_simple_format_gets_transformed(
+        self, config: Config, paths: PathManager, sample_metrics_data: None, sample_templates: Path
+    ) -> None:
+        """Test that simple award format is transformed to categorized format."""
+        awards_data = {
+            "top_pr_author": {
+                "user": "alice",
+                "count": 50,
+                "avatar_url": "https://example.com/alice.jpg",
+            }
+        }
+        with (paths.site_data_path / "awards.json").open("w") as f:
+            json.dump(awards_data, f)
+
+        stats = build_site(config, paths)
+
+        # Should complete without error and transform the data
+        assert len(stats["errors"]) == 0
+
+
+class TestBuildSiteErrorHandling:
+    """Tests for error handling in build_site."""
+
+    def test_build_site_handles_render_exception(
+        self, config: Config, paths: PathManager, sample_metrics_data: None, tmp_path: Path
+    ) -> None:
+        """Test that build_site handles template rendering exceptions."""
+        templates_dir = tmp_path / "site_templates" / "templates"
+        templates_dir.mkdir(parents=True, exist_ok=True)
+
+        # Create a template that will cause an error during rendering
+        # (e.g., undefined variable with strict undefined mode)
+        bad_template = "{{ undefined_var.nonexistent_method() }}"
+        (templates_dir / "error.html").write_text(bad_template)
+
+        # Build should handle the error gracefully
+        stats = build_site(config, paths)
+
+        # The template with error should be skipped, but build continues
+        assert isinstance(stats["templates_rendered"], list)
+
+    def test_copy_assets_handles_permission_error(
+        self, paths: PathManager, sample_assets: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Test that _copy_assets handles permission errors gracefully."""
+        import shutil
+
+        def mock_copy2_error(*args, **kwargs):
+            raise PermissionError("Mock permission denied")
+
+        monkeypatch.setattr(shutil, "copy2", mock_copy2_error)
+
+        # Should not raise, but return 0 files copied
+        files_copied = _copy_assets(sample_assets, paths.site_assets_path)
+
+        assert files_copied == 0
+
+
+class TestGenerateRootRedirectWithBasePath:
+    """Tests for _generate_root_redirect with base_path parameter."""
+
+    def test_redirect_with_base_path(self, tmp_path: Path) -> None:
+        """Test that redirect includes base path in URL."""
+        _generate_root_redirect(tmp_path, 2025, base_path="/yakshave")
+
+        content = (tmp_path / "index.html").read_text()
+        assert "url=/yakshave/2025/" in content
+        assert 'href="/yakshave/2025/"' in content
+
+    def test_redirect_with_trailing_slash_in_base_path(self, tmp_path: Path) -> None:
+        """Test that trailing slash in base_path is removed."""
+        _generate_root_redirect(tmp_path, 2025, base_path="/yakshave/")
+
+        content = (tmp_path / "index.html").read_text()
+        # Should strip trailing slash
+        assert "url=/yakshave/2025/" in content
+
+    def test_redirect_with_empty_base_path(self, tmp_path: Path) -> None:
+        """Test redirect with empty base path."""
+        _generate_root_redirect(tmp_path, 2025, base_path="")
+
+        content = (tmp_path / "index.html").read_text()
+        assert "url=/2025/" in content
