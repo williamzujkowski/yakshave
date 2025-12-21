@@ -29,7 +29,7 @@
                             <ul class="year-list">
                                 {% for year in available_years %}
                                 <li>
-                                    <a href="/{{ year }}/"
+                                    <a href="{{ base_path }}/{{ year }}/"
                                        class="year-option{% if year == config.github.windows.year %} active{% endif %}"
                                        {% if year == config.github.windows.year %}aria-current="true"{% endif %}>
                                         {{ year }}

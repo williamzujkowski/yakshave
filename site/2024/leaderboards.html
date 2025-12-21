@@ -27,14 +27,14 @@
                         <div class="year-dropdown" id="yearDropdown" aria-hidden="true">
                             <ul class="year-list">
                                 <li>
-                                    <a href="/2025/"
+                                    <a href="/yakshave/2025/"
                                        class="year-option"
 >
                                         2025
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/2024/"
+                                    <a href="/yakshave/2024/"
                                        class="year-option active"
 aria-current="true">
                                         2024
@@ -124,7 +124,7 @@ aria-current="true">
 
             <div class="sidebar-footer">
                 <div class="generation-info">
-                    <small>Generated: 2025-12-20</small>
+                    <small>Generated: 2025-12-21</small>
                     <small>Version: 1.0.0</small>
                 </div>
             </div>
@@ -195,16 +195,6 @@ aria-current="true">
             <div class="leaderboard-card">
                 <h3>Most Issues Opened</h3>
                 <div class="leaderboard-list">
-                    <div class="leaderboard-item">
-                        <span class="rank">1</span>
-                        <div class="contributor-info">
-                            <img src="https://github.com/identicons/allstar-app[bot].png"
-                                 alt="allstar-app[bot]"
-                                 class="mini-avatar">
-                            <span class="name">allstar-app[bot]</span>
-                        </div>
-                        <span class="value">4</span>
-                    </div>
                 </div>
             </div>
 
@@ -222,16 +212,6 @@ aria-current="true">
             <div class="leaderboard-card">
                 <h3>Most Comments Total</h3>
                 <div class="leaderboard-list">
-                    <div class="leaderboard-item">
-                        <span class="rank">1</span>
-                        <div class="contributor-info">
-                            <img src="https://github.com/identicons/allstar-app[bot].png"
-                                 alt="allstar-app[bot]"
-                                 class="mini-avatar">
-                            <span class="name">allstar-app[bot]</span>
-                        </div>
-                        <span class="value">232</span>
-                    </div>
                 </div>
             </div>
 
@@ -275,12 +255,12 @@ aria-current="true">
         <div class="comparison-select">
             <select id="compare-contributor-1" class="filter-select">
                 <option value="">Select contributor 1...</option>
-                <option value="MDM6Qm90ODU1NzUwMjU=">allstar-app[bot]</option>
+                <option value="williamzujkowski">williamzujkowski</option>
             </select>
             <span class="vs-label">vs</span>
             <select id="compare-contributor-2" class="filter-select">
                 <option value="">Select contributor 2...</option>
-                <option value="MDM6Qm90ODU1NzUwMjU=">allstar-app[bot]</option>
+                <option value="williamzujkowski">williamzujkowski</option>
             </select>
             <button id="compare-btn" class="btn btn-primary">Compare</button>
         </div>
@@ -329,8 +309,8 @@ aria-current="true">
 <script src="assets/js/leaderboards.js"></script>
 <script>
     // Load leaderboard data
-    const leaderboardsData = {"approvals": [], "changes_requested": [], "comments_total": [{"display_name": null, "login": "allstar-app[bot]", "rank": 1, "user_id": "MDM6Qm90ODU1NzUwMjU=", "value": 232}], "issues_closed": [], "issues_opened": [{"display_name": null, "login": "allstar-app[bot]", "rank": 1, "user_id": "MDM6Qm90ODU1NzUwMjU=", "value": 4}], "overall": [], "prs_merged": [], "prs_opened": [], "review_comments_total": [], "reviews_submitted": []};
-    const allContributorsData = [{"activity_timeline": [], "approvals": 0, "avatar_url": "", "changes_requested": 0, "comments_total": 232, "contributions_total": 236, "display_name": null, "issues_closed": 0, "issues_opened": 4, "login": "allstar-app[bot]", "prs_merged": 0, "prs_opened": 0, "rank": 1, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "MDM6Qm90ODU1NzUwMjU="}];
+    const leaderboardsData = {"approvals": [], "changes_requested": [], "comments_total": [], "issues_closed": [], "issues_opened": [], "overall": [], "prs_merged": [], "prs_opened": [], "review_comments_total": [], "reviews_submitted": []};
+    const allContributorsData = [{"activity_timeline": [], "approvals": 0, "avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4", "changes_requested": 0, "comments_total": 0, "contributions_total": 4, "display_name": null, "issues_closed": 0, "issues_opened": 0, "login": "williamzujkowski", "prs_merged": 2, "prs_opened": 2, "rank": 1, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "williamzujkowski"}];
 
     // Initialize leaderboard tabs
     if (typeof initLeaderboardTabs === 'function') {

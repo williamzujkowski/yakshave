@@ -270,6 +270,10 @@ class ReportConfig(BaseModel):
     output_dir: Path = Field(default=Path("./site"))
     theme: str = Field(default="engineer_exec_toggle")
     awards_config: Path | None = None
+    base_path: str = Field(
+        default="",
+        description="Base URL path for GitHub Pages subpath deployment (e.g., '/yakshave')",
+    )
 
 
 class Config(BaseModel):

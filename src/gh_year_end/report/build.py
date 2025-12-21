@@ -110,7 +110,9 @@ def build_site(config: Config, paths: PathManager) -> dict[str, Any]:
         available_years = get_available_years(site_base_dir)
         if available_years:
             most_recent_year = available_years[0]
-            _generate_root_redirect(site_base_dir, most_recent_year)
+            _generate_root_redirect(
+                site_base_dir, most_recent_year, config.report.base_path
+            )
 
     except Exception as e:
         error_msg = f"Build failed: {e!s}"
@@ -301,6 +303,9 @@ def _render_templates(
                     if category in awards_data:
                         awards_by_category[category] = awards_data[category]
 
+        # Get base path for GitHub Pages subpath deployment
+        base_path = config.report.base_path.rstrip("/") if config.report.base_path else ""
+
         # Build template context
         context = {
             "config": {
@@ -323,6 +328,7 @@ def _render_templates(
                     },
                 },
             },
+            "base_path": base_path,
             "current_year": current_year,
             "available_years": available_years,
             "summary": {
@@ -779,18 +785,25 @@ def _write_build_manifest(output_dir: Path, config: Config, stats: dict[str, Any
     logger.info("Wrote build manifest to %s", manifest_path)
 
 
-def _generate_root_redirect(site_base_dir: Path, target_year: int) -> None:
+def _generate_root_redirect(
+    site_base_dir: Path, target_year: int, base_path: str = ""
+) -> None:
     """Generate root index.html that redirects to the most recent year.
 
     Args:
         site_base_dir: Base directory for site output (e.g., ./site/).
         target_year: Year to redirect to.
+        base_path: Base URL path for GitHub Pages subpath (e.g., '/yakshave').
     """
+    # Ensure base_path doesn't have trailing slash
+    base_path = base_path.rstrip("/")
+    redirect_url = f"{base_path}/{target_year}/"
+
     redirect_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=/{target_year}/">
+    <meta http-equiv="refresh" content="0; url={redirect_url}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <style>
@@ -825,7 +838,7 @@ def _generate_root_redirect(site_base_dir: Path, target_year: int) -> None:
     <div class="redirect-container">
         <h1>Year in Review</h1>
         <p>Redirecting to {target_year}...</p>
-        <p>If you are not redirected automatically, <a href="/{target_year}/">click here</a>.</p>
+        <p>If you are not redirected automatically, <a href="{redirect_url}">click here</a>.</p>
     </div>
 </body>
 </html>"""

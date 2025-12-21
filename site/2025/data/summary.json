@@ -1,14 +1,13 @@
 {
   "year": 2025,
-  "target": {
-    "mode": "user",
-    "name": "williamzujkowski"
-  },
-  "generated_at": "2025-12-19T23:16:02.255410",
-  "total_contributors": 8,
-  "total_issues_opened": 0,
+  "target_name": "williamzujkowski",
+  "target_mode": "user",
   "total_repos": 34,
-  "total_prs_opened": 0,
-  "total_prs_merged": 0,
-  "total_issues_closed": 0
+  "total_contributors": 10,
+  "total_prs": 119,
+  "total_issues": 182,
+  "total_reviews": 3,
+  "total_comments": 0,
+  "prs_merged": 110,
+  "issues_closed": 178
 }

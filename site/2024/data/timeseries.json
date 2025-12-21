@@ -1,3 +1,34 @@
 {
-  "weekly": []
+  "weekly": {
+    "prs_opened": [
+      {
+        "period": "2024-W12",
+        "user": "williamzujkowski",
+        "count": 2
+      }
+    ],
+    "prs_merged": [
+      {
+        "period": "2024-W12",
+        "user": "williamzujkowski",
+        "count": 2
+      }
+    ]
+  },
+  "monthly": {
+    "prs_opened": [
+      {
+        "period": "2024-03",
+        "user": "williamzujkowski",
+        "count": 2
+      }
+    ],
+    "prs_merged": [
+      {
+        "period": "2024-03",
+        "user": "williamzujkowski",
+        "count": 2
+      }
+    ]
+  }
 }
