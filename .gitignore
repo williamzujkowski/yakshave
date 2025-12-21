@@ -101,3 +101,14 @@ Thumbs.db
 *.tmp
 *.temp
 *.log
+
+# Test output directories
+test_site/
+test_site_output/
+test_output/
+
+# Local tooling state (not part of project)
+.claude-flow/
+.hive-mind/
+.playwright-mcp/
+.benchmarks/
