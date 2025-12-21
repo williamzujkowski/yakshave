@@ -28,8 +28,41 @@ def merge_repo_data(
         repo_id = health.get("repo_id")
         hygiene = hygiene_by_repo.get(repo_id, {})
 
-        # Determine health status based on metrics
+        # Calculate hygiene score from available fields
+        # If score field exists and is non-zero, use it; otherwise compute from available data
         hygiene_score = hygiene.get("score", 0)
+
+        # Compute score from available hygiene fields if not already set
+        # This handles cases where score is 0 or None but we have hygiene data
+        if not hygiene_score and hygiene:
+            # Compute basic score from available fields
+            score_components = []
+
+            # Branch protection (25 points)
+            if hygiene.get("protected") or hygiene.get("branch_protection_enabled"):
+                score_components.append(25)
+
+            # Security features (25 points)
+            if hygiene.get("has_security_md"):
+                score_components.append(15)
+            if hygiene.get("dependabot_enabled") or hygiene.get("secret_scanning_enabled"):
+                score_components.append(10)
+
+            # Documentation (25 points)
+            if hygiene.get("has_readme"):
+                score_components.append(15)
+            if hygiene.get("has_contributing"):
+                score_components.append(10)
+
+            # Code ownership and CI (25 points)
+            if hygiene.get("has_codeowners"):
+                score_components.append(15)
+            if hygiene.get("has_ci_workflows"):
+                score_components.append(10)
+
+            hygiene_score = sum(score_components)
+
+        # Determine health status based on metrics
         if hygiene_score >= 80:
             health_status = "healthy"
         elif hygiene_score >= 60:
@@ -89,12 +122,20 @@ def calculate_hygiene_aggregate(hygiene_data: list[dict[str, Any]]) -> dict[str,
         }
 
     total_repos = len(hygiene_data)
+
+    # Handle both full hygiene data and minimal branch protection data
     security_md = sum(1 for r in hygiene_data if r.get("has_security_md"))
     security_features = sum(
         1 for r in hygiene_data if r.get("dependabot_enabled") or r.get("secret_scanning_enabled")
     )
     codeowners = sum(1 for r in hygiene_data if r.get("has_codeowners"))
-    branch_protection = sum(1 for r in hygiene_data if r.get("branch_protection_enabled"))
+
+    # For branch protection, check both has_branch_protection and protected fields
+    branch_protection = sum(
+        1 for r in hygiene_data
+        if r.get("branch_protection_enabled") or r.get("protected")
+    )
+
     ci_workflows = sum(1 for r in hygiene_data if r.get("has_ci_workflows"))
     readme = sum(1 for r in hygiene_data if r.get("has_readme"))
     contributing = sum(1 for r in hygiene_data if r.get("has_contributing"))
