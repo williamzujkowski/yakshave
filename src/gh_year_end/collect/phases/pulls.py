@@ -62,7 +62,7 @@ async def run_pulls_phase(
         config.rate_limit.max_concurrency,
     )
 
-    pull_stats = await collect_repos_parallel(
+    pull_stats: dict[str, Any] = await collect_repos_parallel(
         repos=repos,
         collect_fn=collect_single_repo_pulls,
         endpoint_name="pulls",
