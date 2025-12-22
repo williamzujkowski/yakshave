@@ -368,26 +368,25 @@ class TestCalculateHighlights:
         assert result["most_active_month_prs"] == 30
 
     def test_calculate_review_coverage(self):
-        """Test calculating average review coverage."""
-        summary_data = {}
+        """Test calculating review coverage from total reviews/PRs."""
+        summary_data = {
+            "total_prs": 100,
+            "total_reviews": 80,
+        }
         timeseries_data = {"monthly": {}}
-        repo_health_list = [
-            {"review_coverage": 80.0},
-            {"review_coverage": 90.0},
-            {"review_coverage": 70.0},
-        ]
+        repo_health_list = []
 
         result = calculate_highlights(summary_data, timeseries_data, repo_health_list)
 
-        assert result["review_coverage"] == 80.0
+        assert result["review_coverage"] == 80.0  # (80 / 100) * 100
 
     def test_calculate_avg_review_time_hours(self):
-        """Test calculating average review time in hours."""
+        """Test calculating average merge time in hours."""
         summary_data = {}
         timeseries_data = {"monthly": {}}
         repo_health_list = [
-            {"median_time_to_first_review": 3600},  # 1 hour
-            {"median_time_to_first_review": 7200},  # 2 hours
+            {"median_time_to_merge": 1.0},  # 1 hour
+            {"median_time_to_merge": 2.0},  # 2 hours
         ]
 
         result = calculate_highlights(summary_data, timeseries_data, repo_health_list)
@@ -395,11 +394,11 @@ class TestCalculateHighlights:
         assert result["avg_review_time"] == "1.5 hours"
 
     def test_calculate_avg_review_time_minutes(self):
-        """Test calculating average review time in minutes."""
+        """Test calculating average merge time in minutes."""
         summary_data = {}
         timeseries_data = {"monthly": {}}
         repo_health_list = [
-            {"median_time_to_first_review": 1800},  # 30 minutes
+            {"median_time_to_merge": 0.5},  # 0.5 hours = 30 minutes
         ]
 
         result = calculate_highlights(summary_data, timeseries_data, repo_health_list)
@@ -407,11 +406,11 @@ class TestCalculateHighlights:
         assert result["avg_review_time"] == "30 minutes"
 
     def test_calculate_avg_review_time_days(self):
-        """Test calculating average review time in days."""
+        """Test calculating average merge time in days."""
         summary_data = {}
         timeseries_data = {"monthly": {}}
         repo_health_list = [
-            {"median_time_to_first_review": 172800},  # 2 days
+            {"median_time_to_merge": 48.0},  # 48 hours = 2 days
         ]
 
         result = calculate_highlights(summary_data, timeseries_data, repo_health_list)
@@ -430,17 +429,21 @@ class TestCalculateHighlights:
 
     def test_calculate_with_none_values(self):
         """Test handling None values in repo health data."""
-        summary_data = {}
+        summary_data = {
+            "total_prs": 100,
+            "total_reviews": 80,
+        }
         timeseries_data = {"monthly": {}}
         repo_health_list = [
-            {"review_coverage": 80.0, "median_time_to_first_review": 3600},
-            {"review_coverage": None, "median_time_to_first_review": None},
+            {"median_time_to_merge": 1.0},
+            {"median_time_to_merge": None},
         ]
 
         result = calculate_highlights(summary_data, timeseries_data, repo_health_list)
 
-        # Should only count non-None values
+        # Review coverage from summary data
         assert result["review_coverage"] == 80.0
+        # Merge time should only count non-None/non-zero values
         assert result["avg_review_time"] == "1.0 hours"
 
     def test_new_contributors_always_zero(self):

@@ -965,12 +965,12 @@ class TestCalculateHighlights:
         assert "minutes" in highlights["avg_review_time"]
 
     def test_calculates_avg_review_time_in_days(self) -> None:
-        """Test that average review time is calculated correctly in days."""
+        """Test that average merge time is calculated correctly in days."""
         summary_data = {}
         timeseries_data = {}
         repo_health_list = [
-            {"median_time_to_first_review": 3600 * 24 * 2},  # 2 days
-            {"median_time_to_first_review": 3600 * 24 * 3},  # 3 days
+            {"median_time_to_merge": 48.0},  # 48 hours = 2 days
+            {"median_time_to_merge": 72.0},  # 72 hours = 3 days
         ]
 
         highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
@@ -989,27 +989,23 @@ class TestCalculateHighlights:
         assert highlights["new_contributors"] == 0
 
     def test_handles_missing_review_coverage(self) -> None:
-        """Test that None review coverage values are skipped."""
-        summary_data = {}
+        """Test review coverage falls back to zero when no summary data."""
+        summary_data = {}  # No total_prs or total_reviews
         timeseries_data = {}
-        repo_health_list = [
-            {"review_coverage": 80.0},
-            {"review_coverage": None},
-            {"review_coverage": 60.0},
-        ]
+        repo_health_list = []
 
         highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
 
-        assert highlights["review_coverage"] == 70.0  # (80 + 60) / 2
+        assert highlights["review_coverage"] == 0
 
     def test_handles_missing_review_time(self) -> None:
-        """Test that None review time values are skipped."""
+        """Test that None merge time values are skipped."""
         summary_data = {}
         timeseries_data = {}
         repo_health_list = [
-            {"median_time_to_first_review": 3600},
-            {"median_time_to_first_review": None},
-            {"median_time_to_first_review": 7200},
+            {"median_time_to_merge": 1.0},
+            {"median_time_to_merge": None},
+            {"median_time_to_merge": 2.0},
         ]
 
         highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
