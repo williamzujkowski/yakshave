@@ -65,6 +65,7 @@ class MetricsAggregator:
     )
 
     # Track contributors for new contributor detection
+    _all_contributors_ever: set[str] = field(default_factory=set)
     _new_contributors_this_year: set[str] = field(default_factory=set)
 
     def _is_bot(self, user: dict[str, Any] | None) -> bool:
