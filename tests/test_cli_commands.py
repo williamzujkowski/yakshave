@@ -1,5 +1,6 @@
 """Tests for new CLI commands (collect, build, all)."""
 
+from datetime import UTC
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -245,6 +246,38 @@ class TestCollectCommand:
         assert result.exit_code == 1
         assert "Traceback:" in result.output
 
+    def test_year_override(self, runner: CliRunner, config_file: Path) -> None:
+        """Test that --year flag overrides config year."""
+        config_received = {}
+
+        async def mock_collect(config, *args, **kwargs):
+            config_received["year"] = config.github.windows.year
+            config_received["since"] = config.github.windows.since
+            config_received["until"] = config.github.windows.until
+            return {
+                "summary": {"total_prs": 100},
+                "leaderboards": {"top_contributors": []},
+                "timeseries": {"weekly": []},
+                "repo_health": {"repositories": []},
+                "hygiene_scores": {"scores": []},
+                "awards": {"awards": []},
+            }
+
+        with patch(
+            "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+        ):
+            result = runner.invoke(
+                main, ["collect", "--config", str(config_file), "--year", "2023"]
+            )
+
+        assert result.exit_code == 0
+        assert config_received["year"] == 2023
+        # Check that since/until were recalculated
+        from datetime import datetime
+
+        assert config_received["since"] == datetime(2023, 1, 1, 0, 0, 0, tzinfo=UTC)
+        assert config_received["until"] == datetime(2024, 1, 1, 0, 0, 0, tzinfo=UTC)
+
 
 class TestBuildCommand:
     """Tests for build command."""
@@ -384,6 +417,42 @@ class TestBuildCommand:
         assert result.exit_code == 1
         assert "Traceback:" in result.output
 
+    @patch("gh_year_end.report.build.build_site")
+    def test_year_override(
+        self, mock_build_site: MagicMock, runner: CliRunner, config_file: Path, tmp_path: Path
+    ) -> None:
+        """Test that --year flag overrides config year."""
+        # Create required data files for year 2023
+        data_dir = tmp_path / "site" / "2023" / "data"
+        data_dir.mkdir(parents=True, exist_ok=True)
+        (data_dir / "summary.json").write_text('{"total_prs": 100}')
+        (data_dir / "leaderboards.json").write_text('{"top_contributors": []}')
+
+        config_received = {}
+
+        def capture_config(config, paths):
+            config_received["year"] = config.github.windows.year
+            config_received["since"] = config.github.windows.since
+            config_received["until"] = config.github.windows.until
+            return {
+                "templates_rendered": ["index.html"],
+                "data_files_written": 6,
+                "assets_copied": 5,
+                "errors": [],
+            }
+
+        mock_build_site.side_effect = capture_config
+
+        result = runner.invoke(main, ["build", "--config", str(config_file), "--year", "2023"])
+
+        assert result.exit_code == 0
+        assert config_received["year"] == 2023
+        # Check that since/until were recalculated
+        from datetime import datetime
+
+        assert config_received["since"] == datetime(2023, 1, 1, 0, 0, 0, tzinfo=UTC)
+        assert config_received["until"] == datetime(2024, 1, 1, 0, 0, 0, tzinfo=UTC)
+
 
 class TestAllCommand:
     """Tests for all command (collect + build)."""
@@ -493,6 +562,42 @@ class TestAllCommand:
 
         # Force flag should have been used in collect
         assert force_used.get("value") is True
+
+    def test_year_override(self, runner: CliRunner, config_file: Path) -> None:
+        """Test that --year flag overrides config year in both collect and build."""
+        config_years = {"collect": None, "build": None}
+
+        async def mock_collect(config, *args, **kwargs):
+            config_years["collect"] = config.github.windows.year
+            return {
+                "summary": {"total_prs": 100},
+                "leaderboards": {"top_contributors": []},
+                "timeseries": {"weekly": []},
+                "repo_health": {"repositories": []},
+                "hygiene_scores": {"scores": []},
+                "awards": {"awards": []},
+            }
+
+        def mock_build(config, *args, **kwargs):
+            config_years["build"] = config.github.windows.year
+            return {
+                "templates_rendered": ["index.html"],
+                "data_files_written": 6,
+                "assets_copied": 5,
+                "errors": [],
+            }
+
+        with (
+            patch(
+                "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+            ),
+            patch("gh_year_end.report.build.build_site", side_effect=mock_build),
+        ):
+            result = runner.invoke(main, ["all", "--config", str(config_file), "--year", "2023"])
+
+        assert result.exit_code == 0
+        assert config_years["collect"] == 2023
+        assert config_years["build"] == 2023
 
 
 class TestRemovedCommands:

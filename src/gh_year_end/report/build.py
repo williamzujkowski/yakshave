@@ -66,6 +66,88 @@ def get_available_years(site_base_dir: Path) -> list[int]:
     return sorted(years, reverse=True)
 
 
+def _collect_year_stats(site_dir: Path, years: list[int]) -> dict[int, dict[str, Any] | None]:
+    """Collect summary stats for each available year.
+
+    Args:
+        site_dir: Base directory for site output (e.g., ./site/).
+        years: List of years to collect stats for.
+
+    Returns:
+        Dictionary mapping year to stats dict or None if data unavailable.
+        Stats dict contains: contributors, prs_merged, repos.
+    """
+    stats: dict[int, dict[str, Any] | None] = {}
+
+    for year in years:
+        summary_path = site_dir / str(year) / "data" / "summary.json"
+        if summary_path.exists():
+            try:
+                with summary_path.open() as f:
+                    data = json.load(f)
+                stats[year] = {
+                    "contributors": data.get("total_contributors", 0),
+                    "prs_merged": data.get("prs_merged", 0),
+                    "repos": data.get("total_repos", 0),
+                }
+                logger.info("Loaded stats for year %d: %s", year, stats[year])
+            except Exception as e:
+                logger.warning("Failed to load summary for year %d: %s", year, e)
+                stats[year] = None
+        else:
+            logger.debug("No summary.json found for year %d", year)
+            stats[year] = None
+
+    return stats
+
+
+def _build_years_list(
+    available_years: list[int],
+    year_stats: dict[int, dict[str, Any] | None],
+    current_year: int,
+    base_path: str,
+) -> list[dict[str, Any]]:
+    """Build years list for year_index.html template.
+
+    Args:
+        available_years: List of available years.
+        year_stats: Dictionary mapping year to stats.
+        current_year: Current year being rendered.
+        base_path: Base URL path for links.
+
+    Returns:
+        List of year objects with path, year, description, stats, and flags.
+    """
+    years_list = []
+    base_path_clean = base_path.rstrip("/")
+
+    for year in available_years:
+        stats = year_stats.get(year)
+        is_current = year == current_year
+        is_coming_soon = stats is None
+
+        year_obj = {
+            "year": year,
+            "path": f"{base_path_clean}/{year}/",
+            "description": f"GitHub activity and metrics for {year}",
+            "is_current": is_current,
+            "is_coming_soon": is_coming_soon,
+            "stats": None,
+        }
+
+        # Only add stats if available
+        if stats:
+            year_obj["stats"] = {
+                "contributors": stats.get("contributors", 0),
+                "prs": stats.get("prs_merged", 0),
+                "repos": stats.get("repos", 0),
+            }
+
+        years_list.append(year_obj)
+
+    return years_list
+
+
 def build_site(config: Config, paths: PathManager) -> dict[str, Any]:
     """Build the complete static site from templates and data.
 
@@ -340,6 +422,15 @@ def _render_templates(
         available_years = get_available_years(site_base_dir)
         current_year = config.github.windows.year
 
+        # Get base path for GitHub Pages subpath deployment
+        base_path = config.report.base_path.rstrip("/") if config.report.base_path else ""
+
+        # Collect year statistics for year_index.html template
+        year_stats = _collect_year_stats(site_base_dir, available_years)
+
+        # Build years list with stats for year_index.html
+        years_list = _build_years_list(available_years, year_stats, current_year, base_path)
+
         # Process awards data - transform from simple key-value to categorized format
         awards_by_category: dict[str, list[Any]] = {
             "individual": [],
@@ -422,6 +513,7 @@ def _render_templates(
             "theme_color": config.report.theme_color,
             "current_year": current_year,
             "available_years": available_years,
+            "year_stats": year_stats,
             "thresholds": {
                 "hygiene_healthy": config.thresholds.hygiene_healthy,
                 "hygiene_warning": config.thresholds.hygiene_warning,
