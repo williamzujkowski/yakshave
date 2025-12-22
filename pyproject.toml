@@ -146,8 +146,7 @@ exclude_lines = [
     "if TYPE_CHECKING:",
     "if __name__ == .__main__.:",
 ]
-# NOTE: Temporarily lowered for Phase 2. The collectors (commits, issues, pulls,
-# reviews, comments, repos) and async GitHub clients require integration tests
-# with mocked HTTP calls (httpx/respx) or real API access.
-# TODO: Add collector unit tests with mocked API responses (tracked in #54).
+# NOTE: Coverage threshold temporarily at 45%. Goal is 80%.
+# Collectors have integration tests; additional unit tests with mocked
+# API responses would improve coverage further.
 fail_under = 45
