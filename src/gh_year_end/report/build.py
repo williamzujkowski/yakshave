@@ -317,7 +317,12 @@ def _render_templates(
         repo_health_list.sort(key=lambda x: x.get("prs_merged", 0), reverse=True)
 
         # Merge repo data for repos.html template
-        repos_merged = repos_view.merge_repo_data(repo_health_list, hygiene_scores_list)
+        repos_merged = repos_view.merge_repo_data(
+            repo_health_list,
+            hygiene_scores_list,
+            config.thresholds.hygiene_healthy,
+            config.thresholds.hygiene_warning,
+        )
 
         # Calculate hygiene aggregate for repos.html template
         hygiene_aggregate = repos_view.calculate_hygiene_aggregate(hygiene_scores_list)
@@ -417,6 +422,19 @@ def _render_templates(
             "theme_color": config.report.theme_color,
             "current_year": current_year,
             "available_years": available_years,
+            "thresholds": {
+                "hygiene_healthy": config.thresholds.hygiene_healthy,
+                "hygiene_warning": config.thresholds.hygiene_warning,
+                "hygiene_good": config.thresholds.hygiene_good,
+                "hygiene_bad": config.thresholds.hygiene_bad,
+                "review_coverage_good": config.thresholds.review_coverage_good,
+                "review_coverage_bad": config.thresholds.review_coverage_bad,
+                "max_review_time_hours": config.thresholds.max_review_time_hours,
+                "stale_pr_days": config.thresholds.stale_pr_days,
+                "high_pr_ratio": config.thresholds.high_pr_ratio,
+                "leaderboard_top_n": config.thresholds.leaderboard_top_n,
+                "contributor_chart_top_n": config.thresholds.contributor_chart_top_n,
+            },
             "summary": {
                 "total_contributors": summary_data.get("total_contributors", 0),
                 "total_prs_merged": summary_data.get("prs_merged", 0),
@@ -458,7 +476,14 @@ def _render_templates(
                 summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
             ),
             # Calculate risks from health metrics
-            "risks": _calculate_risks(repo_health_list, hygiene_scores_list, summary_data),
+            "risks": _calculate_risks(
+                repo_health_list,
+                hygiene_scores_list,
+                summary_data,
+                config.thresholds.hygiene_good,
+                config.thresholds.review_coverage_good,
+                config.thresholds.max_review_time_hours,
+            ),
             # Static recommendation - implement dynamic recommendations based on metrics
             "recommendations": [
                 {
@@ -646,9 +671,19 @@ def _calculate_risks(
     repo_health_list: list[dict[str, Any]],
     hygiene_scores_list: list[dict[str, Any]],
     summary_data: dict[str, Any] | None = None,
+    hygiene_good: int = 60,
+    review_coverage_good: int = 50,
+    max_review_time_hours: int = 48,
 ) -> list[dict[str, Any]]:
     """Backward-compatible wrapper for calculate_risks."""
-    return calculate_risks(repo_health_list, hygiene_scores_list, summary_data)
+    return calculate_risks(
+        repo_health_list,
+        hygiene_scores_list,
+        summary_data,
+        hygiene_good,
+        review_coverage_good,
+        max_review_time_hours,
+    )
 
 
 def _calculate_health_signals(

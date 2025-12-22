@@ -199,6 +199,9 @@ def calculate_risks(
     repo_health_list: list[dict[str, Any]],
     hygiene_scores_list: list[dict[str, Any]],
     summary_data: dict[str, Any] | None = None,
+    hygiene_good: int = 60,
+    review_coverage_good: int = 50,
+    max_review_time_hours: int = 48,
 ) -> list[dict[str, Any]]:
     """Identify risks and concerns from repository health metrics.
 
@@ -206,6 +209,9 @@ def calculate_risks(
         repo_health_list: Repository health metrics.
         hygiene_scores_list: Repository hygiene scores.
         summary_data: Optional summary statistics.
+        hygiene_good: Threshold for good hygiene score (default: 60).
+        review_coverage_good: Threshold for good review coverage (default: 50).
+        max_review_time_hours: Maximum acceptable review time in hours (default: 48).
 
     Returns:
         List of risk dictionaries with structure:
@@ -265,18 +271,18 @@ def calculate_risks(
             }
         )
 
-    # Risk 3: Low documentation scores (hygiene score < 60)
+    # Risk 3: Low documentation scores (hygiene score < hygiene_good)
     low_documentation = []
     for repo_id, hygiene in hygiene_by_repo.items():
         score = hygiene.get("score", 0)
-        if score < 60:
+        if score < hygiene_good:
             low_documentation.append(hygiene.get("repo_full_name", repo_id))
 
     if low_documentation:
         risks.append(
             {
                 "title": "Low Documentation Score",
-                "description": f"{len(low_documentation)} repositories have hygiene scores below 60",
+                "description": f"{len(low_documentation)} repositories have hygiene scores below {hygiene_good}",
                 "severity": "medium",
                 "repos": sorted(low_documentation),
             }
@@ -298,35 +304,36 @@ def calculate_risks(
             }
         )
 
-    # Risk 5: Long review times (median > 48 hours)
+    # Risk 5: Long review times (median > max_review_time_hours)
     long_review_times = []
+    max_review_time_seconds = max_review_time_hours * 3600
     for repo_id, health in health_by_repo.items():
         median_review_time = health.get("median_time_to_first_review")
-        if median_review_time is not None and median_review_time > 172800:  # 48 hours in seconds
+        if median_review_time is not None and median_review_time > max_review_time_seconds:
             long_review_times.append(health.get("repo_full_name", repo_id))
 
     if long_review_times:
         risks.append(
             {
                 "title": "Long Review Times",
-                "description": f"{len(long_review_times)} repositories have median review times exceeding 48 hours",
+                "description": f"{len(long_review_times)} repositories have median review times exceeding {max_review_time_hours} hours",
                 "severity": "medium",
                 "repos": sorted(long_review_times),
             }
         )
 
-    # Risk 6: Low review coverage (< 50%)
+    # Risk 6: Low review coverage (< review_coverage_good)
     low_review_coverage = []
     for repo_id, health in health_by_repo.items():
         review_coverage = health.get("review_coverage")
-        if review_coverage is not None and review_coverage < 50:
+        if review_coverage is not None and review_coverage < review_coverage_good:
             low_review_coverage.append(health.get("repo_full_name", repo_id))
 
     if low_review_coverage:
         risks.append(
             {
                 "title": "Low Review Coverage",
-                "description": f"{len(low_review_coverage)} repositories have less than 50% review coverage",
+                "description": f"{len(low_review_coverage)} repositories have less than {review_coverage_good}% review coverage",
                 "severity": "high",
                 "repos": sorted(low_review_coverage),
             }

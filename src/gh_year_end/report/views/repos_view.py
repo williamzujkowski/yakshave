@@ -10,12 +10,16 @@ from typing import Any
 def merge_repo_data(
     repo_health_data: list[dict[str, Any]],
     hygiene_data: list[dict[str, Any]],
+    hygiene_healthy: int = 50,
+    hygiene_warning: int = 30,
 ) -> list[dict[str, Any]]:
     """Merge health and hygiene data for each repository.
 
     Args:
         repo_health_data: List of repository health metrics.
         hygiene_data: List of repository hygiene scores.
+        hygiene_healthy: Threshold for healthy hygiene score (default: 50).
+        hygiene_warning: Threshold for warning hygiene score (default: 30).
 
     Returns:
         List of merged repository data for template rendering.
@@ -102,10 +106,10 @@ def merge_repo_data(
             # Use hygiene-based health status
             # Lower thresholds to account for personal repos that often lack
             # enterprise hygiene features like CODEOWNERS and branch protection
-            if hygiene_score >= 50:
+            if hygiene_score >= hygiene_healthy:
                 health_status = "healthy"
                 hygiene_score_category = "high"
-            elif hygiene_score >= 30:
+            elif hygiene_score >= hygiene_warning:
                 health_status = "warning"
                 hygiene_score_category = "medium"
             else:
