@@ -108,7 +108,7 @@
                         <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                     </svg>
                 </div>
-                <h3>Active Contributors</h3>
+                <h3>{{ metric_tooltip('Active Contributors', 'Contributors with at least one contribution in the selected period') }}</h3>
             </div>
             <div class="signal-value">{{ health.active_contributors | default(0) }}</div>
             <p>contributors in the last 90 days</p>
