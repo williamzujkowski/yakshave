@@ -14,12 +14,12 @@ def add_aria_hidden_to_decorative_svgs(content: str) -> str:
     # Only add to decorative SVGs (class contains icon, or is in navigation/header)
 
     # Find all SVG tags
-    svg_pattern = r'<svg\s+([^>]*?)>'
+    svg_pattern = r"<svg\s+([^>]*?)>"
 
     def replace_svg(match):
         attrs = match.group(1)
         # Skip if already has aria-hidden or aria-label
-        if 'aria-hidden' in attrs or 'aria-label' in attrs or 'role=' in attrs:
+        if "aria-hidden" in attrs or "aria-label" in attrs or "role=" in attrs:
             return match.group(0)
         # Add aria-hidden="true"
         return f'<svg {attrs} aria-hidden="true">'
@@ -30,13 +30,13 @@ def add_aria_hidden_to_decorative_svgs(content: str) -> str:
 def add_table_caption(content: str, caption_text: str) -> str:
     """Add caption to tables that don't have one."""
     # Pattern: <table...>\\n\\s*<thead> (no caption between)
-    table_pattern = r'(<table[^>]*>)\s*(<thead>)'
+    table_pattern = r"(<table[^>]*>)\s*(<thead>)"
 
     def replace_table(match):
         table_tag = match.group(1)
         thead_tag = match.group(2)
         # Check if caption already exists (look ahead)
-        if '<caption' in content[match.start():match.start()+200]:
+        if "<caption" in content[match.start() : match.start() + 200]:
             return match.group(0)
         return f'{table_tag}\n  <caption class="visually-hidden">{caption_text}</caption>\n  {thead_tag}'
 
@@ -52,7 +52,7 @@ def add_aria_sort_to_sortable_headers(content: str) -> str:
         th_open = match.group(1)
         close_bracket = match.group(2)
         # Skip if already has aria-sort
-        if 'aria-sort' in th_open:
+        if "aria-sort" in th_open:
             return match.group(0)
         return f'{th_open} aria-sort="none"{close_bracket}'
 
@@ -64,23 +64,27 @@ def add_scope_to_headers(content: str) -> str:
     # Only apply to headers in thead sections
     # Split by thead sections
     result = []
-    parts = re.split(r'(<thead>.*?</thead>)', content, flags=re.DOTALL)
+    parts = re.split(r"(<thead>.*?</thead>)", content, flags=re.DOTALL)
     for part in parts:
-        if '<thead>' in part and '</thead>' in part:
+        if "<thead>" in part and "</thead>" in part:
             # This is a thead section
-            part = re.sub(r'<th(\s+[^>]*)?>',
-                         lambda m: f'<th{m.group(1) or ""} scope="col">' if 'scope=' not in (m.group(1) or '') else m.group(0),
-                         part)
+            part = re.sub(
+                r"<th(\s+[^>]*)?>",
+                lambda m: f'<th{m.group(1) or ""} scope="col">'
+                if "scope=" not in (m.group(1) or "")
+                else m.group(0),
+                part,
+            )
         result.append(part)
 
-    return ''.join(result)
+    return "".join(result)
 
 
 def process_file(file_path: Path):
     """Process a single template file."""
     print(f"Processing {file_path.name}...")
 
-    with file_path.open(encoding='utf-8') as f:
+    with file_path.open(encoding="utf-8") as f:
         content = f.read()
 
     original_content = content
@@ -96,9 +100,9 @@ def process_file(file_path: Path):
 
     # Step 4: Add table captions based on filename
     caption_map = {
-        'engineers.html': 'Contributor statistics sorted by activity',
-        'repos.html': 'Repository health metrics and statistics',
-        'leaderboards.html': 'Contributor rankings by overall score',
+        "engineers.html": "Contributor statistics sorted by activity",
+        "repos.html": "Repository health metrics and statistics",
+        "leaderboards.html": "Contributor rankings by overall score",
     }
 
     if file_path.name in caption_map:
@@ -106,7 +110,7 @@ def process_file(file_path: Path):
 
     # Write back if changed
     if content != original_content:
-        with file_path.open('w', encoding='utf-8') as f:
+        with file_path.open("w", encoding="utf-8") as f:
             f.write(content)
         print(f"  ✓ Updated {file_path.name}")
     else:

@@ -78,14 +78,15 @@ def calculate_highlights(
     except Exception as e:
         logger.warning("Failed to calculate review coverage: %s", e)
 
-    # Calculate average merge time from repo health data (median_time_to_merge is stored in hours)
+    # Calculate average merge time from repo health data
+    # median_time_to_merge is stored in hours
     try:
         if repo_health_list:
-            merge_times: list[float] = [
-                float(r.get("median_time_to_merge", 0))
-                for r in repo_health_list
-                if r.get("median_time_to_merge") is not None and r.get("median_time_to_merge") > 0
-            ]
+            merge_times: list[float] = []
+            for r in repo_health_list:
+                merge_val = r.get("median_time_to_merge")
+                if merge_val is not None and float(merge_val) > 0:
+                    merge_times.append(float(merge_val))
             if merge_times:
                 avg_merge_time_hours = sum(merge_times) / len(merge_times)
                 # Format based on magnitude

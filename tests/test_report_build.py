@@ -923,27 +923,26 @@ class TestCalculateHighlights:
         assert highlights["most_active_month_prs"] == 12  # 10 + 2
 
     def test_calculates_review_coverage(self) -> None:
-        """Test that review coverage is calculated correctly."""
-        summary_data = {}
+        """Test that review coverage is calculated correctly from total reviews/PRs."""
+        summary_data = {
+            "total_prs": 119,
+            "total_reviews": 3,
+        }
         timeseries_data = {}
-        repo_health_list = [
-            {"review_coverage": 80.0},
-            {"review_coverage": 60.0},
-            {"review_coverage": 90.0},
-        ]
+        repo_health_list = []
 
         highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
 
         assert "review_coverage" in highlights
-        assert highlights["review_coverage"] == 76.7  # (80 + 60 + 90) / 3 rounded
+        assert highlights["review_coverage"] == 2.5  # (3 / 119) * 100 rounded to 1 decimal
 
     def test_calculates_avg_review_time_in_hours(self) -> None:
-        """Test that average review time is calculated correctly in hours."""
+        """Test that average merge time is calculated correctly in hours."""
         summary_data = {}
         timeseries_data = {}
         repo_health_list = [
-            {"median_time_to_first_review": 3600 * 5},  # 5 hours
-            {"median_time_to_first_review": 3600 * 3},  # 3 hours
+            {"median_time_to_merge": 5.0},  # 5 hours
+            {"median_time_to_merge": 3.0},  # 3 hours
         ]
 
         highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
@@ -952,12 +951,12 @@ class TestCalculateHighlights:
         assert "hours" in highlights["avg_review_time"]
 
     def test_calculates_avg_review_time_in_minutes(self) -> None:
-        """Test that average review time is calculated correctly in minutes."""
+        """Test that average merge time is calculated correctly in minutes."""
         summary_data = {}
         timeseries_data = {}
         repo_health_list = [
-            {"median_time_to_first_review": 60 * 30},  # 30 minutes
-            {"median_time_to_first_review": 60 * 20},  # 20 minutes
+            {"median_time_to_merge": 0.5},  # 0.5 hours = 30 minutes
+            {"median_time_to_merge": 0.33},  # 0.33 hours ≈ 20 minutes
         ]
 
         highlights = _calculate_highlights(summary_data, timeseries_data, repo_health_list)
