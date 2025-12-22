@@ -263,6 +263,31 @@ class StorageConfig(BaseModel):
     dataset_version: str = Field(default="v1")
 
 
+class ThresholdsConfig(BaseModel):
+    """Configurable thresholds for analysis and display."""
+
+    # Hygiene score thresholds
+    hygiene_healthy: int = Field(default=50, ge=0, le=100, description="Score >= this is healthy")
+    hygiene_warning: int = Field(default=30, ge=0, le=100, description="Score >= this is warning")
+
+    # For trend indicators
+    hygiene_good: int = Field(default=60, ge=0, le=100, description="Good threshold for trends")
+    hygiene_bad: int = Field(default=40, ge=0, le=100, description="Bad threshold for trends")
+
+    # Review thresholds
+    review_coverage_good: int = Field(default=50, ge=0, le=100)
+    review_coverage_bad: int = Field(default=20, ge=0, le=100)
+    max_review_time_hours: int = Field(default=48, ge=1)
+
+    # PR thresholds
+    stale_pr_days: int = Field(default=30, ge=1)
+    high_pr_ratio: float = Field(default=0.5, ge=0.0, le=1.0)
+
+    # Display limits
+    leaderboard_top_n: int = Field(default=10, ge=1)
+    contributor_chart_top_n: int = Field(default=10, ge=1)
+
+
 class ReportConfig(BaseModel):
     """Report configuration section."""
 
@@ -273,6 +298,26 @@ class ReportConfig(BaseModel):
     base_path: str = Field(
         default="",
         description="Base URL path for GitHub Pages subpath deployment (e.g., '/yakshave')",
+    )
+    base_url: str = Field(
+        default="",
+        description="Full base URL for deployment (e.g., 'https://user.github.io/repo')",
+    )
+    organization_name: str = Field(
+        default="",
+        description="Display name for organization/user (defaults to target.name)",
+    )
+    description: str = Field(
+        default="GitHub Year in Review - Community health metrics and statistics",
+        description="Site description for SEO",
+    )
+    og_image: str = Field(
+        default="assets/favicon-32x32.png",
+        description="Open Graph image path",
+    )
+    theme_color: str = Field(
+        default="#667eea",
+        description="Theme color for PWA manifest",
     )
 
 
@@ -285,6 +330,7 @@ class Config(BaseModel):
     collection: CollectionConfig = Field(default_factory=CollectionConfig)
     storage: StorageConfig = Field(default_factory=StorageConfig)
     report: ReportConfig = Field(default_factory=ReportConfig)
+    thresholds: ThresholdsConfig = Field(default_factory=ThresholdsConfig)
 
 
 def load_config(path: Path) -> Config:

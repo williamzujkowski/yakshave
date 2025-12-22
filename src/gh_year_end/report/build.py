@@ -375,6 +375,12 @@ def _render_templates(
         # Get base path for GitHub Pages subpath deployment
         base_path = config.report.base_path.rstrip("/") if config.report.base_path else ""
 
+        # Compute base_url - use config value or construct from target name
+        base_url = config.report.base_url
+        if not base_url and config.github.target.name:
+            # Default to GitHub Pages URL pattern
+            base_url = f"https://{config.github.target.name}.github.io"
+
         # Pre-compute engineers list (used in multiple context keys)
         engineers_list = _get_engineers_list(leaderboards_data, timeseries_data)
 
@@ -404,6 +410,11 @@ def _render_templates(
                 },
             },
             "base_path": base_path,
+            "base_url": base_url,
+            "organization_name": config.report.organization_name or config.github.target.name,
+            "site_description": config.report.description,
+            "og_image": config.report.og_image,
+            "theme_color": config.report.theme_color,
             "current_year": current_year,
             "available_years": available_years,
             "summary": {
@@ -490,6 +501,11 @@ def _render_templates(
             except Exception as e:
                 logger.warning("Failed to render %s: %s", template_name, e)
                 continue
+
+        # Generate manifest.webmanifest and sw.js from templates
+        year = config.github.windows.year
+        _generate_manifest(output_dir, env, config, year)
+        _generate_service_worker(output_dir, env, year)
 
     except Exception as e:
         logger.warning("Template rendering failed: %s", e)
@@ -856,6 +872,47 @@ def _write_build_manifest(output_dir: Path, config: Config, stats: dict[str, Any
         json.dump(manifest, f, indent=2)
 
     logger.info("Wrote build manifest to %s", manifest_path)
+
+
+def _generate_manifest(
+    output_dir: Path,
+    template_env: Environment,
+    config: Config,
+    year: int,
+) -> None:
+    """Generate manifest.webmanifest from template."""
+    template = template_env.get_template("manifest.webmanifest.j2")
+    content = template.render(
+        config=config,
+        site_description=config.report.description,
+        theme_color=config.report.theme_color,
+        year=year,
+    )
+
+    manifest_path = output_dir / "manifest.webmanifest"
+    manifest_path.write_text(content)
+    logger.info("Generated manifest.webmanifest")
+
+
+def _generate_service_worker(
+    output_dir: Path,
+    template_env: Environment,
+    year: int,
+) -> None:
+    """Generate sw.js from template."""
+    import time
+
+    cache_version = int(time.time())
+
+    template = template_env.get_template("sw.js.j2")
+    content = template.render(
+        year=year,
+        cache_version=cache_version,
+    )
+
+    sw_path = output_dir / "sw.js"
+    sw_path.write_text(content)
+    logger.info("Generated sw.js")
 
 
 def _generate_root_redirect(site_base_dir: Path, target_year: int, base_path: str = "") -> None:
