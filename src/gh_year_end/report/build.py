@@ -375,7 +375,7 @@ def _render_templates(
         engineers_list = _get_engineers_list(leaderboards_data, timeseries_data)
 
         # Generate engineer chart data
-        engineer_charts = generate_engineer_charts(timeseries_data, summary_data)
+        engineer_charts = generate_engineer_charts(timeseries_data, summary_data, repo_health_list)
 
         # Build template context
         context = {

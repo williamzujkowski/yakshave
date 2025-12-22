@@ -67,12 +67,14 @@ def generate_chart_data(
 def generate_engineer_charts(
     timeseries_data: dict[str, Any],
     summary_data: dict[str, Any],
+    repo_health_list: list[dict[str, Any]] | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
     """Generate chart data for Engineers page.
 
     Args:
         timeseries_data: Time series data from timeseries.json.
         summary_data: Summary statistics from summary.json.
+        repo_health_list: Repository health metrics for contribution by repo chart.
 
     Returns:
         Dictionary with engineer chart data:
@@ -85,7 +87,7 @@ def generate_engineer_charts(
     return {
         "contribution_timeline": _generate_contribution_timeline(weekly_data),
         "contribution_types": _generate_contribution_types(weekly_data, summary_data),
-        "contribution_by_repo": _generate_contribution_by_repo(weekly_data),
+        "contribution_by_repo": _generate_contribution_by_repo_from_health(repo_health_list or []),
     }
 
 
@@ -453,47 +455,47 @@ def _generate_contribution_types(
     return result
 
 
-def _generate_contribution_by_repo(weekly_data: dict[str, Any]) -> list[dict[str, Any]]:
+def _generate_contribution_by_repo_from_health(
+    repo_health_list: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
     """Generate contribution by repository chart data for Engineers page.
 
-    Shows top 10 repositories by total contributions.
+    Shows top 10 repositories by total contributions using repo health metrics.
 
     Args:
-        weekly_data: Weekly metrics from timeseries data.
+        repo_health_list: Repository health metrics containing contribution counts.
 
     Returns:
         List of {repo, count} dicts sorted by count descending (top 10).
     """
-    contribution_by_repo: dict[str, int] = defaultdict(int)
+    if not repo_health_list:
+        return []
 
-    # Aggregate contributions per repo across all activity types
-    metric_types = [
-        "prs_opened",
-        "prs_merged",
-        "reviews_submitted",
-        "issues_opened",
-        "issues_closed",
-        "review_comments",
-        "issue_comments",
-    ]
+    # Calculate total contributions per repo from health metrics
+    repos_with_counts = []
+    for repo_data in repo_health_list:
+        repo_name = repo_data.get("repo", "")
+        if not repo_name:
+            continue
 
-    for metric_name in metric_types:
-        metric_data = weekly_data.get(metric_name, [])
-        for entry in metric_data:
-            repo = entry.get("repo", "")
-            count = entry.get("count", 0)
-            if repo:
-                contribution_by_repo[repo] += count
+        # Sum all contribution types
+        total_contributions = (
+            repo_data.get("pr_count", 0)
+            + repo_data.get("issue_count", 0)
+            + repo_data.get("review_count", 0)
+            + repo_data.get("comment_count", 0)
+        )
+
+        if total_contributions > 0:
+            repos_with_counts.append({"repo": repo_name, "count": total_contributions})
 
     # Sort by count descending and take top 10
-    sorted_repos = sorted(contribution_by_repo.items(), key=lambda x: x[1], reverse=True)[:10]
-
-    result = [{"repo": repo, "count": count} for repo, count in sorted_repos]
+    sorted_repos = sorted(repos_with_counts, key=lambda x: x["count"], reverse=True)[:10]
 
     logger.info(
         "Generated contribution by repo chart with %d repos (top 10 of %d total)",
-        len(result),
-        len(contribution_by_repo),
+        len(sorted_repos),
+        len(repos_with_counts),
     )
 
-    return result
+    return sorted_repos
