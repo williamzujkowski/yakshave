@@ -1,0 +1,16 @@
+{
+  "name": "GitHub Year in Review",
+  "short_name": "Year Review",
+  "description": "GitHub community health metrics and statistics",
+  "start_url": "./2025/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#667eea",
+  "icons": [
+    {
+      "src": "favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}

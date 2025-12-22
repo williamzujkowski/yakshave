@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -75,6 +76,8 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#667eea">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -84,6 +87,14 @@
             <div class="header-content">
                 <div class="site-title">williamzujkowski Year in Review 2025</div>
                 <div class="header-meta">
+                    <div class="global-search-container">
+                        <input type="search" id="global-search" class="global-search-input"
+                               placeholder="Search contributors, repos..."
+                               aria-label="Global search">
+                        <div id="global-search-results" class="search-results-dropdown" style="display: none;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
                     <span class="target-info">williamzujkowski</span>
                     <div class="year-selector">
                         <button class="year-badge" id="yearToggle" aria-label="Select year" aria-expanded="false">
@@ -592,11 +603,21 @@ aria-current="true">
                             <div class="progress-fill" style="width: 3.0%"></div>
                             <span class="progress-text">3.0%</span>
                         </div>
+                        <span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  3.0%
+</span>
+
                     </td>
                     <td>
                         <span class="score-badge score-high">
                             50
                         </span>
+                        <span class="trend-indicator trend-neutral">
+  <span class="trend-arrow">→</span>
+  50
+</span>
+
                     </td>
                     <td>
                         <span class="status-badge status-healthy">
@@ -615,11 +636,21 @@ aria-current="true">
                             <div class="progress-fill" style="width: 0.0%"></div>
                             <span class="progress-text">0.0%</span>
                         </div>
+                        <span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  0.0%
+</span>
+
                     </td>
                     <td>
                         <span class="score-badge score-high">
                             55
                         </span>
+                        <span class="trend-indicator trend-neutral">
+  <span class="trend-arrow">→</span>
+  55
+</span>
+
                     </td>
                     <td>
                         <span class="status-badge status-healthy">
@@ -638,11 +669,21 @@ aria-current="true">
                             <div class="progress-fill" style="width: 0.0%"></div>
                             <span class="progress-text">0.0%</span>
                         </div>
+                        <span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  0.0%
+</span>
+
                     </td>
                     <td>
                         <span class="score-badge score-high">
                             50
                         </span>
+                        <span class="trend-indicator trend-neutral">
+  <span class="trend-arrow">→</span>
+  50
+</span>
+
                     </td>
                     <td>
                         <span class="status-badge status-healthy">
@@ -661,11 +702,21 @@ aria-current="true">
                             <div class="progress-fill" style="width: 9.1%"></div>
                             <span class="progress-text">9.1%</span>
                         </div>
+                        <span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  9.1%
+</span>
+
                     </td>
                     <td>
                         <span class="score-badge score-high">
                             50
                         </span>
+                        <span class="trend-indicator trend-neutral">
+  <span class="trend-arrow">→</span>
+  50
+</span>
+
                     </td>
                     <td>
                         <span class="status-badge status-healthy">
@@ -684,11 +735,21 @@ aria-current="true">
                             <div class="progress-fill" style="width: 0.0%"></div>
                             <span class="progress-text">0.0%</span>
                         </div>
+                        <span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  0.0%
+</span>
+
                     </td>
                     <td>
                         <span class="score-badge score-medium">
                             45
                         </span>
+                        <span class="trend-indicator trend-neutral">
+  <span class="trend-arrow">→</span>
+  45
+</span>
+
                     </td>
                     <td>
                         <span class="status-badge status-healthy">
@@ -707,11 +768,21 @@ aria-current="true">
                             <div class="progress-fill" style="width: 0.0%"></div>
                             <span class="progress-text">0.0%</span>
                         </div>
+                        <span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  0.0%
+</span>
+
                     </td>
                     <td>
                         <span class="score-badge score-high">
                             55
                         </span>
+                        <span class="trend-indicator trend-neutral">
+  <span class="trend-arrow">→</span>
+  55
+</span>
+
                     </td>
                     <td>
                         <span class="status-badge status-healthy">
@@ -730,11 +801,21 @@ aria-current="true">
                             <div class="progress-fill" style="width: 0.0%"></div>
                             <span class="progress-text">0.0%</span>
                         </div>
+                        <span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  0.0%
+</span>
+
                     </td>
                     <td>
                         <span class="score-badge score-medium">
                             40
                         </span>
+                        <span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  40
+</span>
+
                     </td>
                     <td>
                         <span class="status-badge status-healthy">
@@ -753,11 +834,21 @@ aria-current="true">
                             <div class="progress-fill" style="width: 0.0%"></div>
                             <span class="progress-text">0.0%</span>
                         </div>
+                        <span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  0.0%
+</span>
+
                     </td>
                     <td>
                         <span class="score-badge score-medium">
                             45
                         </span>
+                        <span class="trend-indicator trend-neutral">
+  <span class="trend-arrow">→</span>
+  45
+</span>
+
                     </td>
                     <td>
                         <span class="status-badge status-healthy">
@@ -776,11 +867,21 @@ aria-current="true">
                             <div class="progress-fill" style="width: 0.0%"></div>
                             <span class="progress-text">0.0%</span>
                         </div>
+                        <span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  0.0%
+</span>
+
                     </td>
                     <td>
                         <span class="score-badge score-high">
                             55
                         </span>
+                        <span class="trend-indicator trend-neutral">
+  <span class="trend-arrow">→</span>
+  55
+</span>
+
                     </td>
                     <td>
                         <span class="status-badge status-healthy">
@@ -799,11 +900,21 @@ aria-current="true">
                             <div class="progress-fill" style="width: 0.0%"></div>
                             <span class="progress-text">0.0%</span>
                         </div>
+                        <span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  0.0%
+</span>
+
                     </td>
                     <td>
                         <span class="score-badge score-medium">
                             45
                         </span>
+                        <span class="trend-indicator trend-neutral">
+  <span class="trend-arrow">→</span>
+  45
+</span>
+
                     </td>
                     <td>
                         <span class="status-badge status-healthy">
@@ -893,6 +1004,8 @@ aria-current="true">
     <script src="assets/js/back-to-top.js"></script>
     <script src="assets/js/export.js"></script>
     <script src="assets/js/keyboard-shortcuts.js"></script>
+    <script src="assets/js/url-state.js"></script>
+    <script src="assets/js/global-search.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="assets/js/charts.js"></script>
 <script>
@@ -916,5 +1029,10 @@ aria-current="true">
         renderCommunityChart('#chart-community', communityData);
     }
 </script>
+    <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('../sw.js');
+    }
+    </script>
 </body>
 </html>

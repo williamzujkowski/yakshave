@@ -27,6 +27,11 @@ function initLeaderboardTabs() {
             if (targetContent) {
                 targetContent.classList.add('active');
             }
+
+            // Update URL parameter
+            if (typeof updateUrlParam === 'function') {
+                updateUrlParam('tab', tabId);
+            }
         });
     });
 }

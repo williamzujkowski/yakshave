@@ -29,6 +29,9 @@ function initContributorTable(tableSelector, contributorsData) {
             filteredData = contributorsData.filter(c =>
                 c.login.toLowerCase().includes(query)
             );
+            if (typeof updateUrlParam === 'function') {
+                updateUrlParam('search', e.target.value || null);
+            }
             renderTable();
         });
     }

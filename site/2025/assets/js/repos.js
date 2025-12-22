@@ -30,6 +30,9 @@ function initRepoTable(tableSelector, reposData) {
                 r.name.toLowerCase().includes(query) ||
                 (r.full_name && r.full_name.toLowerCase().includes(query))
             );
+            if (typeof updateUrlParam === 'function') {
+                updateUrlParam('search', e.target.value || null);
+            }
             renderTable();
         });
     }
@@ -42,6 +45,9 @@ function initRepoTable(tableSelector, reposData) {
                 filteredData = [...reposData];
             } else {
                 filteredData = reposData.filter(r => r.health_status === filterValue);
+            }
+            if (typeof updateUrlParam === 'function') {
+                updateUrlParam('filter', filterValue === 'all' ? null : filterValue);
             }
             renderTable();
         });

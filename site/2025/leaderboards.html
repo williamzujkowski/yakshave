@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -75,6 +76,8 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#667eea">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -84,6 +87,14 @@
             <div class="header-content">
                 <div class="site-title">williamzujkowski Year in Review 2025</div>
                 <div class="header-meta">
+                    <div class="global-search-container">
+                        <input type="search" id="global-search" class="global-search-input"
+                               placeholder="Search contributors, repos..."
+                               aria-label="Global search">
+                        <div id="global-search-results" class="search-results-dropdown" style="display: none;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
                     <span class="target-info">williamzujkowski</span>
                     <div class="year-selector">
                         <button class="year-badge" id="yearToggle" aria-label="Select year" aria-expanded="false">
@@ -319,7 +330,11 @@ aria-current="true">
                                  class="mini-avatar">
                             <span class="name">williamzujkowski</span>
                         </div>
-                        <span class="value">114</span>
+                        <span class="value">114<span class="trend-indicator trend-up">
+  <span class="trend-arrow">↑</span>
+  114
+</span>
+</span>
                     </div>
                     <div class="leaderboard-item">
                         <span class="rank">2</span>
@@ -329,7 +344,11 @@ aria-current="true">
                                  class="mini-avatar">
                             <span class="name">therebelrobot</span>
                         </div>
-                        <span class="value">2</span>
+                        <span class="value">2<span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  2
+</span>
+</span>
                     </div>
                     <div class="leaderboard-item">
                         <span class="rank">3</span>
@@ -339,7 +358,11 @@ aria-current="true">
                                  class="mini-avatar">
                             <span class="name">endcycles</span>
                         </div>
-                        <span class="value">1</span>
+                        <span class="value">1<span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  1
+</span>
+</span>
                     </div>
                     <div class="leaderboard-item">
                         <span class="rank">4</span>
@@ -349,7 +372,11 @@ aria-current="true">
                                  class="mini-avatar">
                             <span class="name">jukkatupamaki</span>
                         </div>
-                        <span class="value">1</span>
+                        <span class="value">1<span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  1
+</span>
+</span>
                     </div>
                     <div class="leaderboard-item">
                         <span class="rank">5</span>
@@ -359,7 +386,11 @@ aria-current="true">
                                  class="mini-avatar">
                             <span class="name">punkpeye</span>
                         </div>
-                        <span class="value">1</span>
+                        <span class="value">1<span class="trend-indicator trend-down">
+  <span class="trend-arrow">↓</span>
+  1
+</span>
+</span>
                     </div>
                 </div>
             </div>
@@ -785,6 +816,8 @@ aria-current="true">
     <script src="assets/js/back-to-top.js"></script>
     <script src="assets/js/export.js"></script>
     <script src="assets/js/keyboard-shortcuts.js"></script>
+    <script src="assets/js/url-state.js"></script>
+    <script src="assets/js/global-search.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="assets/js/charts.js"></script>
 <script src="assets/js/leaderboards.js"></script>
@@ -805,5 +838,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+    <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('../sw.js');
+    }
+    </script>
 </body>
 </html>

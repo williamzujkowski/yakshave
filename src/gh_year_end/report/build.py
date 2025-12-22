@@ -121,6 +121,10 @@ def build_site(config: Config, paths: PathManager) -> dict[str, Any]:
         else:
             logger.warning("Templates directory not found at %s", templates_source)
 
+        # Export search data for global search functionality
+        logger.info("Exporting search data")
+        _export_search_data(paths.site_root, data_context)
+
         # Create build manifest
         _write_build_manifest(paths.site_root, config, stats)
 
@@ -744,6 +748,62 @@ def _copy_assets(src: Path, dest: Path) -> int:
         logger.warning("Failed to copy assets: %s", e)
 
     return files_copied
+
+
+def _export_search_data(output_dir: Path, data_context: dict[str, Any]) -> None:
+    """Export contributors and repos data for global search functionality.
+
+    Args:
+        output_dir: Directory where search JSON files will be written.
+        data_context: Context data containing leaderboards and repo health info.
+    """
+    try:
+        # Extract leaderboards data for contributors
+        leaderboards_data = data_context.get("leaderboards", {})
+        contributors_list = []
+
+        # Get top PR authors from leaderboards
+        if "top_pr_authors" in leaderboards_data:
+            for author in leaderboards_data["top_pr_authors"]:
+                contributors_list.append({
+                    "login": author.get("login", ""),
+                    "total_prs": author.get("total_prs", 0),
+                })
+
+        # Write contributors.json
+        contributors_path = output_dir / "contributors.json"
+        with contributors_path.open("w") as f:
+            json.dump(contributors_list, f, indent=2)
+        logger.info("Exported %d contributors to %s", len(contributors_list), contributors_path)
+
+        # Extract repo health data for repositories
+        repo_health_data = data_context.get("repo_health", {})
+        repos_list = []
+
+        if isinstance(repo_health_data, dict) and "repos" in repo_health_data:
+            # Format from export: {"repos": {repo_id: {...}}}
+            for repo_id, repo_data in repo_health_data["repos"].items():
+                repos_list.append({
+                    "repo_full_name": repo_data.get("repo_full_name", repo_id),
+                    "prs_merged": repo_data.get("prs_merged", 0),
+                })
+        elif isinstance(repo_health_data, list):
+            # List format from metrics
+            for item in repo_health_data:
+                repo_name = item.get("repo", "")
+                repos_list.append({
+                    "repo_full_name": repo_name,
+                    "prs_merged": item.get("pr_count", 0),
+                })
+
+        # Write repos.json
+        repos_path = output_dir / "repos.json"
+        with repos_path.open("w") as f:
+            json.dump(repos_list, f, indent=2)
+        logger.info("Exported %d repositories to %s", len(repos_list), repos_path)
+
+    except Exception as e:
+        logger.warning("Failed to export search data: %s", e)
 
 
 def _write_build_manifest(output_dir: Path, config: Config, stats: dict[str, Any]) -> None:

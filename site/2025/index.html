@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -75,6 +76,8 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#667eea">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -84,6 +87,14 @@
             <div class="header-content">
                 <div class="site-title">williamzujkowski Year in Review 2025</div>
                 <div class="header-meta">
+                    <div class="global-search-container">
+                        <input type="search" id="global-search" class="global-search-input"
+                               placeholder="Search contributors, repos..."
+                               aria-label="Global search">
+                        <div id="global-search-results" class="search-results-dropdown" style="display: none;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
                     <span class="target-info">williamzujkowski</span>
                     <div class="year-selector">
                         <button class="year-badge" id="yearToggle" aria-label="Select year" aria-expanded="false">
@@ -492,6 +503,8 @@ aria-current="true">
     <script src="assets/js/back-to-top.js"></script>
     <script src="assets/js/export.js"></script>
     <script src="assets/js/keyboard-shortcuts.js"></script>
+    <script src="assets/js/url-state.js"></script>
+    <script src="assets/js/global-search.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="assets/js/charts.js"></script>
 <script>
@@ -518,5 +531,10 @@ aria-current="true">
             '<p style="text-align: center; color: #888; padding: 40px;">No activity data available</p>';
     }
 </script>
+    <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('../sw.js');
+    }
+    </script>
 </body>
 </html>

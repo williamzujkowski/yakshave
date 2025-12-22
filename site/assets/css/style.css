@@ -2550,3 +2550,254 @@ kbd {
   margin: 0;
   color: var(--color-text-secondary);
 }
+
+/* ========================================
+   Trend Indicators
+   ======================================== */
+
+.trend-indicator {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  margin-left: 0.5rem;
+}
+
+.trend-up {
+  color: var(--color-success, #28a745);
+}
+
+.trend-down {
+  color: var(--color-danger, #dc3545);
+}
+
+.trend-neutral {
+  color: var(--color-text-secondary);
+}
+
+.trend-arrow {
+  font-size: 1rem;
+  margin-right: 0.25rem;
+}
+
+[data-theme="dark"] .trend-up {
+  color: #4ade80;
+}
+
+[data-theme="dark"] .trend-down {
+  color: #f87171;
+}
+
+/* ========================================
+   Repository Comparison Tool
+   ======================================== */
+
+.comparison-section {
+  margin: var(--spacing-xl) 0;
+}
+
+.comparison-tool {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.comparison-selectors {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.comparison-select-wrapper {
+  flex: 1;
+  min-width: 200px;
+}
+
+.vs-text {
+  font-weight: bold;
+  color: var(--color-text-secondary);
+  padding: 0 var(--spacing-sm);
+}
+
+.comparison-result {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--color-border-primary);
+}
+
+.comparison-table {
+  width: 100%;
+  margin: 0;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: var(--spacing-md);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-secondary);
+}
+
+.comparison-table thead th {
+  background-color: var(--color-bg-tertiary);
+  font-weight: 600;
+}
+
+.comparison-table tbody tr:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+.comparison-table td:first-child {
+  font-weight: 500;
+  width: 30%;
+}
+
+/* Responsive comparison tool */
+@media (max-width: 768px) {
+  .comparison-selectors {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .vs-text {
+    text-align: center;
+    padding: var(--spacing-sm) 0;
+  }
+
+  .comparison-select-wrapper {
+    width: 100%;
+  }
+
+  .comparison-table {
+    font-size: var(--font-size-sm);
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: var(--spacing-sm);
+  }
+
+  .comparison-table td:first-child {
+    width: 40%;
+  }
+}
+
+/* ========================================
+   Global Search
+   ======================================== */
+
+.global-search-container {
+  position: relative;
+  margin-right: var(--spacing-md);
+}
+
+.global-search-input {
+  width: 280px;
+  padding: 8px 12px;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.global-search-input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.global-search-input:focus {
+  background-color: var(--color-bg-primary);
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
+}
+
+.search-results-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-large);
+  z-index: var(--z-index-dropdown);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-decoration: none;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border-tertiary);
+  transition: background-color var(--transition-fast);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover,
+.search-result-item:focus {
+  background-color: var(--color-bg-secondary);
+  outline: none;
+}
+
+.result-type {
+  flex: 0 0 auto;
+  padding: 2px 6px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-sm);
+  text-transform: capitalize;
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-secondary);
+}
+
+.search-result-item:hover .result-type {
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-inverse);
+}
+
+.result-name {
+  flex: 1;
+  font-weight: var(--font-weight-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-meta {
+  flex: 0 0 auto;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.search-no-results {
+  padding: var(--spacing-md);
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+@media (max-width: 768px) {
+  .global-search-container {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .global-search-input {
+    width: 100%;
+  }
+}
+
+[data-theme="dark"] .global-search-input:focus {
+  box-shadow: 0 0 0 3px rgba(33, 139, 255, 0.15);
+}

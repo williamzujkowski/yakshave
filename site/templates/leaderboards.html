@@ -98,7 +98,7 @@
                                  class="mini-avatar">
                             <span class="name">{{ contributor.login }}</span>
                         </div>
-                        <span class="value">{{ contributor.value }}</span>
+                        <span class="value">{{ contributor.value }}{{ trend_indicator(contributor.value, 10, 2, '', false) }}</span>
                     </div>
                     {% endfor %}
                 </div>
