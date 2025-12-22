@@ -79,4 +79,5 @@ report:
   output_dir: "./site"
   theme: "engineer_exec_toggle"
   awards_config: "./config/awards.yaml"
+  base_path: "/yakshave"
   base_url: "https://williamzujkowski.github.io/yakshave"

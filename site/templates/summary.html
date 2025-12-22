@@ -253,13 +253,13 @@
                             <div class="progress-fill" style="width: {{ repo.review_coverage | default(0) }}%"></div>
                             <span class="progress-text">{{ repo.review_coverage | default(0) }}%</span>
                         </div>
-                        {{ trend_indicator(repo.review_coverage | default(0), 50, 20) }}
+                        {{ trend_indicator(repo.review_coverage | default(0), thresholds.review_coverage_good, thresholds.review_coverage_bad) }}
                     </td>
                     <td>
                         <span class="score-badge score-{{ repo.hygiene_score_category | default('medium') }}">
                             {{ repo.hygiene_score | default(0) }}
                         </span>
-                        {{ trend_indicator(repo.hygiene_score | default(0), 60, 40, '') }}
+                        {{ trend_indicator(repo.hygiene_score | default(0), thresholds.hygiene_good, thresholds.hygiene_bad, '') }}
                     </td>
                     <td>
                         <span class="status-badge status-{{ repo.status | default('healthy') }}">
