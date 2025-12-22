@@ -968,10 +968,47 @@ aria-current="true">
         </svg>
     </button>
 
+    <!-- Keyboard Shortcuts Help Modal -->
+    <div id="shortcuts-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="shortcuts-modal-title">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="shortcuts-modal-title">Keyboard Shortcuts</h2>
+                <button class="modal-close" aria-label="Close keyboard shortcuts help">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                    </svg>
+                </button>
+            </div>
+            <dl class="shortcuts-list">
+                <div class="shortcut-item">
+                    <dt><kbd>/</kbd></dt>
+                    <dd>Focus search input</dd>
+                </div>
+                <div class="shortcut-item">
+                    <dt><kbd>Esc</kbd></dt>
+                    <dd>Close modal</dd>
+                </div>
+                <div class="shortcut-item">
+                    <dt><kbd>?</kbd></dt>
+                    <dd>Show keyboard shortcuts</dd>
+                </div>
+                <div class="shortcut-item">
+                    <dt><kbd>d</kbd></dt>
+                    <dd>Toggle dark mode</dd>
+                </div>
+                <div class="shortcut-item">
+                    <dt><kbd>t</kbd> or <kbd>Home</kbd></dt>
+                    <dd>Back to top</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/year-selector.js"></script>
     <script src="assets/js/back-to-top.js"></script>
     <script src="assets/js/export.js"></script>
+    <script src="assets/js/keyboard-shortcuts.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="assets/js/charts.js"></script>
 <script src="assets/js/contributors.js"></script>
@@ -980,7 +1017,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load data
     const contributionTimelineData = [{"count": 6, "date": "2025-02-10"}, {"count": 4, "date": "2025-03-17"}, {"count": 7, "date": "2025-03-31"}, {"count": 2, "date": "2025-06-02"}, {"count": 4, "date": "2025-06-09"}, {"count": 4, "date": "2025-06-16"}, {"count": 6, "date": "2025-06-30"}, {"count": 2, "date": "2025-07-07"}, {"count": 8, "date": "2025-07-14"}, {"count": 17, "date": "2025-08-18"}, {"count": 1, "date": "2025-08-25"}, {"count": 4, "date": "2025-09-15"}, {"count": 4, "date": "2025-09-22"}, {"count": 8, "date": "2025-09-29"}, {"count": 1, "date": "2025-10-06"}, {"count": 2, "date": "2025-10-13"}, {"count": 30, "date": "2025-10-20"}, {"count": 5, "date": "2025-10-27"}, {"count": 58, "date": "2025-11-10"}, {"count": 3, "date": "2025-11-17"}, {"count": 91, "date": "2025-12-08"}, {"count": 300, "date": "2025-12-15"}, {"count": 25, "date": "2025-12-22"}];
     const contributionTypesData = [{"count": 119, "type": "PRs"}, {"count": 3, "type": "Reviews"}, {"count": 180, "type": "Issues"}, {"count": 0, "type": "Comments"}];
-    const contributionByRepoData = [];
+    const contributionByRepoData = [{"count": 212, "repo": "williamzujkowski/yakshave"}, {"count": 96, "repo": "williamzujkowski/cognitive-toolworks"}, {"count": 83, "repo": "williamzujkowski/strudel-mcp-server"}, {"count": 34, "repo": "williamzujkowski/williamzujkowski.github.io"}, {"count": 16, "repo": "williamzujkowski/standards"}, {"count": 7, "repo": "williamzujkowski/old_website"}, {"count": 3, "repo": "williamzujkowski/domainchecker"}, {"count": 3, "repo": "williamzujkowski/williamzujkowski"}, {"count": 2, "repo": "williamzujkowski/Neo-Brutalist-11ty-Theme"}, {"count": 2, "repo": "williamzujkowski/machine-rites"}];
     const contributorsData = [{"activity_timeline": [6, 4, 7, 2, 4, 4, 6, 2, 8, 16, 4, 1, 8, 2, 30, 5, 54, 2, 116, 408, 37], "approvals": 3, "avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4", "changes_requested": 0, "comments_total": 154, "contributions_total": 726, "display_name": null, "issues_closed": 173, "issues_opened": 173, "login": "williamzujkowski", "prs_merged": 109, "prs_opened": 114, "rank": 1, "review_comments_total": 0, "reviews_submitted": 3, "user_id": "williamzujkowski"}, {"activity_timeline": [4], "approvals": 0, "avatar_url": "https://avatars.githubusercontent.com/u/12144404?v=4", "changes_requested": 0, "comments_total": 1, "contributions_total": 4, "display_name": null, "issues_closed": 1, "issues_opened": 1, "login": "endcycles", "prs_merged": 0, "prs_opened": 1, "rank": 2, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "endcycles"}, {"activity_timeline": [2, 2], "approvals": 0, "avatar_url": "https://avatars.githubusercontent.com/u/1178412?v=4", "changes_requested": 0, "comments_total": 0, "contributions_total": 4, "display_name": null, "issues_closed": 2, "issues_opened": 2, "login": "mhrst", "prs_merged": 0, "prs_opened": 0, "rank": 3, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "mhrst"}, {"activity_timeline": [1, 2], "approvals": 0, "avatar_url": "https://avatars.githubusercontent.com/u/54838975?v=4", "changes_requested": 0, "comments_total": 1, "contributions_total": 3, "display_name": null, "issues_closed": 1, "issues_opened": 1, "login": "scarf005", "prs_merged": 0, "prs_opened": 0, "rank": 4, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "scarf005"}, {"activity_timeline": [2, 1], "approvals": 0, "avatar_url": "https://avatars.githubusercontent.com/u/85803896?v=4", "changes_requested": 0, "comments_total": 1, "contributions_total": 3, "display_name": null, "issues_closed": 1, "issues_opened": 1, "login": "Maria-Papa", "prs_merged": 0, "prs_opened": 0, "rank": 5, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "Maria-Papa"}, {"activity_timeline": [1, 1], "approvals": 0, "avatar_url": "https://avatars.githubusercontent.com/u/1825929?v=4", "changes_requested": 0, "comments_total": 0, "contributions_total": 2, "display_name": null, "issues_closed": 0, "issues_opened": 0, "login": "jukkatupamaki", "prs_merged": 1, "prs_opened": 1, "rank": 6, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "jukkatupamaki"}, {"activity_timeline": [2], "approvals": 0, "avatar_url": "https://avatars.githubusercontent.com/u/679178?v=4", "changes_requested": 0, "comments_total": 0, "contributions_total": 2, "display_name": null, "issues_closed": 0, "issues_opened": 0, "login": "therebelrobot", "prs_merged": 0, "prs_opened": 2, "rank": 7, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "therebelrobot"}, {"activity_timeline": [1, 1], "approvals": 0, "avatar_url": "https://avatars.githubusercontent.com/u/51890236?v=4", "changes_requested": 0, "comments_total": 0, "contributions_total": 2, "display_name": null, "issues_closed": 1, "issues_opened": 1, "login": "racso-dev", "prs_merged": 0, "prs_opened": 0, "rank": 8, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "racso-dev"}, {"activity_timeline": [1, 1], "approvals": 0, "avatar_url": "https://avatars.githubusercontent.com/u/36191527?v=4", "changes_requested": 0, "comments_total": 0, "contributions_total": 2, "display_name": null, "issues_closed": 1, "issues_opened": 1, "login": "bartunlimited", "prs_merged": 0, "prs_opened": 0, "rank": 9, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "bartunlimited"}, {"activity_timeline": [2], "approvals": 0, "avatar_url": "https://avatars.githubusercontent.com/u/44283101?v=4", "changes_requested": 0, "comments_total": 2, "contributions_total": 2, "display_name": null, "issues_closed": 0, "issues_opened": 0, "login": "adrione", "prs_merged": 0, "prs_opened": 0, "rank": 10, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "adrione"}, {"activity_timeline": [1], "approvals": 0, "avatar_url": "https://avatars.githubusercontent.com/u/108313943?v=4", "changes_requested": 0, "comments_total": 0, "contributions_total": 1, "display_name": null, "issues_closed": 0, "issues_opened": 0, "login": "punkpeye", "prs_merged": 0, "prs_opened": 1, "rank": 11, "review_comments_total": 0, "reviews_submitted": 0, "user_id": "punkpeye"}];
 
     // Render charts

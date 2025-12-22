@@ -228,7 +228,15 @@ aria-current="true">
                         <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319z"/>
                     </svg>
                 </div>
-                <h3>Average Merge Time</h3>
+                <h3><span class="tooltip-trigger" tabindex="0">
+  Time to Merge
+  <svg class="tooltip-icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+  </svg>
+  <span class="tooltip-content" role="tooltip">Median time from PR creation to merge</span>
+</span>
+</h3>
             </div>
             <div class="signal-value">13m</div>
             <p>median time from PR open to merge</p>
@@ -264,7 +272,15 @@ aria-current="true">
                         <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                     </svg>
                 </div>
-                <h3>Active Contributors</h3>
+                <h3><span class="tooltip-trigger" tabindex="0">
+  Active Contributors
+  <svg class="tooltip-icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+  </svg>
+  <span class="tooltip-content" role="tooltip">Contributors with at least one contribution in the selected period</span>
+</span>
+</h3>
             </div>
             <div class="signal-value">10</div>
             <p>contributors in the last 90 days</p>
@@ -764,10 +780,47 @@ aria-current="true">
         </svg>
     </button>
 
+    <!-- Keyboard Shortcuts Help Modal -->
+    <div id="shortcuts-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="shortcuts-modal-title">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="shortcuts-modal-title">Keyboard Shortcuts</h2>
+                <button class="modal-close" aria-label="Close keyboard shortcuts help">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                    </svg>
+                </button>
+            </div>
+            <dl class="shortcuts-list">
+                <div class="shortcut-item">
+                    <dt><kbd>/</kbd></dt>
+                    <dd>Focus search input</dd>
+                </div>
+                <div class="shortcut-item">
+                    <dt><kbd>Esc</kbd></dt>
+                    <dd>Close modal</dd>
+                </div>
+                <div class="shortcut-item">
+                    <dt><kbd>?</kbd></dt>
+                    <dd>Show keyboard shortcuts</dd>
+                </div>
+                <div class="shortcut-item">
+                    <dt><kbd>d</kbd></dt>
+                    <dd>Toggle dark mode</dd>
+                </div>
+                <div class="shortcut-item">
+                    <dt><kbd>t</kbd> or <kbd>Home</kbd></dt>
+                    <dd>Back to top</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/year-selector.js"></script>
     <script src="assets/js/back-to-top.js"></script>
     <script src="assets/js/export.js"></script>
+    <script src="assets/js/keyboard-shortcuts.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="assets/js/charts.js"></script>
 <script>
