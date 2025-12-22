@@ -11,13 +11,16 @@
 
 <section class="repo-filters-section">
     <div class="filters-bar">
+        <label for="repo-search" class="visually-hidden">Search repositories</label>
         <input type="text" id="repo-search" placeholder="Search repositories..." class="search-input">
+        <label for="health-filter" class="visually-hidden">Filter by health status</label>
         <select id="health-filter" class="filter-select">
             <option value="all">All Repositories</option>
             <option value="healthy">Healthy</option>
             <option value="warning">Needs Attention</option>
             <option value="critical">Critical</option>
         </select>
+        <label for="sort-repos" class="visually-hidden">Sort repositories by</label>
         <select id="sort-repos" class="filter-select">
             <option value="activity">Most Active</option>
             <option value="hygiene">Best Hygiene</option>

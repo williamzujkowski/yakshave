@@ -11,8 +11,10 @@
 
 <section class="contributor-search-section">
     <div class="search-bar">
+        <label for="contributor-search" class="visually-hidden">Search contributors</label>
         <input type="text" id="contributor-search" placeholder="Search contributors by name..." class="search-input">
         <div class="search-filters">
+            <label for="metric-filter" class="visually-hidden">Filter by metric</label>
             <select id="metric-filter" class="filter-select">
                 <option value="all">All Metrics</option>
                 <option value="prs">Pull Requests</option>
@@ -20,6 +22,7 @@
                 <option value="issues">Issues</option>
                 <option value="comments">Comments</option>
             </select>
+            <label for="sort-by" class="visually-hidden">Sort contributors by</label>
             <select id="sort-by" class="filter-select">
                 <option value="prs_merged">Most PRs Merged</option>
                 <option value="reviews_submitted">Most Reviews</option>
