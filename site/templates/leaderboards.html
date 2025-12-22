@@ -30,15 +30,15 @@
                     <div class="podium-item podium-{{ loop.index }}">
                         <div class="podium-rank">
                             {% if loop.index == 1 %}
-                            <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                            <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                                 <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68z"/>
                             </svg>
                             {% elif loop.index == 2 %}
-                            <svg width="28" height="28" viewBox="0 0 16 16" fill="currentColor">
+                            <svg width="28" height="28" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                                 <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68z"/>
                             </svg>
                             {% else %}
-                            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                                 <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68z"/>
                             </svg>
                             {% endif %}
@@ -98,15 +98,15 @@
                     <div class="podium-item podium-{{ loop.index }}">
                         <div class="podium-rank">
                             {% if loop.index == 1 %}
-                            <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                            <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                                 <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864z"/>
                             </svg>
                             {% elif loop.index == 2 %}
-                            <svg width="28" height="28" viewBox="0 0 16 16" fill="currentColor">
+                            <svg width="28" height="28" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                                 <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864z"/>
                             </svg>
                             {% else %}
-                            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+                            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                                 <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864z"/>
                             </svg>
                             {% endif %}
@@ -263,15 +263,16 @@
             <p class="card-description">Weighted ranking across all contribution types</p>
             <div class="table-responsive">
                 <table class="data-table">
-                    <thead>
+  <caption class="visually-hidden">Contributor rankings by overall score</caption>
+  <thead>
                         <tr>
-                            <th>Rank</th>
-                            <th>Contributor</th>
-                            <th>PRs</th>
-                            <th>Reviews</th>
-                            <th>Issues</th>
-                            <th>Comments</th>
-                            <th>Score</th>
+                            <th scope="col">Rank</th>
+                            <th scope="col">Contributor</th>
+                            <th scope="col">PRs</th>
+                            <th scope="col">Reviews</th>
+                            <th scope="col">Issues</th>
+                            <th scope="col">Comments</th>
+                            <th scope="col">Score</th>
                         </tr>
                     </thead>
                     <tbody>

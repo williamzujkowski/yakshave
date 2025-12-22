@@ -31,7 +31,7 @@
             {% for award in awards.individual %}
             <div class="award-card award-{{ award.award_key }}">
                 <div class="award-icon">
-                    <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                    <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                         <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702 1.509.229z"/>
                         <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
                     </svg>
@@ -70,7 +70,7 @@
             {% for award in awards.repository %}
             <div class="award-card award-{{ award.award_key }}">
                 <div class="award-icon">
-                    <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor">
+                    <svg width="48" height="48" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                         <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 0 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 0 1 1-1h8z"/>
                     </svg>
                 </div>
@@ -106,7 +106,7 @@
             <div class="risk-signal-card risk-{{ risk.severity }}">
                 <div class="risk-signal-header">
                     <div class="risk-signal-icon">
-                        <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                        <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                             <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                         </svg>
                     </div>
@@ -250,7 +250,7 @@
         {% if fun_facts.busiest_day %}
         <div class="fun-fact-card">
             <div class="fun-fact-icon">
-                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                     <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>
                 </svg>
             </div>
@@ -267,7 +267,7 @@
         {% if fun_facts.total_comments is defined and fun_facts.total_comments > 0 %}
         <div class="fun-fact-card">
             <div class="fun-fact-icon">
-                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
+                <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                     <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3z"/>
                     <path d="M9 2.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3z"/>
                 </svg>

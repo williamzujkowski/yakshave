@@ -64,44 +64,42 @@ def calculate_highlights(
     except Exception as e:
         logger.warning("Failed to calculate most active month: %s", e)
 
-    # Calculate average review coverage from repo health data
+    # Calculate overall review coverage from summary data
+    # Use total reviews / total PRs rather than averaging per-repo coverage
+    # to avoid skewing by repos with zero activity
     try:
-        if repo_health_list:
-            review_coverages = [
-                r.get("review_coverage", 0)
-                for r in repo_health_list
-                if r.get("review_coverage") is not None
-            ]
-            if review_coverages:
-                avg_coverage = sum(review_coverages) / len(review_coverages)
-                highlights["review_coverage"] = round(avg_coverage, 1)
+        total_prs = summary_data.get("total_prs", 0)
+        total_reviews = summary_data.get("total_reviews", 0)
+
+        if total_prs > 0:
+            overall_coverage = (total_reviews / total_prs) * 100
+            highlights["review_coverage"] = round(overall_coverage, 1)
 
     except Exception as e:
         logger.warning("Failed to calculate review coverage: %s", e)
 
-    # Calculate average review time from repo health data
+    # Calculate average merge time from repo health data (median_time_to_merge is stored in hours)
     try:
         if repo_health_list:
-            review_times: list[float] = [
-                float(r.get("median_time_to_first_review", 0))
+            merge_times: list[float] = [
+                float(r.get("median_time_to_merge", 0))
                 for r in repo_health_list
-                if r.get("median_time_to_first_review") is not None
+                if r.get("median_time_to_merge") is not None and r.get("median_time_to_merge") > 0
             ]
-            if review_times:
-                avg_review_time_seconds = sum(review_times) / len(review_times)
-                # Convert to hours
-                hours = avg_review_time_seconds / 3600
-                if hours < 1:
-                    minutes = avg_review_time_seconds / 60
+            if merge_times:
+                avg_merge_time_hours = sum(merge_times) / len(merge_times)
+                # Format based on magnitude
+                if avg_merge_time_hours < 1:
+                    minutes = avg_merge_time_hours * 60
                     highlights["avg_review_time"] = f"{minutes:.0f} minutes"
-                elif hours < 24:
-                    highlights["avg_review_time"] = f"{hours:.1f} hours"
+                elif avg_merge_time_hours < 24:
+                    highlights["avg_review_time"] = f"{avg_merge_time_hours:.1f} hours"
                 else:
-                    days = hours / 24
+                    days = avg_merge_time_hours / 24
                     highlights["avg_review_time"] = f"{days:.1f} days"
 
     except Exception as e:
-        logger.warning("Failed to calculate average review time: %s", e)
+        logger.warning("Failed to calculate average merge time: %s", e)
 
     # New contributors - get from summary data
     highlights["new_contributors"] = summary_data.get("new_contributors", 0)

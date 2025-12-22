@@ -83,23 +83,24 @@
     <h2>All Contributors</h2>
     <div class="table-responsive">
         <table class="data-table" id="contributors-table">
-            <thead>
+  <caption class="visually-hidden">Contributor statistics sorted by activity</caption>
+  <thead>
                 <tr>
-                    <th>Rank</th>
-                    <th>Contributor</th>
-                    <th class="sortable" data-sort="prs_merged">
+                    <th scope="col">Rank</th>
+                    <th scope="col">Contributor</th>
+                    <th class="sortable" data-sort="prs_merged" aria-sort="none" scope="col">
                         PRs Merged
-                        <svg class="sort-icon" width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+                        <svg class="sort-icon" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                             <path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
                         </svg>
                     </th>
-                    <th class="sortable" data-sort="prs_opened">PRs Opened</th>
-                    <th class="sortable" data-sort="reviews_submitted">Reviews</th>
-                    <th class="sortable" data-sort="approvals">Approvals</th>
-                    <th class="sortable" data-sort="issues_opened">Issues Opened</th>
-                    <th class="sortable" data-sort="issues_closed">Issues Closed</th>
-                    <th class="sortable" data-sort="comments_total">Comments</th>
-                    <th>Activity</th>
+                    <th class="sortable" data-sort="prs_opened" aria-sort="none" scope="col">PRs Opened</th>
+                    <th class="sortable" data-sort="reviews_submitted" aria-sort="none" scope="col">Reviews</th>
+                    <th class="sortable" data-sort="approvals" aria-sort="none" scope="col">Approvals</th>
+                    <th class="sortable" data-sort="issues_opened" aria-sort="none" scope="col">Issues Opened</th>
+                    <th class="sortable" data-sort="issues_closed" aria-sort="none" scope="col">Issues Closed</th>
+                    <th class="sortable" data-sort="comments_total" aria-sort="none" scope="col">Comments</th>
+                    <th scope="col">Activity</th>
                 </tr>
             </thead>
             <tbody>
@@ -162,7 +163,7 @@
     <div class="modal-overlay" onclick="closeContributorModal()"></div>
     <div class="modal-content">
         <button class="modal-close" onclick="closeContributorModal()" aria-label="Close modal">
-            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
             </svg>
         </button>
