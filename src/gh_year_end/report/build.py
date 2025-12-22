@@ -558,7 +558,7 @@ def _generate_repository_awards(
     Returns:
         List of repository award dictionaries for template rendering.
     """
-    awards = []
+    awards: list[dict[str, Any]] = []
 
     if not repo_health_list:
         return awards
