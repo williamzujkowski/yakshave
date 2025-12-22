@@ -762,13 +762,26 @@ def _export_search_data(output_dir: Path, data_context: dict[str, Any]) -> None:
         leaderboards_data = data_context.get("leaderboards", {})
         contributors_list = []
 
-        # Get top PR authors from leaderboards
-        if "top_pr_authors" in leaderboards_data:
-            for author in leaderboards_data["top_pr_authors"]:
-                contributors_list.append({
-                    "login": author.get("login", ""),
-                    "total_prs": author.get("total_prs", 0),
-                })
+        # Get contributors from leaderboards structure
+        # Structure: {"leaderboards": {"prs_merged": {"org": [...]}}}
+        if isinstance(leaderboards_data, dict):
+            # Check for nested leaderboards structure
+            lb_data = leaderboards_data.get("leaderboards", leaderboards_data)
+
+            # Extract from prs_merged.org leaderboard
+            if "prs_merged" in lb_data and "org" in lb_data["prs_merged"]:
+                for contributor in lb_data["prs_merged"]["org"]:
+                    contributors_list.append({
+                        "login": contributor.get("login", ""),
+                        "total_prs": contributor.get("value", 0),
+                    })
+            # Fallback: check for top_pr_authors format
+            elif "top_pr_authors" in lb_data:
+                for author in lb_data["top_pr_authors"]:
+                    contributors_list.append({
+                        "login": author.get("login", ""),
+                        "total_prs": author.get("total_prs", 0),
+                    })
 
         # Write contributors.json
         contributors_path = output_dir / "contributors.json"
