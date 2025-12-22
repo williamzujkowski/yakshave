@@ -600,6 +600,322 @@ class TestAllCommand:
         assert config_years["build"] == 2023
 
 
+class TestBatchYearsCommand:
+    """Tests for batch-years command."""
+
+    def test_help_output(self, runner: CliRunner) -> None:
+        """Test batch-years --help shows correct information."""
+        result = runner.invoke(main, ["batch-years", "--help"])
+        assert result.exit_code == 0
+        assert "Process multiple years in sequence" in result.output
+        assert "--config" in result.output
+        assert "--years" in result.output
+        assert "--from-year" in result.output
+        assert "--to-year" in result.output
+        assert "--skip-collect" in result.output
+        assert "--force" in result.output
+
+    def test_missing_config_file(self, runner: CliRunner) -> None:
+        """Test that missing config file shows error."""
+        result = runner.invoke(
+            main, ["batch-years", "--config", "nonexistent.yaml", "--years", "2024"]
+        )
+        assert result.exit_code != 0
+
+    def test_config_required(self, runner: CliRunner) -> None:
+        """Test that --config parameter is required."""
+        result = runner.invoke(main, ["batch-years", "--years", "2024"])
+        assert result.exit_code != 0
+        assert "Missing option" in result.output or "required" in result.output.lower()
+
+    def test_no_years_specified(self, runner: CliRunner, config_file: Path) -> None:
+        """Test error when no years are specified."""
+        result = runner.invoke(main, ["batch-years", "--config", str(config_file)])
+        assert result.exit_code == 1
+        assert "Specify --years or both --from-year and --to-year" in result.output
+
+    def test_invalid_year_format(self, runner: CliRunner, config_file: Path) -> None:
+        """Test error with invalid year format."""
+        result = runner.invoke(
+            main, ["batch-years", "--config", str(config_file), "--years", "abc,2024"]
+        )
+        assert result.exit_code == 1
+        assert "Invalid year format" in result.output
+
+    def test_from_year_greater_than_to_year(self, runner: CliRunner, config_file: Path) -> None:
+        """Test error when from-year > to-year."""
+        result = runner.invoke(
+            main,
+            [
+                "batch-years",
+                "--config",
+                str(config_file),
+                "--from-year",
+                "2025",
+                "--to-year",
+                "2023",
+            ],
+        )
+        assert result.exit_code == 1
+        assert "from-year must be <= to-year" in result.output
+
+    def test_comma_separated_years(self, runner: CliRunner, config_file: Path) -> None:
+        """Test processing comma-separated years."""
+
+        async def mock_collect(*args, **kwargs):
+            return {
+                "summary": {"total_prs": 100},
+                "leaderboards": {"top_contributors": []},
+                "timeseries": {"weekly": []},
+                "repo_health": {"repositories": []},
+                "hygiene_scores": {"scores": []},
+                "awards": {"awards": []},
+            }
+
+        def mock_build(*args, **kwargs):
+            return {
+                "templates_rendered": ["index.html"],
+                "data_files_written": 6,
+                "assets_copied": 5,
+                "errors": [],
+            }
+
+        with (
+            patch(
+                "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+            ),
+            patch("gh_year_end.report.build.build_site", side_effect=mock_build),
+        ):
+            result = runner.invoke(
+                main, ["batch-years", "--config", str(config_file), "--years", "2023,2024"]
+            )
+
+        assert result.exit_code == 0
+        assert "Processing 2 years" in result.output
+        assert "2023, 2024" in result.output
+        assert "Processing year 2023" in result.output
+        assert "Processing year 2024" in result.output
+        assert "BATCH PROCESSING SUMMARY" in result.output
+        assert "Success: 2" in result.output
+
+    def test_year_range(self, runner: CliRunner, config_file: Path) -> None:
+        """Test processing year range."""
+
+        async def mock_collect(*args, **kwargs):
+            return {
+                "summary": {"total_prs": 100},
+                "leaderboards": {"top_contributors": []},
+                "timeseries": {"weekly": []},
+                "repo_health": {"repositories": []},
+                "hygiene_scores": {"scores": []},
+                "awards": {"awards": []},
+            }
+
+        def mock_build(*args, **kwargs):
+            return {
+                "templates_rendered": ["index.html"],
+                "data_files_written": 6,
+                "assets_copied": 5,
+                "errors": [],
+            }
+
+        with (
+            patch(
+                "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+            ),
+            patch("gh_year_end.report.build.build_site", side_effect=mock_build),
+        ):
+            result = runner.invoke(
+                main,
+                [
+                    "batch-years",
+                    "--config",
+                    str(config_file),
+                    "--from-year",
+                    "2023",
+                    "--to-year",
+                    "2025",
+                ],
+            )
+
+        assert result.exit_code == 0
+        assert "Processing 3 years" in result.output
+        assert "Processing year 2023" in result.output
+        assert "Processing year 2024" in result.output
+        assert "Processing year 2025" in result.output
+        assert "Success: 3" in result.output
+
+    def test_skip_collect_flag(
+        self, runner: CliRunner, config_file: Path, tmp_path: Path
+    ) -> None:
+        """Test that --skip-collect only runs build."""
+        collect_called = {"value": False}
+
+        async def mock_collect(*args, **kwargs):
+            collect_called["value"] = True
+            return {}
+
+        def mock_build(*args, **kwargs):
+            return {
+                "templates_rendered": ["index.html"],
+                "data_files_written": 6,
+                "assets_copied": 5,
+                "errors": [],
+            }
+
+        # Create required data files
+        data_dir = tmp_path / "site" / "2024" / "data"
+        data_dir.mkdir(parents=True, exist_ok=True)
+        (data_dir / "summary.json").write_text('{"total_prs": 100}')
+        (data_dir / "leaderboards.json").write_text('{"top_contributors": []}')
+
+        with (
+            patch(
+                "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+            ),
+            patch("gh_year_end.report.build.build_site", side_effect=mock_build),
+        ):
+            result = runner.invoke(
+                main,
+                [
+                    "batch-years",
+                    "--config",
+                    str(config_file),
+                    "--years",
+                    "2024",
+                    "--skip-collect",
+                ],
+            )
+
+        assert result.exit_code == 0
+        assert not collect_called["value"]
+        assert "Building site..." in result.output
+
+    def test_one_year_fails_continues_with_others(
+        self, runner: CliRunner, config_file: Path
+    ) -> None:
+        """Test that failure in one year continues with remaining years."""
+        call_count = {"value": 0}
+
+        async def mock_collect(*args, **kwargs):
+            call_count["value"] += 1
+            if call_count["value"] == 1:
+                raise ValueError("Collection failed for year 1")
+            return {
+                "summary": {"total_prs": 100},
+                "leaderboards": {"top_contributors": []},
+                "timeseries": {"weekly": []},
+                "repo_health": {"repositories": []},
+                "hygiene_scores": {"scores": []},
+                "awards": {"awards": []},
+            }
+
+        def mock_build(*args, **kwargs):
+            return {
+                "templates_rendered": ["index.html"],
+                "data_files_written": 6,
+                "assets_copied": 5,
+                "errors": [],
+            }
+
+        with (
+            patch(
+                "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+            ),
+            patch("gh_year_end.report.build.build_site", side_effect=mock_build),
+        ):
+            result = runner.invoke(
+                main, ["batch-years", "--config", str(config_file), "--years", "2023,2024,2025"]
+            )
+
+        assert result.exit_code == 1
+        assert "Year 2023 aborted" in result.output
+        assert "Year 2024 completed successfully" in result.output
+        assert "Year 2025 completed successfully" in result.output
+        assert "Success: 2" in result.output
+        assert "Failed: 1" in result.output
+
+    def test_force_flag_passed_through(self, runner: CliRunner, config_file: Path) -> None:
+        """Test that --force flag is passed to collect command."""
+        force_used = {"value": False}
+
+        async def mock_collect(*args, **kwargs):
+            force_used["value"] = kwargs.get("force", False)
+            return {
+                "summary": {"total_prs": 100},
+                "leaderboards": {"top_contributors": []},
+                "timeseries": {"weekly": []},
+                "repo_health": {"repositories": []},
+                "hygiene_scores": {"scores": []},
+                "awards": {"awards": []},
+            }
+
+        def mock_build(*args, **kwargs):
+            return {
+                "templates_rendered": ["index.html"],
+                "data_files_written": 6,
+                "assets_copied": 5,
+                "errors": [],
+            }
+
+        with (
+            patch(
+                "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+            ),
+            patch("gh_year_end.report.build.build_site", side_effect=mock_build),
+        ):
+            runner.invoke(
+                main, ["batch-years", "--config", str(config_file), "--years", "2024", "--force"]
+            )
+
+        assert force_used["value"] is True
+
+    def test_keyboard_interrupt_handling(
+        self, runner: CliRunner, config_file: Path
+    ) -> None:
+        """Test that keyboard interrupt is caught and handled gracefully."""
+        call_count = {"value": 0}
+
+        async def mock_collect(*args, **kwargs):
+            call_count["value"] += 1
+            if call_count["value"] == 2:
+                raise KeyboardInterrupt()
+            return {
+                "summary": {"total_prs": 100},
+                "leaderboards": {"top_contributors": []},
+                "timeseries": {"weekly": []},
+                "repo_health": {"repositories": []},
+                "hygiene_scores": {"scores": []},
+                "awards": {"awards": []},
+            }
+
+        def mock_build(*args, **kwargs):
+            return {
+                "templates_rendered": ["index.html"],
+                "data_files_written": 6,
+                "assets_copied": 5,
+                "errors": [],
+            }
+
+        with (
+            patch(
+                "gh_year_end.collect.orchestrator.collect_and_aggregate", side_effect=mock_collect
+            ),
+            patch("gh_year_end.report.build.build_site", side_effect=mock_build),
+        ):
+            result = runner.invoke(
+                main,
+                ["batch-years", "--config", str(config_file), "--years", "2023,2024,2025"],
+            )
+
+        # KeyboardInterrupt is caught in the collect command and converted to click.Abort
+        # The batch-years command catches click.Abort and marks the year as aborted
+        assert "Year 2024 aborted" in result.output
+        assert "Year 2023 completed successfully" in result.output
+        # Keyboard interrupt doesn't actually stop batch processing - it just marks that year as failed
+        assert call_count["value"] == 3
+
+
 class TestRemovedCommands:
     """Tests for commands that were fully removed."""
 
@@ -615,8 +931,8 @@ class TestRemovedCommands:
                 f"Command '{cmd}' should show 'no such command'"
             )
 
-    def test_only_collect_build_all_in_help(self, runner: CliRunner) -> None:
-        """Test that only collect, build, and all appear in help."""
+    def test_current_commands_in_help(self, runner: CliRunner) -> None:
+        """Test that current commands appear in help and removed ones don't."""
         result = runner.invoke(main, ["--help"])
         assert result.exit_code == 0
 
@@ -634,10 +950,11 @@ class TestRemovedCommands:
                 if parts:
                     command_names.append(parts[0])
 
-        # Only these commands should exist
+        # Current commands should exist
         assert "collect" in command_names
         assert "build" in command_names
         assert "all" in command_names
+        assert "batch-years" in command_names
 
         # Removed commands should NOT exist
         assert "normalize" not in command_names
