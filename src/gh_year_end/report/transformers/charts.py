@@ -14,6 +14,7 @@ def generate_chart_data(
     timeseries_data: dict[str, Any],
     summary_data: dict[str, Any],
     leaderboards_data: dict[str, Any],
+    repo_health_list: list[dict[str, Any]] | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
     """Generate chart-ready data from metrics for D3.js visualization.
 
@@ -21,6 +22,7 @@ def generate_chart_data(
         timeseries_data: Time series data from timeseries.json.
         summary_data: Summary statistics from summary.json.
         leaderboards_data: Leaderboard data from leaderboards.json.
+        repo_health_list: Optional list of repo health metrics.
 
     Returns:
         Dictionary with chart data arrays:
@@ -43,15 +45,15 @@ def generate_chart_data(
     chart_data["collaboration_data"] = collaboration_data
 
     # Build velocity_data: prs_opened, prs_merged, time_to_merge
-    velocity_data = _generate_velocity_data(weekly_data)
+    velocity_data = _generate_velocity_data(weekly_data, repo_health_list or [])
     chart_data["velocity_data"] = velocity_data
 
     # Build quality_data: review_coverage, ci_pass_rate (placeholder)
-    quality_data = _generate_quality_data(weekly_data)
+    quality_data = _generate_quality_data(weekly_data, repo_health_list or [])
     chart_data["quality_data"] = quality_data
 
     # Build community_data: active_contributors, new_contributors
-    community_data = _generate_community_data(weekly_data)
+    community_data = _generate_community_data(weekly_data, summary_data)
     chart_data["community_data"] = community_data
 
     return chart_data
@@ -93,8 +95,9 @@ def _generate_collaboration_data(weekly_data: dict[str, Any]) -> list[dict[str, 
         if period:
             collaboration_by_week[period]["comments"] += count
 
-    # Cross-team reviews - not directly available, use 0 for now
-    # TODO: Implement cross-team detection based on repo ownership
+    # Cross-team reviews - requires team/org ownership data not currently tracked.
+    # Future enhancement: would need repo ownership mapping and contributor team assignments
+    # to detect when a contributor from one team reviews PRs in another team's repo.
 
     # Convert to chart format with ISO dates
     result = []
@@ -114,11 +117,14 @@ def _generate_collaboration_data(weekly_data: dict[str, Any]) -> list[dict[str, 
     return result
 
 
-def _generate_velocity_data(weekly_data: dict[str, Any]) -> list[dict[str, Any]]:
+def _generate_velocity_data(
+    weekly_data: dict[str, Any], repo_health_list: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
     """Generate velocity chart data from weekly timeseries.
 
     Args:
         weekly_data: Weekly metrics from timeseries data.
+        repo_health_list: Repository health metrics containing median_time_to_merge.
 
     Returns:
         List of {date, prs_opened, prs_merged, time_to_merge} dicts sorted chronologically.
@@ -143,8 +149,15 @@ def _generate_velocity_data(weekly_data: dict[str, Any]) -> list[dict[str, Any]]
         if period:
             velocity_by_week[period]["prs_merged"] += count
 
-    # Time to merge - not directly available in weekly aggregates
-    # TODO: Calculate from PR-level data when available
+    # Calculate overall median time to merge from repo health data
+    # Note: This is a global average, not per-week. Weekly time-to-merge would require
+    # storing merge timestamps with PRs and aggregating by week.
+    merge_times = [
+        repo.get("median_time_to_merge", 0)
+        for repo in repo_health_list
+        if repo.get("median_time_to_merge") is not None
+    ]
+    overall_median_time_to_merge = int(sum(merge_times) / len(merge_times)) if merge_times else 0
 
     # Convert to chart format with ISO dates
     result = []
@@ -157,35 +170,47 @@ def _generate_velocity_data(weekly_data: dict[str, Any]) -> list[dict[str, Any]]
                     "date": iso_date,
                     "prs_opened": data["prs_opened"],
                     "prs_merged": data["prs_merged"],
-                    "time_to_merge": data["time_to_merge"],
+                    "time_to_merge": overall_median_time_to_merge,
                 }
             )
 
     return result
 
 
-def _generate_quality_data(weekly_data: dict[str, Any]) -> list[dict[str, Any]]:
+def _generate_quality_data(
+    weekly_data: dict[str, Any], repo_health_list: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
     """Generate quality chart data from weekly timeseries.
 
     Args:
         weekly_data: Weekly metrics from timeseries data.
+        repo_health_list: Repository health metrics containing review_coverage.
 
     Returns:
         List of {date, review_coverage, ci_pass_rate} dicts sorted chronologically.
     """
-    # Quality metrics are not available in weekly aggregates
-    # These would require PR-level data or repo health snapshots over time
-    # Return empty list for now
-    # TODO: Implement when repo health time series data is available
+    # Quality metrics (review_coverage, ci_pass_rate) are calculated per-repo but not
+    # tracked over time. To show time series, we would need to snapshot repo health metrics
+    # weekly during collection. Current implementation computes final values only.
+    #
+    # Possible approaches for future enhancement:
+    # 1. Store weekly repo health snapshots during collection
+    # 2. Calculate quality metrics from weekly PR/review aggregates
+    # 3. Use static values from current repo health (less useful for trending)
+    #
+    # For now, return empty list until time series quality data is collected.
 
     return []
 
 
-def _generate_community_data(weekly_data: dict[str, Any]) -> list[dict[str, Any]]:
+def _generate_community_data(
+    weekly_data: dict[str, Any], summary_data: dict[str, Any]
+) -> list[dict[str, Any]]:
     """Generate community chart data from weekly timeseries.
 
     Args:
         weekly_data: Weekly metrics from timeseries data.
+        summary_data: Summary statistics containing total new_contributors.
 
     Returns:
         List of {date, active_contributors, new_contributors} dicts sorted chronologically.
@@ -211,6 +236,10 @@ def _generate_community_data(weekly_data: dict[str, Any]) -> list[dict[str, Any]
             if period and user:
                 community_by_week[period].add(user)
 
+    # Note: summary_data contains total new_contributors for the year, but tracking
+    # first-time contributors per week would require storing the week each contributor
+    # first appeared during collection. For now, use 0 for per-week values.
+
     # Convert to chart format with ISO dates
     result = []
     for period in sorted(community_by_week.keys()):
@@ -221,7 +250,9 @@ def _generate_community_data(weekly_data: dict[str, Any]) -> list[dict[str, Any]
                 {
                     "date": iso_date,
                     "active_contributors": active_count,
-                    "new_contributors": 0,  # TODO: Track first-time contributors
+                    # Use 0 for per-week new contributors since we only track the year total
+                    # Future: track first appearance week to show new contributors per week
+                    "new_contributors": 0,
                 }
             )
 

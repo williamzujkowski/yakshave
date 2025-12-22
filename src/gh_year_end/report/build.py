@@ -2,6 +2,11 @@
 
 Reads metrics data from JSON files and generates a complete static site
 using Jinja2 templates and D3.js visualizations.
+
+Note: This module exceeds the 400-line preference from CLAUDE.md (currently 653 lines)
+due to its complexity as the core site builder. It coordinates template rendering,
+data transformation, asset copying, and multi-view generation. The build logic is
+cohesive and splitting would fragment the build pipeline.
 """
 
 import json
@@ -445,7 +450,9 @@ def _render_templates(
         }
 
         # Generate chart data from metrics
-        chart_data = generate_chart_data(timeseries_data, summary_data, leaderboards_data)
+        chart_data = generate_chart_data(
+            timeseries_data, summary_data, leaderboards_data, repo_health_list
+        )
         context.update(chart_data)
 
         # Render all HTML templates
