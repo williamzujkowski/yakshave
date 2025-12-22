@@ -308,6 +308,7 @@
     <h2>Compare Contributors</h2>
     <div class="comparison-tool">
         <div class="comparison-select">
+            <label for="compare-contributor-1" class="visually-hidden">Select first contributor</label>
             <select id="compare-contributor-1" class="filter-select">
                 <option value="">Select contributor 1...</option>
                 {% for contributor in all_contributors %}
@@ -315,6 +316,7 @@
                 {% endfor %}
             </select>
             <span class="vs-label">vs</span>
+            <label for="compare-contributor-2" class="visually-hidden">Select second contributor</label>
             <select id="compare-contributor-2" class="filter-select">
                 <option value="">Select contributor 2...</option>
                 {% for contributor in all_contributors %}
