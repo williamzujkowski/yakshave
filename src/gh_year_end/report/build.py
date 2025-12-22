@@ -457,7 +457,7 @@ def _render_templates(
 
         # Generate chart data from metrics
         chart_data = generate_chart_data(
-            timeseries_data, summary_data, leaderboards_data, repo_health_list
+            timeseries_data, summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
         )
         context.update(chart_data)
 

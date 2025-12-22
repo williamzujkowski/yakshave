@@ -851,3 +851,124 @@ class DonutChart extends BaseChart {
             .text('Total');
     }
 }
+
+/**
+ * Render functions for Executive Summary charts.
+ * These are wrapper functions that create chart instances and render data.
+ */
+
+/**
+ * Render collaboration chart (time series).
+ *
+ * @param {string} selector - CSS selector for chart container
+ * @param {Array} data - Array of {date, reviews, comments, cross_team}
+ */
+function renderCollaborationChart(selector, data) {
+    if (!data || data.length === 0) {
+        const container = d3.select(selector);
+        container.html('<p style="text-align: center; color: #888; padding: 40px;">No data available</p>');
+        return;
+    }
+
+    // Parse ISO date strings to Date objects
+    const parsedData = data.map(d => ({
+        date: new Date(d.date),
+        value: (d.reviews || 0) + (d.comments || 0)
+    }));
+
+    const containerId = selector.replace('#', '');
+    const chart = new TimeSeriesChart(containerId, {
+        height: 300,
+        yAxisLabel: 'Activity Count',
+        xAxisLabel: 'Date'
+    });
+
+    chart.render(parsedData);
+}
+
+/**
+ * Render velocity chart (time series).
+ *
+ * @param {string} selector - CSS selector for chart container
+ * @param {Array} data - Array of {date, prs_opened, prs_merged, time_to_merge}
+ */
+function renderVelocityChart(selector, data) {
+    if (!data || data.length === 0) {
+        const container = d3.select(selector);
+        container.html('<p style="text-align: center; color: #888; padding: 40px;">No data available</p>');
+        return;
+    }
+
+    // Parse ISO date strings to Date objects
+    const parsedData = data.map(d => ({
+        date: new Date(d.date),
+        value: d.prs_merged || 0
+    }));
+
+    const containerId = selector.replace('#', '');
+    const chart = new TimeSeriesChart(containerId, {
+        height: 300,
+        yAxisLabel: 'PRs Merged',
+        xAxisLabel: 'Date'
+    });
+
+    chart.render(parsedData);
+}
+
+/**
+ * Render quality chart (bar chart of hygiene adoption rates).
+ *
+ * @param {string} selector - CSS selector for chart container
+ * @param {Array} data - Array of {category, value} where value is percentage
+ */
+function renderQualityChart(selector, data) {
+    if (!data || data.length === 0) {
+        const container = d3.select(selector);
+        container.html('<p style="text-align: center; color: #888; padding: 40px;">No data available</p>');
+        return;
+    }
+
+    // Transform data to bar chart format
+    const barData = data.map((d, i) => ({
+        label: d.category,
+        value: d.value,
+        rank: i + 1
+    }));
+
+    const containerId = selector.replace('#', '');
+    const chart = new BarChart(containerId, {
+        height: 300,
+        xAxisLabel: 'Adoption Rate (%)'
+    });
+
+    chart.render(barData);
+}
+
+/**
+ * Render community chart (time series).
+ *
+ * @param {string} selector - CSS selector for chart container
+ * @param {Array} data - Array of {date, active_contributors, new_contributors}
+ */
+function renderCommunityChart(selector, data) {
+    if (!data || data.length === 0) {
+        const container = d3.select(selector);
+        container.html('<p style="text-align: center; color: #888; padding: 40px;">No data available</p>');
+        return;
+    }
+
+    // Parse ISO date strings to Date objects
+    const parsedData = data.map(d => ({
+        date: new Date(d.date),
+        value: d.active_contributors || 0
+    }));
+
+    const containerId = selector.replace('#', '');
+    const chart = new TimeSeriesChart(containerId, {
+        height: 300,
+        yAxisLabel: 'Active Contributors',
+        xAxisLabel: 'Date'
+    });
+
+    chart.render(parsedData);
+}

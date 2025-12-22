@@ -15,6 +15,7 @@ def generate_chart_data(
     summary_data: dict[str, Any],
     leaderboards_data: dict[str, Any],
     repo_health_list: list[dict[str, Any]] | None = None,
+    hygiene_scores_list: list[dict[str, Any]] | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
     """Generate chart-ready data from metrics for D3.js visualization.
 
@@ -23,12 +24,13 @@ def generate_chart_data(
         summary_data: Summary statistics from summary.json.
         leaderboards_data: Leaderboard data from leaderboards.json.
         repo_health_list: Optional list of repo health metrics.
+        hygiene_scores_list: Optional list of hygiene scores for quality chart.
 
     Returns:
         Dictionary with chart data arrays:
         - collaboration_data: Weekly reviews, comments, cross-team activity
         - velocity_data: Weekly PRs opened/merged, time to merge
-        - quality_data: Weekly review coverage, CI pass rate
+        - quality_data: Bar chart of hygiene adoption rates
         - community_data: Weekly active contributors, new contributors
     """
     chart_data: dict[str, list[dict[str, Any]]] = {
@@ -48,8 +50,8 @@ def generate_chart_data(
     velocity_data = _generate_velocity_data(weekly_data, repo_health_list or [])
     chart_data["velocity_data"] = velocity_data
 
-    # Build quality_data: review_coverage, ci_pass_rate (placeholder)
-    quality_data = _generate_quality_data(weekly_data, repo_health_list or [])
+    # Build quality_data: hygiene adoption rates as bar chart
+    quality_data = _generate_quality_data_from_hygiene(hygiene_scores_list or [])
     chart_data["quality_data"] = quality_data
 
     # Build community_data: active_contributors, new_contributors
@@ -177,30 +179,66 @@ def _generate_velocity_data(
     return result
 
 
-def _generate_quality_data(
-    weekly_data: dict[str, Any], repo_health_list: list[dict[str, Any]]
+def _generate_quality_data_from_hygiene(
+    hygiene_scores_list: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """Generate quality chart data from weekly timeseries.
+    """Generate quality chart data from current hygiene metrics.
+
+    Since we don't have time-series hygiene data, this creates a bar chart showing
+    current adoption rates of key quality practices across all repositories.
 
     Args:
-        weekly_data: Weekly metrics from timeseries data.
-        repo_health_list: Repository health metrics containing review_coverage.
+        hygiene_scores_list: List of repository hygiene scores with has_* fields.
 
     Returns:
-        List of {date, review_coverage, ci_pass_rate} dicts sorted chronologically.
+        List of {category, value} dicts for bar chart visualization.
+        Value represents percentage of repos that have adopted each practice.
     """
-    # Quality metrics (review_coverage, ci_pass_rate) are calculated per-repo but not
-    # tracked over time. To show time series, we would need to snapshot repo health metrics
-    # weekly during collection. Current implementation computes final values only.
-    #
-    # Possible approaches for future enhancement:
-    # 1. Store weekly repo health snapshots during collection
-    # 2. Calculate quality metrics from weekly PR/review aggregates
-    # 3. Use static values from current repo health (less useful for trending)
-    #
-    # For now, return empty list until time series quality data is collected.
+    if not hygiene_scores_list:
+        return []
 
-    return []
+    total_repos = len(hygiene_scores_list)
+    if total_repos == 0:
+        return []
+
+    # Count repos with each quality practice
+    ci_count = sum(1 for h in hygiene_scores_list if h.get("has_ci_workflows", False))
+    security_count = sum(1 for h in hygiene_scores_list if h.get("has_security_md", False))
+    codeowners_count = sum(1 for h in hygiene_scores_list if h.get("has_codeowners", False))
+    protection_count = sum(
+        1 for h in hygiene_scores_list if h.get("branch_protection_enabled", False)
+    )
+
+    # Calculate percentages and create bar chart data
+    quality_data = [
+        {
+            "category": "CI Workflows",
+            "value": round((ci_count / total_repos) * 100, 1),
+        },
+        {
+            "category": "Security Policy",
+            "value": round((security_count / total_repos) * 100, 1),
+        },
+        {
+            "category": "Code Owners",
+            "value": round((codeowners_count / total_repos) * 100, 1),
+        },
+        {
+            "category": "Branch Protection",
+            "value": round((protection_count / total_repos) * 100, 1),
+        },
+    ]
+
+    logger.info(
+        "Generated quality chart data: CI=%.1f%%, Security=%.1f%%, "
+        "CodeOwners=%.1f%%, Protection=%.1f%%",
+        quality_data[0]["value"],
+        quality_data[1]["value"],
+        quality_data[2]["value"],
+        quality_data[3]["value"],
+    )
+
+    return quality_data
 
 
 def _generate_community_data(
