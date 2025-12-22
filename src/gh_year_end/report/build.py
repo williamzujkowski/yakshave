@@ -363,6 +363,10 @@ def _render_templates(
                 # Transform from simple format (top_pr_author, top_reviewer, etc.)
                 awards_by_category = _transform_awards_data(awards_data)
 
+        # Add repository awards if not already populated
+        if not awards_by_category.get("repository"):
+            awards_by_category["repository"] = _generate_repository_awards(repo_health_list)
+
         # Get base path for GitHub Pages subpath deployment
         base_path = config.report.base_path.rstrip("/") if config.report.base_path else ""
 
@@ -541,6 +545,67 @@ def _calculate_insights(
     return calculate_insights(
         summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
     )
+
+
+def _generate_repository_awards(
+    repo_health_list: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Generate repository awards from repo health data.
+
+    Args:
+        repo_health_list: List of repository health metrics.
+
+    Returns:
+        List of repository award dictionaries for template rendering.
+    """
+    awards = []
+
+    if not repo_health_list:
+        return awards
+
+    # Most Active Repository - highest pr_count (or prs_merged)
+    active_repos = [r for r in repo_health_list if r.get("pr_count", 0) > 0]
+    if active_repos:
+        most_active = max(active_repos, key=lambda x: x.get("pr_count", 0))
+        awards.append(
+            {
+                "award_key": "most_active",
+                "title": "Most Active Repository",
+                "description": "Highest number of pull requests",
+                "repo_name": most_active.get("repo", ""),
+                "supporting_stats": f"{most_active.get('pr_count', 0)} PRs",
+            }
+        )
+
+    # Best Reviewed Repository - highest review_coverage
+    reviewed_repos = [r for r in repo_health_list if r.get("review_coverage", 0) > 0]
+    if reviewed_repos:
+        best_reviewed = max(reviewed_repos, key=lambda x: x.get("review_coverage", 0))
+        awards.append(
+            {
+                "award_key": "best_reviewed",
+                "title": "Best Reviewed Repository",
+                "description": "Highest review coverage",
+                "repo_name": best_reviewed.get("repo", ""),
+                "supporting_stats": f"{best_reviewed.get('review_coverage', 0):.0f}% coverage",
+            }
+        )
+
+    # Most Collaborative Repository - highest contributor_count
+    collab_repos = [r for r in repo_health_list if r.get("contributor_count", 0) > 0]
+    if collab_repos:
+        most_collab = max(collab_repos, key=lambda x: x.get("contributor_count", 0))
+        awards.append(
+            {
+                "award_key": "most_collaborative",
+                "title": "Most Collaborative Repository",
+                "description": "Most active contributors",
+                "repo_name": most_collab.get("repo", ""),
+                "supporting_stats": f"{most_collab.get('contributor_count', 0)} contributors",
+            }
+        )
+
+    return awards
 
 
 def _calculate_risks(

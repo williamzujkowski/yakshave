@@ -100,10 +100,12 @@ def merge_repo_data(
             hygiene_score = None
         else:
             # Use hygiene-based health status
-            if hygiene_score >= 80:
+            # Lower thresholds to account for personal repos that often lack
+            # enterprise hygiene features like CODEOWNERS and branch protection
+            if hygiene_score >= 50:
                 health_status = "healthy"
                 hygiene_score_category = "high"
-            elif hygiene_score >= 60:
+            elif hygiene_score >= 30:
                 health_status = "warning"
                 hygiene_score_category = "medium"
             else:

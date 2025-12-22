@@ -1,9 +1,9 @@
 {
   "version": "1.0",
   "year": 2025,
-  "target": "sample-org",
-  "target_mode": "org",
-  "build_time": "2025-12-22T04:57:44.043580+00:00",
+  "target": "williamzujkowski",
+  "target_mode": "user",
+  "build_time": "2025-12-22T12:49:39.090725+00:00",
   "templates_rendered": [
     "repos.html",
     "index.html",
