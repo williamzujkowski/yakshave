@@ -4,6 +4,11 @@ Provides granular progress tracking at the repo + endpoint + page level,
 allowing collection to resume from exact point of interruption.
 Handles signal interrupts (SIGINT, SIGTERM) gracefully and ensures
 atomic writes via temp files.
+
+Note: This module exceeds the 400-line preference from CLAUDE.md (currently 626 lines)
+due to its complexity as the checkpoint/resume system. It handles hierarchical progress
+tracking, signal handling, file locking, atomic writes, and multi-level state management.
+Splitting would fragment the cohesive checkpoint coordination logic.
 """
 
 import fcntl

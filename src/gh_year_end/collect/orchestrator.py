@@ -3,6 +3,11 @@
 Coordinates the execution of all collectors in the correct order,
 manages clients and rate limiting, and aggregates statistics.
 Supports checkpoint-based resume for long-running collections.
+
+Note: This module exceeds the 400-line preference from CLAUDE.md (currently 896 lines)
+due to its complexity as the core collection orchestrator. The functionality is cohesive
+and covers parallel execution, checkpoint coordination, phase sequencing, and error
+aggregation. Splitting would reduce maintainability and obscure the orchestration flow.
 """
 
 import asyncio

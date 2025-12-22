@@ -2,6 +2,11 @@
 
 Implements intelligent throttling based on rate limit headers and configurable strategies
 to avoid hitting GitHub's primary and secondary rate limits.
+
+Note: This module exceeds the 400-line preference from CLAUDE.md (currently 647 lines)
+due to its complexity as the adaptive rate limiting system. It implements circuit breaker
+patterns, priority queuing, adaptive pacing, burst detection, and recovery strategies.
+Splitting would break the cohesive rate limiting algorithm.
 """
 
 import asyncio

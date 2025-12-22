@@ -2,6 +2,11 @@
 
 This module provides a single-pass aggregator that computes all metrics
 during collection, eliminating the need for separate normalize and metrics phases.
+
+Note: This module exceeds the 400-line preference from CLAUDE.md (currently 650 lines)
+due to its complexity as the core metrics aggregator. It handles leaderboards, time
+series, repository health, hygiene tracking, and awards computation in a single unified
+class. Splitting would break the single-pass aggregation pattern.
 """
 
 from collections import defaultdict
