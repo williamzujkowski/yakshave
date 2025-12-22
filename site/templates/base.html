@@ -82,6 +82,8 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#667eea">
     <link rel="stylesheet" href="assets/css/style.css">
     {% block extra_css %}{% endblock %}
 </head>
@@ -351,5 +353,10 @@
     <script src="assets/js/keyboard-shortcuts.js"></script>
     <script src="assets/js/url-state.js"></script>
     {% block extra_js %}{% endblock %}
+    <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('../sw.js');
+    }
+    </script>
 </body>
 </html>
