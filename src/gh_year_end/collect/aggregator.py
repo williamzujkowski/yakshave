@@ -199,6 +199,8 @@ class MetricsAggregator:
                 "issue_count": 0,
                 "review_count": 0,
                 "comment_count": 0,
+                "prs_with_reviews": set(),  # Track PRs that received reviews
+                "merge_times": [],  # Track merge times in hours
             }
 
     def add_pr(self, repo_id: str, pr: dict[str, Any]) -> None:
@@ -236,10 +238,16 @@ class MetricsAggregator:
         if pr.get("merged_at"):
             self.leaderboards["prs_merged"][author_login] += 1
             merged_at = pr.get("merged_at")
-            if merged_at:
+            if merged_at and created_at:
                 merged_dt = datetime.fromisoformat(merged_at.replace("Z", "+00:00"))
                 if merged_dt.year == self.year:
                     self._increment_timeseries(merged_dt, "prs_merged", author_login)
+
+                # Track merge time for repo health
+                if repo_id in self.repo_health:
+                    created_dt = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
+                    time_to_merge_hours = (merged_dt - created_dt).total_seconds() / 3600
+                    self.repo_health[repo_id]["merge_times"].append(time_to_merge_hours)
 
     def add_issue(self, repo_id: str, issue: dict[str, Any]) -> None:
         """Update metrics when an issue is collected.
@@ -285,12 +293,12 @@ class MetricsAggregator:
                 if closed_dt.year == self.year:
                     self._increment_timeseries(closed_dt, "issues_closed", author_login)
 
-    def add_review(self, repo_id: str, _pr_number: int, review: dict[str, Any]) -> None:
+    def add_review(self, repo_id: str, pr_number: int, review: dict[str, Any]) -> None:
         """Update metrics when a review is collected.
 
         Args:
             repo_id: Repository full name (owner/repo)
-            _pr_number: Pull request number (unused, for API compatibility)
+            pr_number: Pull request number
             review: GitHub review object
         """
         reviewer = review.get("user")
@@ -307,6 +315,8 @@ class MetricsAggregator:
         if repo_id in self.repo_health:
             self.repo_health[repo_id]["contributors"].add(reviewer_login)
             self.repo_health[repo_id]["review_count"] += 1
+            # Track that this PR received a review
+            self.repo_health[repo_id]["prs_with_reviews"].add(pr_number)
 
         # Increment leaderboards
         self.leaderboards["reviews_submitted"][reviewer_login] += 1
@@ -423,6 +433,7 @@ class MetricsAggregator:
             "total_comments": total_comments,
             "prs_merged": sum(self.leaderboards["prs_merged"].values()),
             "issues_closed": sum(self.leaderboards["issues_closed"].values()),
+            "new_contributors": len(self._new_contributors_this_year),
         }
 
     def _compute_leaderboards(self) -> dict[str, Any]:
@@ -499,10 +510,15 @@ class MetricsAggregator:
         """Compute awards based on metrics.
 
         Returns:
-            Awards dict matching awards.json format
+            Awards dict with individual, repository, and special_mentions categories
         """
-        awards: dict[str, Any] = {}
+        awards: dict[str, Any] = {
+            "individual": {},
+            "repository": {},
+            "special_mentions": {},
+        }
 
+        # Individual Awards
         # Top PR author
         if self.leaderboards["prs_opened"]:
             top_pr = max(
@@ -515,7 +531,7 @@ class MetricsAggregator:
                 default=(None, 0),
             )
             if top_pr[0]:
-                awards["top_pr_author"] = {
+                awards["individual"]["top_pr_author"] = {
                     "user": top_pr[0],
                     "count": top_pr[1],
                     "avatar_url": self.users.get(top_pr[0], {}).get("avatar_url", ""),
@@ -533,7 +549,7 @@ class MetricsAggregator:
                 default=(None, 0),
             )
             if top_reviewer[0]:
-                awards["top_reviewer"] = {
+                awards["individual"]["top_reviewer"] = {
                     "user": top_reviewer[0],
                     "count": top_reviewer[1],
                     "avatar_url": self.users.get(top_reviewer[0], {}).get("avatar_url", ""),
@@ -551,11 +567,94 @@ class MetricsAggregator:
                 default=(None, 0),
             )
             if top_issue[0]:
-                awards["top_issue_opener"] = {
+                awards["individual"]["top_issue_opener"] = {
                     "user": top_issue[0],
                     "count": top_issue[1],
                     "avatar_url": self.users.get(top_issue[0], {}).get("avatar_url", ""),
                 }
+
+        # Repository Awards
+        if self.repo_health:
+            # Most active repo (highest PR count)
+            top_active_repo = max(
+                [
+                    (repo_id, data.get("prs_merged", 0))
+                    for repo_id, data in self.repo_health.items()
+                ],
+                key=lambda x: x[1],
+                default=(None, 0),
+            )
+            if top_active_repo[0] and top_active_repo[1] > 0:
+                awards["repository"]["most_active"] = {
+                    "repo": top_active_repo[0],
+                    "count": top_active_repo[1],
+                }
+
+            # Best reviewed repo (highest review coverage)
+            top_reviewed_repo = max(
+                [
+                    (repo_id, data.get("review_coverage", 0))
+                    for repo_id, data in self.repo_health.items()
+                ],
+                key=lambda x: x[1],
+                default=(None, 0),
+            )
+            if top_reviewed_repo[0] and top_reviewed_repo[1] > 0:
+                awards["repository"]["best_reviewed"] = {
+                    "repo": top_reviewed_repo[0],
+                    "coverage": top_reviewed_repo[1],
+                }
+
+            # Most collaborative repo (highest contributor count)
+            top_collaborative_repo = max(
+                [
+                    (repo_id, data.get("active_contributors_365d", 0))
+                    for repo_id, data in self.repo_health.items()
+                ],
+                key=lambda x: x[1],
+                default=(None, 0),
+            )
+            if top_collaborative_repo[0] and top_collaborative_repo[1] > 0:
+                awards["repository"]["most_collaborative"] = {
+                    "repo": top_collaborative_repo[0],
+                    "contributors": top_collaborative_repo[1],
+                }
+
+        # Special Mentions
+        # First contributions
+        if self._new_contributors_this_year:
+            first_contributors = sorted(list(self._new_contributors_this_year))[:5]
+            awards["special_mentions"]["first_contributions"] = [
+                {
+                    "user": user,
+                    "avatar_url": self.users.get(user, {}).get("avatar_url", ""),
+                }
+                for user in first_contributors
+            ]
+
+        # Consistent contributors
+        user_weeks: dict[str, set[str]] = defaultdict(set)
+        for metric in ["prs_opened", "issues_opened", "reviews_submitted"]:
+            for entry in self.timeseries.get("weekly", {}).get(metric, []):
+                user = entry.get("user")
+                period = entry.get("period")
+                if user and period and not self.users.get(user, {}).get("is_bot", False):
+                    user_weeks[user].add(period)
+
+        if user_weeks:
+            consistent = sorted(
+                [(user, len(weeks)) for user, weeks in user_weeks.items()],
+                key=lambda x: x[1],
+                reverse=True,
+            )[:3]
+            awards["special_mentions"]["consistent_contributors"] = [
+                {
+                    "user": user,
+                    "weeks": weeks,
+                    "avatar_url": self.users.get(user, {}).get("avatar_url", ""),
+                }
+                for user, weeks in consistent
+            ]
 
         return awards
 

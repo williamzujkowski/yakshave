@@ -112,10 +112,8 @@ def calculate_insights(
     # Hygiene data doesn't currently track SECURITY.md explicitly, so we'll return None
     insights["repos_with_security_policy"] = None
 
-    # Calculate new_contributors
-    # This would require tracking first-time contributors which we don't have in current metrics
-    # For now, set to 0
-    insights["new_contributors"] = 0
+    # Calculate new_contributors - get from summary data
+    insights["new_contributors"] = summary_data.get("new_contributors", 0)
 
     # Calculate contributor_retention
     # This would require historical contributor data which we don't have

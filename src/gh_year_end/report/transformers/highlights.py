@@ -103,9 +103,8 @@ def calculate_highlights(
     except Exception as e:
         logger.warning("Failed to calculate average review time: %s", e)
 
-    # New contributors - would need contributor data from metrics
-    # For now, keep as 0 since we don't have first-contribution tracking
-    highlights["new_contributors"] = 0
+    # New contributors - get from summary data
+    highlights["new_contributors"] = summary_data.get("new_contributors", 0)
 
     return highlights
 

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="williamzujkowski Year in Review 2025 - GitHub Community Health Report">
-    <title>williamzujkowski Year in Review 2025 - Repositories</title>
+    <meta name="description" content="Sample Org Year in Review 2025 - GitHub Community Health Report">
+    <title>Sample Org Year in Review 2025 - Repositories</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
@@ -14,9 +14,9 @@
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <h1 class="site-title">williamzujkowski Year in Review 2025</h1>
+                <h1 class="site-title">Sample Org Year in Review 2025</h1>
                 <div class="header-meta">
-                    <span class="target-info">williamzujkowski</span>
+                    <span class="target-info">sample-org</span>
                     <div class="year-selector">
                         <button class="year-badge" id="yearToggle" aria-label="Select year" aria-expanded="false">
                             2025
@@ -27,7 +27,7 @@
                         <div class="year-dropdown" id="yearDropdown" aria-hidden="true">
                             <ul class="year-list">
                                 <li>
-                                    <a href="/yakshave/2025/"
+                                    <a href="/2025/"
                                        class="year-option active"
 aria-current="true">
                                         2025
@@ -37,7 +37,7 @@ aria-current="true">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/yakshave/2024/"
+                                    <a href="/2024/"
                                        class="year-option"
 >
                                         2024
@@ -1724,13 +1724,6 @@ aria-current="true">
     </div>
 </section>
 
-<section class="repo-activity-section">
-    <h2>Repository Activity Trends</h2>
-    <div class="chart-container">
-        <div id="chart-repo-activity" class="chart"></div>
-    </div>
-</section>
-
 <!-- Repository Detail Modal -->
 <div id="repo-modal" class="modal" style="display: none;">
     <div class="modal-overlay" onclick="closeRepoModal()"></div>
@@ -1771,7 +1764,7 @@ aria-current="true">
                 </div>
             </div>
             <div class="footer-legal">
-                <p>&copy; 2025 williamzujkowski. Generated with gh-year-end.</p>
+                <p>&copy; 2025 sample-org. Generated with gh-year-end.</p>
             </div>
         </div>
     </footer>
@@ -1785,13 +1778,8 @@ aria-current="true">
     // Load data
     const reposData = [{"active_contributors_365d": 0, "full_name": "williamzujkowski/NOPE", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "NOPE", "prs_merged": 0, "repo_id": "williamzujkowski/NOPE", "review_coverage": 0}, {"active_contributors_365d": 1, "full_name": "williamzujkowski/Neo-Brutalist-11ty-Theme", "health_status": "warning", "hygiene_score": null, "hygiene_score_category": "medium", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "Neo-Brutalist-11ty-Theme", "prs_merged": 2, "repo_id": "williamzujkowski/Neo-Brutalist-11ty-Theme", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/arpwatch-docker", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "arpwatch-docker", "prs_merged": 0, "repo_id": "williamzujkowski/arpwatch-docker", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/astro-template-website", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "astro-template-website", "prs_merged": 0, "repo_id": "williamzujkowski/astro-template-website", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/codesnippets", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "codesnippets", "prs_merged": 0, "repo_id": "williamzujkowski/codesnippets", "review_coverage": 0}, {"active_contributors_365d": 1, "full_name": "williamzujkowski/cognitive-toolworks", "health_status": "healthy", "hygiene_score": null, "hygiene_score_category": "high", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "cognitive-toolworks", "prs_merged": 32, "repo_id": "williamzujkowski/cognitive-toolworks", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/compliance-factory", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "compliance-factory", "prs_merged": 0, "repo_id": "williamzujkowski/compliance-factory", "review_coverage": 0}, {"active_contributors_365d": 1, "full_name": "williamzujkowski/data-sources", "health_status": "warning", "hygiene_score": null, "hygiene_score_category": "medium", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "data-sources", "prs_merged": 0, "repo_id": "williamzujkowski/data-sources", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/dependency-risk-profiler", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "dependency-risk-profiler", "prs_merged": 0, "repo_id": "williamzujkowski/dependency-risk-profiler", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/dev-box", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "dev-box", "prs_merged": 0, "repo_id": "williamzujkowski/dev-box", "review_coverage": 0}, {"active_contributors_365d": 1, "full_name": "williamzujkowski/domainchecker", "health_status": "warning", "hygiene_score": null, "hygiene_score_category": "medium", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "domainchecker", "prs_merged": 3, "repo_id": "williamzujkowski/domainchecker", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/dont-panic", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "dont-panic", "prs_merged": 0, "repo_id": "williamzujkowski/dont-panic", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/gutenburg_epubs", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "gutenburg_epubs", "prs_merged": 0, "repo_id": "williamzujkowski/gutenburg_epubs", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/llm-markdown-generator", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "llm-markdown-generator", "prs_merged": 0, "repo_id": "williamzujkowski/llm-markdown-generator", "review_coverage": 0}, {"active_contributors_365d": 1, "full_name": "williamzujkowski/machine-rites", "health_status": "warning", "hygiene_score": null, "hygiene_score_category": "medium", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "machine-rites", "prs_merged": 2, "repo_id": "williamzujkowski/machine-rites", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/mcp-servers", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "mcp-servers", "prs_merged": 0, "repo_id": "williamzujkowski/mcp-servers", "review_coverage": 0}, {"active_contributors_365d": 1, "full_name": "williamzujkowski/mcp-standards-server", "health_status": "warning", "hygiene_score": null, "hygiene_score_category": "medium", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "mcp-standards-server", "prs_merged": 2, "repo_id": "williamzujkowski/mcp-standards-server", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/multi-source-research-blog", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "multi-source-research-blog", "prs_merged": 0, "repo_id": "williamzujkowski/multi-source-research-blog", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/normal-things", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "normal-things", "prs_merged": 0, "repo_id": "williamzujkowski/normal-things", "review_coverage": 0}, {"active_contributors_365d": 1, "full_name": "williamzujkowski/old_website", "health_status": "healthy", "hygiene_score": null, "hygiene_score_category": "high", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "old_website", "prs_merged": 7, "repo_id": "williamzujkowski/old_website", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/oscalize", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "oscalize", "prs_merged": 0, "repo_id": "williamzujkowski/oscalize", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/pizza-calculator", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "pizza-calculator", "prs_merged": 0, "repo_id": "williamzujkowski/pizza-calculator", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/repovac", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "repovac", "prs_merged": 0, "repo_id": "williamzujkowski/repovac", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/space-game", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "space-game", "prs_merged": 0, "repo_id": "williamzujkowski/space-game", "review_coverage": 0}, {"active_contributors_365d": 1, "full_name": "williamzujkowski/standards", "health_status": "healthy", "hygiene_score": null, "hygiene_score_category": "high", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "standards", "prs_merged": 16, "repo_id": "williamzujkowski/standards", "review_coverage": 0}, {"active_contributors_365d": 10, "full_name": "williamzujkowski/strudel-mcp-server", "health_status": "healthy", "hygiene_score": null, "hygiene_score_category": "high", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "strudel-mcp-server", "prs_merged": 11, "repo_id": "williamzujkowski/strudel-mcp-server", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/strudel-sessions", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "strudel-sessions", "prs_merged": 0, "repo_id": "williamzujkowski/strudel-sessions", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/template", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "template", "prs_merged": 0, "repo_id": "williamzujkowski/template", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/vuln-post-generator", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "vuln-post-generator", "prs_merged": 0, "repo_id": "williamzujkowski/vuln-post-generator", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/vulnerability-data-pipeline", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "vulnerability-data-pipeline", "prs_merged": 0, "repo_id": "williamzujkowski/vulnerability-data-pipeline", "review_coverage": 0}, {"active_contributors_365d": 0, "full_name": "williamzujkowski/vulnerability-intelligence-generator", "health_status": "critical", "hygiene_score": null, "hygiene_score_category": "low", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "vulnerability-intelligence-generator", "prs_merged": 0, "repo_id": "williamzujkowski/vulnerability-intelligence-generator", "review_coverage": 0}, {"active_contributors_365d": 1, "full_name": "williamzujkowski/williamzujkowski", "health_status": "warning", "hygiene_score": null, "hygiene_score_category": "medium", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "williamzujkowski", "prs_merged": 3, "repo_id": "williamzujkowski/williamzujkowski", "review_coverage": 0}, {"active_contributors_365d": 1, "full_name": "williamzujkowski/williamzujkowski.github.io", "health_status": "healthy", "hygiene_score": null, "hygiene_score_category": "high", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "williamzujkowski.github.io", "prs_merged": 33, "repo_id": "williamzujkowski/williamzujkowski.github.io", "review_coverage": 0}, {"active_contributors_365d": 1, "full_name": "williamzujkowski/yakshave", "health_status": "healthy", "hygiene_score": null, "hygiene_score_category": "high", "is_private": false, "language": null, "median_time_to_merge": "N/A", "name": "yakshave", "prs_merged": 8, "repo_id": "williamzujkowski/yakshave", "review_coverage": 0}];
     const hygieneData = null;
-    const repoActivityData = [];
 
     // Render charts only if hygiene data is available
-
-    if (typeof renderRepoActivity === 'function') {
-        renderRepoActivity('#chart-repo-activity', repoActivityData);
-    }
 
     // Initialize repo table features
     if (typeof initRepoTable === 'function') {

@@ -128,10 +128,15 @@ function renderSparklines() {
         const max = Math.max(...values, 1);
 
         const points = values.map((val, i) => {
-            const x = (i / (values.length - 1)) * width;
+            const x = values.length === 1 ? width / 2 : (i / (values.length - 1)) * width;
             const y = height - (val / max) * height;
             return `${x},${y}`;
+        }).filter(p => {
+            const coords = p.split(',');
+            return !isNaN(coords[0]) && !isNaN(coords[1]);
         }).join(' ');
+
+        if (!points) return;
 
         sparkline.innerHTML = `
             <svg width="${width}" height="${height}" style="display: block;">

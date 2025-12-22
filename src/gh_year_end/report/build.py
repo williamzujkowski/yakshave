@@ -269,8 +269,8 @@ def _render_templates(
                         "repo_full_name": repo_name,
                         "prs_merged": item.get("pr_count", 0),
                         "active_contributors_365d": item.get("contributor_count", 0),
-                        "review_coverage": 0,  # Not in this data format
-                        "median_time_to_merge": "N/A",
+                        "review_coverage": item.get("review_coverage", 0),
+                        "median_time_to_merge": item.get("median_time_to_merge"),
                         **item,
                     }
                 )

@@ -473,6 +473,156 @@ async def run_collection(
     return stats
 
 
+async def _collect_repo_hygiene_inline(
+    repo: dict[str, Any],
+    owner: str,
+    repo_name: str,
+    rest_client: RestClient,
+    config: Config,
+) -> dict[str, Any]:
+    """Collect comprehensive hygiene data for a repository inline.
+
+    Args:
+        repo: Repository metadata dict.
+        owner: Repository owner.
+        repo_name: Repository name.
+        rest_client: REST client for API calls.
+        config: Application configuration.
+
+    Returns:
+        Dictionary with hygiene data including file presence, branch protection, and security features.
+    """
+    repo_full_name = f"{owner}/{repo_name}"
+    default_branch = repo.get("default_branch", "main")
+
+    hygiene_data: dict[str, Any] = {
+        "repo": repo_full_name,
+        "default_branch": default_branch,
+        "protected": False,
+        "branch_protection_enabled": False,
+        "has_readme": False,
+        "has_security_md": False,
+        "has_codeowners": False,
+        "has_contributing": False,
+        "has_license": False,
+        "has_ci_workflows": False,
+        "dependabot_enabled": False,
+        "secret_scanning_enabled": False,
+        "score": 0,
+    }
+
+    # Check branch protection
+    try:
+        protection_data, status_code = await rest_client.get_branch_protection(
+            owner=owner,
+            repo=repo_name,
+            branch=default_branch,
+        )
+        if status_code == 200 and protection_data:
+            hygiene_data["protected"] = True
+            hygiene_data["branch_protection_enabled"] = True
+            hygiene_data["protection"] = protection_data
+    except Exception as e:
+        logger.debug("Error checking branch protection for %s: %s", repo_full_name, e)
+
+    # Fetch repository tree to check file presence
+    try:
+        tree_data = await rest_client.get_repository_tree(
+            owner=owner,
+            repo=repo_name,
+            tree_sha=default_branch,
+            recursive=True,
+        )
+
+        if tree_data and "tree" in tree_data:
+            tree_entries = tree_data.get("tree", [])
+            paths = {entry.get("path", ""): entry for entry in tree_entries}
+
+            # Check for key hygiene files
+            hygiene_data["has_readme"] = any(
+                p.upper() == "README.MD" or p.upper() == "README" for p in paths
+            )
+            hygiene_data["has_security_md"] = (
+                "SECURITY.md" in paths or "security.md" in paths or ".github/SECURITY.md" in paths
+            )
+            hygiene_data["has_codeowners"] = (
+                "CODEOWNERS" in paths or ".github/CODEOWNERS" in paths or "docs/CODEOWNERS" in paths
+            )
+            hygiene_data["has_contributing"] = (
+                "CONTRIBUTING.md" in paths
+                or "contributing.md" in paths
+                or ".github/CONTRIBUTING.md" in paths
+            )
+            hygiene_data["has_license"] = any(p.upper().startswith("LICENSE") for p in paths)
+
+            # Check for CI workflows
+            ci_workflow_paths = [
+                ".github/workflows/",
+                ".gitlab-ci.yml",
+                "circle.yml",
+                ".circleci/config.yml",
+                ".travis.yml",
+                "Jenkinsfile",
+            ]
+            hygiene_data["has_ci_workflows"] = any(
+                any(p.startswith(prefix) for prefix in ci_workflow_paths if "/" in prefix)
+                or p in ci_workflow_paths
+                for p in paths
+            )
+
+    except Exception as e:
+        logger.debug("Error fetching repository tree for %s: %s", repo_full_name, e)
+
+    # Check security features (Dependabot, secret scanning)
+    try:
+        repo_data = await rest_client.get_repo_security_analysis(owner, repo_name)
+        if repo_data:
+            security_analysis = repo_data.get("security_and_analysis", {})
+
+            # Check Dependabot
+            dependabot_alerts = security_analysis.get("dependabot_security_updates", {})
+            hygiene_data["dependabot_enabled"] = dependabot_alerts.get("status") == "enabled"
+
+            # Check secret scanning
+            secret_scanning = security_analysis.get("secret_scanning", {})
+            hygiene_data["secret_scanning_enabled"] = secret_scanning.get("status") == "enabled"
+    except Exception as e:
+        logger.debug("Error checking security features for %s: %s", repo_full_name, e)
+
+    # Calculate hygiene score (0-100)
+    score = 0
+
+    # Branch protection (25 points)
+    if hygiene_data["branch_protection_enabled"]:
+        score += 25
+
+    # Security features (25 points)
+    if hygiene_data["has_security_md"]:
+        score += 10
+    if hygiene_data["dependabot_enabled"]:
+        score += 8
+    if hygiene_data["secret_scanning_enabled"]:
+        score += 7
+
+    # Documentation (25 points)
+    if hygiene_data["has_readme"]:
+        score += 15
+    if hygiene_data["has_contributing"]:
+        score += 5
+    if hygiene_data["has_license"]:
+        score += 5
+
+    # Code ownership and CI (25 points)
+    if hygiene_data["has_codeowners"]:
+        score += 10
+    if hygiene_data["has_ci_workflows"]:
+        score += 15
+
+    hygiene_data["score"] = score
+
+    return hygiene_data
+
+
 async def collect_and_aggregate(
     config: Config,
     force: bool = False,
@@ -576,6 +726,7 @@ async def collect_and_aggregate(
         total_prs = 0
         total_issues = 0
         total_reviews = 0
+        total_comments = 0
 
         for idx, repo in enumerate(repos, 1):
             repo_full_name = repo["full_name"]
@@ -585,6 +736,11 @@ async def collect_and_aggregate(
 
             # Add repo to aggregator
             aggregator.add_repo(repo)
+
+            # Track PR numbers for comment collection
+            pr_numbers = []
+            # Track issue numbers for comment collection
+            issue_numbers = []
 
             try:
                 # Collect PRs
@@ -608,6 +764,7 @@ async def collect_and_aggregate(
                                     < config.github.windows.until
                                 ):
                                     aggregator.add_pr(repo_full_name, pr)
+                                    pr_numbers.append(pr["number"])
                                     total_prs += 1
 
                                     # Collect reviews for this PR
@@ -651,40 +808,61 @@ async def collect_and_aggregate(
                                     < config.github.windows.until
                                 ):
                                     aggregator.add_issue(repo_full_name, issue)
+                                    issue_numbers.append(issue["number"])
                                     total_issues += 1
+
+                # Collect comments
+                if config.collection.enable.comments:
+                    # Collect issue comments
+                    if issue_numbers:
+                        logger.debug(
+                            "  Collecting issue comments for %d issues...", len(issue_numbers)
+                        )
+                        for issue_number in issue_numbers:
+                            async for comments_page, _metadata in rest_client.list_issue_comments(
+                                owner=owner,
+                                repo=repo_name,
+                                issue_number=issue_number,
+                            ):
+                                for comment in comments_page:
+                                    aggregator.add_comment(
+                                        repo_full_name, comment, comment_type="issue"
+                                    )
+                                    total_comments += 1
+
+                    # Collect review comments (inline PR comments)
+                    if pr_numbers:
+                        logger.debug("  Collecting review comments for %d PRs...", len(pr_numbers))
+                        for pr_number in pr_numbers:
+                            async for comments_page, _metadata in rest_client.list_review_comments(
+                                owner=owner,
+                                repo=repo_name,
+                                pull_number=pr_number,
+                            ):
+                                for comment in comments_page:
+                                    aggregator.add_comment(
+                                        repo_full_name, comment, comment_type="review"
+                                    )
+                                    total_comments += 1
 
                 # Collect hygiene data
                 if config.collection.enable.hygiene:
                     logger.debug("  Collecting hygiene data...")
-                    # Simplified hygiene collection - just check branch protection
-                    try:
-                        default_branch = repo.get("default_branch", "main")
-                        protection = await rest_client.get_branch_protection(
-                            owner=owner,
-                            repo=repo_name,
-                            branch=default_branch,
-                        )
-                        hygiene_data = {
-                            "repo": repo_full_name,
-                            "default_branch": default_branch,
-                            "protected": True,
-                            "protection": protection,
-                        }
-                    except Exception:
-                        # Branch protection not enabled or not accessible
-                        hygiene_data = {
-                            "repo": repo_full_name,
-                            "default_branch": repo.get("default_branch", "main"),
-                            "protected": False,
-                        }
-
+                    hygiene_data = await _collect_repo_hygiene_inline(
+                        repo=repo,
+                        owner=owner,
+                        repo_name=repo_name,
+                        rest_client=rest_client,
+                        config=config,
+                    )
                     aggregator.set_hygiene(repo_full_name, hygiene_data)
 
                 logger.info(
-                    "  Processed: %d PRs, %d issues, %d reviews",
+                    "  Processed: %d PRs, %d issues, %d reviews, %d comments",
                     total_prs,
                     total_issues,
                     total_reviews,
+                    total_comments,
                 )
 
             except Exception as e:
@@ -699,6 +877,7 @@ async def collect_and_aggregate(
         logger.info("Total PRs: %d", total_prs)
         logger.info("Total issues: %d", total_issues)
         logger.info("Total reviews: %d", total_reviews)
+        logger.info("Total comments: %d", total_comments)
 
         # Export aggregated metrics
         metrics = aggregator.export()
