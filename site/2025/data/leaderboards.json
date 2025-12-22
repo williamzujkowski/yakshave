@@ -55,7 +55,7 @@
   "issues_opened": [
     {
       "user": "williamzujkowski",
-      "count": 175,
+      "count": 173,
       "avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4"
     },
     {
@@ -92,7 +92,7 @@
   "issues_closed": [
     {
       "user": "williamzujkowski",
-      "count": 171,
+      "count": 173,
       "avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4"
     },
     {
@@ -126,5 +126,31 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/36191527?v=4"
     }
   ],
-  "comments_total": []
+  "comments_total": [
+    {
+      "user": "williamzujkowski",
+      "count": 154,
+      "avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4"
+    },
+    {
+      "user": "adrione",
+      "count": 2,
+      "avatar_url": "https://avatars.githubusercontent.com/u/44283101?v=4"
+    },
+    {
+      "user": "endcycles",
+      "count": 1,
+      "avatar_url": "https://avatars.githubusercontent.com/u/12144404?v=4"
+    },
+    {
+      "user": "scarf005",
+      "count": 1,
+      "avatar_url": "https://avatars.githubusercontent.com/u/54838975?v=4"
+    },
+    {
+      "user": "Maria-Papa",
+      "count": 1,
+      "avatar_url": "https://avatars.githubusercontent.com/u/85803896?v=4"
+    }
+  ]
 }

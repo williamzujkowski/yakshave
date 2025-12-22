@@ -275,7 +275,12 @@
       {
         "period": "2025-W51",
         "user": "williamzujkowski",
-        "count": 140
+        "count": 126
+      },
+      {
+        "period": "2025-W52",
+        "user": "williamzujkowski",
+        "count": 12
       }
     ],
     "issues_closed": [
@@ -317,7 +322,49 @@
       {
         "period": "2025-W51",
         "user": "williamzujkowski",
-        "count": 138
+        "count": 127
+      },
+      {
+        "period": "2025-W52",
+        "user": "williamzujkowski",
+        "count": 13
+      }
+    ],
+    "comments_total": [
+      {
+        "period": "2025-W46",
+        "user": "Maria-Papa",
+        "count": 1
+      },
+      {
+        "period": "2025-W48",
+        "user": "adrione",
+        "count": 2
+      },
+      {
+        "period": "2025-W50",
+        "user": "williamzujkowski",
+        "count": 34
+      },
+      {
+        "period": "2025-W50",
+        "user": "endcycles",
+        "count": 1
+      },
+      {
+        "period": "2025-W50",
+        "user": "scarf005",
+        "count": 1
+      },
+      {
+        "period": "2025-W51",
+        "user": "williamzujkowski",
+        "count": 108
+      },
+      {
+        "period": "2025-W52",
+        "user": "williamzujkowski",
+        "count": 12
       }
     ]
   },
@@ -497,7 +544,7 @@
       {
         "period": "2025-12",
         "user": "williamzujkowski",
-        "count": 175
+        "count": 173
       },
       {
         "period": "2025-12",
@@ -509,7 +556,7 @@
       {
         "period": "2025-12",
         "user": "williamzujkowski",
-        "count": 171
+        "count": 173
       },
       {
         "period": "2025-12",
@@ -539,6 +586,33 @@
       {
         "period": "2025-12",
         "user": "bartunlimited",
+        "count": 1
+      }
+    ],
+    "comments_total": [
+      {
+        "period": "2025-11",
+        "user": "adrione",
+        "count": 2
+      },
+      {
+        "period": "2025-11",
+        "user": "Maria-Papa",
+        "count": 1
+      },
+      {
+        "period": "2025-12",
+        "user": "williamzujkowski",
+        "count": 154
+      },
+      {
+        "period": "2025-12",
+        "user": "endcycles",
+        "count": 1
+      },
+      {
+        "period": "2025-12",
+        "user": "scarf005",
         "count": 1
       }
     ]

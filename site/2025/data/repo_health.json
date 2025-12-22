@@ -5,7 +5,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/Neo-Brutalist-11ty-Theme",
@@ -13,7 +15,9 @@
     "pr_count": 2,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": 0.1
   },
   {
     "repo": "williamzujkowski/arpwatch-docker",
@@ -21,7 +25,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/astro-template-website",
@@ -29,7 +35,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/codesnippets",
@@ -37,7 +45,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/cognitive-toolworks",
@@ -45,7 +55,9 @@
     "pr_count": 32,
     "issue_count": 46,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 18,
+    "review_coverage": 0.0,
+    "median_time_to_merge": 0.0
   },
   {
     "repo": "williamzujkowski/compliance-factory",
@@ -53,7 +65,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/data-sources",
@@ -61,7 +75,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 1,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/dependency-risk-profiler",
@@ -69,7 +85,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/dev-box",
@@ -77,7 +95,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/domainchecker",
@@ -85,7 +105,9 @@
     "pr_count": 3,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": 0.0
   },
   {
     "repo": "williamzujkowski/dont-panic",
@@ -93,7 +115,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/gutenburg_epubs",
@@ -101,7 +125,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/llm-markdown-generator",
@@ -109,7 +135,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/machine-rites",
@@ -117,7 +145,9 @@
     "pr_count": 2,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": 0.1
   },
   {
     "repo": "williamzujkowski/mcp-servers",
@@ -125,7 +155,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/mcp-standards-server",
@@ -133,7 +165,9 @@
     "pr_count": 2,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": 0.0
   },
   {
     "repo": "williamzujkowski/multi-source-research-blog",
@@ -141,7 +175,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/normal-things",
@@ -149,7 +185,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/old_website",
@@ -157,7 +195,9 @@
     "pr_count": 7,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": 0.0
   },
   {
     "repo": "williamzujkowski/oscalize",
@@ -165,7 +205,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/pizza-calculator",
@@ -173,7 +215,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/repovac",
@@ -181,7 +225,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/space-game",
@@ -189,7 +235,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/standards",
@@ -197,15 +245,19 @@
     "pr_count": 16,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": 0.5
   },
   {
     "repo": "williamzujkowski/strudel-mcp-server",
-    "contributor_count": 10,
+    "contributor_count": 11,
     "pr_count": 11,
     "issue_count": 36,
     "review_count": 1,
-    "comment_count": 0
+    "comment_count": 35,
+    "review_coverage": 9.1,
+    "median_time_to_merge": 0.0
   },
   {
     "repo": "williamzujkowski/strudel-sessions",
@@ -213,7 +265,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/template",
@@ -221,7 +275,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/vuln-post-generator",
@@ -229,7 +285,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/vulnerability-data-pipeline",
@@ -237,7 +295,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/vulnerability-intelligence-generator",
@@ -245,7 +305,9 @@
     "pr_count": 0,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": null
   },
   {
     "repo": "williamzujkowski/williamzujkowski",
@@ -253,7 +315,9 @@
     "pr_count": 3,
     "issue_count": 0,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 0.0,
+    "median_time_to_merge": 0.0
   },
   {
     "repo": "williamzujkowski/williamzujkowski.github.io",
@@ -261,14 +325,18 @@
     "pr_count": 33,
     "issue_count": 0,
     "review_count": 1,
-    "comment_count": 0
+    "comment_count": 0,
+    "review_coverage": 3.0,
+    "median_time_to_merge": 0.0
   },
   {
     "repo": "williamzujkowski/yakshave",
     "contributor_count": 1,
     "pr_count": 8,
-    "issue_count": 100,
+    "issue_count": 98,
     "review_count": 0,
-    "comment_count": 0
+    "comment_count": 106,
+    "review_coverage": 0.0,
+    "median_time_to_merge": 0.0
   }
 ]
