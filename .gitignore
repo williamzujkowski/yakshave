@@ -85,6 +85,10 @@ site/2*/
 *.jsonl
 *.parquet
 
+# Generated files (from templates)
+site/*/manifest.webmanifest
+site/*/sw.js
+
 # Secrets - NEVER commit these
 .env
 .env.*
