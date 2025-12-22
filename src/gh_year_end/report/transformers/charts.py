@@ -7,7 +7,10 @@ from typing import Any
 
 logger = logging.getLogger(__name__)
 
-__all__ = ["generate_chart_data"]
+__all__ = [
+    "generate_chart_data",
+    "generate_engineer_charts",
+]
 
 
 def generate_chart_data(
@@ -59,6 +62,31 @@ def generate_chart_data(
     chart_data["community_data"] = community_data
 
     return chart_data
+
+
+def generate_engineer_charts(
+    timeseries_data: dict[str, Any],
+    summary_data: dict[str, Any],
+) -> dict[str, list[dict[str, Any]]]:
+    """Generate chart data for Engineers page.
+
+    Args:
+        timeseries_data: Time series data from timeseries.json.
+        summary_data: Summary statistics from summary.json.
+
+    Returns:
+        Dictionary with engineer chart data:
+        - contribution_timeline: Weekly total contributions over time
+        - contribution_types: Distribution by activity type (PRs, Reviews, Issues, Comments)
+        - contribution_by_repo: Top 10 repos by total contributions
+    """
+    weekly_data = timeseries_data.get("weekly", {})
+
+    return {
+        "contribution_timeline": _generate_contribution_timeline(weekly_data),
+        "contribution_types": _generate_contribution_types(weekly_data, summary_data),
+        "contribution_by_repo": _generate_contribution_by_repo(weekly_data),
+    }
 
 
 def _generate_collaboration_data(weekly_data: dict[str, Any]) -> list[dict[str, Any]]:
@@ -320,3 +348,152 @@ def _period_to_iso_date(period: str) -> str | None:
     except (ValueError, AttributeError) as e:
         logger.warning("Failed to parse period %s: %s", period, e)
         return None
+
+
+def _generate_contribution_timeline(weekly_data: dict[str, Any]) -> list[dict[str, Any]]:
+    """Generate contribution timeline chart data for Engineers page.
+
+    Aggregates all contribution types (PRs, reviews, issues, comments) per week.
+
+    Args:
+        weekly_data: Weekly metrics from timeseries data.
+
+    Returns:
+        List of {date, count} dicts sorted chronologically.
+    """
+    contribution_by_week: dict[str, int] = defaultdict(int)
+
+    # Aggregate all contribution types per week
+    metric_types = [
+        "prs_opened",
+        "prs_merged",
+        "reviews_submitted",
+        "issues_opened",
+        "issues_closed",
+        "review_comments",
+        "issue_comments",
+    ]
+
+    for metric_name in metric_types:
+        metric_data = weekly_data.get(metric_name, [])
+        for entry in metric_data:
+            period = entry.get("period", "")
+            count = entry.get("count", 0)
+            if period:
+                contribution_by_week[period] += count
+
+    # Convert to chart format with ISO dates
+    result = []
+    for period in sorted(contribution_by_week.keys()):
+        iso_date = _period_to_iso_date(period)
+        if iso_date:
+            result.append(
+                {
+                    "date": iso_date,
+                    "count": contribution_by_week[period],
+                }
+            )
+
+    logger.info("Generated contribution timeline with %d weeks of data", len(result))
+    return result
+
+
+def _generate_contribution_types(
+    weekly_data: dict[str, Any], summary_data: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Generate contribution types distribution for Engineers page.
+
+    Shows breakdown by activity type: PRs, Reviews, Issues, Comments.
+
+    Args:
+        weekly_data: Weekly metrics from timeseries data.
+        summary_data: Summary statistics for totals.
+
+    Returns:
+        List of {type, count} dicts for donut chart.
+    """
+    # Aggregate totals across all weeks
+    totals = {
+        "PRs": 0,
+        "Reviews": 0,
+        "Issues": 0,
+        "Comments": 0,
+    }
+
+    # Count PRs (opened + merged, avoiding double-count)
+    prs_opened = weekly_data.get("prs_opened", [])
+    totals["PRs"] = sum(entry.get("count", 0) for entry in prs_opened)
+
+    # Count Reviews
+    reviews = weekly_data.get("reviews_submitted", [])
+    totals["Reviews"] = sum(entry.get("count", 0) for entry in reviews)
+
+    # Count Issues (opened + closed, avoiding double-count)
+    issues_opened = weekly_data.get("issues_opened", [])
+    totals["Issues"] = sum(entry.get("count", 0) for entry in issues_opened)
+
+    # Count Comments (review + issue)
+    review_comments = weekly_data.get("review_comments", [])
+    issue_comments = weekly_data.get("issue_comments", [])
+    totals["Comments"] = sum(entry.get("count", 0) for entry in review_comments) + sum(
+        entry.get("count", 0) for entry in issue_comments
+    )
+
+    # Convert to chart format
+    result = [{"type": activity_type, "count": count} for activity_type, count in totals.items()]
+
+    logger.info(
+        "Generated contribution types: PRs=%d, Reviews=%d, Issues=%d, Comments=%d",
+        totals["PRs"],
+        totals["Reviews"],
+        totals["Issues"],
+        totals["Comments"],
+    )
+
+    return result
+
+
+def _generate_contribution_by_repo(weekly_data: dict[str, Any]) -> list[dict[str, Any]]:
+    """Generate contribution by repository chart data for Engineers page.
+
+    Shows top 10 repositories by total contributions.
+
+    Args:
+        weekly_data: Weekly metrics from timeseries data.
+
+    Returns:
+        List of {repo, count} dicts sorted by count descending (top 10).
+    """
+    contribution_by_repo: dict[str, int] = defaultdict(int)
+
+    # Aggregate contributions per repo across all activity types
+    metric_types = [
+        "prs_opened",
+        "prs_merged",
+        "reviews_submitted",
+        "issues_opened",
+        "issues_closed",
+        "review_comments",
+        "issue_comments",
+    ]
+
+    for metric_name in metric_types:
+        metric_data = weekly_data.get(metric_name, [])
+        for entry in metric_data:
+            repo = entry.get("repo", "")
+            count = entry.get("count", 0)
+            if repo:
+                contribution_by_repo[repo] += count
+
+    # Sort by count descending and take top 10
+    sorted_repos = sorted(contribution_by_repo.items(), key=lambda x: x[1], reverse=True)[:10]
+
+    result = [{"repo": repo, "count": count} for repo, count in sorted_repos]
+
+    logger.info(
+        "Generated contribution by repo chart with %d repos (top 10 of %d total)",
+        len(result),
+        len(contribution_by_repo),
+    )
+
+    return result

@@ -29,6 +29,7 @@ from gh_year_end.report.transformers import (
     calculate_insights,
     calculate_risks,
     generate_chart_data,
+    generate_engineer_charts,
     transform_activity_timeline,
     transform_awards_data,
     transform_leaderboards,
@@ -373,6 +374,9 @@ def _render_templates(
         # Pre-compute engineers list (used in multiple context keys)
         engineers_list = _get_engineers_list(leaderboards_data, timeseries_data)
 
+        # Generate engineer chart data
+        engineer_charts = generate_engineer_charts(timeseries_data, summary_data)
+
         # Build template context
         context = {
             "config": {
@@ -430,9 +434,10 @@ def _render_templates(
             "engineers": engineers_list,
             "top_contributors": engineers_list[:10],
             "all_contributors": engineers_list,
-            "contribution_timeline": [],
-            "contribution_types": [],
-            "contribution_by_repo": [],
+            # Engineer chart data for Engineers page
+            "contribution_timeline": engineer_charts.get("contribution_timeline", []),
+            "contribution_types": engineer_charts.get("contribution_types", []),
+            "contribution_by_repo": engineer_charts.get("contribution_by_repo", []),
             # Calculate insights from metrics data
             "insights": _calculate_insights(
                 summary_data, leaderboards_data, repo_health_list, hygiene_scores_list

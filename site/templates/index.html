@@ -5,6 +5,24 @@
 {% block canonical_page %}index.html{% endblock %}
 {% block og_page %}index.html{% endblock %}
 
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Overview - {{ config.report.title }}",
+  "description": "A comprehensive look at {{ config.github.target.name }}'s GitHub activity for {{ config.github.windows.year }}",
+  "url": "https://williamzujkowski.github.io/yakshave/{{ config.github.windows.year }}/index.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "{{ config.report.title }}",
+    "url": "https://williamzujkowski.github.io/yakshave/"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <h1>Year in Review: {{ config.github.windows.year }}</h1>

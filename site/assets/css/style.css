@@ -1111,6 +1111,27 @@ small {
   border-color: var(--color-accent-primary);
 }
 
+.btn-sm {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
+
+.export-btn {
+  float: right;
+  margin-bottom: var(--spacing-sm);
+}
+
+.table-wrapper {
+  position: relative;
+  overflow: visible;
+}
+
+.table-wrapper::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 /* ========================================
    Contributor Cards
    ======================================== */
@@ -1680,24 +1701,71 @@ small {
    ======================================== */
 
 @media print {
+  /* Hide non-essential elements */
   .sidebar,
-  .header-nav,
-  .theme-toggle,
-  .search-bar,
-  .filters-bar,
-  .btn,
+  .nav-container,
+  #theme-toggle,
+  #year-selector,
+  .back-to-top,
+  .no-print,
+  button:not(.print-include),
   .modal {
     display: none !important;
   }
 
-  .layout {
-    display: block;
+  /* Full width content */
+  .main-content,
+  .content-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  .content {
-    padding: 0;
+  /* Reset backgrounds for printing */
+  body,
+  .card,
+  .stat-card,
+  table {
+    background: white !important;
+    color: black !important;
   }
 
+  /* Ensure charts print */
+  svg {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Table improvements */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+  }
+
+  /* Page breaks */
+  .page-break-before { page-break-before: always; }
+  .page-break-after { page-break-after: always; }
+  h1, h2, h3 { page-break-after: avoid; }
+  table, figure, .card { page-break-inside: avoid; }
+
+  /* Add print footer */
+  @page {
+    margin: 1in;
+  }
+
+  /* Show URLs for links */
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* Keep existing card styles for page breaks */
   .stat-card,
   .highlight-card,
   .signal-card,
@@ -1705,6 +1773,15 @@ small {
   .leaderboard-card,
   .award-card {
     break-inside: avoid;
+  }
+
+  /* Additional layout fixes */
+  .layout {
+    display: block;
+  }
+
+  .content {
+    padding: 0;
   }
 }
 
@@ -2234,6 +2311,94 @@ small {
 }
 
 /* ========================================
+   Tooltips
+   ======================================== */
+
+.tooltip-trigger {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  cursor: help;
+}
+
+.tooltip-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+}
+
+.tooltip-trigger:hover .tooltip-icon,
+.tooltip-trigger:focus .tooltip-icon {
+  opacity: 1;
+}
+
+.tooltip-content {
+  position: absolute;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  max-width: 250px;
+  font-size: var(--font-size-sm);
+  z-index: var(--z-index-tooltip);
+  display: none;
+  box-shadow: var(--shadow-medium);
+  white-space: normal;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-normal);
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  margin-bottom: 4px;
+}
+
+.tooltip-trigger:hover .tooltip-content,
+.tooltip-trigger:focus .tooltip-content {
+  display: block;
+}
+
+/* Tooltip arrow */
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--color-bg-primary);
+}
+
+.tooltip-content::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: var(--color-border-primary);
+  margin-top: 1px;
+}
+
+/* Ensure tooltip doesn't break table layouts */
+th .tooltip-trigger,
+td .tooltip-trigger {
+  display: inline-flex;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .tooltip-content {
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .tooltip-content::after {
+  border-top-color: var(--color-bg-tertiary);
+}
+
+/* ========================================
    Accessibility
    ======================================== */
 
@@ -2264,4 +2429,124 @@ small {
 :focus-visible {
   outline: 2px solid var(--color-accent-primary);
   outline-offset: 2px;
+}
+
+/* ========================================
+   Modal
+   ======================================== */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-bg-overlay);
+  z-index: var(--z-index-modal);
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.modal.open {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  max-width: 500px;
+  width: 100%;
+  box-shadow: var(--shadow-large);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.modal-close:active {
+  background-color: var(--color-border-primary);
+}
+
+/* ========================================
+   Keyboard Shortcuts
+   ======================================== */
+
+kbd {
+  display: inline-block;
+  padding: 3px 8px;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 -1px 0 var(--color-border-primary);
+  white-space: nowrap;
+}
+
+.shortcuts-list {
+  margin: 0;
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+}
+
+.shortcut-item:not(:last-child) {
+  border-bottom: 1px solid var(--color-border-tertiary);
+}
+
+.shortcut-item dt {
+  flex: 0 0 120px;
+  font-weight: var(--font-weight-normal);
+  margin: 0;
+}
+
+.shortcut-item dd {
+  flex: 1;
+  margin: 0;
+  color: var(--color-text-secondary);
 }

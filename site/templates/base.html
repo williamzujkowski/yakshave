@@ -1,3 +1,14 @@
+{% macro metric_tooltip(label, tooltip_text) %}
+<span class="tooltip-trigger" tabindex="0">
+  {{ label }}
+  <svg class="tooltip-icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+  </svg>
+  <span class="tooltip-content" role="tooltip">{{ tooltip_text }}</span>
+</span>
+{% endmacro %}
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -23,6 +34,40 @@
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://williamzujkowski.github.io/yakshave/{{ config.github.windows.year }}/{% block canonical_page %}index.html{% endblock %}">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "{{ config.report.title }}",
+      "url": "https://williamzujkowski.github.io/yakshave/",
+      "description": "GitHub Year in Review - Community health metrics and statistics"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://williamzujkowski.github.io/yakshave/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ config.github.windows.year }}",
+          "item": "https://williamzujkowski.github.io/yakshave/{{ config.github.windows.year }}/"
+        }
+      ]
+    }
+    </script>
+
+    {% block structured_data %}{% endblock %}
 
     <title>{% block title %}{{ config.report.title }}{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -177,6 +222,7 @@
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/year-selector.js"></script>
     <script src="assets/js/back-to-top.js"></script>
+    <script src="assets/js/export.js"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

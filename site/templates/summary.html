@@ -5,6 +5,24 @@
 {% block canonical_page %}summary.html{% endblock %}
 {% block og_page %}summary.html{% endblock %}
 
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Executive Summary - {{ config.report.title }}",
+  "description": "Health signals, risks, and key insights for {{ config.github.windows.year }}",
+  "url": "https://williamzujkowski.github.io/yakshave/{{ config.github.windows.year }}/summary.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "{{ config.report.title }}",
+    "url": "https://williamzujkowski.github.io/yakshave/"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <h1>Executive Summary</h1>
@@ -21,7 +39,7 @@
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                     </svg>
                 </div>
-                <h3>Strong Review Culture</h3>
+                <h3>{{ metric_tooltip('Review Coverage', 'Percentage of PRs that received at least one review before merging') }}</h3>
             </div>
             <div class="signal-value">{{ health.review_coverage | default(0) }}%</div>
             <p>of PRs receive at least one review</p>
@@ -41,7 +59,7 @@
                         <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319z"/>
                     </svg>
                 </div>
-                <h3>Average Merge Time</h3>
+                <h3>{{ metric_tooltip('Time to Merge', 'Median time from PR creation to merge') }}</h3>
             </div>
             <div class="signal-value">{{ health.avg_merge_time | default('N/A') }}</div>
             <p>median time from PR open to merge</p>

@@ -5,6 +5,24 @@
 {% block canonical_page %}engineers.html{% endblock %}
 {% block og_page %}engineers.html{% endblock %}
 
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Contributors - {{ config.report.title }}",
+  "description": "Individual contribution statistics and drilldowns for {{ config.github.windows.year }}",
+  "url": "https://williamzujkowski.github.io/yakshave/{{ config.github.windows.year }}/engineers.html",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "{{ config.report.title }}",
+    "url": "https://williamzujkowski.github.io/yakshave/"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <h1>Contributors</h1>
@@ -82,7 +100,7 @@
 <section class="all-contributors-section">
     <h2>All Contributors</h2>
     <div class="table-responsive">
-        <table class="data-table" id="contributors-table">
+        <table class="data-table" id="contributors-table" data-exportable data-export-name="contributors.csv">
   <caption class="visually-hidden">Contributor statistics sorted by activity</caption>
   <thead>
                 <tr>
