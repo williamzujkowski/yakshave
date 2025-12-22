@@ -116,12 +116,12 @@ jobs:
         run: uv pip install safety
 
       - name: Check dependencies for known vulnerabilities
-        run: uv run safety check --json --output safety-report.json
+        run: uv run safety scan --output json --save-as json safety-report.json || true
         continue-on-error: true
 
       - name: Display safety results
         if: always()
-        run: uv run safety check || true
+        run: uv run safety scan --output text || true
 
       - name: Upload safety report
         if: always()
@@ -130,6 +130,7 @@ jobs:
           name: safety-report
           path: safety-report.json
           retention-days: 30
+          if-no-files-found: ignore
 
   # Fast unit tests with parallelization - runs on every push
   test-fast:
