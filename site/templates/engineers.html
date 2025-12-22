@@ -2,6 +2,8 @@
 
 {% block title %}{{ config.report.title }} - Contributors{% endblock %}
 {% block nav_engineers %}active{% endblock %}
+{% block canonical_page %}engineers.html{% endblock %}
+{% block og_page %}engineers.html{% endblock %}
 
 {% block content %}
 <div class="page-header">
@@ -46,9 +48,7 @@
                 </div>
                 <div class="contributor-info">
                     <h3 class="contributor-name">
-                        <a href="https://github.com/{{ contributor.login }}" target="_blank" rel="noopener noreferrer">
-                            {{ contributor.login }}
-                        </a>
+                        <a href="https://github.com/{{ contributor.login }}" target="_blank" rel="noopener noreferrer">{{ contributor.login }}</a>
                     </h3>
                     <p class="contributor-rank">Rank #{{ contributor.rank }}</p>
                 </div>
@@ -178,6 +178,7 @@
 <script src="assets/js/charts.js"></script>
 <script src="assets/js/contributors.js"></script>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
     // Load data
     const contributionTimelineData = {{ contribution_timeline | tojson }};
     const contributionTypesData = {{ contribution_types | tojson }};
@@ -199,5 +200,6 @@
     if (typeof initContributorTable === 'function') {
         initContributorTable('#contributors-table', contributorsData);
     }
+});
 </script>
 {% endblock %}

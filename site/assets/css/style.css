@@ -1575,6 +1575,59 @@ small {
   .podium-3 {
     order: initial;
   }
+
+  /* Responsive table improvements */
+  .table-responsive {
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-lg);
+  }
+
+  .data-table {
+    min-width: 600px;
+  }
+
+  /* Increase touch target sizes for mobile (WCAG 2.5.8) */
+  .nav-link,
+  .btn,
+  .btn-primary,
+  .tab-button,
+  .year-badge,
+  .theme-toggle,
+  .btn-icon,
+  .modal-close {
+    min-height: 44px;
+    min-width: 44px;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .btn-icon,
+  .modal-close,
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Ensure adequate spacing between touch targets */
+  .main-nav li {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .tabs .tab-button {
+    margin-right: var(--spacing-xs);
+  }
+
+  /* Make filter inputs more touch-friendly */
+  .search-input,
+  .filter-select {
+    min-height: 44px;
+    padding: var(--spacing-md);
+  }
+
+  /* Ensure year dropdown items are touch-friendly */
+  .year-option {
+    min-height: 44px;
+    padding: var(--spacing-md);
+  }
 }
 
 @media (max-width: 480px) {
@@ -1589,6 +1642,16 @@ small {
   .modal-content {
     width: 95%;
     padding: var(--spacing-lg);
+  }
+
+  /* Stack table on very small screens */
+  .data-table {
+    font-size: var(--font-size-sm);
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: var(--spacing-sm);
   }
 }
 
@@ -2118,6 +2181,56 @@ small {
 
 [data-theme="dark"] .hero-banner {
   background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
+}
+
+/* ========================================
+   Back to Top Button
+   ======================================== */
+
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-inverse);
+  border: none;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-large);
+  cursor: pointer;
+  z-index: var(--z-index-fixed);
+  transition: all var(--transition-fast);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.back-to-top.visible {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background-color: var(--color-accent-secondary);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top:active {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+  }
 }
 
 /* ========================================

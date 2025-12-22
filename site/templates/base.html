@@ -11,18 +11,18 @@
     <meta property="og:site_name" content="Year in Review">
     <meta property="og:title" content="{% block og_title %}{{ config.report.title }}{% endblock %}">
     <meta property="og:description" content="{% block og_description %}GitHub Year in Review Statistics for {{ config.github.target.name }}{% endblock %}">
-    {% block og_url_meta %}{% endblock %}
-    <meta property="og:image" content="{% block og_image %}assets/favicon-32x32.png{% endblock %}">
+    <meta property="og:url" content="https://williamzujkowski.github.io/yakshave/{{ config.github.windows.year }}/{% block og_page %}index.html{% endblock %}">
+    <meta property="og:image" content="https://williamzujkowski.github.io/yakshave/{{ config.github.windows.year }}/{% block og_image %}assets/favicon-32x32.png{% endblock %}">
     {% endblock %}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{% block twitter_title %}{{ config.report.title }}{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_description %}GitHub Year in Review Statistics for {{ config.github.target.name }}{% endblock %}">
-    <meta name="twitter:image" content="{% block twitter_image %}assets/favicon-32x32.png{% endblock %}">
+    <meta name="twitter:image" content="https://williamzujkowski.github.io/yakshave/{{ config.github.windows.year }}/{% block twitter_image %}assets/favicon-32x32.png{% endblock %}">
 
     <!-- Canonical URL -->
-    {% block canonical_url_tag %}{% endblock %}
+    <link rel="canonical" href="https://williamzujkowski.github.io/yakshave/{{ config.github.windows.year }}/{% block canonical_page %}index.html{% endblock %}">
 
     <title>{% block title %}{{ config.report.title }}{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -36,7 +36,7 @@
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <h1 class="site-title">{{ config.report.title }}</h1>
+                <div class="site-title">{{ config.report.title }}</div>
                 <div class="header-meta">
                     <span class="target-info">{{ config.github.target.name }}</span>
                     <div class="year-selector">
@@ -168,8 +168,15 @@
         </div>
     </footer>
 
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+            <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/year-selector.js"></script>
+    <script src="assets/js/back-to-top.js"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -2,6 +2,8 @@
 
 {% block title %}{{ config.report.title }} - Repositories{% endblock %}
 {% block nav_repos %}active{% endblock %}
+{% block canonical_page %}repos.html{% endblock %}
+{% block og_page %}repos.html{% endblock %}
 
 {% block content %}
 <div class="page-header">
@@ -274,6 +276,7 @@
 <script src="assets/js/charts.js"></script>
 <script src="assets/js/repos.js"></script>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
     // Load data
     const reposData = {{ repos | tojson }};
     const hygieneData = {{ hygiene | tojson }};
@@ -298,5 +301,6 @@
     if (typeof initRepoTable === 'function') {
         initRepoTable('#repos-table', reposData);
     }
+});
 </script>
 {% endblock %}

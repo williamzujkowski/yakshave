@@ -2,6 +2,8 @@
 
 {% block title %}{{ config.report.title }} - Leaderboards{% endblock %}
 {% block nav_leaderboards %}active{% endblock %}
+{% block canonical_page %}leaderboards.html{% endblock %}
+{% block og_page %}leaderboards.html{% endblock %}
 
 {% block content %}
 <div class="page-header">
@@ -337,6 +339,7 @@
 <script src="assets/js/charts.js"></script>
 <script src="assets/js/leaderboards.js"></script>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
     // Load leaderboard data
     const leaderboardsData = {{ leaderboards | tojson }};
     const allContributorsData = {{ all_contributors | tojson }};
@@ -350,5 +353,6 @@
     if (typeof initComparisonTool === 'function') {
         initComparisonTool(allContributorsData);
     }
+});
 </script>
 {% endblock %}
