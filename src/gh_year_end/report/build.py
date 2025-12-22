@@ -329,18 +329,28 @@ def _render_templates(
             "risk": [],
         }
 
+        # Extract special_mentions from awards_data if present
+        special_mentions_data: dict[str, list[dict[str, Any]]] = {
+            "first_contributions": [],
+            "consistent_contributors": [],
+            "largest_prs": [],
+            "fastest_merges": [],
+        }
+
         # Handle different award data formats
         if isinstance(awards_data, dict):
+            # Extract special_mentions if present
+            if "special_mentions" in awards_data:
+                special_mentions_data.update(awards_data["special_mentions"])
+
             # Check if already in categorized format
             if "awards" in awards_data:
                 for category in ["individual", "repository", "risk"]:
                     if category in awards_data["awards"]:
                         awards_by_category[category] = awards_data["awards"][category]
             elif any(k in awards_data for k in ["individual", "repository", "risk"]):
-                # Direct category mapping
-                for category in ["individual", "repository", "risk"]:
-                    if category in awards_data:
-                        awards_by_category[category] = awards_data[category]
+                # Direct category mapping - transform individual and repository awards
+                awards_by_category = _transform_awards_data(awards_data)
             else:
                 # Transform from simple format (top_pr_author, top_reviewer, etc.)
                 awards_by_category = _transform_awards_data(awards_data)
@@ -403,12 +413,7 @@ def _render_templates(
             "repos": repos_merged,
             "repo_summary": repo_summary_stats,
             "awards": awards_by_category,
-            "special_mentions": {
-                "first_contributions": [],
-                "consistent_contributors": [],
-                "largest_prs": [],
-                "fastest_merges": [],
-            },
+            "special_mentions": special_mentions_data,
             # Fun facts calculates available metrics; some return None due to missing PR detail data
             "fun_facts": _calculate_fun_facts(summary_data, timeseries_data, leaderboards_data),
             "engineers": engineers_list,

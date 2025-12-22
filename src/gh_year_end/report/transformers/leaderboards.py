@@ -8,10 +8,10 @@ __all__ = ["transform_awards_data", "transform_leaderboards"]
 def transform_awards_data(awards_data: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
     """Transform awards from simple key-value format to categorized format.
 
-    Transforms from:
+    Handles both old format:
         {"top_pr_author": {"user": "...", "count": 10, "avatar_url": "..."}}
-    To:
-        {"individual": [{"award_key": "top_pr_author", "title": "...", ...}]}
+    And new nested format:
+        {"individual": {"top_pr_author": {...}}, "repository": {...}, "special_mentions": {...}}
     """
     awards_by_category: dict[str, list[Any]] = {
         "individual": [],
@@ -19,7 +19,81 @@ def transform_awards_data(awards_data: dict[str, Any]) -> dict[str, list[dict[st
         "risk": [],
     }
 
-    # Map award keys to display info
+    # Check if already in nested format
+    if "individual" in awards_data or "repository" in awards_data:
+        # New format - transform to list format
+        individual_defs = {
+            "top_pr_author": {
+                "title": "Top PR Author",
+                "description": "Most pull requests opened",
+                "stat_label": "PRs opened",
+            },
+            "top_reviewer": {
+                "title": "Top Reviewer",
+                "description": "Most reviews submitted",
+                "stat_label": "reviews",
+            },
+            "top_issue_opener": {
+                "title": "Top Issue Opener",
+                "description": "Most issues opened",
+                "stat_label": "issues",
+            },
+        }
+
+        # Transform individual awards
+        for award_key, award_data in awards_data.get("individual", {}).items():
+            if award_key in individual_defs:
+                definition = individual_defs[award_key]
+                awards_by_category["individual"].append(
+                    {
+                        "award_key": award_key,
+                        "title": definition["title"],
+                        "description": definition["description"],
+                        "winner_name": award_data.get("user", ""),
+                        "winner_avatar_url": award_data.get("avatar_url", ""),
+                        "supporting_stats": f"{award_data.get('count', 0)} {definition['stat_label']}",
+                    }
+                )
+
+        # Transform repository awards
+        repo_defs = {
+            "most_active": {
+                "title": "Most Active Repository",
+                "description": "Highest number of merged PRs",
+                "stat_key": "count",
+                "stat_label": "PRs merged",
+            },
+            "best_reviewed": {
+                "title": "Best Reviewed Repository",
+                "description": "Highest review coverage",
+                "stat_key": "coverage",
+                "stat_label": "% coverage",
+            },
+            "most_collaborative": {
+                "title": "Most Collaborative Repository",
+                "description": "Most active contributors",
+                "stat_key": "contributors",
+                "stat_label": "contributors",
+            },
+        }
+
+        for award_key, award_data in awards_data.get("repository", {}).items():
+            if award_key in repo_defs:
+                definition = repo_defs[award_key]
+                stat_value = award_data.get(definition["stat_key"], 0)
+                awards_by_category["repository"].append(
+                    {
+                        "award_key": award_key,
+                        "title": definition["title"],
+                        "description": definition["description"],
+                        "repo_name": award_data.get("repo", ""),
+                        "supporting_stats": f"{stat_value} {definition['stat_label']}",
+                    }
+                )
+
+        return awards_by_category
+
+    # Old flat format - transform to new format
     award_definitions = {
         "top_pr_author": {
             "category": "individual",
@@ -41,7 +115,6 @@ def transform_awards_data(awards_data: dict[str, Any]) -> dict[str, list[dict[st
         },
     }
 
-    # Transform each award
     for award_key, award_data in awards_data.items():
         if award_key not in award_definitions:
             continue

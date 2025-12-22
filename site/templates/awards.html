@@ -78,11 +78,11 @@
                 </div>
                 <div class="award-winner repo-winner">
                     <div class="winner-info">
-                        <a href="https://github.com/{{ award.winner_name }}"
+                        <a href="https://github.com/{{ award.repo_name }}"
                            target="_blank"
                            rel="noopener noreferrer"
                            class="winner-name">
-                            {{ award.winner_name }}
+                            {{ award.repo_name }}
                         </a>
                         <div class="winner-stats">
                             {% if award.supporting_stats %}
@@ -99,8 +99,9 @@
     <!-- Risk Signals Tab -->
     <div class="tab-content" id="tab-risk">
         <div class="risk-signals-grid">
-            {% for signal in awards.risk %}
-            <div class="risk-signal-card">
+            {% if risks and risks|length > 0 %}
+            {% for risk in risks[:6] %}
+            <div class="risk-signal-card risk-{{ risk.severity }}">
                 <div class="risk-signal-header">
                     <div class="risk-signal-icon">
                         <svg width="32" height="32" viewBox="0 0 16 16" fill="currentColor">
@@ -108,24 +109,39 @@
                         </svg>
                     </div>
                     <div class="risk-signal-info">
-                        <h3 class="risk-signal-title">{{ signal.title }}</h3>
-                        <span class="risk-badge">{{ signal.category | upper }}</span>
+                        <h3 class="risk-signal-title">{{ risk.title }}</h3>
+                        <span class="risk-badge risk-badge-{{ risk.severity }}">{{ risk.severity | upper }}</span>
                     </div>
                 </div>
-                <p class="risk-signal-description">{{ signal.description }}</p>
+                <p class="risk-signal-description">{{ risk.description }}</p>
+                {% if risk.affected_repos %}
                 <div class="risk-signal-stats">
                     <div class="risk-stat">
-                        <span class="risk-stat-label">Affected:</span>
-                        <span class="risk-stat-value">{{ signal.winner_name }}</span>
+                        <span class="risk-stat-label">Affected Repositories:</span>
+                        <span class="risk-stat-value">{{ risk.affected_repos | length }}</span>
                     </div>
-                    {% if signal.supporting_stats %}
-                    <div class="risk-stat-details">
-                        {{ signal.supporting_stats }}
+                    <div class="risk-affected-list">
+                        {% for repo in risk.affected_repos[:5] %}
+                        <span class="risk-affected-item">{{ repo }}</span>
+                        {% endfor %}
+                        {% if risk.affected_repos|length > 5 %}
+                        <span class="risk-affected-more">+{{ risk.affected_repos|length - 5 }} more</span>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
+                {% endif %}
+                {% if risk.recommendation %}
+                <div class="risk-recommendation">
+                    <strong>Recommendation:</strong> {{ risk.recommendation }}
+                </div>
+                {% endif %}
             </div>
             {% endfor %}
+            {% else %}
+            <div class="empty-state">
+                <p>No risk signals detected. Great job maintaining healthy repositories!</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -137,19 +153,22 @@
             <h3>First Contribution</h3>
             <p>Celebrating new community members</p>
             <div class="mention-list">
+                {% if special_mentions.first_contributions and special_mentions.first_contributions|length > 0 %}
                 {% for contributor in special_mentions.first_contributions[:5] %}
                 <div class="mention-item">
-                    <img src="{{ contributor.avatar_url | default('https://github.com/identicons/' + contributor.login + '.png') }}"
-                         alt="{{ contributor.login }}"
+                    <img src="{{ contributor.avatar_url | default('https://github.com/identicons/' + contributor.user + '.png') }}"
+                         alt="{{ contributor.user }}"
                          class="mini-avatar">
-                    <a href="https://github.com/{{ contributor.login }}"
+                    <a href="https://github.com/{{ contributor.user }}"
                        target="_blank"
                        rel="noopener noreferrer">
-                        {{ contributor.login }}
+                        {{ contributor.user }}
                     </a>
-                    <span class="mention-date">{{ contributor.first_contribution_date }}</span>
                 </div>
                 {% endfor %}
+                {% else %}
+                <p class="empty-mention">No first-time contributors this period</p>
+                {% endif %}
             </div>
         </div>
 
@@ -157,19 +176,23 @@
             <h3>Consistent Contributors</h3>
             <p>Most weeks with activity</p>
             <div class="mention-list">
-                {% for contributor in special_mentions.consistent_contributors[:5] %}
+                {% if special_mentions.consistent_contributors and special_mentions.consistent_contributors|length > 0 %}
+                {% for contributor in special_mentions.consistent_contributors[:3] %}
                 <div class="mention-item">
-                    <img src="{{ contributor.avatar_url | default('https://github.com/identicons/' + contributor.login + '.png') }}"
-                         alt="{{ contributor.login }}"
+                    <img src="{{ contributor.avatar_url | default('https://github.com/identicons/' + contributor.user + '.png') }}"
+                         alt="{{ contributor.user }}"
                          class="mini-avatar">
-                    <a href="https://github.com/{{ contributor.login }}"
+                    <a href="https://github.com/{{ contributor.user }}"
                        target="_blank"
                        rel="noopener noreferrer">
-                        {{ contributor.login }}
+                        {{ contributor.user }}
                     </a>
-                    <span class="mention-stat">{{ contributor.active_weeks }} weeks</span>
+                    <span class="mention-stat">{{ contributor.weeks }} weeks</span>
                 </div>
                 {% endfor %}
+                {% else %}
+                <p class="empty-mention">Data not available</p>
+                {% endif %}
             </div>
         </div>
 
