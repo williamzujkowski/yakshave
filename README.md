@@ -14,17 +14,22 @@ cd yakshave
 uv sync
 ```
 
+Copy the example config:
+
+```bash
+cp config/example.yaml config/config.yaml
+```
+
+Edit `config/config.yaml` and replace:
+- `YOUR_GITHUB_USERNAME` with your GitHub username or org name
+- `YOUR_NAME` with your display name
+- `YOUR_REPO` with your repository name (for GitHub Pages deployment)
+
 Set your GitHub token:
 
 ```bash
-export GITHUB_TOKEN=ghp_your_token_here
-```
-
-Configure for your org or user:
-
-```bash
-cp config/config.example.yaml config/config.yaml
-# Edit config.yaml - set target.mode (org|user) and target.name
+export GITHUB_TOKEN=$(gh auth token)
+# Or manually: export GITHUB_TOKEN=ghp_your_token_here
 ```
 
 Run the pipeline:
@@ -40,6 +45,10 @@ View the report:
 python -m http.server -d site/2025
 # Open http://localhost:8000
 ```
+
+Deploy to GitHub Pages:
+- Push the `site/` directory to your `gh-pages` branch
+- Or configure GitHub Actions for automatic deployment
 
 ## CLI Commands
 
@@ -139,15 +148,24 @@ The final site has no external dependencies and can be served with any static we
 
 ## Configuration
 
-See `config/config.example.yaml` for all options.
+See `config/example.yaml` for a quick-start template or `config/config.example.yaml` for all options.
 
-Key settings:
+### Required Settings
+
+| Setting | Description | Example |
+|---------|-------------|---------|
+| `github.target.name` | Your GitHub username or org | `myusername` |
+| `github.target.mode` | Target type | `user` or `org` |
+| `report.title` | Title shown on all pages | `My Year in Review 2025` |
+| `report.base_path` | URL path for GitHub Pages deployment | `/myrepo` or `""` for root |
+
+### Key Settings
 
 ```yaml
 github:
   target:
-    mode: org          # org | user
-    name: your-org
+    mode: user         # org | user
+    name: YOUR_GITHUB_USERNAME
   windows:
     year: 2025
     since: "2025-01-01T00:00:00Z"
@@ -164,22 +182,56 @@ collection:
     comments: true
     commits: true
     hygiene: true
+
+report:
+  title: "YOUR_NAME Year in Review 2025"
+  base_path: "/YOUR_REPO"  # For GitHub Pages at username.github.io/repo
 ```
 
-Optional pre-filtering (reduces API calls for large orgs):
+### Optional Settings
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `rate_limit.max_concurrency` | `4` | Max parallel API requests |
+| `collection.commits.include_files` | `true` | Include file changes in commits |
+| `collection.commits.classify_files` | `true` | Classify files (docs, test, ci) |
+| `report.theme` | `default` | UI theme (`engineer_exec_toggle`) |
+
+### Deployment Configuration
+
+**GitHub Pages (subdirectory):**
+```yaml
+report:
+  base_path: "/my-year-end"  # For https://user.github.io/my-year-end
+```
+
+**GitHub Pages (root domain):**
+```yaml
+report:
+  base_path: ""  # For https://user.github.io
+```
+
+**Custom domain:**
+```yaml
+report:
+  base_path: ""  # For https://your-domain.com
+```
+
+### Optional Pre-filtering
+
+Reduces API calls for large orgs:
 
 ```yaml
 github:
   discovery:
     quick_scan:
       enabled: true    # Use Search API for pre-filtering
-    filters:
-      activity:
-        enabled: true
-        min_pushed_at_days_ago: 365
-      size:
-        enabled: true
-        min_kb: 1
+    activity_filter:
+      enabled: true
+      min_pushed_within_days: 365
+    size_filter:
+      enabled: true
+      min_kb: 1
 ```
 
 ## Development

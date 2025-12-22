@@ -1,0 +1,64 @@
+# Example configuration for gh-year-end
+# Copy this file and customize for your organization/user
+
+github:
+  target:
+    mode: user  # "user" for personal account, "org" for organization
+    name: YOUR_GITHUB_USERNAME  # Replace with your GitHub username or org name
+  auth:
+    token_env: GITHUB_TOKEN  # Environment variable containing your GitHub token
+  discovery:
+    include_forks: false
+    include_archived: false
+    visibility: all  # "all", "public", or "private"
+  windows:
+    year: 2025
+    since: "2025-01-01T00:00:00Z"
+    until: "2026-01-01T00:00:00Z"
+
+rate_limit:
+  strategy: adaptive
+  max_concurrency: 10
+
+identity:
+  bots:
+    exclude_patterns:
+      - ".*\\[bot\\]$"
+      - "^dependabot$"
+  humans_only: true
+
+collection:
+  enable:
+    pulls: true
+    issues: true
+    reviews: true
+    comments: true
+    commits: true
+    hygiene: true
+
+storage:
+  root: "./data"
+  raw_format: jsonl
+  curated_format: parquet
+
+report:
+  title: "YOUR_NAME Year in Review 2025"  # Customize your report title
+  output_dir: "./site"
+  theme: "engineer_exec_toggle"
+  awards_config: "./config/awards.yaml"
+
+  # IMPORTANT: Set base_path for proper deployment
+  # For GitHub Pages at https://username.github.io/repo-name, use:
+  base_path: "/YOUR_REPO"  # e.g., "/yakshave" or "" for root domain
+
+  # Examples:
+  # - GitHub Pages subdirectory: base_path: "/my-year-end"
+  # - GitHub Pages root (username.github.io): base_path: ""
+  # - Custom domain: base_path: ""
+
+# Optional: Customize thresholds (these are defaults)
+# thresholds:
+#   hygiene_healthy: 50
+#   hygiene_warning: 30
+#   review_coverage_good: 50
+#   stale_pr_days: 30

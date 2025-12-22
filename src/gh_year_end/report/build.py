@@ -507,6 +507,15 @@ def _render_templates(
         _generate_manifest(output_dir, env, config, year)
         _generate_service_worker(output_dir, env, year)
 
+        # Generate SEO files (sitemap.xml and robots.txt)
+        if base_url:
+            _generate_sitemap(site_base_dir, env, base_url, available_years)
+            _generate_robots_txt(site_base_dir, env, base_url)
+        else:
+            logger.warning(
+                "Skipping sitemap.xml and robots.txt generation: base_url not configured"
+            )
+
     except Exception as e:
         logger.warning("Template rendering failed: %s", e)
 
@@ -974,3 +983,60 @@ def _generate_root_redirect(site_base_dir: Path, target_year: int, base_path: st
     root_index_path = site_base_dir / "index.html"
     root_index_path.write_text(redirect_html, encoding="utf-8")
     logger.info("Generated root redirect to %d at %s", target_year, root_index_path)
+
+
+def _generate_sitemap(
+    output_dir: Path,
+    template_env: Environment,
+    base_url: str,
+    years: list[int],
+) -> None:
+    """Generate sitemap.xml from template.
+
+    Args:
+        output_dir: Directory where sitemap.xml will be written.
+        template_env: Jinja2 environment with template loader.
+        base_url: Full base URL for the site (e.g., 'https://user.github.io/repo').
+        years: List of years to include in sitemap.
+    """
+    pages = [
+        "index.html",
+        "summary.html",
+        "engineers.html",
+        "repos.html",
+        "leaderboards.html",
+        "awards.html",
+    ]
+    build_date = datetime.now(UTC).strftime("%Y-%m-%d")
+
+    template = template_env.get_template("sitemap.xml.j2")
+    content = template.render(
+        base_url=base_url.rstrip("/"),
+        years=years,
+        pages=pages,
+        build_date=build_date,
+    )
+
+    sitemap_path = output_dir / "sitemap.xml"
+    sitemap_path.write_text(content, encoding="utf-8")
+    logger.info("Generated sitemap.xml with %d years", len(years))
+
+
+def _generate_robots_txt(
+    output_dir: Path,
+    template_env: Environment,
+    base_url: str,
+) -> None:
+    """Generate robots.txt from template.
+
+    Args:
+        output_dir: Directory where robots.txt will be written.
+        template_env: Jinja2 environment with template loader.
+        base_url: Full base URL for the site (e.g., 'https://user.github.io/repo').
+    """
+    template = template_env.get_template("robots.txt.j2")
+    content = template.render(base_url=base_url.rstrip("/"))
+
+    robots_path = output_dir / "robots.txt"
+    robots_path.write_text(content, encoding="utf-8")
+    logger.info("Generated robots.txt")
