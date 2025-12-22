@@ -413,11 +413,10 @@ def _render_templates(
             "build_time": datetime.now(UTC).isoformat(),
             "leaderboards": _transform_leaderboards(leaderboards_data),
             "hygiene": hygiene_aggregate,
-            # Also provide for backwards compatibility
-            "health": {
-                "repos": repo_health_list,
-                "hygiene": hygiene_scores_list,
-            },
+            # Calculate aggregate health signals for Executive Summary
+            "health": _calculate_health_signals(
+                summary_data, repo_health_list, hygiene_scores_list
+            ),
             "repos": repos_merged,
             "repo_summary": repo_summary_stats,
             "awards": awards_by_category,
@@ -551,6 +550,102 @@ def _calculate_risks(
 ) -> list[dict[str, Any]]:
     """Backward-compatible wrapper for calculate_risks."""
     return calculate_risks(repo_health_list, hygiene_scores_list, summary_data)
+
+
+def _calculate_health_signals(
+    summary_data: dict[str, Any],
+    repo_health_list: list[dict[str, Any]],
+    hygiene_scores_list: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Calculate aggregate health signals for Executive Summary.
+
+    Args:
+        summary_data: Summary statistics from summary.json.
+        repo_health_list: Repository health metrics.
+        hygiene_scores_list: Repository hygiene scores.
+
+    Returns:
+        Dictionary with aggregate health signal values:
+        - review_coverage: Overall % of PRs with reviews
+        - avg_merge_time: Median merge time across repos (formatted)
+        - stale_pr_count: Total stale PRs across all repos
+        - active_contributors: Total contributors (from summary)
+        - repos: Original repo health list (for backward compatibility)
+        - hygiene: Original hygiene scores list (for backward compatibility)
+    """
+    health_signals: dict[str, Any] = {
+        "repos": repo_health_list,
+        "hygiene": hygiene_scores_list,
+    }
+
+    # 1. Calculate overall review coverage percentage (total_reviews / total_prs * 100)
+    try:
+        total_prs = summary_data.get("total_prs", 0)
+        total_reviews = summary_data.get("total_reviews", 0)
+
+        if total_prs > 0:
+            review_coverage = (total_reviews / total_prs) * 100
+            health_signals["review_coverage"] = round(review_coverage, 1)
+        else:
+            health_signals["review_coverage"] = 0
+    except Exception as e:
+        logger.warning("Failed to calculate review_coverage: %s", e)
+        health_signals["review_coverage"] = 0
+
+    # 2. Calculate median merge time from repo_health_list
+    # Average of non-null median_time_to_merge values (in hours from collection)
+    try:
+        merge_times = []
+        for repo in repo_health_list:
+            median_time = repo.get("median_time_to_merge")
+            if median_time is not None and median_time > 0:
+                merge_times.append(median_time)
+
+        if merge_times:
+            avg_merge_time_hours = sum(merge_times) / len(merge_times)
+
+            # Format as human-readable string
+            if avg_merge_time_hours < 1:
+                health_signals["avg_merge_time"] = f"{int(avg_merge_time_hours * 60)}m"
+            elif avg_merge_time_hours < 24:
+                health_signals["avg_merge_time"] = f"{avg_merge_time_hours:.1f}h"
+            else:
+                health_signals["avg_merge_time"] = f"{avg_merge_time_hours / 24:.1f}d"
+        else:
+            health_signals["avg_merge_time"] = "N/A"
+    except Exception as e:
+        logger.warning("Failed to calculate avg_merge_time: %s", e)
+        health_signals["avg_merge_time"] = "N/A"
+
+    # 3. Sum stale_pr_count from all repos
+    # Note: stale_pr_count is not currently tracked in repo_health data
+    # Defaulting to 0 until collection phase is updated to track stale PRs
+    try:
+        stale_pr_count = sum(repo.get("stale_pr_count", 0) for repo in repo_health_list)
+        health_signals["stale_pr_count"] = stale_pr_count
+    except Exception as e:
+        logger.warning("Failed to calculate stale_pr_count: %s", e)
+        health_signals["stale_pr_count"] = 0
+
+    # 4. Use total_contributors from summary
+    # This represents all contributors active during the year
+    try:
+        active_contributors = summary_data.get("total_contributors", 0)
+        health_signals["active_contributors"] = active_contributors
+    except Exception as e:
+        logger.warning("Failed to calculate active_contributors: %s", e)
+        health_signals["active_contributors"] = 0
+
+    logger.info(
+        "Calculated health signals: review_coverage=%.1f%%, avg_merge_time=%s, "
+        "stale_pr_count=%d, active_contributors=%d",
+        health_signals.get("review_coverage", 0),
+        health_signals.get("avg_merge_time", "N/A"),
+        health_signals.get("stale_pr_count", 0),
+        health_signals.get("active_contributors", 0),
+    )
+
+    return health_signals
 
 
 def _copy_assets(src: Path, dest: Path) -> int:

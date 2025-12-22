@@ -68,9 +68,8 @@ def calculate_insights(
         insights["review_participation_rate"] = 0
 
     # Calculate cross_team_reviews
-    # This would require team/organization data which we don't have in current metrics
-    # For now, set to None to indicate unavailable
-    insights["cross_team_reviews"] = None
+    # TODO: This would require team/organization data which we don't have in current metrics
+    insights["cross_team_reviews"] = 0
 
     # Calculate prs_per_week
     try:
@@ -82,9 +81,8 @@ def calculate_insights(
         insights["prs_per_week"] = 0
 
     # Calculate median_pr_size
-    # This would require PR detail data with additions/deletions which we don't have
-    # For now, set to None to indicate unavailable
-    insights["median_pr_size"] = None
+    # TODO: This would require PR detail data with additions/deletions which we don't have
+    insights["median_pr_size"] = 0
 
     # Calculate merge_rate
     try:
@@ -101,24 +99,53 @@ def calculate_insights(
         insights["merge_rate"] = 0
 
     # Count repos with CI from hygiene scores
-    # Hygiene data doesn't currently track CI explicitly, so we'll return None
-    insights["repos_with_ci"] = None
+    try:
+        total_repos = len(hygiene_scores_list)
+        if total_repos > 0:
+            repos_with_ci = sum(1 for h in hygiene_scores_list if h.get("has_ci_workflows"))
+            insights["repos_with_ci"] = round((repos_with_ci / total_repos) * 100, 0)
+        else:
+            insights["repos_with_ci"] = 0
+    except Exception as e:
+        logger.warning("Failed to calculate repos_with_ci: %s", e)
+        insights["repos_with_ci"] = 0
 
     # Count repos with CODEOWNERS from hygiene scores
-    # Hygiene data doesn't currently track CODEOWNERS explicitly, so we'll return None
-    insights["repos_with_codeowners"] = None
+    try:
+        total_repos = len(hygiene_scores_list)
+        if total_repos > 0:
+            repos_with_codeowners = sum(1 for h in hygiene_scores_list if h.get("has_codeowners"))
+            insights["repos_with_codeowners"] = round(
+                (repos_with_codeowners / total_repos) * 100, 0
+            )
+        else:
+            insights["repos_with_codeowners"] = 0
+    except Exception as e:
+        logger.warning("Failed to calculate repos_with_codeowners: %s", e)
+        insights["repos_with_codeowners"] = 0
 
     # Count repos with security policy from hygiene scores
-    # Hygiene data doesn't currently track SECURITY.md explicitly, so we'll return None
-    insights["repos_with_security_policy"] = None
+    try:
+        total_repos = len(hygiene_scores_list)
+        if total_repos > 0:
+            repos_with_security_policy = sum(
+                1 for h in hygiene_scores_list if h.get("has_security_md")
+            )
+            insights["repos_with_security_policy"] = round(
+                (repos_with_security_policy / total_repos) * 100, 0
+            )
+        else:
+            insights["repos_with_security_policy"] = 0
+    except Exception as e:
+        logger.warning("Failed to calculate repos_with_security_policy: %s", e)
+        insights["repos_with_security_policy"] = 0
 
     # Calculate new_contributors - get from summary data
     insights["new_contributors"] = summary_data.get("new_contributors", 0)
 
     # Calculate contributor_retention
-    # This would require historical contributor data which we don't have
-    # For now, set to None to indicate unavailable
-    insights["contributor_retention"] = None
+    # TODO: This would require historical contributor data which we don't have
+    insights["contributor_retention"] = 0
 
     # Calculate bus_factor
     try:

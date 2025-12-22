@@ -997,12 +997,16 @@ class TestCalculateInsights:
         )
 
         # These metrics are not available from current data
-        assert result["cross_team_reviews"] is None
-        assert result["median_pr_size"] is None
-        assert result["repos_with_ci"] is None
-        assert result["repos_with_codeowners"] is None
-        assert result["repos_with_security_policy"] is None
-        assert result["contributor_retention"] is None
+        # TODO: cross_team_reviews requires team/org data
+        assert result["cross_team_reviews"] == 0
+        # TODO: median_pr_size requires PR detail data
+        assert result["median_pr_size"] == 0
+        # CI/CODEOWNERS/Security metrics calculated from hygiene data (0 when empty)
+        assert result["repos_with_ci"] == 0
+        assert result["repos_with_codeowners"] == 0
+        assert result["repos_with_security_policy"] == 0
+        # TODO: contributor_retention requires historical contributor data
+        assert result["contributor_retention"] == 0
 
     def test_new_contributors_always_zero(self):
         """Test that new contributors comes from summary data."""
