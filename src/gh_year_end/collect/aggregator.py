@@ -437,22 +437,6 @@ class MetricsAggregator:
             else:
                 median_time_to_merge = sorted_times[mid]
 
-        # Calculate review coverage
-        pr_count = health["pr_count"]
-        prs_with_reviews_count = len(health["prs_with_reviews"])
-        review_coverage = (prs_with_reviews_count / pr_count * 100) if pr_count > 0 else 0.0
-
-        # Calculate median time to merge
-        merge_times = health["merge_times"]
-        median_time_to_merge = None
-        if merge_times:
-            sorted_times = sorted(merge_times)
-            mid = len(sorted_times) // 2
-            if len(sorted_times) % 2 == 0:
-                median_time_to_merge = (sorted_times[mid - 1] + sorted_times[mid]) / 2
-            else:
-                median_time_to_merge = sorted_times[mid]
-
         return {
             "repo": repo_id,
             "contributor_count": len(health["contributors"]),
