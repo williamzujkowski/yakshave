@@ -12,6 +12,7 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -114,7 +115,7 @@
             </div>
         </aside>
 
-        <main class="content">
+        <main class="content" id="main-content">
             {% block content %}{% endblock %}
         </main>
     </div>
