@@ -83,6 +83,14 @@
             <div class="header-content">
                 <div class="site-title">{{ config.report.title }}</div>
                 <div class="header-meta">
+                    <div class="global-search-container">
+                        <input type="search" id="global-search" class="global-search-input"
+                               placeholder="Search contributors, repos..."
+                               aria-label="Global search">
+                        <div id="global-search-results" class="search-results-dropdown" style="display: none;">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
                     <span class="target-info">{{ config.github.target.name }}</span>
                     <div class="year-selector">
                         <button class="year-badge" id="yearToggle" aria-label="Select year" aria-expanded="false">

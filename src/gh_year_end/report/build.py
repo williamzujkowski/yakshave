@@ -763,25 +763,39 @@ def _export_search_data(output_dir: Path, data_context: dict[str, Any]) -> None:
         contributors_list = []
 
         # Get contributors from leaderboards structure
-        # Structure: {"leaderboards": {"prs_merged": {"org": [...]}}}
+        # Structure contains prs_merged list with user and count
         if isinstance(leaderboards_data, dict):
-            # Check for nested leaderboards structure
-            lb_data = leaderboards_data.get("leaderboards", leaderboards_data)
-
-            # Extract from prs_merged.org leaderboard
-            if "prs_merged" in lb_data and "org" in lb_data["prs_merged"]:
-                for contributor in lb_data["prs_merged"]["org"]:
-                    contributors_list.append({
-                        "login": contributor.get("login", ""),
-                        "total_prs": contributor.get("value", 0),
-                    })
+            # Extract from prs_merged list (current format)
+            if "prs_merged" in leaderboards_data and isinstance(
+                leaderboards_data["prs_merged"], list
+            ):
+                for contributor in leaderboards_data["prs_merged"]:
+                    contributors_list.append(
+                        {
+                            "login": contributor.get("user", ""),
+                            "total_prs": contributor.get("count", 0),
+                        }
+                    )
+            # Fallback: check for nested leaderboards.prs_merged.org format
+            elif "leaderboards" in leaderboards_data:
+                lb_data = leaderboards_data["leaderboards"]
+                if "prs_merged" in lb_data and "org" in lb_data["prs_merged"]:
+                    for contributor in lb_data["prs_merged"]["org"]:
+                        contributors_list.append(
+                            {
+                                "login": contributor.get("login", ""),
+                                "total_prs": contributor.get("value", 0),
+                            }
+                        )
             # Fallback: check for top_pr_authors format
-            elif "top_pr_authors" in lb_data:
-                for author in lb_data["top_pr_authors"]:
-                    contributors_list.append({
-                        "login": author.get("login", ""),
-                        "total_prs": author.get("total_prs", 0),
-                    })
+            elif "top_pr_authors" in leaderboards_data:
+                for author in leaderboards_data["top_pr_authors"]:
+                    contributors_list.append(
+                        {
+                            "login": author.get("login", ""),
+                            "total_prs": author.get("total_prs", 0),
+                        }
+                    )
 
         # Write contributors.json
         contributors_path = output_dir / "contributors.json"
@@ -796,18 +810,22 @@ def _export_search_data(output_dir: Path, data_context: dict[str, Any]) -> None:
         if isinstance(repo_health_data, dict) and "repos" in repo_health_data:
             # Format from export: {"repos": {repo_id: {...}}}
             for repo_id, repo_data in repo_health_data["repos"].items():
-                repos_list.append({
-                    "repo_full_name": repo_data.get("repo_full_name", repo_id),
-                    "prs_merged": repo_data.get("prs_merged", 0),
-                })
+                repos_list.append(
+                    {
+                        "repo_full_name": repo_data.get("repo_full_name", repo_id),
+                        "prs_merged": repo_data.get("prs_merged", 0),
+                    }
+                )
         elif isinstance(repo_health_data, list):
             # List format from metrics
             for item in repo_health_data:
                 repo_name = item.get("repo", "")
-                repos_list.append({
-                    "repo_full_name": repo_name,
-                    "prs_merged": item.get("pr_count", 0),
-                })
+                repos_list.append(
+                    {
+                        "repo_full_name": repo_name,
+                        "prs_merged": item.get("pr_count", 0),
+                    }
+                )
 
         # Write repos.json
         repos_path = output_dir / "repos.json"

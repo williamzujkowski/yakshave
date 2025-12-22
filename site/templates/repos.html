@@ -149,7 +149,6 @@
                             <span class="score-badge score-{{ repo.hygiene_score_category | default('medium') }}">
                                 {{ repo.hygiene_score | default(0) }}
                             </span>
-                            {{ trend_indicator(repo.hygiene_score | default(0), 60, 40, '') }}
                             <div class="score-bar">
                                 <div class="score-fill" style="width: {{ repo.hygiene_score | default(0) }}%"></div>
                             </div>
@@ -162,7 +161,6 @@
                             <div class="progress-fill" style="width: {{ repo.review_coverage | default(0) }}%"></div>
                             <span class="progress-text">{{ repo.review_coverage | default(0) }}%</span>
                         </div>
-                        {{ trend_indicator(repo.review_coverage | default(0), 50, 20) }}
                     </td>
                     <td>{{ repo.median_time_to_merge | default('N/A') }}</td>
                     <td>

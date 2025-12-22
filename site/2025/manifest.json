@@ -3,16 +3,14 @@
   "year": 2025,
   "target": "williamzujkowski",
   "target_mode": "user",
-  "build_time": "2025-12-22T19:51:33.776872+00:00",
+  "build_time": "2025-12-22T19:54:02.004754+00:00",
   "templates_rendered": [
     "repos.html",
     "index.html",
     "engineers.html",
-    "summary.html",
     "year_index.html",
     "awards.html",
-    "base.html",
-    "leaderboards.html"
+    "base.html"
   ],
   "data_files_written": 6,
   "assets_copied": 20,
