@@ -9,6 +9,15 @@
 </span>
 {% endmacro %}
 
+{% macro trend_indicator(value, threshold_good, threshold_bad, suffix='%', inverse=false) %}
+{% set is_good = value >= threshold_good if not inverse else value <= threshold_good %}
+{% set is_bad = value <= threshold_bad if not inverse else value >= threshold_bad %}
+<span class="trend-indicator {% if is_good %}trend-up{% elif is_bad %}trend-down{% else %}trend-neutral{% endif %}">
+  <span class="trend-arrow">{% if is_good %}↑{% elif is_bad %}↓{% else %}→{% endif %}</span>
+  {{ value }}{{ suffix }}
+</span>
+{% endmacro %}
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
