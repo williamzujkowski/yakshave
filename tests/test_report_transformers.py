@@ -444,14 +444,20 @@ class TestCalculateHighlights:
         assert result["avg_review_time"] == "1.0 hours"
 
     def test_new_contributors_always_zero(self):
-        """Test that new contributors is always 0 (not implemented)."""
+        """Test that new contributors comes from summary data."""
         summary_data = {}
         timeseries_data = {"monthly": {}}
         repo_health_list = []
 
         result = calculate_highlights(summary_data, timeseries_data, repo_health_list)
 
+        # Should default to 0 when not in summary
         assert result["new_contributors"] == 0
+
+        # Should use value from summary when provided
+        summary_data = {"new_contributors": 5}
+        result = calculate_highlights(summary_data, timeseries_data, repo_health_list)
+        assert result["new_contributors"] == 5
 
 
 class TestCalculateFunFacts:
@@ -999,7 +1005,7 @@ class TestCalculateInsights:
         assert result["contributor_retention"] is None
 
     def test_new_contributors_always_zero(self):
-        """Test that new contributors is always 0 (not implemented)."""
+        """Test that new contributors comes from summary data."""
         summary_data = {}
         leaderboards_data = {}
         repo_health_list = []
@@ -1009,7 +1015,15 @@ class TestCalculateInsights:
             summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
         )
 
+        # Should default to 0 when not in summary
         assert result["new_contributors"] == 0
+
+        # Should use value from summary when provided
+        summary_data = {"new_contributors": 8}
+        result = calculate_insights(
+            summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
+        )
+        assert result["new_contributors"] == 8
 
     def test_calculate_empty_data(self):
         """Test calculating insights with empty data."""
