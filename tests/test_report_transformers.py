@@ -1025,6 +1025,49 @@ class TestCalculateInsights:
         )
         assert result["new_contributors"] == 8
 
+    def test_calculate_hygiene_metrics_from_data(self):
+        """Test that CI/CODEOWNERS/Security metrics are calculated from hygiene data."""
+        summary_data = {}
+        leaderboards_data = {}
+        repo_health_list = []
+        hygiene_scores_list = [
+            {
+                "repo_id": "repo1",
+                "has_ci_workflows": True,
+                "has_codeowners": True,
+                "has_security_md": True,
+            },
+            {
+                "repo_id": "repo2",
+                "has_ci_workflows": False,
+                "has_codeowners": True,
+                "has_security_md": False,
+            },
+            {
+                "repo_id": "repo3",
+                "has_ci_workflows": True,
+                "has_codeowners": False,
+                "has_security_md": True,
+            },
+            {
+                "repo_id": "repo4",
+                "has_ci_workflows": True,
+                "has_codeowners": True,
+                "has_security_md": True,
+            },
+        ]
+
+        result = calculate_insights(
+            summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
+        )
+
+        # 3 out of 4 repos have CI workflows (75%)
+        assert result["repos_with_ci"] == 75
+        # 3 out of 4 repos have CODEOWNERS (75%)
+        assert result["repos_with_codeowners"] == 75
+        # 3 out of 4 repos have security policy (75%)
+        assert result["repos_with_security_policy"] == 75
+
     def test_calculate_empty_data(self):
         """Test calculating insights with empty data."""
         result = calculate_insights({}, {}, [], [])

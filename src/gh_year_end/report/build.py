@@ -308,6 +308,9 @@ def _render_templates(
                     }
                 )
 
+        # Sort repo_health_list by prs_merged descending for top performing repos
+        repo_health_list.sort(key=lambda x: x.get("prs_merged", 0), reverse=True)
+
         # Merge repo data for repos.html template
         repos_merged = repos_view.merge_repo_data(repo_health_list, hygiene_scores_list)
 
