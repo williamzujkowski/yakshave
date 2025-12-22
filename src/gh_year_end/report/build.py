@@ -422,14 +422,8 @@ def _render_templates(
         available_years = get_available_years(site_base_dir)
         current_year = config.github.windows.year
 
-        # Get base path for GitHub Pages subpath deployment
-        base_path = config.report.base_path.rstrip("/") if config.report.base_path else ""
-
         # Collect year statistics for year_index.html template
         year_stats = _collect_year_stats(site_base_dir, available_years)
-
-        # Build years list with stats for year_index.html
-        years_list = _build_years_list(available_years, year_stats, current_year, base_path)
 
         # Process awards data - transform from simple key-value to categorized format
         awards_by_category: dict[str, list[Any]] = {
@@ -471,6 +465,9 @@ def _render_templates(
         # Get base path for GitHub Pages subpath deployment
         base_path = config.report.base_path.rstrip("/") if config.report.base_path else ""
 
+        # Build years list with stats for year_index.html
+        years_list = _build_years_list(available_years, year_stats, current_year, base_path)
+
         # Compute base_url - use config value or construct from target name
         base_url = config.report.base_url
         if not base_url and config.github.target.name:
@@ -507,6 +504,7 @@ def _render_templates(
             },
             "base_path": base_path,
             "base_url": base_url,
+            "target_name": config.github.target.name,
             "organization_name": config.report.organization_name or config.github.target.name,
             "site_description": config.report.description,
             "og_image": config.report.og_image,
@@ -514,6 +512,11 @@ def _render_templates(
             "current_year": current_year,
             "available_years": available_years,
             "year_stats": year_stats,
+            "years": years_list,
+            "most_recent_year": available_years[0] if available_years else None,
+            "most_recent_year_path": f"{base_path}/{available_years[0]}/"
+            if available_years
+            else None,
             "thresholds": {
                 "hygiene_healthy": config.thresholds.hygiene_healthy,
                 "hygiene_warning": config.thresholds.hygiene_warning,

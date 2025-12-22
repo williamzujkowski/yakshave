@@ -393,6 +393,12 @@ uv run gh-year-end build --config config/config.yaml    # Build static site from
 uv run gh-year-end collect --config config/config.yaml --force
 uv run gh-year-end all --config config/config.yaml --force
 
+# Multiple years (edit year in config between runs)
+# Edit config.yaml to set: github.windows.year: 2024
+uv run gh-year-end all --config config/config.yaml
+# Edit config.yaml to set: github.windows.year: 2025
+uv run gh-year-end all --config config/config.yaml
+
 # Monitor CI after push
 git push && gh run watch
 ```

@@ -12,7 +12,15 @@ github:
     include_archived: false
     visibility: all  # "all", "public", or "private"
   windows:
+    # Year for data collection. Determines the time window and output directory.
+    # Default: 2025
+    # Range: 2000-2100
     year: 2025
+
+    # Optional: Override the calculated time window
+    # If omitted, since/until are calculated from year:
+    #   since: {year}-01-01T00:00:00Z
+    #   until: {year+1}-01-01T00:00:00Z
     since: "2025-01-01T00:00:00Z"
     until: "2026-01-01T00:00:00Z"
 

@@ -146,6 +146,42 @@ Generates the static site from metrics JSON:
 
 The final site has no external dependencies and can be served with any static web server or deployed to GitHub Pages.
 
+## Multi-Year Reports
+
+The tool processes one year at a time, set in the config file. By default, it uses 2025.
+
+### Single Year
+
+```bash
+# Edit config.yaml to set the year
+# github:
+#   windows:
+#     year: 2025
+
+gh-year-end all --config config.yaml
+```
+
+The year determines:
+- Time window for data collection (Jan 1 - Dec 31)
+- Output directory (`site/2025/`)
+- URL path in the generated site
+
+### Multiple Years
+
+To generate reports for multiple years, run the tool once per year with different config files or by editing the year value between runs:
+
+```bash
+# Year 2024
+# Edit config.yaml: year: 2024
+gh-year-end all --config config.yaml
+
+# Year 2025
+# Edit config.yaml: year: 2025
+gh-year-end all --config config.yaml
+```
+
+Each year gets its own directory under `site/`. The root `index.html` redirects to the most recent year.
+
 ## Configuration
 
 See `config/example.yaml` for a quick-start template or `config/config.example.yaml` for all options.

@@ -1,7 +1,7 @@
 """Configuration loading and validation."""
 
 import re
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -98,22 +98,32 @@ class DiscoveryConfig(BaseModel):
 class WindowsConfig(BaseModel):
     """Time window configuration."""
 
-    year: int
-    since: datetime
-    until: datetime
+    year: int = Field(default=2025, ge=2000, le=2100, description="Year for data collection")
+    since: datetime = Field(description="Start of window (defaults to Jan 1 of year)")
+    until: datetime = Field(description="End of window (defaults to Jan 1 of next year)")
+
+    @model_validator(mode="before")
+    @classmethod
+    def set_defaults(cls, data: Any) -> Any:
+        """Set default since/until from year if not provided."""
+        if isinstance(data, dict):
+            year = data.get("year", 2025)
+
+            # Set since default if not provided
+            if "since" not in data or data["since"] is None:
+                data["since"] = datetime(year, 1, 1, 0, 0, 0, tzinfo=UTC)
+
+            # Set until default if not provided
+            if "until" not in data or data["until"] is None:
+                data["until"] = datetime(year + 1, 1, 1, 0, 0, 0, tzinfo=UTC)
+
+        return data
 
     @model_validator(mode="after")
     def validate_boundaries(self) -> "WindowsConfig":
-        """Validate that since/until align with year boundary."""
-        expected_since = datetime(self.year, 1, 1, 0, 0, 0)
-        expected_until = datetime(self.year + 1, 1, 1, 0, 0, 0)
-
-        if self.since.replace(tzinfo=None) != expected_since:
-            msg = f"since must be {expected_since.isoformat()}Z for year {self.year}"
-            raise ValueError(msg)
-
-        if self.until.replace(tzinfo=None) != expected_until:
-            msg = f"until must be {expected_until.isoformat()}Z for year {self.year}"
+        """Validate that since < until."""
+        if self.since >= self.until:
+            msg = "since must be before until"
             raise ValueError(msg)
 
         return self
