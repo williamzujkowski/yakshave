@@ -745,9 +745,7 @@ class TestBatchYearsCommand:
         assert "Processing year 2025" in result.output
         assert "Success: 3" in result.output
 
-    def test_skip_collect_flag(
-        self, runner: CliRunner, config_file: Path, tmp_path: Path
-    ) -> None:
+    def test_skip_collect_flag(self, runner: CliRunner, config_file: Path, tmp_path: Path) -> None:
         """Test that --skip-collect only runs build."""
         collect_called = {"value": False}
 
@@ -870,9 +868,7 @@ class TestBatchYearsCommand:
 
         assert force_used["value"] is True
 
-    def test_keyboard_interrupt_handling(
-        self, runner: CliRunner, config_file: Path
-    ) -> None:
+    def test_keyboard_interrupt_handling(self, runner: CliRunner, config_file: Path) -> None:
         """Test that keyboard interrupt is caught and handled gracefully."""
         call_count = {"value": 0}
 
