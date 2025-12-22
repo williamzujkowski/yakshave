@@ -227,6 +227,7 @@ class TestCollectIssues:
 
         async def mock_list_issues(*args, **kwargs):
             raise Exception("API error")
+            yield  # Make this an async generator, but never reached
 
         mock_rest_client.list_issues = mock_list_issues
 

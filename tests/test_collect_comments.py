@@ -207,6 +207,8 @@ class TestCollectIssueComments:
         """Test error handling in issue comment collection."""
 
         async def mock_list_issue_comments(*args, **kwargs):
+            if False:  # Make this an async generator
+                yield
             raise Exception("API error")
 
         mock_rest_client.list_issue_comments = mock_list_issue_comments
@@ -336,6 +338,8 @@ class TestCollectReviewComments:
         """Test error handling in review comment collection."""
 
         async def mock_list_review_comments(*args, **kwargs):
+            if False:  # Make this an async generator
+                yield
             raise Exception("API error")
 
         mock_rest_client.list_review_comments = mock_list_review_comments

@@ -281,6 +281,7 @@ class TestCollectPulls:
         async def mock_list_pulls(*args, **kwargs):
             """Mock list_pulls that raises error."""
             raise Exception("API error")
+            yield  # Make this an async generator (unreachable but needed for type)
 
         mock_rest_client.list_pulls = mock_list_pulls
 
