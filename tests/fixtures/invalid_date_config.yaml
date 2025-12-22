@@ -4,5 +4,5 @@ github:
     name: test-org
   windows:
     year: 2025
-    since: "2025-02-01T00:00:00Z"  # Wrong start date
-    until: "2026-01-01T00:00:00Z"
+    since: "2026-01-01T00:00:00Z"  # since >= until (invalid)
+    until: "2025-01-01T00:00:00Z"

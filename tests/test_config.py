@@ -33,7 +33,7 @@ class TestConfigLoading:
         with pytest.raises(ValidationError) as exc_info:
             load_config(FIXTURES_DIR / "invalid_date_config.yaml")
 
-        assert "since must be" in str(exc_info.value)
+        assert "since must be before until" in str(exc_info.value)
 
 
 class TestConfigValidation:
@@ -109,39 +109,37 @@ class TestConfigValidation:
         assert config.storage.root == Path("./data")
         assert config.collection.enable.pulls is True
 
-    def test_year_boundary_validation_wrong_since(self) -> None:
-        """Test that wrong since date raises ValidationError."""
-        with pytest.raises(ValidationError) as exc_info:
-            Config.model_validate(
-                {
-                    "github": {
-                        "target": {"mode": "org", "name": "test"},
-                        "windows": {
-                            "year": 2025,
-                            "since": "2025-02-01T00:00:00Z",  # Wrong
-                            "until": "2026-01-01T00:00:00Z",
-                        },
-                    }
+    def test_custom_since_date_allowed(self) -> None:
+        """Test that custom since dates are now allowed."""
+        config = Config.model_validate(
+            {
+                "github": {
+                    "target": {"mode": "org", "name": "test"},
+                    "windows": {
+                        "year": 2025,
+                        "since": "2025-02-01T00:00:00Z",  # Custom start date
+                        "until": "2026-01-01T00:00:00Z",
+                    },
                 }
-            )
-        assert "since must be" in str(exc_info.value)
+            }
+        )
+        assert config.github.windows.since.month == 2
 
-    def test_year_boundary_validation_wrong_until(self) -> None:
-        """Test that wrong until date raises ValidationError."""
-        with pytest.raises(ValidationError) as exc_info:
-            Config.model_validate(
-                {
-                    "github": {
-                        "target": {"mode": "org", "name": "test"},
-                        "windows": {
-                            "year": 2025,
-                            "since": "2025-01-01T00:00:00Z",
-                            "until": "2025-12-31T00:00:00Z",  # Wrong
-                        },
-                    }
+    def test_custom_until_date_allowed(self) -> None:
+        """Test that custom until dates are now allowed."""
+        config = Config.model_validate(
+            {
+                "github": {
+                    "target": {"mode": "org", "name": "test"},
+                    "windows": {
+                        "year": 2025,
+                        "since": "2025-01-01T00:00:00Z",
+                        "until": "2025-12-31T00:00:00Z",  # Custom end date
+                    },
                 }
-            )
-        assert "until must be" in str(exc_info.value)
+            }
+        )
+        assert config.github.windows.until.month == 12
 
     def test_rate_limit_bounds(self) -> None:
         """Test rate limit configuration bounds."""
@@ -161,3 +159,85 @@ class TestConfigValidation:
                     },
                 }
             )
+
+    def test_windows_default_year(self) -> None:
+        """Test that year defaults to 2025."""
+        config = Config.model_validate(
+            {
+                "github": {
+                    "target": {"mode": "org", "name": "test"},
+                    "windows": {},
+                }
+            }
+        )
+        assert config.github.windows.year == 2025
+
+    def test_windows_auto_calculate_since_until(self) -> None:
+        """Test that since/until are auto-calculated from year."""
+        config = Config.model_validate(
+            {
+                "github": {
+                    "target": {"mode": "org", "name": "test"},
+                    "windows": {"year": 2024},
+                }
+            }
+        )
+        assert config.github.windows.year == 2024
+        assert config.github.windows.since.year == 2024
+        assert config.github.windows.since.month == 1
+        assert config.github.windows.since.day == 1
+        assert config.github.windows.until.year == 2025
+        assert config.github.windows.until.month == 1
+        assert config.github.windows.until.day == 1
+
+    def test_windows_explicit_since_until_still_work(self) -> None:
+        """Test that explicit since/until values still work."""
+        config = Config.model_validate(
+            {
+                "github": {
+                    "target": {"mode": "org", "name": "test"},
+                    "windows": {
+                        "year": 2025,
+                        "since": "2025-01-01T00:00:00Z",
+                        "until": "2026-01-01T00:00:00Z",
+                    },
+                }
+            }
+        )
+        assert config.github.windows.year == 2025
+        assert config.github.windows.since.year == 2025
+        assert config.github.windows.until.year == 2026
+
+    def test_windows_validates_since_before_until(self) -> None:
+        """Test that since must be before until."""
+        with pytest.raises(ValidationError) as exc_info:
+            Config.model_validate(
+                {
+                    "github": {
+                        "target": {"mode": "org", "name": "test"},
+                        "windows": {
+                            "year": 2025,
+                            "since": "2026-01-01T00:00:00Z",
+                            "until": "2025-01-01T00:00:00Z",
+                        },
+                    }
+                }
+            )
+        assert "since must be before until" in str(exc_info.value)
+
+    def test_windows_custom_date_range_within_year(self) -> None:
+        """Test that custom date ranges work (e.g., Q4 only)."""
+        config = Config.model_validate(
+            {
+                "github": {
+                    "target": {"mode": "org", "name": "test"},
+                    "windows": {
+                        "year": 2025,
+                        "since": "2025-10-01T00:00:00Z",
+                        "until": "2026-01-01T00:00:00Z",
+                    },
+                }
+            }
+        )
+        assert config.github.windows.since.month == 10
+        assert config.github.windows.until.year == 2026
