@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ config.report.title }} - GitHub Community Health Report">
+
+    <!-- Open Graph -->
+    {% block og_meta %}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Year in Review">
+    <meta property="og:title" content="{% block og_title %}{{ config.report.title }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}GitHub Year in Review Statistics for {{ config.github.target.name }}{% endblock %}">
+    {% block og_url_meta %}{% endblock %}
+    <meta property="og:image" content="{% block og_image %}assets/favicon-32x32.png{% endblock %}">
+    {% endblock %}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ config.report.title }}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}GitHub Year in Review Statistics for {{ config.github.target.name }}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}assets/favicon-32x32.png{% endblock %}">
+
+    <!-- Canonical URL -->
+    {% block canonical_url_tag %}{% endblock %}
+
     <title>{% block title %}{{ config.report.title }}{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">

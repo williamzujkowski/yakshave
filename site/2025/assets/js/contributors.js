@@ -164,8 +164,8 @@ function showContributorDetails(userId) {
     const contributorCard = document.querySelector(`[data-user-id="${userId}"]`);
     if (!contributorCard) return;
 
-    const login = contributorCard.querySelector('.contributor-name a')?.textContent || userId;
-    const avatar = contributorCard.querySelector('.contributor-avatar img')?.src || '';
+    const login = contributorCard.querySelector('.contributor-info .contributor-name a')?.textContent || userId;
+    const avatar = contributorCard.querySelector('.contributor-header .contributor-avatar img')?.src || '';
 
     // Build modal content
     modalContent.innerHTML = `

@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="williamzujkowski Year in Review 2025 - GitHub Community Health Report">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Year in Review">
+    <meta property="og:title" content="williamzujkowski Year in Review 2025">
+    <meta property="og:description" content="GitHub Year in Review Statistics for williamzujkowski">
+    <meta property="og:image" content="assets/favicon-32x32.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="williamzujkowski Year in Review 2025">
+    <meta name="twitter:description" content="GitHub Year in Review Statistics for williamzujkowski">
+    <meta name="twitter:image" content="assets/favicon-32x32.png">
+
+    <!-- Canonical URL -->
+
     <title>williamzujkowski Year in Review 2025 - Contributors</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
@@ -11,6 +27,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -116,7 +133,7 @@ aria-current="true">
             </div>
         </aside>
 
-        <main class="content">
+        <main class="content" id="main-content">
 <div class="page-header">
     <h1>Contributors</h1>
     <p class="lead">Individual contribution statistics and drilldowns</p>
@@ -124,8 +141,10 @@ aria-current="true">
 
 <section class="contributor-search-section">
     <div class="search-bar">
+        <label for="contributor-search" class="visually-hidden">Search contributors</label>
         <input type="text" id="contributor-search" placeholder="Search contributors by name..." class="search-input">
         <div class="search-filters">
+            <label for="metric-filter" class="visually-hidden">Filter by metric</label>
             <select id="metric-filter" class="filter-select">
                 <option value="all">All Metrics</option>
                 <option value="prs">Pull Requests</option>
@@ -133,6 +152,7 @@ aria-current="true">
                 <option value="issues">Issues</option>
                 <option value="comments">Comments</option>
             </select>
+            <label for="sort-by" class="visually-hidden">Sort contributors by</label>
             <select id="sort-by" class="filter-select">
                 <option value="prs_merged">Most PRs Merged</option>
                 <option value="reviews_submitted">Most Reviews</option>
@@ -866,7 +886,7 @@ aria-current="true">
 </section>
 
 <!-- Contributor Detail Modal -->
-<div id="contributor-modal" class="modal" style="display: none;">
+<div id="contributor-modal" class="modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="contributor-modal-title">
     <div class="modal-overlay" onclick="closeContributorModal()"></div>
     <div class="modal-content">
         <button class="modal-close" onclick="closeContributorModal()" aria-label="Close modal">

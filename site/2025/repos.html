@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="williamzujkowski Year in Review 2025 - GitHub Community Health Report">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Year in Review">
+    <meta property="og:title" content="williamzujkowski Year in Review 2025">
+    <meta property="og:description" content="GitHub Year in Review Statistics for williamzujkowski">
+    <meta property="og:image" content="assets/favicon-32x32.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="williamzujkowski Year in Review 2025">
+    <meta name="twitter:description" content="GitHub Year in Review Statistics for williamzujkowski">
+    <meta name="twitter:image" content="assets/favicon-32x32.png">
+
+    <!-- Canonical URL -->
+
     <title>williamzujkowski Year in Review 2025 - Repositories</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
@@ -11,6 +27,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -116,7 +133,7 @@ aria-current="true">
             </div>
         </aside>
 
-        <main class="content">
+        <main class="content" id="main-content">
 <div class="page-header">
     <h1>Repository Health Dashboard</h1>
     <p class="lead">Health metrics, hygiene scores, and activity analysis</p>
@@ -124,13 +141,16 @@ aria-current="true">
 
 <section class="repo-filters-section">
     <div class="filters-bar">
+        <label for="repo-search" class="visually-hidden">Search repositories</label>
         <input type="text" id="repo-search" placeholder="Search repositories..." class="search-input">
+        <label for="health-filter" class="visually-hidden">Filter by health status</label>
         <select id="health-filter" class="filter-select">
             <option value="all">All Repositories</option>
             <option value="healthy">Healthy</option>
             <option value="warning">Needs Attention</option>
             <option value="critical">Critical</option>
         </select>
+        <label for="sort-repos" class="visually-hidden">Sort repositories by</label>
         <select id="sort-repos" class="filter-select">
             <option value="activity">Most Active</option>
             <option value="hygiene">Best Hygiene</option>
@@ -1798,7 +1818,7 @@ aria-current="true">
 </section>
 
 <!-- Repository Detail Modal -->
-<div id="repo-modal" class="modal" style="display: none;">
+<div id="repo-modal" class="modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="repo-modal-title">
     <div class="modal-overlay" onclick="closeRepoModal()"></div>
     <div class="modal-content modal-wide">
         <button class="modal-close" onclick="closeRepoModal()" aria-label="Close modal">
