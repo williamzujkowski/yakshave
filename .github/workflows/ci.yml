@@ -79,12 +79,13 @@ jobs:
         run: uv pip install bandit[toml]
 
       - name: Run bandit security scan
-        run: uv run bandit -r src/ -f json -o bandit-report.json
+        # Skip: B105 (false positives on source labels), B404/B603/B607 (expected subprocess for git/gh)
+        run: uv run bandit -r src/ -f json -o bandit-report.json --skip B105,B404,B603,B607
         continue-on-error: true
 
       - name: Display bandit results
         if: always()
-        run: uv run bandit -r src/ || true
+        run: uv run bandit -r src/ --skip B105,B404,B603,B607 || true
 
       - name: Upload bandit report
         if: always()
@@ -121,7 +122,7 @@ jobs:
 
       - name: Display safety results
         if: always()
-        run: uv run safety scan --output text || true
+        run: uv run safety scan --output screen || true
 
       - name: Upload safety report
         if: always()
