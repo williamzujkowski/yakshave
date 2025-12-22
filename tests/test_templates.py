@@ -58,6 +58,19 @@ def base_context():
             "total_reviews": 2000,
             "total_repos": 50,
         },
+        "thresholds": {
+            "hygiene_healthy": 50,
+            "hygiene_warning": 30,
+            "hygiene_good": 60,
+            "hygiene_bad": 40,
+            "review_coverage_good": 50,
+            "review_coverage_bad": 20,
+            "max_review_time_hours": 48,
+            "stale_pr_days": 30,
+            "high_pr_ratio": 0.5,
+            "leaderboard_top_n": 10,
+            "contributor_chart_top_n": 10,
+        },
     }
 
 
