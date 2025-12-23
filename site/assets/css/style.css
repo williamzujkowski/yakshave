@@ -970,6 +970,39 @@ small {
   margin-bottom: var(--spacing-2xl);
 }
 
+/* Peak annotations for time series charts */
+.peak-annotations .peak-annotation {
+  transition: all var(--transition-base);
+}
+
+.peak-annotations .peak-marker {
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.peak-annotations .peak-marker:hover {
+  r: 6;
+  filter: brightness(1.2);
+}
+
+.peak-annotations .peak-label {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.peak-annotations .peak-badge {
+  transition: opacity var(--transition-base);
+}
+
+@media (max-width: 768px) {
+  .peak-annotations .peak-label {
+    font-size: 10px !important;
+  }
+
+  .peak-annotations .peak-marker {
+    r: 4;
+  }
+}
+
 /* ========================================
    Tabs
    ======================================== */

@@ -191,10 +191,30 @@ class TimeSeriesChart extends BaseChart {
         super(containerId, {
             showArea: true,
             showPoints: false,
+            showPeakAnnotations: true,
+            peakThreshold: 3,
             xAxisLabel: 'Date',
             yAxisLabel: 'Count',
             ...options
         });
+    }
+
+    /**
+     * Find peak values in the data.
+     * Returns the top N peaks based on value.
+     *
+     * @param {Array} data - Array of {date: Date, value: number}
+     * @param {number} topN - Number of peaks to find (default: 3)
+     * @returns {Array} Array of peak data points
+     */
+    findPeaks(data, topN = 3) {
+        if (!data || data.length === 0) return [];
+
+        // Sort by value descending and take top N
+        return [...data]
+            .sort((a, b) => b.value - a.value)
+            .slice(0, topN)
+            .sort((a, b) => a.date - b.date); // Re-sort by date for display
     }
 
     /**
@@ -350,6 +370,52 @@ class TimeSeriesChart extends BaseChart {
                 const tooltipContent = `<strong>${dateStr}</strong><br/>Value: ${d.value}`;
                 this.showTooltip(tooltipContent, event.pageX, event.pageY);
             });
+
+        // Peak annotations
+        if (this.options.showPeakAnnotations && data.length > 0) {
+            const peaks = this.findPeaks(data, this.options.peakThreshold);
+
+            // Add annotation group
+            const annotations = this.chartArea.append('g')
+                .attr('class', 'peak-annotations');
+
+            // Add annotation for each peak
+            peaks.forEach((peak, index) => {
+                const peakGroup = annotations.append('g')
+                    .attr('class', `peak-annotation peak-${index + 1}`)
+                    .attr('transform', `translate(${xScale(peak.date)},${yScale(peak.value)})`);
+
+                // Peak marker circle
+                peakGroup.append('circle')
+                    .attr('r', 5)
+                    .attr('fill', this.colors.tertiary)
+                    .attr('stroke', this.colors.background)
+                    .attr('stroke-width', 2)
+                    .attr('class', 'peak-marker');
+
+                // Peak value label (above the point)
+                peakGroup.append('text')
+                    .attr('y', -15)
+                    .attr('text-anchor', 'middle')
+                    .attr('fill', this.colors.text)
+                    .attr('class', 'peak-label')
+                    .style('font-size', '11px')
+                    .style('font-weight', 'bold')
+                    .style('pointer-events', 'none')
+                    .text(peak.value);
+
+                // Add small annotation badge
+                peakGroup.append('rect')
+                    .attr('x', -15)
+                    .attr('y', -28)
+                    .attr('width', 30)
+                    .attr('height', 12)
+                    .attr('rx', 3)
+                    .attr('fill', this.colors.tertiary)
+                    .attr('opacity', 0.15)
+                    .attr('class', 'peak-badge');
+            });
+        }
 
         // Axis labels
         if (this.options.xAxisLabel) {
