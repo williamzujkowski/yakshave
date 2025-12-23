@@ -1002,7 +1002,7 @@ class TestCalculateInsights:
         # These metrics are not available from current data
         # TODO: cross_team_reviews requires team/org data
         assert result["cross_team_reviews"] == 0
-        # TODO: median_pr_size requires PR detail data
+        # median_pr_size is 0 when no PR sizes provided
         assert result["median_pr_size"] == 0
         # CI/CODEOWNERS/Security metrics calculated from hygiene data (0 when empty)
         assert result["repos_with_ci"] == 0
@@ -1031,6 +1031,40 @@ class TestCalculateInsights:
             summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
         )
         assert result["new_contributors"] == 8
+
+    def test_median_pr_size_calculation(self):
+        """Test that median_pr_size is calculated correctly from PR sizes."""
+        leaderboards_data = {}
+        repo_health_list = []
+        hygiene_scores_list = []
+
+        # Test with odd number of PR sizes
+        summary_data = {"pr_sizes": [10, 50, 100, 200, 500]}
+        result = calculate_insights(
+            summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
+        )
+        assert result["median_pr_size"] == 100  # Middle value
+
+        # Test with even number of PR sizes
+        summary_data = {"pr_sizes": [10, 50, 100, 200]}
+        result = calculate_insights(
+            summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
+        )
+        assert result["median_pr_size"] == 75  # Average of 50 and 100
+
+        # Test with single PR
+        summary_data = {"pr_sizes": [123]}
+        result = calculate_insights(
+            summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
+        )
+        assert result["median_pr_size"] == 123
+
+        # Test with empty list
+        summary_data = {"pr_sizes": []}
+        result = calculate_insights(
+            summary_data, leaderboards_data, repo_health_list, hygiene_scores_list
+        )
+        assert result["median_pr_size"] == 0
 
     def test_calculate_hygiene_metrics_from_data(self):
         """Test that CI/CODEOWNERS/Security metrics are calculated from hygiene data."""

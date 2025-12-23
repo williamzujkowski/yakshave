@@ -81,8 +81,21 @@ def calculate_insights(
         insights["prs_per_week"] = 0
 
     # Calculate median_pr_size
-    # TODO: This would require PR detail data with additions/deletions which we don't have
-    insights["median_pr_size"] = 0
+    try:
+        pr_sizes = summary_data.get("pr_sizes", [])
+        if pr_sizes:
+            sorted_sizes = sorted(pr_sizes)
+            mid = len(sorted_sizes) // 2
+            if len(sorted_sizes) % 2 == 0:
+                median_pr_size = (sorted_sizes[mid - 1] + sorted_sizes[mid]) / 2
+            else:
+                median_pr_size = sorted_sizes[mid]
+            insights["median_pr_size"] = int(median_pr_size)
+        else:
+            insights["median_pr_size"] = 0
+    except Exception as e:
+        logger.warning("Failed to calculate median_pr_size: %s", e)
+        insights["median_pr_size"] = 0
 
     # Calculate merge_rate
     try:
