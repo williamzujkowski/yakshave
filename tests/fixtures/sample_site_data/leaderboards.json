@@ -86,6 +86,70 @@
       ],
       "repos": {}
     },
+    "prs_opened": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "U_001",
+          "login": "alice",
+          "display_name": "Alice Developer",
+          "value": 10
+        },
+        {
+          "rank": 2,
+          "user_id": "U_002",
+          "login": "bob",
+          "display_name": "Bob Engineer",
+          "value": 6
+        },
+        {
+          "rank": 3,
+          "user_id": "U_003",
+          "login": "charlie",
+          "display_name": "Charlie Coder",
+          "value": 3
+        }
+      ],
+      "repos": {}
+    },
+    "approvals": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "U_002",
+          "login": "bob",
+          "display_name": "Bob Engineer",
+          "value": 5
+        },
+        {
+          "rank": 2,
+          "user_id": "U_001",
+          "login": "alice",
+          "display_name": "Alice Developer",
+          "value": 3
+        }
+      ],
+      "repos": {}
+    },
+    "changes_requested": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "U_002",
+          "login": "bob",
+          "display_name": "Bob Engineer",
+          "value": 2
+        },
+        {
+          "rank": 2,
+          "user_id": "U_001",
+          "login": "alice",
+          "display_name": "Alice Developer",
+          "value": 1
+        }
+      ],
+      "repos": {}
+    },
     "issues_opened": {
       "org": [
         {
@@ -111,7 +175,78 @@
         }
       ],
       "repos": {}
+    },
+    "issues_closed": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "U_001",
+          "login": "alice",
+          "display_name": "Alice Developer",
+          "value": 3
+        },
+        {
+          "rank": 2,
+          "user_id": "U_003",
+          "login": "charlie",
+          "display_name": "Charlie Coder",
+          "value": 2
+        }
+      ],
+      "repos": {}
+    },
+    "comments_total": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "U_001",
+          "login": "alice",
+          "display_name": "Alice Developer",
+          "value": 15
+        },
+        {
+          "rank": 2,
+          "user_id": "U_002",
+          "login": "bob",
+          "display_name": "Bob Engineer",
+          "value": 12
+        },
+        {
+          "rank": 3,
+          "user_id": "U_003",
+          "login": "charlie",
+          "display_name": "Charlie Coder",
+          "value": 8
+        }
+      ],
+      "repos": {}
+    },
+    "review_comments_total": {
+      "org": [
+        {
+          "rank": 1,
+          "user_id": "U_002",
+          "login": "bob",
+          "display_name": "Bob Engineer",
+          "value": 10
+        },
+        {
+          "rank": 2,
+          "user_id": "U_001",
+          "login": "alice",
+          "display_name": "Alice Developer",
+          "value": 8
+        },
+        {
+          "rank": 3,
+          "user_id": "U_003",
+          "login": "charlie",
+          "display_name": "Charlie Coder",
+          "value": 5
+        }
+      ],
+      "repos": {}
     }
   },
-  "metrics_available": ["prs_merged", "reviews_submitted", "issues_opened"]
+  "metrics_available": ["prs_merged", "prs_opened", "reviews_submitted", "approvals", "changes_requested", "issues_opened", "issues_closed", "comments_total", "review_comments_total"]
 }
