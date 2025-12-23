@@ -7,6 +7,31 @@ data for template rendering.
 from typing import Any
 
 
+def format_merge_time(hours: float | None) -> str:
+    """Format merge time in hours to human-readable string.
+
+    Args:
+        hours: Merge time in hours (float or None).
+
+    Returns:
+        Formatted string like "2.5h", "3.2d", or "N/A" if None.
+    """
+    if hours is None:
+        return "N/A"
+
+    if hours < 1:
+        # Less than 1 hour - show minutes
+        minutes = int(hours * 60)
+        return f"{minutes}m"
+    elif hours < 24:
+        # Less than 24 hours - show hours with 1 decimal
+        return f"{hours:.1f}h"
+    else:
+        # 24+ hours - show days with 1 decimal
+        days = hours / 24
+        return f"{days:.1f}d"
+
+
 def merge_repo_data(
     repo_health_data: list[dict[str, Any]],
     hygiene_data: list[dict[str, Any]],
@@ -130,7 +155,7 @@ def merge_repo_data(
                 "prs_merged": health.get("prs_merged", 0),
                 "active_contributors_365d": health.get("active_contributors_365d", 0),
                 "review_coverage": health.get("review_coverage", 0),
-                "median_time_to_merge": health.get("median_time_to_merge", "N/A"),
+                "median_time_to_merge": format_merge_time(health.get("median_time_to_merge")),
                 "health_status": health_status,
             }
         )

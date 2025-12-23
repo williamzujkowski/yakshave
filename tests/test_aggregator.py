@@ -884,7 +884,10 @@ class TestExport:
         assert len(export["leaderboards"]["prs_opened"]) == 0
 
         assert len(export["repo_health"]) == 0
-        assert len(export["awards"]) == 0
+        # Awards should include special_mentions even when empty
+        assert "special_mentions" in export["awards"]
+        assert len(export["awards"]["special_mentions"]["first_contributions"]) == 0
+        assert len(export["awards"]["special_mentions"]["largest_prs"]) == 0
 
     def test_export_timeseries_filters_bots(self):
         """Test that bots are filtered from time series export."""

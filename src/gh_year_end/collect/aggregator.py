@@ -73,6 +73,9 @@ class MetricsAggregator:
     _all_contributors_ever: set[str] = field(default_factory=set)
     _new_contributors_this_year: set[str] = field(default_factory=set)
 
+    # Track PR details for special mentions
+    _pr_details: list[dict[str, Any]] = field(default_factory=list)
+
     def _is_bot(self, user: dict[str, Any] | None) -> bool:
         """Check if user is a bot.
 
@@ -265,20 +268,38 @@ class MetricsAggregator:
             merged_at = pr.get("merged_at")
             if merged_at and created_at:
                 merged_dt = datetime.fromisoformat(merged_at.replace("Z", "+00:00"))
+                created_dt = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
+
+                # Track merge time for repo health (regardless of merge year)
+                if repo_id in self.repo_health:
+                    time_to_merge_hours = (merged_dt - created_dt).total_seconds() / 3600
+                    self.repo_health[repo_id]["merge_times"].append(time_to_merge_hours)
+
+                    # Store PR details for special mentions
+                    additions = pr.get("additions", 0)
+                    deletions = pr.get("deletions", 0)
+                    lines_changed = additions + deletions
+
+                    self._pr_details.append(
+                        {
+                            "number": pr.get("number"),
+                            "title": pr.get("title", ""),
+                            "url": pr.get("html_url", ""),
+                            "author_login": author_login,
+                            "author_avatar_url": author.get("avatar_url", "") if author else "",
+                            "repo": repo_id,
+                            "lines_changed": lines_changed,
+                            "additions": additions,
+                            "deletions": deletions,
+                            "merge_time_hours": time_to_merge_hours,
+                            "created_at": created_at,
+                            "merged_at": merged_at,
+                        }
+                    )
+
+                # Track in timeseries only if merged in target year
                 if merged_dt.year == self.year:
                     self._increment_timeseries(merged_dt, "prs_merged", author_login)
-
-                # Track merge time for repo health
-                if repo_id in self.repo_health:
-                    created_dt = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
-                    time_to_merge_hours = (merged_dt - created_dt).total_seconds() / 3600
-                    self.repo_health[repo_id]["merge_times"].append(time_to_merge_hours)
-
-                # Track merge time for repo health
-                if repo_id in self.repo_health:
-                    created_dt = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
-                    time_to_merge_hours = (merged_dt - created_dt).total_seconds() / 3600
-                    self.repo_health[repo_id]["merge_times"].append(time_to_merge_hours)
 
     def add_issue(self, repo_id: str, issue: dict[str, Any]) -> None:
         """Update metrics when an issue is collected.
@@ -475,6 +496,11 @@ class MetricsAggregator:
         for user_login in self.leaderboards["reviews_submitted"]:
             all_contributors.add(user_login)
 
+        # Collect PR sizes for median calculation
+        pr_sizes = [
+            pr["lines_changed"] for pr in self._pr_details if pr.get("lines_changed", 0) > 0
+        ]
+
         return {
             "year": self.year,
             "target_name": self.target_name,
@@ -488,6 +514,7 @@ class MetricsAggregator:
             "prs_merged": sum(self.leaderboards["prs_merged"].values()),
             "issues_closed": sum(self.leaderboards["issues_closed"].values()),
             "new_contributors": len(self._new_contributors_this_year),
+            "pr_sizes": pr_sizes,  # List of PR sizes for median calculation
         }
 
     def _compute_leaderboards(self) -> dict[str, Any]:
@@ -622,7 +649,84 @@ class MetricsAggregator:
                     "avatar_url": self.users.get(top_issue[0], {}).get("avatar_url", ""),
                 }
 
+        # Compute special mentions
+        awards["special_mentions"] = self._compute_special_mentions()
+
         return awards
+
+    def _compute_special_mentions(self) -> dict[str, Any]:
+        """Compute special mentions for awards page.
+
+        Returns:
+            Dict with special mention lists: first_contributions, consistent_contributors,
+            largest_prs, fastest_merges
+        """
+        special_mentions: dict[str, list[dict[str, Any]]] = {
+            "first_contributions": [],
+            "consistent_contributors": [],
+            "largest_prs": [],
+            "fastest_merges": [],
+        }
+
+        # First contributions - contributors new this year
+        for user_login in sorted(self._new_contributors_this_year):
+            user_data = self.users.get(user_login, {})
+            if not user_data.get("is_bot", False):
+                special_mentions["first_contributions"].append(
+                    {
+                        "user": user_login,
+                        "avatar_url": user_data.get("avatar_url", ""),
+                    }
+                )
+
+        # Consistent contributors - count weeks with activity per user
+        user_weeks: defaultdict[str, set[str]] = defaultdict(set)
+        for _metric, periods in self._weekly_counters.items():
+            for week, user_counts in periods.items():
+                for user_login in user_counts:
+                    if user_login != "_total":
+                        user_weeks[user_login].add(week)
+
+        # Filter bots and sort by week count
+        consistent = [
+            {
+                "user": user_login,
+                "avatar_url": self.users.get(user_login, {}).get("avatar_url", ""),
+                "weeks": len(weeks),
+            }
+            for user_login, weeks in user_weeks.items()
+            if not self.users.get(user_login, {}).get("is_bot", False) and len(weeks) > 0
+        ]
+        consistent.sort(key=lambda x: x["weeks"], reverse=True)
+        special_mentions["consistent_contributors"] = consistent[:3]
+
+        # Largest PRs - sort by lines changed
+        if self._pr_details:
+            largest_prs = sorted(self._pr_details, key=lambda x: x["lines_changed"], reverse=True)[
+                :5
+            ]
+            special_mentions["largest_prs"] = largest_prs
+
+        # Fastest merges - sort by merge time (ascending)
+        if self._pr_details:
+            # Filter out very quick merges (< 1 minute) as they might be auto-merges
+            valid_merges = [pr for pr in self._pr_details if pr["merge_time_hours"] >= 1 / 60]
+            if valid_merges:
+                fastest_merges = sorted(valid_merges, key=lambda x: x["merge_time_hours"])[:5]
+
+                # Format merge_time for display
+                for pr in fastest_merges:
+                    hours = pr["merge_time_hours"]
+                    if hours < 1:
+                        pr["merge_time"] = f"{int(hours * 60)}m"
+                    elif hours < 24:
+                        pr["merge_time"] = f"{hours:.1f}h"
+                    else:
+                        pr["merge_time"] = f"{hours / 24:.1f}d"
+
+                special_mentions["fastest_merges"] = fastest_merges
+
+        return special_mentions
 
     def export(self) -> dict[str, Any]:
         """Export all metrics as JSON-serializable dict.
