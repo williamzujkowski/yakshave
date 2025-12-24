@@ -35,31 +35,61 @@ def calculate_highlights(
 
     # Calculate most active month from timeseries data
     try:
-        # Timeseries data structure: {"monthly": {"prs_merged": [{period, user, count}]}}
-        monthly_data = timeseries_data.get("monthly", {})
-        prs_merged = monthly_data.get("prs_merged", [])
+        monthly_prs: dict[str, int] = defaultdict(int)
 
-        if prs_merged:
-            # Group by month and sum PRs across all users
-            monthly_prs: dict[str, int] = defaultdict(int)
-
-            for entry in prs_merged:
-                period = entry.get("period", "")  # Format: "2025-11"
-                count = entry.get("count", 0)
-
-                if period:
+        # Handle flat list format: [{"period_start": "2025-01-01", "metric_key": "prs_merged", ...}]
+        if isinstance(timeseries_data, list):
+            for entry in timeseries_data:
+                if entry.get("metric_key") != "prs_merged":
+                    continue
+                if entry.get("scope") != "org":
+                    continue
+                period_start = entry.get("period_start", "")
+                value = entry.get("value", 0)
+                if period_start and value:
                     try:
-                        # Parse period format: "2025-11" -> "November 2025"
-                        dt = datetime.strptime(period, "%Y-%m")
+                        dt = datetime.strptime(period_start, "%Y-%m-%d")
                         month_key = dt.strftime("%B %Y")
-                        monthly_prs[month_key] += count
+                        monthly_prs[month_key] += value
                     except (ValueError, AttributeError):
                         continue
+        elif isinstance(timeseries_data, dict):
+            # Transformed format: {weekly: {prs_merged: [{period, count}]}, monthly: {...}}
+            # Try weekly data first (aggregate into months), then monthly
+            weekly_data = timeseries_data.get("weekly", {})
+            prs_merged = weekly_data.get("prs_merged", [])
 
-            if monthly_prs:
-                most_active = max(monthly_prs.items(), key=lambda x: x[1])
-                highlights["most_active_month"] = most_active[0]
-                highlights["most_active_month_prs"] = most_active[1]
+            if prs_merged:
+                # Aggregate weekly data into months
+                for entry in prs_merged:
+                    period = entry.get("period", "")
+                    count = entry.get("count", 0)
+                    if period and count:
+                        try:
+                            dt = datetime.strptime(period, "%Y-%m-%d")
+                            month_key = dt.strftime("%B %Y")
+                            monthly_prs[month_key] += count
+                        except (ValueError, AttributeError):
+                            continue
+            else:
+                # Fallback to monthly data if available
+                monthly_data = timeseries_data.get("monthly", {})
+                prs_merged = monthly_data.get("prs_merged", [])
+                for entry in prs_merged:
+                    period = entry.get("period", "")
+                    count = entry.get("count", 0)
+                    if period:
+                        try:
+                            dt = datetime.strptime(period, "%Y-%m")
+                            month_key = dt.strftime("%B %Y")
+                            monthly_prs[month_key] += count
+                        except (ValueError, AttributeError):
+                            continue
+
+        if monthly_prs:
+            most_active = max(monthly_prs.items(), key=lambda x: x[1])
+            highlights["most_active_month"] = most_active[0]
+            highlights["most_active_month_prs"] = most_active[1]
 
     except Exception as e:
         logger.warning("Failed to calculate most active month: %s", e)

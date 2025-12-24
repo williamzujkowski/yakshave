@@ -585,6 +585,7 @@ def _calculate_summary_from_metrics(data_dir: Path) -> dict[str, Any]:
                         total_reviews += value
                 summary["prs_merged"] = total_prs
                 summary["total_prs_merged"] = total_prs
+                summary["total_prs"] = total_prs  # For highlights calculation
                 summary["total_reviews"] = total_reviews
         except Exception as e:
             logger.warning("Failed to get PR/review counts from timeseries: %s", e)
