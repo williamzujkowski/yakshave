@@ -10,11 +10,14 @@
 {% endmacro %}
 
 {% macro trend_indicator(value, threshold_good, threshold_bad, suffix='%', inverse=false) %}
-{% set is_good = value >= threshold_good if not inverse else value <= threshold_good %}
-{% set is_bad = value <= threshold_bad if not inverse else value >= threshold_bad %}
+{% set safe_value = value if value is not none else 0 %}
+{% set safe_good = threshold_good if threshold_good is not none else 0 %}
+{% set safe_bad = threshold_bad if threshold_bad is not none else 0 %}
+{% set is_good = safe_value >= safe_good if not inverse else safe_value <= safe_good %}
+{% set is_bad = safe_value <= safe_bad if not inverse else safe_value >= safe_bad %}
 <span class="trend-indicator {% if is_good %}trend-up{% elif is_bad %}trend-down{% else %}trend-neutral{% endif %}">
   <span class="trend-arrow">{% if is_good %}↑{% elif is_bad %}↓{% else %}→{% endif %}</span>
-  {{ value }}{{ suffix }}
+  {{ safe_value }}{{ suffix }}
 </span>
 {% endmacro %}
 

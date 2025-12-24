@@ -59,7 +59,7 @@ def merge_repo_data(
 
         # Calculate hygiene score from available fields
         # If score field exists and is non-zero, use it; otherwise compute from available data
-        hygiene_score = hygiene.get("score", 0)
+        hygiene_score = hygiene.get("score") or 0
 
         # Check if we have meaningful hygiene data
         meaningful_hygiene_fields = [
@@ -131,10 +131,12 @@ def merge_repo_data(
             # Use hygiene-based health status
             # Lower thresholds to account for personal repos that often lack
             # enterprise hygiene features like CODEOWNERS and branch protection
-            if hygiene_score >= hygiene_healthy:
+            # hygiene_score is guaranteed to be an int here (either from hygiene.get or computed)
+            score = hygiene_score if isinstance(hygiene_score, int) else 0
+            if score >= hygiene_healthy:
                 health_status = "healthy"
                 hygiene_score_category = "high"
-            elif hygiene_score >= hygiene_warning:
+            elif score >= hygiene_warning:
                 health_status = "warning"
                 hygiene_score_category = "medium"
             else:

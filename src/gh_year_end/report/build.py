@@ -262,14 +262,18 @@ def _verify_metrics_data_exists(paths: PathManager) -> None:
 def _load_json_data(data_dir: Path) -> dict[str, Any]:
     """Load all JSON data files for report generation.
 
+    Tries to load from the standard file names first. If data is empty or
+    missing, falls back to metrics_*.json files and transforms them.
+
     Args:
         data_dir: Directory containing JSON metrics files.
 
     Returns:
         Dictionary mapping data keys to their content.
     """
-    data = {}
+    data: dict[str, Any] = {}
 
+    # Standard file mappings
     json_files = [
         "summary.json",
         "leaderboards.json",
@@ -279,6 +283,7 @@ def _load_json_data(data_dir: Path) -> dict[str, Any]:
         "awards.json",
     ]
 
+    # Load standard files first
     for filename in json_files:
         filepath = data_dir / filename
         if filepath.exists():
@@ -292,7 +297,218 @@ def _load_json_data(data_dir: Path) -> dict[str, Any]:
         else:
             logger.debug("Optional file not found: %s", filename)
 
+    # Check if we need to fall back to metrics_*.json files
+    # This handles cases where stub files exist but have empty data
+    data = _enrich_from_metrics_files(data_dir, data)
+
     return data
+
+
+def _enrich_from_metrics_files(data_dir: Path, data: dict[str, Any]) -> dict[str, Any]:
+    """Enrich data context from metrics_*.json files if standard files are empty.
+
+    Args:
+        data_dir: Directory containing metrics files.
+        data: Existing data dictionary to enrich.
+
+    Returns:
+        Enriched data dictionary.
+    """
+    # Mapping from metrics file to data key and transform function
+    metrics_mappings = [
+        ("metrics_leaderboard.json", "leaderboards", _transform_metrics_leaderboard),
+        ("metrics_time_series.json", "timeseries", _transform_metrics_timeseries),
+        ("metrics_repo_health.json", "repo_health", _transform_metrics_repo_health),
+        ("metrics_repo_hygiene_score.json", "hygiene_scores", _transform_metrics_hygiene),
+        ("metrics_awards.json", "awards", _transform_metrics_awards),
+    ]
+
+    for metrics_file, data_key, transform_fn in metrics_mappings:
+        # Check if existing data is empty or missing
+        existing = data.get(data_key, {})
+        is_empty = (
+            not existing
+            or (isinstance(existing, dict) and _is_empty_dict(existing))
+            or (isinstance(existing, list) and len(existing) == 0)
+        )
+
+        if is_empty:
+            metrics_path = data_dir / metrics_file
+            if metrics_path.exists():
+                try:
+                    with metrics_path.open() as f:
+                        metrics_content = json.load(f)
+                    if metrics_content:
+                        transformed = transform_fn(metrics_content)
+                        if transformed:
+                            data[data_key] = transformed
+                            logger.info("Enriched %s from %s", data_key, metrics_file)
+                except Exception as e:
+                    logger.warning("Failed to load %s: %s", metrics_file, e)
+
+    return data
+
+
+def _is_empty_dict(d: dict[str, Any]) -> bool:
+    """Check if a dict has only empty values."""
+    if not d:
+        return True
+    for v in d.values():
+        if isinstance(v, list) and len(v) > 0:
+            return False
+        if isinstance(v, dict) and not _is_empty_dict(v):
+            return False
+        if v and not isinstance(v, (list, dict)):
+            return False
+    return True
+
+
+def _transform_metrics_leaderboard(
+    metrics: list[dict[str, Any]],
+) -> dict[str, list[dict[str, Any]]]:
+    """Transform metrics_leaderboard.json format to leaderboards.json format.
+
+    Input: [{year, metric_key, scope, repo_id, user_id, value, rank}, ...]
+    Output: {metric_key: [{user, count, avatar_url}, ...], ...}
+    """
+    if not isinstance(metrics, list):
+        return {}
+
+    result: dict[str, list[dict[str, Any]]] = {}
+
+    # Group by metric_key, filter to org scope
+    for item in metrics:
+        if item.get("scope") != "org":
+            continue
+
+        metric_key = item.get("metric_key", "")
+        user_id = item.get("user_id", "")
+        value = item.get("value", 0)
+
+        if not metric_key or not user_id:
+            continue
+
+        if metric_key not in result:
+            result[metric_key] = []
+
+        # Extract username from user_id if possible (user_id might be GitHub node ID)
+        # For now, use user_id as-is since we don't have login mapping
+        result[metric_key].append(
+            {
+                "user": user_id,
+                "count": value,
+                "avatar_url": "",
+            }
+        )
+
+    # Sort each metric list by count descending
+    for metric_key in result:
+        result[metric_key].sort(key=lambda x: x["count"], reverse=True)
+
+    return result
+
+
+def _transform_metrics_timeseries(metrics: list[dict[str, Any]]) -> dict[str, Any]:
+    """Transform metrics_time_series.json format to timeseries.json format.
+
+    Input: [{year, period_type, period_start, period_end, scope, repo_id, metric_key, value}, ...]
+    Output: {weekly: {metric_key: [{period, count}, ...]}, monthly: {...}}
+    """
+    if not isinstance(metrics, list):
+        return {"weekly": {}, "monthly": {}}
+
+    result: dict[str, dict[str, list[dict[str, Any]]]] = {
+        "weekly": {},
+        "monthly": {},
+    }
+
+    for item in metrics:
+        if item.get("scope") != "org":
+            continue
+
+        period_type = item.get("period_type", "")
+        metric_key = item.get("metric_key", "")
+        period_start = item.get("period_start", "")
+        value = item.get("value", 0)
+
+        if not period_type or not metric_key or not period_start:
+            continue
+
+        period_bucket = "weekly" if period_type == "week" else "monthly"
+
+        if metric_key not in result[period_bucket]:
+            result[period_bucket][metric_key] = []
+
+        result[period_bucket][metric_key].append(
+            {
+                "period": period_start,
+                "count": value,
+            }
+        )
+
+    # Sort each list by period
+    for period_bucket in result:
+        for metric_key in result[period_bucket]:
+            result[period_bucket][metric_key].sort(key=lambda x: x["period"])
+
+    return result
+
+
+def _transform_metrics_repo_health(metrics: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Transform metrics_repo_health.json to repo_health list format."""
+    if not isinstance(metrics, list):
+        return []
+    # Already in list format, just return
+    return metrics
+
+
+def _transform_metrics_hygiene(metrics: Any) -> dict[str, Any]:
+    """Transform metrics_repo_hygiene_score.json to hygiene_scores format."""
+    if isinstance(metrics, dict):
+        return metrics
+    if isinstance(metrics, list):
+        # Convert list to dict keyed by repo
+        return {"scores": metrics}
+    return {}
+
+
+def _transform_metrics_awards(metrics: list[dict[str, Any]]) -> dict[str, Any]:
+    """Transform metrics_awards.json to awards format.
+
+    Input: [{award_key, title, description, category, winner_user_id, winner_repo_id,
+             winner_name, supporting_stats}, ...]
+    Output: {individual: [...], repository: [...], risk: [...], special_mentions: {...}}
+    """
+    if not isinstance(metrics, list):
+        return {}
+
+    result: dict[str, list[dict[str, Any]]] = {
+        "individual": [],
+        "repository": [],
+        "risk": [],
+    }
+
+    for item in metrics:
+        category = item.get("category", "individual")
+        if category not in result:
+            continue
+
+        award = {
+            "award_key": item.get("award_key", ""),
+            "title": item.get("title", ""),
+            "description": item.get("description", ""),
+            "winner_name": item.get("winner_name", ""),
+            "winner_avatar_url": "",
+            "supporting_stats": item.get("supporting_stats", ""),
+        }
+
+        # Add repo_name for repository awards
+        if category == "repository":
+            award["repo_name"] = item.get("winner_name", "")
+
+        result[category].append(award)
+
+    return result
 
 
 def _render_templates(

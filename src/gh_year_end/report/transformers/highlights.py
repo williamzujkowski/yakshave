@@ -156,17 +156,24 @@ def calculate_fun_facts(
                 most_active_day_count = max_count
 
                 # Convert period to readable date
+                # Handle both formats: "YYYY-WXX" and "YYYY-MM-DD"
                 try:
-                    year, week = busiest_period.split("-W")
-                    year_int = int(year)
-                    week_int = int(week)
+                    if "-W" in busiest_period:
+                        # ISO week format: "2025-W07"
+                        year, week = busiest_period.split("-W")
+                        year_int = int(year)
+                        week_int = int(week)
 
-                    # Calculate ISO date for Monday of this week
-                    jan4 = datetime(year_int, 1, 4)
-                    week1_monday = jan4 - timedelta(days=jan4.weekday())
-                    target_monday = week1_monday + timedelta(weeks=week_int - 1)
+                        # Calculate ISO date for Monday of this week
+                        jan4 = datetime(year_int, 1, 4)
+                        week1_monday = jan4 - timedelta(days=jan4.weekday())
+                        target_monday = week1_monday + timedelta(weeks=week_int - 1)
 
-                    busiest_day = target_monday.strftime("%B %d, %Y")
+                        busiest_day = target_monday.strftime("%B %d, %Y")
+                    else:
+                        # Date format: "2025-01-15" - parse and format
+                        dt = datetime.strptime(busiest_period, "%Y-%m-%d")
+                        busiest_day = dt.strftime("%B %d, %Y")
                 except (ValueError, AttributeError) as e:
                     logger.warning("Failed to parse busiest period %s: %s", busiest_period, e)
                     busiest_day = None

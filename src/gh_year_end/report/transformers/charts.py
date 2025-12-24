@@ -334,25 +334,35 @@ def _generate_community_data(
 
 
 def _period_to_iso_date(period: str) -> str | None:
-    """Convert period string (YYYY-WXX) to ISO date string (YYYY-MM-DD).
+    """Convert period string to ISO date string (YYYY-MM-DD).
+
+    Handles both formats:
+    - "YYYY-WXX" (e.g., "2025-W07") - ISO week format
+    - "YYYY-MM-DD" (e.g., "2025-01-15") - Date format
 
     Args:
-        period: Period string in format "YYYY-WXX" (e.g., "2025-W07").
+        period: Period string in either format.
 
     Returns:
-        ISO date string for the Monday of that week, or None if parsing fails.
+        ISO date string (for YYYY-WXX, the Monday of that week), or None if parsing fails.
     """
     try:
-        year, week = period.split("-W")
-        year_int = int(year)
-        week_int = int(week)
+        if "-W" in period:
+            # ISO week format: "YYYY-WXX"
+            year, week = period.split("-W")
+            year_int = int(year)
+            week_int = int(week)
 
-        # Calculate ISO date for Monday of this week
-        jan4 = datetime(year_int, 1, 4)
-        week1_monday = jan4 - timedelta(days=jan4.weekday())
-        target_monday = week1_monday + timedelta(weeks=week_int - 1)
+            # Calculate ISO date for Monday of this week
+            jan4 = datetime(year_int, 1, 4)
+            week1_monday = jan4 - timedelta(days=jan4.weekday())
+            target_monday = week1_monday + timedelta(weeks=week_int - 1)
 
-        return target_monday.strftime("%Y-%m-%d")
+            return target_monday.strftime("%Y-%m-%d")
+        else:
+            # Assume date format: "YYYY-MM-DD" - validate and return as-is
+            datetime.strptime(period, "%Y-%m-%d")
+            return period
     except (ValueError, AttributeError) as e:
         logger.warning("Failed to parse period %s: %s", period, e)
         return None

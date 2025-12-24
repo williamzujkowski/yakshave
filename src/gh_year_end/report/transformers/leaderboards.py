@@ -8,10 +8,10 @@ __all__ = ["transform_awards_data", "transform_leaderboards"]
 def transform_awards_data(awards_data: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
     """Transform awards from simple key-value format to categorized format.
 
-    Handles both old format:
-        {"top_pr_author": {"user": "...", "count": 10, "avatar_url": "..."}}
-    And new nested format:
-        {"individual": {"top_pr_author": {...}}, "repository": {...}, "special_mentions": {...}}
+    Handles multiple formats:
+        1. Old format: {"top_pr_author": {"user": "...", "count": 10, "avatar_url": "..."}}
+        2. Nested dict format: {"individual": {"top_pr_author": {...}}, "repository": {...}}
+        3. List format: {"individual": [{award1}, {award2}], "repository": [...]}
     """
     awards_by_category: dict[str, list[Any]] = {
         "individual": [],
@@ -19,7 +19,15 @@ def transform_awards_data(awards_data: dict[str, Any]) -> dict[str, list[dict[st
         "risk": [],
     }
 
-    # Check if already in nested format
+    # Check if already in categorized format with lists (from metrics_awards.json transform)
+    if "individual" in awards_data and isinstance(awards_data.get("individual"), list):
+        # Already in final list format - just copy the lists
+        for category in ["individual", "repository", "risk"]:
+            if category in awards_data and isinstance(awards_data[category], list):
+                awards_by_category[category] = awards_data[category]
+        return awards_by_category
+
+    # Check if in nested dict format (category -> award_key -> award_data)
     if "individual" in awards_data or "repository" in awards_data:
         # New format - transform to list format
         individual_defs = {

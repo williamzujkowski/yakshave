@@ -42,23 +42,32 @@ def transform_activity_timeline(timeseries_data: dict[str, Any]) -> list[dict[st
                     period_totals[period] += count
 
             # Convert to D3.js format: {date: ISO string, value: number}
-            # Period format is "YYYY-WXX", convert to ISO date (first day of week)
+            # Handle both period formats:
+            # - "YYYY-WXX": ISO week format (original aggregator output)
+            # - "YYYY-MM-DD": Date format (from metrics_time_series.json)
             for period, total_count in sorted(period_totals.items()):
                 try:
-                    # Parse week format: "2025-W07" -> ISO date of Monday of that week
-                    year, week = period.split("-W")
-                    year_int = int(year)
-                    week_int = int(week)
+                    if "-W" in period:
+                        # Parse week format: "2025-W07" -> ISO date of Monday of that week
+                        year, week = period.split("-W")
+                        year_int = int(year)
+                        week_int = int(week)
 
-                    # Calculate ISO date for Monday of this week
-                    # ISO week 1 is the first week with a Thursday in the new year
-                    jan4 = datetime(year_int, 1, 4)
-                    week1_monday = jan4 - timedelta(days=jan4.weekday())
-                    target_monday = week1_monday + timedelta(weeks=week_int - 1)
+                        # Calculate ISO date for Monday of this week
+                        # ISO week 1 is the first week with a Thursday in the new year
+                        jan4 = datetime(year_int, 1, 4)
+                        week1_monday = jan4 - timedelta(days=jan4.weekday())
+                        target_monday = week1_monday + timedelta(weeks=week_int - 1)
+                        date_str = target_monday.strftime("%Y-%m-%d")
+                    else:
+                        # Assume date format: "YYYY-MM-DD" - use as-is
+                        # Validate it's a valid date
+                        datetime.strptime(period, "%Y-%m-%d")
+                        date_str = period
 
                     activity_timeline.append(
                         {
-                            "date": target_monday.strftime("%Y-%m-%d"),
+                            "date": date_str,
                             "value": total_count,
                         }
                     )
