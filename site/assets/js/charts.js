@@ -866,7 +866,8 @@ class DonutChart extends BaseChart {
                 .style('font-weight', 'bold')
                 .text(d => {
                     const percent = (d.value / d3.sum(data, d => d.value)) * 100;
-                    return percent > 5 ? `${percent.toFixed(0)}%` : '';
+                    // Use 1 decimal place to reduce rounding errors when percentages sum
+                    return percent > 5 ? `${percent.toFixed(1)}%` : '';
                 });
         }
 

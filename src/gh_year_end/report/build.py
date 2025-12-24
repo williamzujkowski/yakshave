@@ -12,7 +12,7 @@ cohesive and splitting would fragment the build pipeline.
 import json
 import logging
 import shutil
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -547,8 +547,26 @@ def _render_templates(
             except (ValueError, TypeError):
                 return str(value)
 
+        def format_end_date(value: str) -> str:
+            """Format exclusive end date as inclusive (subtract one day).
+
+            The 'until' date in config is exclusive (e.g., 2026-01-01 means data up to
+            but not including Jan 1, 2026). For display purposes, we want to show the
+            last included day (Dec 31, 2025).
+            """
+            if not value:
+                return ""
+            try:
+                dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                # Subtract one day to get the last included day
+                last_day = dt - timedelta(days=1)
+                return last_day.strftime("%B %d, %Y")
+            except (ValueError, AttributeError):
+                return str(value)
+
         env.filters["format_date"] = format_date
         env.filters["format_number"] = format_number
+        env.filters["format_end_date"] = format_end_date
 
         # Extract data from data_context (already loaded by _load_json_data)
         summary_data = data_context.get("summary", {})
