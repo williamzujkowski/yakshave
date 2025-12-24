@@ -3,6 +3,7 @@
 Tests verify that templates render correctly with various data inputs.
 """
 
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import pytest
@@ -21,11 +22,23 @@ def template_env():
         autoescape=select_autoescape(["html", "xml"]),
     )
 
+    def format_end_date(value: str) -> str:
+        """Format exclusive end date as inclusive (subtract one day)."""
+        if not value:
+            return ""
+        try:
+            dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+            last_day = dt - timedelta(days=1)
+            return last_day.strftime("%B %d, %Y")
+        except (ValueError, AttributeError):
+            return str(value)
+
     # Add custom filters for templates
     env.filters["format_date"] = lambda d: d
     env.filters["format_number"] = lambda n: f"{n:,}"
     env.filters["truncate"] = lambda s, length: s[:length] + "..." if len(s) > length else s
     env.filters["round"] = lambda n, digits=0: round(n, digits)
+    env.filters["format_end_date"] = format_end_date
 
     return env
 
