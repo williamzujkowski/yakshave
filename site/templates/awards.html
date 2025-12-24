@@ -46,6 +46,7 @@
     <!-- Individual Awards Tab -->
     <div class="tab-content active" id="tab-individual">
         <div class="awards-grid">
+            {% if awards.individual and awards.individual|length > 0 %}
             {% for award in awards.individual %}
             <div class="award-card award-{{ award.award_key }}">
                 <div class="award-icon">
@@ -79,12 +80,18 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="empty-state">
+                <p>Individual awards will be available once contribution data is collected.</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 
     <!-- Repository Awards Tab -->
     <div class="tab-content" id="tab-repository">
         <div class="awards-grid">
+            {% if awards.repository and awards.repository|length > 0 %}
             {% for award in awards.repository %}
             <div class="award-card award-{{ award.award_key }}">
                 <div class="award-icon">
@@ -113,6 +120,11 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="empty-state">
+                <p>Repository awards will be available once contribution data is collected.</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 

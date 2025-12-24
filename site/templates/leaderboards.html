@@ -43,6 +43,7 @@
         <div class="leaderboard-grid">
             <div class="leaderboard-card">
                 <h3>Most PRs Merged</h3>
+                {% if leaderboards.prs_merged and leaderboards.prs_merged|length > 0 %}
                 <div class="podium">
                     {% for contributor in leaderboards.prs_merged[:3] %}
                     <div class="podium-item podium-{{ loop.index }}">
@@ -84,10 +85,16 @@
                     </div>
                     {% endfor %}
                 </div>
+                {% else %}
+                <div class="empty-state">
+                    <p>No PR data available yet.</p>
+                </div>
+                {% endif %}
             </div>
 
             <div class="leaderboard-card">
                 <h3>Most PRs Opened</h3>
+                {% if leaderboards.prs_opened and leaderboards.prs_opened|length > 0 %}
                 <div class="leaderboard-list">
                     {% for contributor in leaderboards.prs_opened[:10] %}
                     <div class="leaderboard-item">
@@ -102,6 +109,11 @@
                     </div>
                     {% endfor %}
                 </div>
+                {% else %}
+                <div class="empty-state">
+                    <p>No PR data available yet.</p>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
