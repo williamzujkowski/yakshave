@@ -134,6 +134,9 @@ def calculate_fun_facts(
 
     try:
         weekly_data = timeseries_data.get("weekly", {})
+        # Handle case where weekly_data is a list instead of dict (malformed data)
+        if not isinstance(weekly_data, dict):
+            weekly_data = {}
         # Use prs_opened as activity indicator
         prs_opened = weekly_data.get("prs_opened", [])
 

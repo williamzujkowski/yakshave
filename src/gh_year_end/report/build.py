@@ -351,6 +351,24 @@ def _render_templates(
             # Format from export.py: {"repos": {repo_id: {...}}}
             for repo_id, repo_data in repo_health_data["repos"].items():
                 repo_health_list.append({"repo_id": repo_id, **repo_data})
+        elif isinstance(repo_health_data, dict) and "repositories" in repo_health_data:
+            # New format: {"repositories": [...]} - extract list from repositories key
+            repos_list = repo_health_data.get("repositories", [])
+            if isinstance(repos_list, list):
+                for item in repos_list:
+                    if isinstance(item, dict):
+                        repo_name = item.get("repo", "")
+                        repo_health_list.append(
+                            {
+                                "repo_id": repo_name,
+                                "repo_full_name": repo_name,
+                                "prs_merged": item.get("pr_count", 0),
+                                "active_contributors_365d": item.get("contributor_count", 0),
+                                "review_coverage": item.get("review_coverage", 0),
+                                "median_time_to_merge": item.get("median_time_to_merge"),
+                                **item,
+                            }
+                        )
         elif isinstance(repo_health_data, list):
             # List format from metrics - transform to expected structure
             for item in repo_health_data:
@@ -373,16 +391,31 @@ def _render_templates(
             # Format from export.py: {"repos": {repo_id: {...}}}
             for repo_id, repo_data in hygiene_scores_data["repos"].items():
                 hygiene_scores_list.append({"repo_id": repo_id, **repo_data})
+        elif isinstance(hygiene_scores_data, dict) and "scores" in hygiene_scores_data:
+            # New format: {"scores": [...]} - extract list from scores key
+            scores_list = hygiene_scores_data.get("scores", [])
+            if isinstance(scores_list, list):
+                for item in scores_list:
+                    if isinstance(item, dict):
+                        repo_name = item.get("repo", "")
+                        hygiene_scores_list.append(
+                            {
+                                "repo_id": repo_name,
+                                "score": item.get("score", 0),
+                                **item,
+                            }
+                        )
         elif isinstance(hygiene_scores_data, dict):
             # Dict format with repo names as keys: {"repo_name": {...}}
             for repo_name, repo_data in hygiene_scores_data.items():
-                hygiene_scores_list.append(
-                    {
-                        "repo_id": repo_name,
-                        "score": repo_data.get("score", 0),
-                        **repo_data,
-                    }
-                )
+                if isinstance(repo_data, dict):
+                    hygiene_scores_list.append(
+                        {
+                            "repo_id": repo_name,
+                            "score": repo_data.get("score", 0),
+                            **repo_data,
+                        }
+                    )
         elif isinstance(hygiene_scores_data, list):
             # List format from metrics - transform to expected structure
             for item in hygiene_scores_data:

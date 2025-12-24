@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content=" - GitHub Year-End Reports">
-    <title> - GitHub Year-End Reports</title>
+    <meta name="description" content="williamzujkowski - GitHub Year-End Reports">
+    <title>williamzujkowski - GitHub Year-End Reports</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
@@ -301,7 +301,7 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <h1></h1>
+            <h1>williamzujkowski</h1>
             <p>GitHub Year-End Reports</p>
         </div>
         <button class="theme-toggle" aria-label="Toggle dark mode">
@@ -320,13 +320,44 @@
             <p>Explore GitHub activity and community health metrics across the years</p>
         </div>
 
+        <div class="redirect-notice" id="redirect-notice">
+            Redirecting to <strong>2025</strong> in <strong id="countdown">3</strong> seconds...
+            <button id="cancel-redirect">Cancel</button>
+        </div>
 
         <div class="years-grid">
+            <a href="/yakshave/2025/" class="year-card current" >
+                <span class="year-badge current-badge">Latest</span>
+
+                <h2>2025</h2>
+                <p>GitHub activity and metrics for 2025</p>
+
+                <div class="stats">
+                </div>
+            </a>
+            <a href="/yakshave/2024/" class="year-card" >
+                <span class="year-badge">Available</span>
+
+                <h2>2024</h2>
+                <p>GitHub activity and metrics for 2024</p>
+
+                <div class="stats">
+                </div>
+            </a>
+            <a href="/yakshave/2023/" class="year-card" >
+                <span class="year-badge">Available</span>
+
+                <h2>2023</h2>
+                <p>GitHub activity and metrics for 2023</p>
+
+                <div class="stats">
+                </div>
+            </a>
         </div>
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 . Generated with gh-year-end.</p>
+        <p>&copy; 2025 williamzujkowski. Generated with gh-year-end.</p>
     </footer>
 
     <script>
@@ -346,6 +377,40 @@
         });
 
         // Auto-redirect functionality
+        let countdown = 3;
+        let redirectCancelled = false;
+        const countdownElement = document.getElementById('countdown');
+        const redirectNotice = document.getElementById('redirect-notice');
+        const cancelButton = document.getElementById('cancel-redirect');
+
+        cancelButton.addEventListener('click', () => {
+            redirectCancelled = true;
+            redirectNotice.style.display = 'none';
+        });
+
+        const countdownInterval = setInterval(() => {
+            if (redirectCancelled) {
+                clearInterval(countdownInterval);
+                return;
+            }
+
+            countdown--;
+            countdownElement.textContent = countdown;
+
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                window.location.href = '/yakshave/2025/';
+            }
+        }, 1000);
+
+        // Cancel redirect if user interacts with the page
+        document.addEventListener('click', (e) => {
+            if (!redirectNotice.contains(e.target)) {
+                redirectCancelled = true;
+                redirectNotice.style.display = 'none';
+                clearInterval(countdownInterval);
+            }
+        }, { once: true });
     </script>
 </body>
 </html>

@@ -44,6 +44,9 @@ def generate_chart_data(
     }
 
     weekly_data = timeseries_data.get("weekly", {})
+    # Handle case where weekly_data is a list instead of dict (malformed data)
+    if not isinstance(weekly_data, dict):
+        weekly_data = {}
 
     # Build collaboration_data: reviews, comments, cross_team activity
     collaboration_data = _generate_collaboration_data(weekly_data)
@@ -83,6 +86,9 @@ def generate_engineer_charts(
         - contribution_by_repo: Top 10 repos by total contributions
     """
     weekly_data = timeseries_data.get("weekly", {})
+    # Handle case where weekly_data is a list instead of dict (malformed data)
+    if not isinstance(weekly_data, dict):
+        weekly_data = {}
 
     return {
         "contribution_timeline": _generate_contribution_timeline(weekly_data),

@@ -25,6 +25,9 @@ def transform_activity_timeline(timeseries_data: dict[str, Any]) -> list[dict[st
     try:
         # Timeseries data structure: {"weekly": {"prs_merged": [{period, user, count}]}}
         weekly_data = timeseries_data.get("weekly", {})
+        # Handle case where weekly_data is a list instead of dict (malformed data)
+        if not isinstance(weekly_data, dict):
+            weekly_data = {}
         prs_merged = weekly_data.get("prs_merged", [])
 
         if prs_merged:

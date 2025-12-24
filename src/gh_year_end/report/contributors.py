@@ -146,6 +146,9 @@ def populate_activity_timelines(
     user_weekly_activity: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
 
     weekly_data = timeseries_data.get("weekly", {})
+    # Handle case where weekly_data is a list instead of dict (malformed data)
+    if not isinstance(weekly_data, dict):
+        weekly_data = {}
 
     # Aggregate activity across all metric types
     metric_types = [
