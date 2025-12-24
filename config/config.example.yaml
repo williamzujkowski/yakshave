@@ -1,10 +1,16 @@
 # GitHub Year-End Report Configuration
 # Copy this file to config.yaml and customize for your org/user
+#
+# Quick Start:
+#   1. cp config/config.example.yaml config/config.yaml
+#   2. Edit github.target.name to your org/username
+#   3. Set GITHUB_TOKEN environment variable
+#   4. Run: uv run gh-year-end all --config config/config.yaml
 
 github:
   target:
-    mode: org          # org | user
-    name: example-org  # Organization or username to analyze
+    mode: org              # org | user - analyze organization or personal account
+    name: example-org      # Organization or username to analyze
   auth:
     token_env: GITHUB_TOKEN  # Environment variable containing GitHub token
   discovery:
@@ -18,10 +24,20 @@ github:
 
 rate_limit:
   strategy: adaptive         # adaptive | fixed
-  max_concurrency: 4         # Max parallel requests
+  max_concurrency: 4         # Max parallel requests (increase for faster collection)
   min_sleep_seconds: 1       # Minimum sleep between requests
   max_sleep_seconds: 60      # Maximum sleep when rate limited
   sample_rate_limit_endpoint_every_n_requests: 50
+  burst:
+    capacity: 30             # Maximum burst capacity
+    sustained_rate: 10.0     # Sustained tokens per second
+    recovery_rate: 2.0       # Token recovery rate per second
+  secondary:
+    max_requests_per_minute: 90    # GitHub secondary rate limit threshold
+    detection_window_seconds: 60   # Detection window
+    backoff_multiplier: 1.5        # Backoff multiplier on violations
+    threshold: 0.8                 # Percentage of limit to trigger throttling
+    max_backoff_multiplier: 2.0    # Maximum backoff multiplier cap
 
 identity:
   bots:
@@ -43,9 +59,9 @@ collection:
   commits:
     include_files: true    # Include file changes in commits
     classify_files: true   # Classify files (docs, test, ci, etc.)
-    max_per_repo: null     # Limit to N commits per repo (null = no limit, e.g., 1000)
-    max_pages: null        # Limit to N pages per repo (null = no limit, e.g., 10)
-    since_days: null       # Only commits from last N days of year window (null = full window, e.g., 365)
+    max_per_repo: null     # Limit to N commits per repo (null = no limit)
+    max_pages: null        # Limit to N pages per repo (null = no limit)
+    since_days: null       # Only commits from last N days (null = full window)
   hygiene:
     paths:
       - "SECURITY.md"
@@ -71,7 +87,37 @@ storage:
   dataset_version: "v1"
 
 report:
-  title: "Year in Review 2025"
-  output_dir: "./site"
-  theme: "engineer_exec_toggle"
-  awards_config: "./config/awards.yaml"
+  title: "Year in Review 2025"              # Page title
+  output_dir: "./site"                       # Output directory for static site
+  theme: "engineer_exec_toggle"              # Theme selection
+  awards_config: "./config/awards.yaml"      # Custom awards configuration
+
+  # GitHub Pages deployment settings (required for subpath deployment)
+  base_path: ""                              # URL path prefix (e.g., "/your-repo-name")
+  base_url: ""                               # Full site URL (e.g., "https://org.github.io/repo")
+
+  # Display settings
+  organization_name: ""                      # Display name (defaults to github.target.name)
+  description: "GitHub Year in Review - Community health metrics and statistics"
+  theme_color: "#667eea"                     # PWA theme color
+
+# Analysis thresholds (all values are customizable)
+thresholds:
+  # Hygiene score thresholds (0-100)
+  hygiene_healthy: 50      # Score >= this is healthy (green)
+  hygiene_warning: 30      # Score >= this is warning (yellow), below is critical (red)
+  hygiene_good: 60         # Good threshold for trend indicators
+  hygiene_bad: 40          # Bad threshold for trend indicators
+
+  # Review thresholds
+  review_coverage_good: 50       # Good review coverage percentage
+  review_coverage_bad: 20        # Poor review coverage percentage
+  max_review_time_hours: 48      # Target max time to first review
+
+  # PR thresholds
+  stale_pr_days: 30              # Days before PR is considered stale
+  high_pr_ratio: 0.5             # High PR merge ratio threshold
+
+  # Display limits
+  leaderboard_top_n: 10          # Number of entries in leaderboards
+  contributor_chart_top_n: 10    # Number of contributors in charts
