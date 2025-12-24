@@ -346,6 +346,22 @@ def _enrich_from_metrics_files(data_dir: Path, data: dict[str, Any]) -> dict[str
                 except Exception as e:
                     logger.warning("Failed to load %s: %s", metrics_file, e)
 
+    # Calculate and enrich summary data from metrics files
+    existing_summary = data.get("summary", {})
+    if _is_empty_dict(existing_summary) or not existing_summary.get("total_contributors"):
+        calculated_summary = _calculate_summary_from_metrics(data_dir)
+        if calculated_summary.get("total_contributors", 0) > 0:
+            # Merge with existing summary, preferring calculated values
+            if "summary" not in data:
+                data["summary"] = {}
+            data["summary"].update(calculated_summary)
+            logger.info(
+                "Enriched summary from metrics: %d contributors, %d PRs, %d repos",
+                calculated_summary.get("total_contributors", 0),
+                calculated_summary.get("prs_merged", 0),
+                calculated_summary.get("total_repos", 0),
+            )
+
     return data
 
 
@@ -509,6 +525,82 @@ def _transform_metrics_awards(metrics: list[dict[str, Any]]) -> dict[str, Any]:
         result[category].append(award)
 
     return result
+
+
+def _calculate_summary_from_metrics(data_dir: Path) -> dict[str, Any]:
+    """Calculate summary statistics from metrics files.
+
+    Reads metrics files to compute:
+    - total_contributors: unique users in leaderboard
+    - prs_merged: sum from timeseries (org scope)
+    - total_repos: count of repos in repo_health
+    - total_reviews: sum from timeseries (org scope)
+
+    Returns:
+        Summary dict with calculated statistics.
+    """
+    summary: dict[str, Any] = {
+        "total_contributors": 0,
+        "prs_merged": 0,
+        "total_prs_merged": 0,
+        "total_repos": 0,
+        "total_reviews": 0,
+    }
+
+    # Get unique contributors from leaderboard
+    leaderboard_path = data_dir / "metrics_leaderboard.json"
+    if leaderboard_path.exists():
+        try:
+            with leaderboard_path.open() as f:
+                leaderboard = json.load(f)
+            if isinstance(leaderboard, list):
+                unique_users: set[str] = set()
+                for item in leaderboard:
+                    if item.get("scope") != "org":
+                        continue
+                    user_id = item.get("user_id", "")
+                    if user_id:
+                        unique_users.add(user_id)
+                summary["total_contributors"] = len(unique_users)
+        except Exception as e:
+            logger.warning("Failed to get contributors from leaderboard: %s", e)
+
+    # Get PR and review counts from timeseries (org-scope weekly totals)
+    timeseries_path = data_dir / "metrics_time_series.json"
+    if timeseries_path.exists():
+        try:
+            with timeseries_path.open() as f:
+                timeseries = json.load(f)
+            if isinstance(timeseries, list):
+                total_prs = 0
+                total_reviews = 0
+                for item in timeseries:
+                    if item.get("scope") != "org":
+                        continue
+                    metric_key = item.get("metric_key", "")
+                    value = item.get("value", 0)
+                    if metric_key == "prs_merged":
+                        total_prs += value
+                    elif metric_key == "reviews_submitted":
+                        total_reviews += value
+                summary["prs_merged"] = total_prs
+                summary["total_prs_merged"] = total_prs
+                summary["total_reviews"] = total_reviews
+        except Exception as e:
+            logger.warning("Failed to get PR/review counts from timeseries: %s", e)
+
+    # Get repo count from repo_health
+    repo_health_path = data_dir / "metrics_repo_health.json"
+    if repo_health_path.exists():
+        try:
+            with repo_health_path.open() as f:
+                repo_health = json.load(f)
+            if isinstance(repo_health, list):
+                summary["total_repos"] = len(repo_health)
+        except Exception as e:
+            logger.warning("Failed to calculate repo count: %s", e)
+
+    return summary
 
 
 def _render_templates(
