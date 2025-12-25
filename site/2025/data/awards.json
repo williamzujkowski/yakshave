@@ -1,3 +1,186 @@
 {
-  "awards": []
+  "top_pr_author": {
+    "user": "williamzujkowski",
+    "count": 115,
+    "avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4"
+  },
+  "top_reviewer": {
+    "user": "williamzujkowski",
+    "count": 3,
+    "avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4"
+  },
+  "top_issue_opener": {
+    "user": "williamzujkowski",
+    "count": 198,
+    "avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4"
+  },
+  "special_mentions": {
+    "first_contributions": [],
+    "consistent_contributors": [
+      {
+        "user": "williamzujkowski",
+        "avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4",
+        "weeks": 21
+      },
+      {
+        "user": "jukkatupamaki",
+        "avatar_url": "https://avatars.githubusercontent.com/u/1825929?v=4",
+        "weeks": 2
+      },
+      {
+        "user": "scarf005",
+        "avatar_url": "https://avatars.githubusercontent.com/u/54838975?v=4",
+        "weeks": 2
+      }
+    ],
+    "largest_prs": [
+      {
+        "number": 1,
+        "title": "feat: implement automated SVG terminal generation",
+        "url": "https://github.com/williamzujkowski/williamzujkowski/pull/1",
+        "author_login": "williamzujkowski",
+        "author_avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4",
+        "repo": "williamzujkowski/williamzujkowski",
+        "lines_changed": 0,
+        "additions": 0,
+        "deletions": 0,
+        "merge_time_hours": 0.01361111111111111,
+        "created_at": "2025-07-18T03:45:20Z",
+        "merged_at": "2025-07-18T03:46:09Z"
+      },
+      {
+        "number": 3,
+        "title": "feat: Unix-style terminal with block cursor and realistic typing",
+        "url": "https://github.com/williamzujkowski/williamzujkowski/pull/3",
+        "author_login": "williamzujkowski",
+        "author_avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4",
+        "repo": "williamzujkowski/williamzujkowski",
+        "lines_changed": 0,
+        "additions": 0,
+        "deletions": 0,
+        "merge_time_hours": 9.004444444444445,
+        "created_at": "2025-07-18T04:13:09Z",
+        "merged_at": "2025-07-18T13:13:25Z"
+      },
+      {
+        "number": 2,
+        "title": "feat: enhance SVG with complete terminal window design",
+        "url": "https://github.com/williamzujkowski/williamzujkowski/pull/2",
+        "author_login": "williamzujkowski",
+        "author_avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4",
+        "repo": "williamzujkowski/williamzujkowski",
+        "lines_changed": 0,
+        "additions": 0,
+        "deletions": 0,
+        "merge_time_hours": 0.009444444444444445,
+        "created_at": "2025-07-18T03:56:53Z",
+        "merged_at": "2025-07-18T03:57:27Z"
+      },
+      {
+        "number": 3,
+        "title": "additional security updates",
+        "url": "https://github.com/williamzujkowski/domainchecker/pull/3",
+        "author_login": "williamzujkowski",
+        "author_avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4",
+        "repo": "williamzujkowski/domainchecker",
+        "lines_changed": 0,
+        "additions": 0,
+        "deletions": 0,
+        "merge_time_hours": 0.007222222222222222,
+        "created_at": "2025-02-15T19:00:27Z",
+        "merged_at": "2025-02-15T19:00:53Z"
+      },
+      {
+        "number": 2,
+        "title": "security and speed improvements",
+        "url": "https://github.com/williamzujkowski/domainchecker/pull/2",
+        "author_login": "williamzujkowski",
+        "author_avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4",
+        "repo": "williamzujkowski/domainchecker",
+        "lines_changed": 0,
+        "additions": 0,
+        "deletions": 0,
+        "merge_time_hours": 0.0019444444444444444,
+        "created_at": "2025-02-15T18:42:04Z",
+        "merged_at": "2025-02-15T18:42:11Z"
+      }
+    ],
+    "fastest_merges": [
+      {
+        "number": 2,
+        "title": "chore: comprehensive repository cleanup and mobile viewport fixes",
+        "url": "https://github.com/williamzujkowski/Neo-Brutalist-11ty-Theme/pull/2",
+        "author_login": "williamzujkowski",
+        "author_avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4",
+        "repo": "williamzujkowski/Neo-Brutalist-11ty-Theme",
+        "lines_changed": 0,
+        "additions": 0,
+        "deletions": 0,
+        "merge_time_hours": 0.016666666666666666,
+        "created_at": "2025-09-30T03:03:13Z",
+        "merged_at": "2025-09-30T03:04:13Z",
+        "merge_time": "1m"
+      },
+      {
+        "number": 78,
+        "title": "docs: comprehensive documentation cleanup and accuracy fixes",
+        "url": "https://github.com/williamzujkowski/cognitive-toolworks/pull/78",
+        "author_login": "williamzujkowski",
+        "author_avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4",
+        "repo": "williamzujkowski/cognitive-toolworks",
+        "lines_changed": 0,
+        "additions": 0,
+        "deletions": 0,
+        "merge_time_hours": 0.018055555555555554,
+        "created_at": "2025-12-17T03:49:51Z",
+        "merged_at": "2025-12-17T03:50:56Z",
+        "merge_time": "1m"
+      },
+      {
+        "number": 76,
+        "title": "refactor(docs): centralize instruction files with AGENTS.md as canonical source",
+        "url": "https://github.com/williamzujkowski/cognitive-toolworks/pull/76",
+        "author_login": "williamzujkowski",
+        "author_avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4",
+        "repo": "williamzujkowski/cognitive-toolworks",
+        "lines_changed": 0,
+        "additions": 0,
+        "deletions": 0,
+        "merge_time_hours": 0.018333333333333333,
+        "created_at": "2025-12-17T03:35:44Z",
+        "merged_at": "2025-12-17T03:36:50Z",
+        "merge_time": "1m"
+      },
+      {
+        "number": 4,
+        "title": "Enhance terminal with multi-paper display and auto-sizing",
+        "url": "https://github.com/williamzujkowski/old_website/pull/4",
+        "author_login": "williamzujkowski",
+        "author_avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4",
+        "repo": "williamzujkowski/old_website",
+        "lines_changed": 0,
+        "additions": 0,
+        "deletions": 0,
+        "merge_time_hours": 0.01888888888888889,
+        "created_at": "2025-04-03T05:47:18Z",
+        "merged_at": "2025-04-03T05:48:26Z",
+        "merge_time": "1m"
+      },
+      {
+        "number": 5,
+        "title": "feat: Add Model Context Protocol (MCP) Standards Integration",
+        "url": "https://github.com/williamzujkowski/standards/pull/5",
+        "author_login": "williamzujkowski",
+        "author_avatar_url": "https://avatars.githubusercontent.com/u/14303249?v=4",
+        "repo": "williamzujkowski/standards",
+        "lines_changed": 0,
+        "additions": 0,
+        "deletions": 0,
+        "merge_time_hours": 0.02,
+        "created_at": "2025-07-03T03:57:12Z",
+        "merged_at": "2025-07-03T03:58:24Z",
+        "merge_time": "1m"
+      }
+    ]
+  }
 }

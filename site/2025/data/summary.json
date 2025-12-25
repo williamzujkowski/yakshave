@@ -1,3 +1,15 @@
 {
-  "total_prs": 100
+  "year": 2025,
+  "target_name": "williamzujkowski",
+  "target_mode": "user",
+  "total_repos": 34,
+  "total_contributors": 10,
+  "total_prs": 120,
+  "total_issues": 205,
+  "total_reviews": 3,
+  "total_comments": 107,
+  "prs_merged": 111,
+  "issues_closed": 177,
+  "new_contributors": 0,
+  "pr_sizes": []
 }
