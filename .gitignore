@@ -112,7 +112,9 @@ test_site_output/
 test_output/
 
 # Local tooling state (not part of project)
+.claude/
 .claude-flow/
 .hive-mind/
+.swarm/
 .playwright-mcp/
 .benchmarks/
