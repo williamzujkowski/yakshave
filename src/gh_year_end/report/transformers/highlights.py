@@ -30,6 +30,7 @@ def calculate_highlights(
         "most_active_month_prs": 0,
         "avg_review_time": "N/A",
         "review_coverage": 0,
+        "reviews_per_pr": 0.0,
         "new_contributors": 0,
     }
 
@@ -94,19 +95,21 @@ def calculate_highlights(
     except Exception as e:
         logger.warning("Failed to calculate most active month: %s", e)
 
-    # Calculate overall review coverage from summary data
-    # Use total reviews / total PRs rather than averaging per-repo coverage
-    # to avoid skewing by repos with zero activity
+    # Calculate review metrics from summary data
+    # reviews_per_pr: Average reviews per PR (ratio, e.g., 1.0 means 1 review per PR)
+    # review_coverage: Capped at 100% for display purposes
     try:
         total_prs = summary_data.get("total_prs", 0)
         total_reviews = summary_data.get("total_reviews", 0)
 
         if total_prs > 0:
-            overall_coverage = (total_reviews / total_prs) * 100
-            highlights["review_coverage"] = round(overall_coverage, 1)
+            reviews_per_pr = total_reviews / total_prs
+            highlights["reviews_per_pr"] = round(reviews_per_pr, 1)
+            # Cap at 100% for display - shows "at least 100% have reviews"
+            highlights["review_coverage"] = min(round(reviews_per_pr * 100, 1), 100.0)
 
     except Exception as e:
-        logger.warning("Failed to calculate review coverage: %s", e)
+        logger.warning("Failed to calculate review metrics: %s", e)
 
     # Calculate average merge time from repo health data
     # median_time_to_merge is stored in hours
