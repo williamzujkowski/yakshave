@@ -314,16 +314,27 @@ def _enrich_from_metrics_files(data_dir: Path, data: dict[str, Any]) -> dict[str
     Returns:
         Enriched data dictionary.
     """
-    # Mapping from metrics file to data key and transform function
-    metrics_mappings = [
-        ("metrics_leaderboard.json", "leaderboards", _transform_metrics_leaderboard),
-        ("metrics_time_series.json", "timeseries", _transform_metrics_timeseries),
-        ("metrics_repo_health.json", "repo_health", _transform_metrics_repo_health),
-        ("metrics_repo_hygiene_score.json", "hygiene_scores", _transform_metrics_hygiene),
-        ("metrics_awards.json", "awards", _transform_metrics_awards),
+    # Load users mapping if available (for resolving user IDs to logins)
+    users_mapping: dict[str, dict[str, Any]] = {}
+    users_path = data_dir / "users.json"
+    if users_path.exists():
+        try:
+            with users_path.open() as f:
+                users_mapping = json.load(f)
+            logger.info("Loaded %d users from users.json", len(users_mapping))
+        except Exception as e:
+            logger.warning("Failed to load users.json: %s", e)
+
+    # Mapping from metrics file to data key
+    metrics_files = [
+        ("metrics_leaderboard.json", "leaderboards"),
+        ("metrics_time_series.json", "timeseries"),
+        ("metrics_repo_health.json", "repo_health"),
+        ("metrics_repo_hygiene_score.json", "hygiene_scores"),
+        ("metrics_awards.json", "awards"),
     ]
 
-    for metrics_file, data_key, transform_fn in metrics_mappings:
+    for metrics_file, data_key in metrics_files:
         # Check if existing data is empty or missing
         existing = data.get(data_key, {})
         is_empty = (
@@ -339,7 +350,21 @@ def _enrich_from_metrics_files(data_dir: Path, data: dict[str, Any]) -> dict[str
                     with metrics_path.open() as f:
                         metrics_content = json.load(f)
                     if metrics_content:
-                        transformed = transform_fn(metrics_content)
+                        # Call appropriate transform function
+                        transformed: dict[str, Any] | list[dict[str, Any]] | None = None
+                        if data_key == "leaderboards":
+                            transformed = _transform_metrics_leaderboard(
+                                metrics_content, users_mapping
+                            )
+                        elif data_key == "timeseries":
+                            transformed = _transform_metrics_timeseries(metrics_content)
+                        elif data_key == "repo_health":
+                            transformed = _transform_metrics_repo_health(metrics_content)
+                        elif data_key == "hygiene_scores":
+                            transformed = _transform_metrics_hygiene(metrics_content)
+                        elif data_key == "awards":
+                            transformed = _transform_metrics_awards(metrics_content)
+
                         if transformed:
                             data[data_key] = transformed
                             logger.info("Enriched %s from %s", data_key, metrics_file)
@@ -381,15 +406,21 @@ def _is_empty_dict(d: dict[str, Any]) -> bool:
 
 def _transform_metrics_leaderboard(
     metrics: list[dict[str, Any]],
+    users: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
     """Transform metrics_leaderboard.json format to leaderboards.json format.
 
     Input: [{year, metric_key, scope, repo_id, user_id, value, rank}, ...]
     Output: {metric_key: [{user, count, avatar_url}, ...], ...}
+
+    Args:
+        metrics: List of leaderboard entries from metrics_leaderboard.json.
+        users: Optional user mapping (login -> {login, avatar_url, type}) for ID resolution.
     """
     if not isinstance(metrics, list):
         return {}
 
+    users = users or {}
     result: dict[str, list[dict[str, Any]]] = {}
 
     # Group by metric_key, filter to org scope
@@ -407,13 +438,20 @@ def _transform_metrics_leaderboard(
         if metric_key not in result:
             result[metric_key] = []
 
-        # Extract username from user_id if possible (user_id might be GitHub node ID)
-        # For now, use user_id as-is since we don't have login mapping
+        # Try to resolve user_id to login using users mapping
+        user = user_id
+        avatar_url = ""
+
+        # Check if user_id is already a login in the users mapping
+        if user_id in users:
+            user = users[user_id].get("login", user_id)
+            avatar_url = users[user_id].get("avatar_url", "")
+
         result[metric_key].append(
             {
-                "user": user_id,
+                "user": user,
                 "count": value,
-                "avatar_url": "",
+                "avatar_url": avatar_url,
             }
         )
 

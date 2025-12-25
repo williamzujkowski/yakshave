@@ -76,6 +76,9 @@ class MetricsAggregator:
     # Track PR details for special mentions
     _pr_details: list[dict[str, Any]] = field(default_factory=list)
 
+    # Track PR creation times for review latency calculation (repo_id, pr_number) -> created_at
+    _pr_created_at: dict[tuple[str, int], datetime] = field(default_factory=dict)
+
     def _is_bot(self, user: dict[str, Any] | None) -> bool:
         """Check if user is a bot.
 
@@ -262,6 +265,11 @@ class MetricsAggregator:
             if created_dt.year == self.year:
                 self._increment_timeseries(created_dt, "prs_opened", author_login)
 
+            # Store PR creation time for review latency calculation
+            pr_number = pr.get("number")
+            if pr_number:
+                self._pr_created_at[(repo_id, pr_number)] = created_dt
+
         # Track merged PRs
         if pr.get("merged_at"):
             self.leaderboards["prs_merged"][author_login] += 1
@@ -369,8 +377,6 @@ class MetricsAggregator:
             self.repo_health[repo_id]["review_count"] += 1
             # Track that this PR received a review
             self.repo_health[repo_id]["prs_with_reviews"].add(pr_number)
-            # Track that this PR received a review
-            self.repo_health[repo_id]["prs_with_reviews"].add(pr_number)
 
         # Increment leaderboards
         self.leaderboards["reviews_submitted"][reviewer_login] += 1
@@ -386,6 +392,21 @@ class MetricsAggregator:
             submitted_dt = datetime.fromisoformat(submitted_at.replace("Z", "+00:00"))
             if submitted_dt.year == self.year:
                 self._increment_timeseries(submitted_dt, "reviews_submitted", reviewer_login)
+
+            # Calculate time-to-first-review for this PR
+            pr_key = (repo_id, pr_number)
+            if pr_key in self._pr_created_at:
+                pr_created = self._pr_created_at[pr_key]
+                latency_hours = (submitted_dt - pr_created).total_seconds() / 3600
+
+                # Track first review only (shortest latency per PR)
+                if repo_id in self.repo_health:
+                    if "review_latencies" not in self.repo_health[repo_id]:
+                        self.repo_health[repo_id]["review_latencies"] = {}
+                    latencies = self.repo_health[repo_id]["review_latencies"]
+                    # Only store if this is the first review or faster than previous
+                    if pr_number not in latencies or latency_hours < latencies[pr_number]:
+                        latencies[pr_number] = latency_hours
 
     def add_comment(
         self, repo_id: str, comment: dict[str, Any], comment_type: str = "issue"
@@ -463,6 +484,19 @@ class MetricsAggregator:
             else:
                 median_time_to_merge = sorted_times[mid]
 
+        # Calculate median time to first review
+        review_latencies = list(health.get("review_latencies", {}).values())
+        median_time_to_first_review = None
+        if review_latencies:
+            sorted_latencies = sorted(review_latencies)
+            mid = len(sorted_latencies) // 2
+            if len(sorted_latencies) % 2 == 0:
+                median_time_to_first_review = (
+                    sorted_latencies[mid - 1] + sorted_latencies[mid]
+                ) / 2
+            else:
+                median_time_to_first_review = sorted_latencies[mid]
+
         return {
             "repo": repo_id,
             "contributor_count": len(health["contributors"]),
@@ -473,6 +507,11 @@ class MetricsAggregator:
             "review_coverage": round(review_coverage, 1),
             "median_time_to_merge": (
                 round(median_time_to_merge, 1) if median_time_to_merge is not None else None
+            ),
+            "median_time_to_first_review": (
+                round(median_time_to_first_review, 1)
+                if median_time_to_first_review is not None
+                else None
             ),
         }
 
@@ -728,6 +767,22 @@ class MetricsAggregator:
 
         return special_mentions
 
+    def _export_users(self) -> dict[str, dict[str, Any]]:
+        """Export user mapping for ID resolution at build time.
+
+        Returns:
+            Dict mapping login -> user info (login, avatar_url, type)
+        """
+        return {
+            login: {
+                "login": info["login"],
+                "avatar_url": info.get("avatar_url", ""),
+                "type": info.get("type", "User"),
+            }
+            for login, info in self.users.items()
+            if not info.get("is_bot", False)
+        }
+
     def export(self) -> dict[str, Any]:
         """Export all metrics as JSON-serializable dict.
 
@@ -739,7 +794,8 @@ class MetricsAggregator:
                 'timeseries': {...},
                 'repo_health': [...],
                 'hygiene_scores': {...},
-                'awards': {...}
+                'awards': {...},
+                'users': {...}
             }
         """
         # Convert repo_health sets to lists for JSON serialization
@@ -756,4 +812,5 @@ class MetricsAggregator:
             "repo_health": repo_health_list,
             "hygiene_scores": self.hygiene,
             "awards": self._compute_awards(),
+            "users": self._export_users(),
         }
